@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.987
+ * Model version              : 1.1039
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Wed May  8 14:27:10 2019
+ * C source code generated on : Wed May  8 17:05:26 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -29,6 +29,7 @@ extern DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_11;
 extern DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_13;
 extern DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_1_Ch_1;
 extern real_T rt_powd_snf(real_T u0, real_T u1);
+extern real_T rt_roundd_snf(real_T u);
 extern real_T rt_hypotd_snf(real_T u0, real_T u1);
 extern void Human_in_Loop_Mux(real_T rtu_x1, real_T rtu_x2,
   B_Mux_Human_in_Loop_T *localB);

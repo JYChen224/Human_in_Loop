@@ -3,7 +3,7 @@
 --  Trace file: Human_in_Loop.trc
 --
 --  RTI1202 7.9 (02-Nov-2017)
---  Wed May  8 14:27:10 2019
+--  Wed May  8 17:05:26 2019
 --
 --  Copyright 2019, dSPACE GmbH. All rights reserved.
 --
@@ -26,7 +26,7 @@
 
 _genname     "RTI"
 _genversion  "7.9"
-_gendate     "05/08/2019 14:27:18"
+_gendate     "05/08/2019 17:05:30"
 _description ""
 _author      "RTI1202 7.9 (02-Nov-2017)"
 _model       "Human_in_Loop"
@@ -53,12 +53,14 @@ typedef Human_in_Loop_ArrayDT0_1_3_Col col flt(64,IEEE)[1][3]
 typedef Human_in_Loop_ArrayDT0_1_4_Col col flt(64,IEEE)[1][4]
 typedef Human_in_Loop_ArrayDT0_1_5_Col col flt(64,IEEE)[1][5]
 typedef Human_in_Loop_ArrayDT0_2_750_Col col flt(64,IEEE)[2][750]
+typedef Human_in_Loop_ArrayDT0_1_750_Col col flt(64,IEEE)[1][750]
 typedef Human_in_Loop_ArrayDT0_4 flt(64,IEEE)[4]
 typedef Human_in_Loop_ArrayDT0_4_1100_Col col flt(64,IEEE)[4][1100]
 typedef Human_in_Loop_ArrayDT0_3 flt(64,IEEE)[3]
 typedef Human_in_Loop_ArrayDT0_2 flt(64,IEEE)[2]
 typedef Human_in_Loop_ArrayDT0_5 flt(64,IEEE)[5]
 typedef Human_in_Loop_ArrayDT0_4400 flt(64,IEEE)[4400]
+typedef Human_in_Loop_ArrayDT0_1_1000_Col col flt(64,IEEE)[1][1000]
 typedef Human_in_Loop_ArrayDT0_15 flt(64,IEEE)[15]
 
 
@@ -257,7 +259,7 @@ group "Model Root"
 	 block: "DataStoreMemory"
 	}
 
-		p_1_Human_in_Loop_real_T_3[49]
+		p_1_Human_in_Loop_real_T_4[49]
 		{
 		 type:    Human_in_Loop_ArrayDT0_4_1100_Col*
 		 alias:   "InitialValue"
@@ -289,7 +291,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[1]
+				p_1_Human_in_Loop_real_T_4[1]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -309,7 +311,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[0]
+				p_1_Human_in_Loop_real_T_4[0]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -371,14 +373,14 @@ group "Model Root"
   
 		group "Controller" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3070]
+			p_0_Human_in_Loop_real_T_0[3821]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "motor_vel_cmd"
 			 flags:   OUTPUT|READONLY
 			}
 
-			p_1_Human_in_Loop_int8_T_1[0]
+			p_1_Human_in_Loop_int8_T_2[0]
 			{
 			 type:    int(8)*
 			 alias:   "run_mode"
@@ -418,6 +420,61 @@ group "Model Root"
 
 
 		endgroup -- subsystem-group "Controller"
+  
+  
+		group "LRN" -- subsystem-group
+
+			p_0_Human_in_Loop_real_T_0[3070]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "lrn_cmd"
+			 flags:   OUTPUT|READONLY
+			}
+			p_0_Human_in_Loop_real_T_0[3071]
+			{
+			 type:    Human_in_Loop_ArrayDT0_1_750_Col*
+			 alias:   "lrn_mem"
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_1_Human_in_Loop_boolean_T_3[3]
+			{
+			 type:    uint(8)*
+			 alias:   "BT_LRN_CLEAR"
+			 range:   < 0 ; 1 >
+			 bitmask: 0x01
+			 flags:   PARAM
+			}
+			p_1_Human_in_Loop_boolean_T_3[4]
+			{
+			 type:    uint(8)*
+			 alias:   "BT_LRN_ON"
+			 range:   < 0 ; 1 >
+			 bitmask: 0x01
+			 flags:   PARAM
+			}
+			p_1_Human_in_Loop_real_T_0[18]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "error_filter_k"
+			 flags:   PARAM
+			}
+			p_1_Human_in_Loop_int32_T_1[0]
+			{
+			 type:    int(32)*
+			 alias:   "time_delay"
+			 flags:   PARAM
+			}
+			p_1_Human_in_Loop_real_T_0[21]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "lrn_shrink"
+			 flags:   PARAM
+			}
+
+
+
+		endgroup -- subsystem-group "LRN"
   
   
 		group "Torque track" -- subsystem-group
@@ -482,7 +539,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_3[31]
+			p_1_Human_in_Loop_real_T_4[31]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -502,7 +559,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_3[36]
+			p_1_Human_in_Loop_real_T_4[36]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -516,7 +573,7 @@ group "Model Root"
   
 		group "Control Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3094]
+			p_0_Human_in_Loop_real_T_0[3845]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 			 alias:   "Control_Parameter"
@@ -529,7 +586,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[27]
+				p_1_Human_in_Loop_real_T_4[27]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -544,7 +601,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[28]
+				p_1_Human_in_Loop_real_T_4[28]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -559,7 +616,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[30]
+				p_1_Human_in_Loop_real_T_4[30]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -574,7 +631,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[26]
+				p_1_Human_in_Loop_real_T_4[26]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -589,7 +646,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[29]
+				p_1_Human_in_Loop_real_T_4[29]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -603,7 +660,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3094]
+				p_0_Human_in_Loop_real_T_0[3845]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 				 alias:   "x"
@@ -621,7 +678,7 @@ group "Model Root"
   
 		group "Torque Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3090]
+			p_0_Human_in_Loop_real_T_0[3841]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "Torque_Parameter"
@@ -634,7 +691,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[35]
+				p_1_Human_in_Loop_real_T_4[35]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -649,7 +706,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[34]
+				p_1_Human_in_Loop_real_T_4[34]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -664,7 +721,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[32]
+				p_1_Human_in_Loop_real_T_4[32]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -679,7 +736,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_3[33]
+				p_1_Human_in_Loop_real_T_4[33]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -693,7 +750,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3090]
+				p_0_Human_in_Loop_real_T_0[3841]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 				 alias:   "x"
@@ -738,7 +795,7 @@ group "Model Root"
 		 alias:   "motor"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[3081]
+		p_0_Human_in_Loop_real_T_0[3832]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "footswich"
@@ -756,7 +813,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_3[15]
+			p_1_Human_in_Loop_real_T_4[15]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -776,7 +833,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_3[18]
+			p_1_Human_in_Loop_real_T_4[18]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -796,7 +853,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_3[24]
+			p_1_Human_in_Loop_real_T_4[24]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -816,13 +873,13 @@ group "Model Root"
 			 alias:   "Ankle"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3085]
+			p_0_Human_in_Loop_real_T_0[3836]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Motor"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3082]
+			p_0_Human_in_Loop_real_T_0[3833]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Accel"
@@ -835,7 +892,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_boolean_T_4[0]
+				p_1_Human_in_Loop_boolean_T_5[0]
 				{
 				 type:    uint(8)*
 				 alias:   "Value"
@@ -852,7 +909,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_boolean_T_4[1]
+				p_1_Human_in_Loop_boolean_T_5[1]
 				{
 				 type:    uint(8)*
 				 alias:   "Value"
@@ -874,7 +931,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[16]
+				p_1_Human_in_Loop_real_T_4[16]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -894,7 +951,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[17]
+				p_1_Human_in_Loop_real_T_4[17]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -914,7 +971,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[19]
+				p_1_Human_in_Loop_real_T_4[19]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -934,7 +991,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[20]
+				p_1_Human_in_Loop_real_T_4[20]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -954,19 +1011,19 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[38]
+				p_1_Human_in_Loop_real_T_4[38]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Numerator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_3[42]
+				p_1_Human_in_Loop_real_T_4[42]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Denominator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_3[46]
+				p_1_Human_in_Loop_real_T_4[46]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialStates"
@@ -1121,7 +1178,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[47]
+					p_1_Human_in_Loop_real_T_4[47]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1141,7 +1198,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[48]
+					p_1_Human_in_Loop_real_T_4[48]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1378,7 +1435,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[22]
+					p_1_Human_in_Loop_real_T_4[22]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1398,7 +1455,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[21]
+					p_1_Human_in_Loop_real_T_4[21]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1418,7 +1475,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[23]
+					p_1_Human_in_Loop_real_T_4[23]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1501,7 +1558,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[37]
+					p_1_Human_in_Loop_real_T_4[37]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "WtEt"
@@ -1594,14 +1651,14 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3089]
+				p_0_Human_in_Loop_real_T_0[3840]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
 				 flags:   OUTPUT|READONLY
 				}
 
-				p_1_Human_in_Loop_boolean_T_2[3]
+				p_1_Human_in_Loop_boolean_T_3[5]
 				{
 				 type:    uint(8)*
 				 alias:   "BT_RESET_ANKLE"
@@ -1617,14 +1674,14 @@ group "Model Root"
   
 			group "Data process1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3088]
+				p_0_Human_in_Loop_real_T_0[3839]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
 				 flags:   OUTPUT|READONLY
 				}
 
-				p_1_Human_in_Loop_boolean_T_2[4]
+				p_1_Human_in_Loop_boolean_T_3[6]
 				{
 				 type:    uint(8)*
 				 alias:   "BT_RESET_MOTOR"
@@ -1655,7 +1712,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3085]
+				p_0_Human_in_Loop_real_T_0[3836]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
@@ -1670,7 +1727,7 @@ group "Model Root"
   
 			group "Mux2" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3082]
+				p_0_Human_in_Loop_real_T_0[3833]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
@@ -1688,7 +1745,7 @@ group "Model Root"
   
 		group "FootSwitch module" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3081]
+			p_0_Human_in_Loop_real_T_0[3832]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "FootSwitch"
@@ -1701,7 +1758,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_boolean_T_4[2]
+				p_1_Human_in_Loop_boolean_T_5[2]
 				{
 				 type:    uint(8)*
 				 alias:   "Value"
@@ -1737,7 +1794,7 @@ group "Model Root"
   
 			group "FootSwitch Filter" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3081]
+				p_0_Human_in_Loop_real_T_0[3832]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "state"
@@ -1773,7 +1830,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[2]
+				p_1_Human_in_Loop_real_T_4[2]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -1793,19 +1850,19 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_3[3]
+				p_1_Human_in_Loop_real_T_4[3]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Numerator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_3[7]
+				p_1_Human_in_Loop_real_T_4[7]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Denominator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_3[11]
+				p_1_Human_in_Loop_real_T_4[11]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialStates"
@@ -2039,7 +2096,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[13]
+					p_1_Human_in_Loop_real_T_4[13]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -2059,7 +2116,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[12]
+					p_1_Human_in_Loop_real_T_4[12]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -2079,7 +2136,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_3[14]
+					p_1_Human_in_Loop_real_T_4[14]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -2108,26 +2165,26 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3080]
+				p_0_Human_in_Loop_real_T_0[3831]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque"
 				 flags:   OUTPUT|READONLY
 				}
 
-				p_1_Human_in_Loop_real_T_0[18]
+				p_1_Human_in_Loop_real_T_0[19]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "load_vol_gain"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_0[19]
+				p_1_Human_in_Loop_real_T_0[20]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "load_vol_offset"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_boolean_T_2[5]
+				p_1_Human_in_Loop_boolean_T_3[7]
 				{
 				 type:    uint(8)*
 				 alias:   "BT_RESET_TORQUE"
@@ -2143,7 +2200,7 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3079]
+				p_0_Human_in_Loop_real_T_0[3830]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque_dot"
@@ -2197,7 +2254,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_3[25]
+			p_1_Human_in_Loop_real_T_4[25]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -2211,7 +2268,7 @@ group "Model Root"
   
 		group "Mux1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3075]
+			p_0_Human_in_Loop_real_T_0[3826]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "x"
@@ -2226,32 +2283,32 @@ group "Model Root"
   
 		group "State Machine" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3071]
+			p_0_Human_in_Loop_real_T_0[3822]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "mode"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3072]
+			p_0_Human_in_Loop_real_T_0[3823]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "state"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3073]
+			p_0_Human_in_Loop_real_T_0[3824]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3074]
+			p_0_Human_in_Loop_real_T_0[3825]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_timer"
 			 flags:   OUTPUT|READONLY
 			}
 
-			p_1_Human_in_Loop_boolean_T_2[6]
+			p_1_Human_in_Loop_boolean_T_3[8]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_RUN"
@@ -2259,7 +2316,7 @@ group "Model Root"
 			 bitmask: 0x01
 			 flags:   PARAM
 			}
-			p_1_Human_in_Loop_boolean_T_2[7]
+			p_1_Human_in_Loop_boolean_T_3[9]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_SLACK"
@@ -2267,7 +2324,7 @@ group "Model Root"
 			 bitmask: 0x01
 			 flags:   PARAM
 			}
-			p_1_Human_in_Loop_boolean_T_2[2]
+			p_1_Human_in_Loop_boolean_T_3[2]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_IDLE"
@@ -2275,7 +2332,7 @@ group "Model Root"
 			 bitmask: 0x01
 			 flags:   PARAM
 			}
-			p_1_Human_in_Loop_boolean_T_2[1]
+			p_1_Human_in_Loop_boolean_T_3[1]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_ERROR"
@@ -2283,7 +2340,7 @@ group "Model Root"
 			 bitmask: 0x01
 			 flags:   PARAM
 			}
-			p_1_Human_in_Loop_boolean_T_2[0]
+			p_1_Human_in_Loop_boolean_T_3[0]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_CALIB"

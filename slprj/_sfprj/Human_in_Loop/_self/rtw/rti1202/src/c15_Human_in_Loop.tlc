@@ -7,25 +7,34 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   2 \
+    NumChartData   3 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
       IsTestPoint  0\
     }\
     ChartData {\
-      Name         "last_state"\
+      Name         "last_footstate"\
       Description  "EmlPersistent"\
       SFName       ""\
       Path         ""\
-      SrcLocation  "Human_in_Loop:3443:77-87"\
+      SrcLocation  "Human_in_Loop:5011:161-175"\
     }\
     ChartData {\
-      Name         "reg_stride_num"\
+      Name         "torque_error_memory"\
       Description  "EmlPersistent"\
       SFName       ""\
       Path         ""\
-      SrcLocation  "Human_in_Loop:3443:100-114"\
+      SrcLocation  "Human_in_Loop:5011:188-207"\
+      Dimensions   [1,1000]\
+    }\
+    ChartData {\
+      Name         "lrn_cmd_memory"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:5011:220-234"\
+      Dimensions   [1,1000]\
     }\
   }
   %return ChartDataElements

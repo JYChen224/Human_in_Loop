@@ -5,7 +5,7 @@
    Declaration of function that initializes the global TRC pointers
 
    RTI1202 7.9 (02-Nov-2017)
-   Wed May  8 14:27:10 2019
+   Wed May  8 17:05:26 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -34,10 +34,11 @@ EXTERN_C volatile boolean_T *p_0_Human_in_Loop_boolean_T_1;
 EXTERN_C volatile real_T *p_0_Human_in_Loop_real_T_2;
 EXTERN_C volatile real_T *p_0_Human_in_Loop_real_T_3;
 EXTERN_C volatile real_T *p_1_Human_in_Loop_real_T_0;
-EXTERN_C volatile int8_T *p_1_Human_in_Loop_int8_T_1;
-EXTERN_C volatile boolean_T *p_1_Human_in_Loop_boolean_T_2;
-EXTERN_C volatile real_T *p_1_Human_in_Loop_real_T_3;
-EXTERN_C volatile boolean_T *p_1_Human_in_Loop_boolean_T_4;
+EXTERN_C volatile int32_T *p_1_Human_in_Loop_int32_T_1;
+EXTERN_C volatile int8_T *p_1_Human_in_Loop_int8_T_2;
+EXTERN_C volatile boolean_T *p_1_Human_in_Loop_boolean_T_3;
+EXTERN_C volatile real_T *p_1_Human_in_Loop_real_T_4;
+EXTERN_C volatile boolean_T *p_1_Human_in_Loop_boolean_T_5;
 EXTERN_C volatile real_T *p_2_Human_in_Loop_real_T_0;
 EXTERN_C volatile int8_T *p_2_Human_in_Loop_int8_T_1;
 
