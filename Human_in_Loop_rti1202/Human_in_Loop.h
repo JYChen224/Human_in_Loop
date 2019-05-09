@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1039
+ * Model version              : 1.1087
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Wed May  8 17:05:26 2019
+ * C source code generated on : Thu May  9 14:07:39 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,6 +24,7 @@
 #include <rtkernel.h>
 #include <rti_assert.h>
 #include <rtidefineddatatypes.h>
+#include <dsser.h>
 #include "rtwtypes.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
@@ -61,9 +62,9 @@
 # define rtmGetT(rtm)                  ((rtm)->Timing.taskTime0)
 #endif
 
-/* Block signals for system '<S20>/Mux' */
+/* Block signals for system '<S21>/Mux' */
 typedef struct {
-  real_T x[2];                         /* '<S20>/Mux' */
+  real_T x[2];                         /* '<S21>/Mux' */
 } B_Mux_Human_in_Loop_T;
 
 /* Block signals (auto storage) */
@@ -79,57 +80,59 @@ typedef struct {
   real_T tmp_data_cx[750];
   real_T z1_data[750];
   real_T z1_data_b[750];
-  real_T SFunction1;                   /* '<S39>/S-Function1' */
-  real_T Gain;                         /* '<S22>/Gain' */
-  real_T u4low2;                       /* '<S22>/0.4low2' */
-  real_T x2k1;                         /* '<S38>/Unit Delay1' */
-  real_T x1k1;                         /* '<S38>/Unit Delay' */
-  real_T Gain1;                        /* '<S38>/Gain1' */
-  real_T Gain2;                        /* '<S38>/Gain2' */
-  real_T UnitDelay2;                   /* '<S38>/Unit Delay2' */
-  real_T Gain4;                        /* '<S38>/Gain4' */
-  real_T Add2;                         /* '<S38>/Add2' */
-  real_T Gain3;                        /* '<S38>/Gain3' */
-  real_T x2k;                          /* '<S38>/Add1' */
+  real_T SFunction1;                   /* '<S48>/S-Function1' */
+  real_T Gain;                         /* '<S23>/Gain' */
+  real_T u4low2;                       /* '<S23>/0.4low2' */
+  real_T x2k1;                         /* '<S47>/Unit Delay1' */
+  real_T x1k1;                         /* '<S47>/Unit Delay' */
+  real_T Gain1;                        /* '<S47>/Gain1' */
+  real_T Gain2;                        /* '<S47>/Gain2' */
+  real_T UnitDelay2;                   /* '<S47>/Unit Delay2' */
+  real_T Gain4;                        /* '<S47>/Gain4' */
+  real_T Add2;                         /* '<S47>/Add2' */
+  real_T Gain3;                        /* '<S47>/Gain3' */
+  real_T x2k;                          /* '<S47>/Add1' */
   real_T RT1[2];                       /* '<S4>/RT1' */
-  real_T SFunction1_o1;                /* '<S28>/S-Function1' */
-  real_T SFunction1_o2;                /* '<S28>/S-Function1' */
-  real_T Gain_l;                       /* '<S20>/Gain' */
-  real_T Gain1_b;                      /* '<S20>/Gain1' */
+  real_T SFunction1_o1;                /* '<S37>/S-Function1' */
+  real_T SFunction1_o2;                /* '<S37>/S-Function1' */
+  real_T Gain_l;                       /* '<S21>/Gain' */
+  real_T Gain1_b;                      /* '<S21>/Gain1' */
   real_T RT2[2];                       /* '<S4>/RT2' */
-  real_T SFunction1_o1_k;              /* '<S29>/S-Function1' */
-  real_T SFunction1_o2_k;              /* '<S29>/S-Function1' */
-  real_T Gain2_h;                      /* '<S20>/Gain2' */
-  real_T Gain3_m;                      /* '<S20>/Gain3' */
-  real_T x2k1_k;                       /* '<S24>/Unit Delay1' */
-  real_T x1k1_m;                       /* '<S24>/Unit Delay' */
-  real_T Gain1_m;                      /* '<S24>/Gain1' */
-  real_T Gain2_c;                      /* '<S24>/Gain2' */
-  real_T UnitDelay2_b;                 /* '<S24>/Unit Delay2' */
-  real_T Gain4_g;                      /* '<S24>/Gain4' */
-  real_T Add2_m;                       /* '<S24>/Add2' */
-  real_T Gain3_k;                      /* '<S24>/Gain3' */
-  real_T x2k_i;                        /* '<S24>/Add1' */
+  real_T SFunction1_o1_k;              /* '<S38>/S-Function1' */
+  real_T SFunction1_o2_k;              /* '<S38>/S-Function1' */
+  real_T Gain2_h;                      /* '<S21>/Gain2' */
+  real_T Gain3_m;                      /* '<S21>/Gain3' */
+  real_T x2k1_k;                       /* '<S33>/Unit Delay1' */
+  real_T x1k1_m;                       /* '<S33>/Unit Delay' */
+  real_T Gain1_m;                      /* '<S33>/Gain1' */
+  real_T Gain2_c;                      /* '<S33>/Gain2' */
+  real_T UnitDelay2_b;                 /* '<S33>/Unit Delay2' */
+  real_T Gain4_g;                      /* '<S33>/Gain4' */
+  real_T Add2_m;                       /* '<S33>/Add2' */
+  real_T Gain3_k;                      /* '<S33>/Gain3' */
+  real_T x2k_i;                        /* '<S33>/Add1' */
   real_T RT3[3];                       /* '<S4>/RT3' */
   real_T RT1_n[4];                     /* '<S5>/RT1' */
   real_T RT1_a[5];                     /* '<S2>/RT1' */
   real_T RT2_h[4];                     /* '<S2>/RT2' */
-  real_T Gain_g;                       /* '<S38>/Gain' */
-  real_T x1k;                          /* '<S38>/Add' */
-  real_T TSamp;                        /* '<S27>/TSamp' */
-  real_T Uk1;                          /* '<S27>/UD' */
-  real_T Diff;                         /* '<S27>/Diff' */
-  real_T u4low1;                       /* '<S20>/0.4low1' */
-  real_T UnitDelay;                    /* '<S23>/Unit Delay' */
-  real_T UnitDelay1;                   /* '<S23>/Unit Delay1' */
-  real_T Add1;                         /* '<S23>/Add1' */
-  real_T Gain_p;                       /* '<S23>/Gain' */
-  real_T Gain1_d;                      /* '<S23>/Gain1' */
-  real_T Add2_i;                       /* '<S23>/Add2' */
-  real_T Add3;                         /* '<S23>/Add3' */
-  real_T Gain2_i;                      /* '<S23>/Gain2' */
-  real_T Gain_i;                       /* '<S24>/Gain' */
-  real_T x1k_i;                        /* '<S24>/Add' */
+  real_T Gain_g;                       /* '<S47>/Gain' */
+  real_T x1k;                          /* '<S47>/Add' */
+  real_T TSamp;                        /* '<S36>/TSamp' */
+  real_T Uk1;                          /* '<S36>/UD' */
+  real_T Diff;                         /* '<S36>/Diff' */
+  real_T u4low1;                       /* '<S21>/0.4low1' */
+  real_T UnitDelay;                    /* '<S32>/Unit Delay' */
+  real_T UnitDelay1;                   /* '<S32>/Unit Delay1' */
+  real_T Add1;                         /* '<S32>/Add1' */
+  real_T Gain_p;                       /* '<S32>/Gain' */
+  real_T Gain1_d;                      /* '<S32>/Gain1' */
+  real_T Add2_i;                       /* '<S32>/Add2' */
+  real_T Add3;                         /* '<S32>/Add3' */
+  real_T Gain2_i;                      /* '<S32>/Gain2' */
+  real_T Gain_i;                       /* '<S33>/Gain' */
+  real_T x1k_i;                        /* '<S33>/Add' */
+  real_T RT1_c;                        /* '<S20>/RT1' */
+  real_T RT2_g;                        /* '<S20>/RT2' */
   real_T Gain2_j;                      /* '<S9>/Gain2' */
   real_T Gain1_p;                      /* '<S9>/Gain1' */
   real_T torque_des;                   /* '<S1>/Torque track' */
@@ -145,34 +148,47 @@ typedef struct {
   real_T stride_time;                  /* '<S5>/State Machine' */
   real_T stride_timer;                 /* '<S5>/State Machine' */
   real_T x[4];                         /* '<S5>/Mux1' */
-  real_T torque_dot;                   /* '<S22>/MATLAB Function' */
-  real_T torque;                       /* '<S22>/Data process' */
-  real_T state_c;                      /* '<S21>/FootSwitch Filter' */
-  real_T x_d[3];                       /* '<S20>/Mux2' */
-  real_T x_i[3];                       /* '<S20>/Mux1' */
-  real_T angle;                        /* '<S20>/Data process1' */
-  real_T angle_m;                      /* '<S20>/Data process' */
+  real_T torque_dot;                   /* '<S23>/MATLAB Function' */
+  real_T torque;                       /* '<S23>/Data process' */
+  real_T state_c;                      /* '<S22>/FootSwitch Filter' */
+  real_T x_d[3];                       /* '<S21>/Mux2' */
+  real_T x_i[3];                       /* '<S21>/Mux1' */
+  real_T angle;                        /* '<S21>/Data process1' */
+  real_T angle_m;                      /* '<S21>/Data process' */
+  real_T Trigger;                      /* '<S20>/Timer' */
+  real_T Time;                         /* '<S20>/Timer' */
+  real_T Count;                        /* '<S20>/Timer' */
+  real_T Data1;                        /* '<S28>/MATLAB Function1' */
+  real_T Data2;                        /* '<S28>/MATLAB Function1' */
+  real_T E;                            /* '<S28>/Estimation' */
+  real_T Time_p[12];                   /* '<S28>/Estimation' */
+  real_T Y[12];                        /* '<S28>/Estimation' */
+  real_T Y_E[12];                      /* '<S28>/Estimation' */
+  real_T est_curve[24];                /* '<S28>/Estimation' */
   real_T x_k[4];                       /* '<S14>/Mux1' */
   real_T x_o[5];                       /* '<S13>/Mux1' */
-  boolean_T SFunction1_a;              /* '<S35>/S-Function1' */
-  B_Mux_Human_in_Loop_T sf_Mux;        /* '<S22>/Mux' */
-  B_Mux_Human_in_Loop_T sf_Mux_p;      /* '<S20>/Mux' */
+  int32_T SFunction1_o3;               /* '<S29>/S-Function1' */
+  uint32_T SFunction1_o2_b;            /* '<S29>/S-Function1' */
+  uint8_T SFunction1_o1_l[16];         /* '<S29>/S-Function1' */
+  boolean_T SFunction1_a;              /* '<S44>/S-Function1' */
+  B_Mux_Human_in_Loop_T sf_Mux;        /* '<S23>/Mux' */
+  B_Mux_Human_in_Loop_T sf_Mux_p;      /* '<S21>/Mux' */
 } B_Human_in_Loop_T;
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T u4low2_states[3];             /* '<S22>/0.4low2' */
-  real_T UnitDelay1_DSTATE;            /* '<S38>/Unit Delay1' */
-  real_T UnitDelay_DSTATE;             /* '<S38>/Unit Delay' */
-  real_T UnitDelay2_DSTATE;            /* '<S38>/Unit Delay2' */
-  real_T UnitDelay1_DSTATE_h;          /* '<S24>/Unit Delay1' */
-  real_T UnitDelay_DSTATE_e;           /* '<S24>/Unit Delay' */
-  real_T UnitDelay2_DSTATE_a;          /* '<S24>/Unit Delay2' */
-  real_T UD_DSTATE;                    /* '<S27>/UD' */
-  real_T u4low1_states[3];             /* '<S20>/0.4low1' */
-  real_T UnitDelay_DSTATE_j;           /* '<S23>/Unit Delay' */
-  real_T UnitDelay1_DSTATE_a;          /* '<S23>/Unit Delay1' */
-  real_T u4low2_tmp;                   /* '<S22>/0.4low2' */
+  real_T u4low2_states[3];             /* '<S23>/0.4low2' */
+  real_T UnitDelay1_DSTATE;            /* '<S47>/Unit Delay1' */
+  real_T UnitDelay_DSTATE;             /* '<S47>/Unit Delay' */
+  real_T UnitDelay2_DSTATE;            /* '<S47>/Unit Delay2' */
+  real_T UnitDelay1_DSTATE_h;          /* '<S33>/Unit Delay1' */
+  real_T UnitDelay_DSTATE_e;           /* '<S33>/Unit Delay' */
+  real_T UnitDelay2_DSTATE_a;          /* '<S33>/Unit Delay2' */
+  real_T UD_DSTATE;                    /* '<S36>/UD' */
+  real_T u4low1_states[3];             /* '<S21>/0.4low1' */
+  real_T UnitDelay_DSTATE_j;           /* '<S32>/Unit Delay' */
+  real_T UnitDelay1_DSTATE_a;          /* '<S32>/Unit Delay1' */
+  real_T u4low2_tmp;                   /* '<S23>/0.4low2' */
   volatile real_T RT1_Buffer0[2];      /* '<S4>/RT1' */
   volatile real_T RT1_Buffer1[2];      /* '<S4>/RT1' */
   volatile real_T RT2_Buffer0[2];      /* '<S4>/RT2' */
@@ -185,7 +201,11 @@ typedef struct {
   volatile real_T RT1_Buffer1_e[5];    /* '<S2>/RT1' */
   volatile real_T RT2_Buffer0_k[4];    /* '<S2>/RT2' */
   volatile real_T RT2_Buffer1_i[4];    /* '<S2>/RT2' */
-  real_T u4low1_tmp;                   /* '<S20>/0.4low1' */
+  real_T u4low1_tmp;                   /* '<S21>/0.4low1' */
+  volatile real_T RT1_Buffer0_e;       /* '<S20>/RT1' */
+  volatile real_T RT1_Buffer1_f4;      /* '<S20>/RT1' */
+  volatile real_T RT2_Buffer0_i;       /* '<S20>/RT2' */
+  volatile real_T RT2_Buffer1_o;       /* '<S20>/RT2' */
   real_T TorqueMem[4400];              /* '<Root>/Data Store Memory' */
   real_T last_footstate;               /* '<S1>/Torque track' */
   real_T last_footstate_a;             /* '<S1>/LRN' */
@@ -198,12 +218,19 @@ typedef struct {
   real_T reg_state;                    /* '<S5>/State Machine' */
   real_T bt_run;                       /* '<S5>/State Machine' */
   real_T reg_last_switch;              /* '<S5>/State Machine' */
-  real_T data[15];                     /* '<S22>/MATLAB Function' */
-  real_T torque_zero;                  /* '<S22>/Data process' */
-  real_T foot_state;                   /* '<S21>/FootSwitch Filter' */
-  real_T filter_time;                  /* '<S21>/FootSwitch Filter' */
-  real_T angle_zero;                   /* '<S20>/Data process1' */
-  real_T angle_zero_f;                 /* '<S20>/Data process' */
+  real_T data[15];                     /* '<S23>/MATLAB Function' */
+  real_T torque_zero;                  /* '<S23>/Data process' */
+  real_T foot_state;                   /* '<S22>/FootSwitch Filter' */
+  real_T filter_time;                  /* '<S22>/FootSwitch Filter' */
+  real_T angle_zero;                   /* '<S21>/Data process1' */
+  real_T angle_zero_f;                 /* '<S21>/Data process' */
+  real_T count;                        /* '<S20>/Timer' */
+  real_T time;                         /* '<S20>/Timer' */
+  real_T last_count;                   /* '<S28>/Estimation' */
+  real_T x[20];                        /* '<S28>/Estimation' */
+  real_T y[20];                        /* '<S28>/Estimation' */
+  real_T theta[2];                     /* '<S28>/Estimation' */
+  real_T num;                          /* '<S28>/Estimation' */
   volatile int8_T RT1_write_buf;       /* '<S4>/RT1' */
   volatile int8_T RT1_read_buf;        /* '<S4>/RT1' */
   volatile int8_T RT1_last_buf_wr;     /* '<S4>/RT1' */
@@ -222,6 +249,12 @@ typedef struct {
   volatile int8_T RT2_write_buf_i;     /* '<S2>/RT2' */
   volatile int8_T RT2_read_buf_k;      /* '<S2>/RT2' */
   volatile int8_T RT2_last_buf_wr_d;   /* '<S2>/RT2' */
+  volatile int8_T RT1_write_buf_f;     /* '<S20>/RT1' */
+  volatile int8_T RT1_read_buf_p4;     /* '<S20>/RT1' */
+  volatile int8_T RT1_last_buf_wr_j;   /* '<S20>/RT1' */
+  volatile int8_T RT2_write_buf_g;     /* '<S20>/RT2' */
+  volatile int8_T RT2_read_buf_a;      /* '<S20>/RT2' */
+  volatile int8_T RT2_last_buf_wr_a;   /* '<S20>/RT2' */
 } DW_Human_in_Loop_T;
 
 /* Parameters (auto storage) */
@@ -236,7 +269,7 @@ struct P_Human_in_Loop_T_ {
                                         * Referenced by: '<S1>/Controller'
                                         */
   real_T DiscreteDerivative_ICPrevScaled;/* Mask Parameter: DiscreteDerivative_ICPrevScaled
-                                          * Referenced by: '<S27>/UD'
+                                          * Referenced by: '<S36>/UD'
                                           */
   real_T MATLABFunction_MAX_MOTOR_ANGLE;/* Mask Parameter: MATLABFunction_MAX_MOTOR_ANGLE
                                          * Referenced by: '<S9>/MATLAB Function'
@@ -258,54 +291,54 @@ struct P_Human_in_Loop_T_ {
                                         */
   real_T uOrderTD_T;                   /* Mask Parameter: uOrderTD_T
                                         * Referenced by:
-                                        *   '<S23>/Gain1'
-                                        *   '<S23>/Gain2'
+                                        *   '<S32>/Gain1'
+                                        *   '<S32>/Gain2'
                                         */
   real_T uOrderTD_T1;                  /* Mask Parameter: uOrderTD_T1
                                         * Referenced by:
-                                        *   '<S38>/Gain1'
-                                        *   '<S38>/Gain2'
-                                        *   '<S38>/Gain4'
+                                        *   '<S47>/Gain1'
+                                        *   '<S47>/Gain2'
+                                        *   '<S47>/Gain4'
                                         */
   real_T uOrderTD_T1_l;                /* Mask Parameter: uOrderTD_T1_l
                                         * Referenced by:
-                                        *   '<S24>/Gain1'
-                                        *   '<S24>/Gain2'
-                                        *   '<S24>/Gain4'
+                                        *   '<S33>/Gain1'
+                                        *   '<S33>/Gain2'
+                                        *   '<S33>/Gain4'
                                         */
   real_T uOrderTD_T2;                  /* Mask Parameter: uOrderTD_T2
                                         * Referenced by:
-                                        *   '<S38>/Gain1'
-                                        *   '<S38>/Gain2'
-                                        *   '<S38>/Gain4'
+                                        *   '<S47>/Gain1'
+                                        *   '<S47>/Gain2'
+                                        *   '<S47>/Gain4'
                                         */
   real_T uOrderTD_T2_h;                /* Mask Parameter: uOrderTD_T2_h
                                         * Referenced by:
-                                        *   '<S24>/Gain1'
-                                        *   '<S24>/Gain2'
-                                        *   '<S24>/Gain4'
+                                        *   '<S33>/Gain1'
+                                        *   '<S33>/Gain2'
+                                        *   '<S33>/Gain4'
                                         */
   real_T uOrderTD_Ts;                  /* Mask Parameter: uOrderTD_Ts
                                         * Referenced by:
-                                        *   '<S38>/Gain'
-                                        *   '<S38>/Gain3'
+                                        *   '<S47>/Gain'
+                                        *   '<S47>/Gain3'
                                         */
   real_T uOrderTD_Ts_n;                /* Mask Parameter: uOrderTD_Ts_n
                                         * Referenced by:
-                                        *   '<S24>/Gain'
-                                        *   '<S24>/Gain3'
+                                        *   '<S33>/Gain'
+                                        *   '<S33>/Gain3'
                                         */
   real_T uOrderTD_Ts_g;                /* Mask Parameter: uOrderTD_Ts_g
-                                        * Referenced by: '<S23>/Gain'
+                                        * Referenced by: '<S32>/Gain'
                                         */
   real_T LRN_error_filter_k;           /* Mask Parameter: LRN_error_filter_k
                                         * Referenced by: '<S1>/LRN'
                                         */
   real_T Dataprocess_load_vol_gain;    /* Mask Parameter: Dataprocess_load_vol_gain
-                                        * Referenced by: '<S22>/Data process'
+                                        * Referenced by: '<S23>/Data process'
                                         */
   real_T Dataprocess_load_vol_offset;  /* Mask Parameter: Dataprocess_load_vol_offset
-                                        * Referenced by: '<S22>/Data process'
+                                        * Referenced by: '<S23>/Data process'
                                         */
   real_T LRN_lrn_shrink;               /* Mask Parameter: LRN_lrn_shrink
                                         * Referenced by: '<S1>/LRN'
@@ -331,20 +364,26 @@ struct P_Human_in_Loop_T_ {
   boolean_T LRN_BT_LRN_ON;             /* Mask Parameter: LRN_BT_LRN_ON
                                         * Referenced by: '<S1>/LRN'
                                         */
+  boolean_T Timer_BT_METAB_EST;        /* Mask Parameter: Timer_BT_METAB_EST
+                                        * Referenced by: '<S20>/Timer'
+                                        */
   boolean_T Dataprocess_BT_RESET_ANKLE;/* Mask Parameter: Dataprocess_BT_RESET_ANKLE
-                                        * Referenced by: '<S20>/Data process'
+                                        * Referenced by: '<S21>/Data process'
                                         */
   boolean_T Dataprocess1_BT_RESET_MOTOR;/* Mask Parameter: Dataprocess1_BT_RESET_MOTOR
-                                         * Referenced by: '<S20>/Data process1'
+                                         * Referenced by: '<S21>/Data process1'
                                          */
   boolean_T Dataprocess_BT_RESET_TORQUE;/* Mask Parameter: Dataprocess_BT_RESET_TORQUE
-                                         * Referenced by: '<S22>/Data process'
+                                         * Referenced by: '<S23>/Data process'
                                          */
   boolean_T StateMachine_BT_RUN;       /* Mask Parameter: StateMachine_BT_RUN
                                         * Referenced by: '<S5>/State Machine'
                                         */
   boolean_T StateMachine_BT_SLACK;     /* Mask Parameter: StateMachine_BT_SLACK
                                         * Referenced by: '<S5>/State Machine'
+                                        */
+  real_T E_Y0;                         /* Computed Parameter: E_Y0
+                                        * Referenced by: '<S28>/E'
                                         */
   real_T Gain2_Gain;                   /* Expression: 1/360
                                         * Referenced by: '<S9>/Gain2'
@@ -353,52 +392,52 @@ struct P_Human_in_Loop_T_ {
                                         * Referenced by: '<S9>/Gain1'
                                         */
   real_T Gain_Gain;                    /* Expression: 10
-                                        * Referenced by: '<S22>/Gain'
+                                        * Referenced by: '<S23>/Gain'
                                         */
   real_T u4low2_NumCoef[4];            /* Expression: [0.219606211225382   0.658818633676145   0.658818633676145   0.219606211225382]*1e-3
-                                        * Referenced by: '<S22>/0.4low2'
+                                        * Referenced by: '<S23>/0.4low2'
                                         */
   real_T u4low2_DenCoef[4];            /* Expression: [1.000000000000000  -2.748835809214676   2.528231219142559  -0.777638560238080]
-                                        * Referenced by: '<S22>/0.4low2'
+                                        * Referenced by: '<S23>/0.4low2'
                                         */
   real_T u4low2_InitialStates;         /* Expression: 0
-                                        * Referenced by: '<S22>/0.4low2'
+                                        * Referenced by: '<S23>/0.4low2'
                                         */
   real_T UnitDelay1_InitialCondition;  /* Expression: 0
-                                        * Referenced by: '<S38>/Unit Delay1'
+                                        * Referenced by: '<S47>/Unit Delay1'
                                         */
   real_T UnitDelay_InitialCondition;   /* Expression: 0
-                                        * Referenced by: '<S38>/Unit Delay'
+                                        * Referenced by: '<S47>/Unit Delay'
                                         */
   real_T UnitDelay2_InitialCondition;  /* Expression: 0
-                                        * Referenced by: '<S38>/Unit Delay2'
+                                        * Referenced by: '<S47>/Unit Delay2'
                                         */
   real_T RT1_InitialCondition;         /* Expression: 0
                                         * Referenced by: '<S4>/RT1'
                                         */
   real_T Gain_Gain_c;                  /* Expression: 360/1250
-                                        * Referenced by: '<S20>/Gain'
+                                        * Referenced by: '<S21>/Gain'
                                         */
   real_T Gain1_Gain_e;                 /* Expression: 360/1250
-                                        * Referenced by: '<S20>/Gain1'
+                                        * Referenced by: '<S21>/Gain1'
                                         */
   real_T RT2_InitialCondition;         /* Expression: 0
                                         * Referenced by: '<S4>/RT2'
                                         */
   real_T Gain2_Gain_e;                 /* Expression: -360.0/1250.0
-                                        * Referenced by: '<S20>/Gain2'
+                                        * Referenced by: '<S21>/Gain2'
                                         */
   real_T Gain3_Gain;                   /* Expression: -360.0/1250.0
-                                        * Referenced by: '<S20>/Gain3'
+                                        * Referenced by: '<S21>/Gain3'
                                         */
   real_T UnitDelay1_InitialCondition_j;/* Expression: 0
-                                        * Referenced by: '<S24>/Unit Delay1'
+                                        * Referenced by: '<S33>/Unit Delay1'
                                         */
   real_T UnitDelay_InitialCondition_j; /* Expression: 0
-                                        * Referenced by: '<S24>/Unit Delay'
+                                        * Referenced by: '<S33>/Unit Delay'
                                         */
   real_T UnitDelay2_InitialCondition_h;/* Expression: 0
-                                        * Referenced by: '<S24>/Unit Delay2'
+                                        * Referenced by: '<S33>/Unit Delay2'
                                         */
   real_T RT3_InitialCondition;         /* Expression: 0
                                         * Referenced by: '<S4>/RT3'
@@ -440,36 +479,42 @@ struct P_Human_in_Loop_T_ {
                                         * Referenced by: '<S2>/RT2'
                                         */
   real_T TSamp_WtEt;                   /* Computed Parameter: TSamp_WtEt
-                                        * Referenced by: '<S27>/TSamp'
+                                        * Referenced by: '<S36>/TSamp'
                                         */
   real_T u4low1_NumCoef[4];            /* Expression: [   0.001567010350588   0.004701031051765   0.004701031051765   0.001567010350588
                                           ]
-                                        * Referenced by: '<S20>/0.4low1'
+                                        * Referenced by: '<S21>/0.4low1'
                                         */
   real_T u4low1_DenCoef[4];            /* Expression: [   1.000000000000000  -2.498608344691178   2.115254127003159  -0.604109699507275
                                           ]
-                                        * Referenced by: '<S20>/0.4low1'
+                                        * Referenced by: '<S21>/0.4low1'
                                         */
   real_T u4low1_InitialStates;         /* Expression: 0
-                                        * Referenced by: '<S20>/0.4low1'
+                                        * Referenced by: '<S21>/0.4low1'
                                         */
   real_T UnitDelay_InitialCondition_g; /* Expression: 0
-                                        * Referenced by: '<S23>/Unit Delay'
+                                        * Referenced by: '<S32>/Unit Delay'
                                         */
   real_T UnitDelay1_InitialCondition_i;/* Expression: 0
-                                        * Referenced by: '<S23>/Unit Delay1'
+                                        * Referenced by: '<S32>/Unit Delay1'
+                                        */
+  real_T RT1_InitialCondition_c;       /* Expression: 0
+                                        * Referenced by: '<S20>/RT1'
+                                        */
+  real_T RT2_InitialCondition_i;       /* Expression: 0
+                                        * Referenced by: '<S20>/RT2'
                                         */
   real_T DataStoreMemory_InitialValue[4400];/* Expression: zeros(4,1100)
                                              * Referenced by: '<Root>/Data Store Memory'
                                              */
   boolean_T VCC1_Value;                /* Computed Parameter: VCC1_Value
-                                        * Referenced by: '<S20>/VCC1'
+                                        * Referenced by: '<S21>/VCC1'
                                         */
   boolean_T VCC3_Value;                /* Computed Parameter: VCC3_Value
-                                        * Referenced by: '<S20>/VCC3'
+                                        * Referenced by: '<S21>/VCC3'
                                         */
   boolean_T Constant_Value;            /* Computed Parameter: Constant_Value
-                                        * Referenced by: '<S21>/Constant'
+                                        * Referenced by: '<S22>/Constant'
                                         */
 };
 
@@ -543,30 +588,39 @@ extern RT_MODEL_Human_in_Loop_T *const Human_in_Loop_M;
  * '<S17>'  : 'Human_in_Loop/RTI Data/RTI Data Store'
  * '<S18>'  : 'Human_in_Loop/RTI Data/RTI Data Store/RTI Data Store'
  * '<S19>'  : 'Human_in_Loop/RTI Data/RTI Data Store/RTI Data Store/RTI Data Store'
- * '<S20>'  : 'Human_in_Loop/Sensor Data/Encoder module'
- * '<S21>'  : 'Human_in_Loop/Sensor Data/FootSwitch module'
- * '<S22>'  : 'Human_in_Loop/Sensor Data/Torque module'
- * '<S23>'  : 'Human_in_Loop/Sensor Data/Encoder module/1-Order TD'
- * '<S24>'  : 'Human_in_Loop/Sensor Data/Encoder module/2-Order TD'
- * '<S25>'  : 'Human_in_Loop/Sensor Data/Encoder module/Data process'
- * '<S26>'  : 'Human_in_Loop/Sensor Data/Encoder module/Data process1'
- * '<S27>'  : 'Human_in_Loop/Sensor Data/Encoder module/Discrete Derivative'
- * '<S28>'  : 'Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1'
- * '<S29>'  : 'Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL3'
- * '<S30>'  : 'Human_in_Loop/Sensor Data/Encoder module/Encoder Power Setup1'
- * '<S31>'  : 'Human_in_Loop/Sensor Data/Encoder module/Encoder Power Setup3'
- * '<S32>'  : 'Human_in_Loop/Sensor Data/Encoder module/Mux'
- * '<S33>'  : 'Human_in_Loop/Sensor Data/Encoder module/Mux1'
- * '<S34>'  : 'Human_in_Loop/Sensor Data/Encoder module/Mux2'
- * '<S35>'  : 'Human_in_Loop/Sensor Data/FootSwitch module/DIO_CLASS1_BIT_IN_BL1'
- * '<S36>'  : 'Human_in_Loop/Sensor Data/FootSwitch module/DIO_CLASS1_BIT_OUT_BL1'
- * '<S37>'  : 'Human_in_Loop/Sensor Data/FootSwitch module/FootSwitch Filter'
- * '<S38>'  : 'Human_in_Loop/Sensor Data/Torque module/2-Order TD'
- * '<S39>'  : 'Human_in_Loop/Sensor Data/Torque module/ADC_CLASS1_BL6'
- * '<S40>'  : 'Human_in_Loop/Sensor Data/Torque module/Data process'
- * '<S41>'  : 'Human_in_Loop/Sensor Data/Torque module/MATLAB Function'
- * '<S42>'  : 'Human_in_Loop/Sensor Data/Torque module/Mux'
- * '<S43>'  : 'Human_in_Loop/State Module/Mux1'
- * '<S44>'  : 'Human_in_Loop/State Module/State Machine'
+ * '<S20>'  : 'Human_in_Loop/Sensor Data/Cosmed'
+ * '<S21>'  : 'Human_in_Loop/Sensor Data/Encoder module'
+ * '<S22>'  : 'Human_in_Loop/Sensor Data/FootSwitch module'
+ * '<S23>'  : 'Human_in_Loop/Sensor Data/Torque module'
+ * '<S24>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED'
+ * '<S25>'  : 'Human_in_Loop/Sensor Data/Cosmed/Timer'
+ * '<S26>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED/DS1202SER_INT_C1_I1'
+ * '<S27>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED/DS1202SER_SETUP_C1'
+ * '<S28>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED/Serial Decoding System'
+ * '<S29>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED/Serial Decoding System/DS1202SER_RX_C1'
+ * '<S30>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED/Serial Decoding System/Estimation'
+ * '<S31>'  : 'Human_in_Loop/Sensor Data/Cosmed/COSMED/Serial Decoding System/MATLAB Function1'
+ * '<S32>'  : 'Human_in_Loop/Sensor Data/Encoder module/1-Order TD'
+ * '<S33>'  : 'Human_in_Loop/Sensor Data/Encoder module/2-Order TD'
+ * '<S34>'  : 'Human_in_Loop/Sensor Data/Encoder module/Data process'
+ * '<S35>'  : 'Human_in_Loop/Sensor Data/Encoder module/Data process1'
+ * '<S36>'  : 'Human_in_Loop/Sensor Data/Encoder module/Discrete Derivative'
+ * '<S37>'  : 'Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1'
+ * '<S38>'  : 'Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL3'
+ * '<S39>'  : 'Human_in_Loop/Sensor Data/Encoder module/Encoder Power Setup1'
+ * '<S40>'  : 'Human_in_Loop/Sensor Data/Encoder module/Encoder Power Setup3'
+ * '<S41>'  : 'Human_in_Loop/Sensor Data/Encoder module/Mux'
+ * '<S42>'  : 'Human_in_Loop/Sensor Data/Encoder module/Mux1'
+ * '<S43>'  : 'Human_in_Loop/Sensor Data/Encoder module/Mux2'
+ * '<S44>'  : 'Human_in_Loop/Sensor Data/FootSwitch module/DIO_CLASS1_BIT_IN_BL1'
+ * '<S45>'  : 'Human_in_Loop/Sensor Data/FootSwitch module/DIO_CLASS1_BIT_OUT_BL1'
+ * '<S46>'  : 'Human_in_Loop/Sensor Data/FootSwitch module/FootSwitch Filter'
+ * '<S47>'  : 'Human_in_Loop/Sensor Data/Torque module/2-Order TD'
+ * '<S48>'  : 'Human_in_Loop/Sensor Data/Torque module/ADC_CLASS1_BL6'
+ * '<S49>'  : 'Human_in_Loop/Sensor Data/Torque module/Data process'
+ * '<S50>'  : 'Human_in_Loop/Sensor Data/Torque module/MATLAB Function'
+ * '<S51>'  : 'Human_in_Loop/Sensor Data/Torque module/Mux'
+ * '<S52>'  : 'Human_in_Loop/State Module/Mux1'
+ * '<S53>'  : 'Human_in_Loop/State Module/State Machine'
  */
 #endif                                 /* RTW_HEADER_Human_in_Loop_h_ */

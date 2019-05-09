@@ -3,7 +3,7 @@
 --  Trace file: Human_in_Loop.trc
 --
 --  RTI1202 7.9 (02-Nov-2017)
---  Wed May  8 17:05:26 2019
+--  Thu May  9 14:07:39 2019
 --
 --  Copyright 2019, dSPACE GmbH. All rights reserved.
 --
@@ -26,7 +26,7 @@
 
 _genname     "RTI"
 _genversion  "7.9"
-_gendate     "05/08/2019 17:05:30"
+_gendate     "05/09/2019 14:07:43"
 _description ""
 _author      "RTI1202 7.9 (02-Nov-2017)"
 _model       "Human_in_Loop"
@@ -54,6 +54,9 @@ typedef Human_in_Loop_ArrayDT0_1_4_Col col flt(64,IEEE)[1][4]
 typedef Human_in_Loop_ArrayDT0_1_5_Col col flt(64,IEEE)[1][5]
 typedef Human_in_Loop_ArrayDT0_2_750_Col col flt(64,IEEE)[2][750]
 typedef Human_in_Loop_ArrayDT0_1_750_Col col flt(64,IEEE)[1][750]
+typedef Human_in_Loop_ArrayDT0_1_12_Col col flt(64,IEEE)[1][12]
+typedef Human_in_Loop_ArrayDT0_2_12_Col col flt(64,IEEE)[2][12]
+typedef Human_in_Loop_ArrayDT3_16 uint(8)[16]
 typedef Human_in_Loop_ArrayDT0_4 flt(64,IEEE)[4]
 typedef Human_in_Loop_ArrayDT0_4_1100_Col col flt(64,IEEE)[4][1100]
 typedef Human_in_Loop_ArrayDT0_3 flt(64,IEEE)[3]
@@ -62,6 +65,7 @@ typedef Human_in_Loop_ArrayDT0_5 flt(64,IEEE)[5]
 typedef Human_in_Loop_ArrayDT0_4400 flt(64,IEEE)[4400]
 typedef Human_in_Loop_ArrayDT0_1_1000_Col col flt(64,IEEE)[1][1000]
 typedef Human_in_Loop_ArrayDT0_15 flt(64,IEEE)[15]
+typedef Human_in_Loop_ArrayDT0_1_20_Col col flt(64,IEEE)[1][20]
 
 
 -- ******** Simulation control variables **************************************
@@ -247,6 +251,61 @@ group "Task Info"
   }
   endgroup
 
+  group "DS1202SER_INT_C1_I1"
+  {
+   flags: COLLAPSED
+  }
+
+  pRti_UART_EVENTS_CH1_INT0_TTime
+  {
+   type:  flt(64,IEEE)*
+   alias: "turnaroundTime"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_TState
+  {
+   type:  int(32)*
+   alias: "state"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_OType
+  {
+   type:  int(32)*
+   alias: "overrunCheckType"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_OMax
+  {
+   type:  int(32)*
+   alias: "overrunQueueMax"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_ORpt
+  {
+   type:  int(32)*
+   alias: "overrunQueueCount"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_OCnt
+  {
+   type:  int(32)*
+   alias: "overrunCount"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_TCnt
+  {
+   type:  flt(64,IEEE)*
+   alias: "taskCallCount"
+   flags: READONLY
+  }
+  pRti_UART_EVENTS_CH1_INT0_Prio
+  {
+   type:  int(32)*
+   alias: "priority"
+   flags: READONLY
+  }
+  endgroup
+
 
 endgroup
 
@@ -259,7 +318,7 @@ group "Model Root"
 	 block: "DataStoreMemory"
 	}
 
-		p_1_Human_in_Loop_real_T_4[49]
+		p_1_Human_in_Loop_real_T_4[52]
 		{
 		 type:    Human_in_Loop_ArrayDT0_4_1100_Col*
 		 alias:   "InitialValue"
@@ -285,13 +344,13 @@ group "Model Root"
 			{
 			 block: "Gain"
 			}
-				p_0_Human_in_Loop_real_T_0[66]
+				p_0_Human_in_Loop_real_T_0[68]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[1]
+				p_1_Human_in_Loop_real_T_4[2]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -305,13 +364,13 @@ group "Model Root"
 			{
 			 block: "Gain"
 			}
-				p_0_Human_in_Loop_real_T_0[65]
+				p_0_Human_in_Loop_real_T_0[67]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[0]
+				p_1_Human_in_Loop_real_T_4[1]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -331,7 +390,7 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3069]
+				p_0_Human_in_Loop_real_T_0[3071]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "vel"
@@ -373,7 +432,7 @@ group "Model Root"
   
 		group "Controller" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3821]
+			p_0_Human_in_Loop_real_T_0[3823]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "motor_vel_cmd"
@@ -424,13 +483,13 @@ group "Model Root"
   
 		group "LRN" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3070]
+			p_0_Human_in_Loop_real_T_0[3072]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "lrn_cmd"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3071]
+			p_0_Human_in_Loop_real_T_0[3073]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_750_Col*
 			 alias:   "lrn_mem"
@@ -479,25 +538,25 @@ group "Model Root"
   
 		group "Torque track" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[67]
+			p_0_Human_in_Loop_real_T_0[69]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_des"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[68]
+			p_0_Human_in_Loop_real_T_0[70]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_delta_des"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[69]
+			p_0_Human_in_Loop_real_T_0[71]
 			{
 			 type:    Human_in_Loop_ArrayDT0_2_750_Col*
 			 alias:   "torque_trace"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[1569]
+			p_0_Human_in_Loop_real_T_0[1571]
 			{
 			 type:    Human_in_Loop_ArrayDT0_2_750_Col*
 			 alias:   "torque_delta_trace"
@@ -539,7 +598,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_4[31]
+			p_1_Human_in_Loop_real_T_4[32]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -559,7 +618,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_4[36]
+			p_1_Human_in_Loop_real_T_4[37]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -573,7 +632,7 @@ group "Model Root"
   
 		group "Control Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3845]
+			p_0_Human_in_Loop_real_T_0[3913]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 			 alias:   "Control_Parameter"
@@ -586,7 +645,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[27]
+				p_1_Human_in_Loop_real_T_4[28]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -601,7 +660,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[28]
+				p_1_Human_in_Loop_real_T_4[29]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -616,7 +675,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[30]
+				p_1_Human_in_Loop_real_T_4[31]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -631,7 +690,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[26]
+				p_1_Human_in_Loop_real_T_4[27]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -646,7 +705,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[29]
+				p_1_Human_in_Loop_real_T_4[30]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -660,7 +719,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3845]
+				p_0_Human_in_Loop_real_T_0[3913]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 				 alias:   "x"
@@ -678,7 +737,7 @@ group "Model Root"
   
 		group "Torque Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3841]
+			p_0_Human_in_Loop_real_T_0[3909]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "Torque_Parameter"
@@ -691,7 +750,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[35]
+				p_1_Human_in_Loop_real_T_4[36]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -706,7 +765,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[34]
+				p_1_Human_in_Loop_real_T_4[35]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -721,7 +780,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[32]
+				p_1_Human_in_Loop_real_T_4[33]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -736,7 +795,7 @@ group "Model Root"
 			 block: "Constant"
 			}
 				-- Skipping output Out1
-				p_1_Human_in_Loop_real_T_4[33]
+				p_1_Human_in_Loop_real_T_4[34]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
@@ -750,7 +809,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3841]
+				p_0_Human_in_Loop_real_T_0[3909]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 				 alias:   "x"
@@ -795,7 +854,7 @@ group "Model Root"
 		 alias:   "motor"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[3832]
+		p_0_Human_in_Loop_real_T_0[3834]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "footswich"
@@ -813,7 +872,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_4[15]
+			p_1_Human_in_Loop_real_T_4[16]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -833,7 +892,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_4[18]
+			p_1_Human_in_Loop_real_T_4[19]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -853,7 +912,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_4[24]
+			p_1_Human_in_Loop_real_T_4[25]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -865,21 +924,245 @@ group "Model Root"
 
   
   
+		group "Cosmed" -- subsystem-group
+
+			p_0_Human_in_Loop_real_T_0[3843]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "trigger"
+			 flags:   OUTPUT|READONLY
+			}
+			p_0_Human_in_Loop_real_T_0[3848]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "metab"
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "RT1" -- block-group
+			{
+			 block: "RateTransition"
+			}
+				p_0_Human_in_Loop_real_T_0[65]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+				p_1_Human_in_Loop_real_T_4[50]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "InitialCondition"
+				 flags:   PARAM
+				}
+
+
+			endgroup -- block-group "RT1"
+
+			group "RT2" -- block-group
+			{
+			 block: "RateTransition"
+			}
+				p_0_Human_in_Loop_real_T_0[66]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+				p_1_Human_in_Loop_real_T_4[51]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "InitialCondition"
+				 flags:   PARAM
+				}
+
+
+			endgroup -- block-group "RT2"
+
+  
+  
+			group "COSMED" -- subsystem-group
+
+				p_0_Human_in_Loop_real_T_0[3848]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "E"
+				 flags:   OUTPUT|READONLY
+				}
+
+
+  
+  
+				group "DS1202SER_INT_C1_I1" -- subsystem-group
+
+					-- Skipping output  
+
+				endgroup -- subsystem-group "DS1202SER_INT_C1_I1"
+  
+  
+				group "DS1202SER_SETUP_C1" -- subsystem-group
+
+
+				endgroup -- subsystem-group "DS1202SER_SETUP_C1"
+  
+  
+				group "Serial Decoding System" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[3848]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "E"
+					 flags:   OUTPUT|READONLY
+					}
+
+
+  
+  
+					group "DS1202SER_RX_C1" -- subsystem-group
+
+						p_0_Human_in_Loop_uint8_T_3[0]
+						{
+						 type:    Human_in_Loop_ArrayDT3_16*
+						 alias:   "RXBytes"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_uint32_T_2[0]
+						{
+						 type:    uint(32)*
+						 alias:   "NumRXBytes"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_int32_T_1[0]
+						{
+						 type:    int(32)*
+						 alias:   "Status"
+						 desc:    "No data (unused channel) "
+						 flags:   OUTPUT|READONLY
+						}
+
+					endgroup -- subsystem-group "DS1202SER_RX_C1"
+  
+  
+					group "Estimation" -- subsystem-group
+
+						p_0_Human_in_Loop_real_T_0[3848]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "E"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_real_T_0[3849]
+						{
+						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
+						 alias:   "Time"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_real_T_0[3861]
+						{
+						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
+						 alias:   "Y"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_real_T_0[3873]
+						{
+						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
+						 alias:   "Y_E"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_real_T_0[3885]
+						{
+						 type:    Human_in_Loop_ArrayDT0_2_12_Col*
+						 alias:   "est_curve"
+						 flags:   OUTPUT|READONLY
+						}
+
+
+
+
+					endgroup -- subsystem-group "Estimation"
+  
+  
+					group "MATLAB Function1" -- subsystem-group
+
+						p_0_Human_in_Loop_real_T_0[3846]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Data1"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_real_T_0[3847]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Data2"
+						 flags:   OUTPUT|READONLY
+						}
+
+
+
+
+					endgroup -- subsystem-group "MATLAB Function1"
+
+
+				endgroup -- subsystem-group "Serial Decoding System"
+
+
+			endgroup -- subsystem-group "COSMED"
+  
+  
+			group "Timer" -- subsystem-group
+
+				p_0_Human_in_Loop_real_T_0[3843]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Trigger"
+				 flags:   OUTPUT|READONLY
+				}
+				p_0_Human_in_Loop_real_T_0[3844]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Time"
+				 flags:   OUTPUT|READONLY
+				}
+				p_0_Human_in_Loop_real_T_0[3845]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Count"
+				 flags:   OUTPUT|READONLY
+				}
+
+				p_1_Human_in_Loop_boolean_T_3[5]
+				{
+				 type:    uint(8)*
+				 alias:   "BT_METAB_EST"
+				 range:   < 0 ; 1 >
+				 bitmask: 0x01
+				 flags:   PARAM
+				}
+
+
+
+			endgroup -- subsystem-group "Timer"
+
+
+		endgroup -- subsystem-group "Cosmed"
+  
+  
 		group "Encoder module" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_3[0]
+			p_0_Human_in_Loop_real_T_6[0]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 			 alias:   "Ankle"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3836]
+			p_0_Human_in_Loop_real_T_0[3838]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Motor"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3833]
+			p_0_Human_in_Loop_real_T_0[3835]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Accel"
@@ -931,7 +1214,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[16]
+				p_1_Human_in_Loop_real_T_4[17]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -951,7 +1234,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[17]
+				p_1_Human_in_Loop_real_T_4[18]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -971,7 +1254,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[19]
+				p_1_Human_in_Loop_real_T_4[20]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -991,7 +1274,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[20]
+				p_1_Human_in_Loop_real_T_4[21]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -1011,19 +1294,19 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[38]
+				p_1_Human_in_Loop_real_T_4[39]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Numerator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_4[42]
+				p_1_Human_in_Loop_real_T_4[43]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Denominator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_4[46]
+				p_1_Human_in_Loop_real_T_4[47]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialStates"
@@ -1178,7 +1461,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[47]
+					p_1_Human_in_Loop_real_T_4[48]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1198,7 +1481,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[48]
+					p_1_Human_in_Loop_real_T_4[49]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1435,7 +1718,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[22]
+					p_1_Human_in_Loop_real_T_4[23]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1455,7 +1738,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[21]
+					p_1_Human_in_Loop_real_T_4[22]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1475,7 +1758,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[23]
+					p_1_Human_in_Loop_real_T_4[24]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -1558,7 +1841,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[37]
+					p_1_Human_in_Loop_real_T_4[38]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "WtEt"
@@ -1651,14 +1934,14 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3840]
+				p_0_Human_in_Loop_real_T_0[3842]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
 				 flags:   OUTPUT|READONLY
 				}
 
-				p_1_Human_in_Loop_boolean_T_3[5]
+				p_1_Human_in_Loop_boolean_T_3[6]
 				{
 				 type:    uint(8)*
 				 alias:   "BT_RESET_ANKLE"
@@ -1674,14 +1957,14 @@ group "Model Root"
   
 			group "Data process1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3839]
+				p_0_Human_in_Loop_real_T_0[3841]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
 				 flags:   OUTPUT|READONLY
 				}
 
-				p_1_Human_in_Loop_boolean_T_3[6]
+				p_1_Human_in_Loop_boolean_T_3[7]
 				{
 				 type:    uint(8)*
 				 alias:   "BT_RESET_MOTOR"
@@ -1697,7 +1980,7 @@ group "Model Root"
   
 			group "Mux" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_3[0]
+				p_0_Human_in_Loop_real_T_6[0]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 				 alias:   "x"
@@ -1712,7 +1995,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3836]
+				p_0_Human_in_Loop_real_T_0[3838]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
@@ -1727,7 +2010,7 @@ group "Model Root"
   
 			group "Mux2" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3833]
+				p_0_Human_in_Loop_real_T_0[3835]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
@@ -1745,7 +2028,7 @@ group "Model Root"
   
 		group "FootSwitch module" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3832]
+			p_0_Human_in_Loop_real_T_0[3834]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "FootSwitch"
@@ -1774,7 +2057,7 @@ group "Model Root"
   
 			group "DIO_CLASS1_BIT_IN_BL1" -- subsystem-group
 
-				p_0_Human_in_Loop_boolean_T_1[0]
+				p_0_Human_in_Loop_boolean_T_4[0]
 				{
 				 type:    uint(8)*
 				 alias:   "Out"
@@ -1794,7 +2077,7 @@ group "Model Root"
   
 			group "FootSwitch Filter" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3832]
+				p_0_Human_in_Loop_real_T_0[3834]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "state"
@@ -1812,7 +2095,7 @@ group "Model Root"
   
 		group "Torque module" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_2[0]
+			p_0_Human_in_Loop_real_T_5[0]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 			 alias:   "Torque"
@@ -1830,7 +2113,7 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[2]
+				p_1_Human_in_Loop_real_T_4[3]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
@@ -1850,19 +2133,19 @@ group "Model Root"
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
 				}
-				p_1_Human_in_Loop_real_T_4[3]
+				p_1_Human_in_Loop_real_T_4[4]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Numerator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_4[7]
+				p_1_Human_in_Loop_real_T_4[8]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Denominator"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_real_T_4[11]
+				p_1_Human_in_Loop_real_T_4[12]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialStates"
@@ -2096,7 +2379,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[13]
+					p_1_Human_in_Loop_real_T_4[14]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -2116,7 +2399,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[12]
+					p_1_Human_in_Loop_real_T_4[13]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -2136,7 +2419,7 @@ group "Model Root"
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
 					}
-					p_1_Human_in_Loop_real_T_4[14]
+					p_1_Human_in_Loop_real_T_4[15]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
@@ -2165,7 +2448,7 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3831]
+				p_0_Human_in_Loop_real_T_0[3833]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque"
@@ -2184,7 +2467,7 @@ group "Model Root"
 				 alias:   "load_vol_offset"
 				 flags:   PARAM
 				}
-				p_1_Human_in_Loop_boolean_T_3[7]
+				p_1_Human_in_Loop_boolean_T_3[8]
 				{
 				 type:    uint(8)*
 				 alias:   "BT_RESET_TORQUE"
@@ -2200,7 +2483,7 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3830]
+				p_0_Human_in_Loop_real_T_0[3832]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque_dot"
@@ -2215,7 +2498,7 @@ group "Model Root"
   
 			group "Mux" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_2[0]
+				p_0_Human_in_Loop_real_T_5[0]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 				 alias:   "x"
@@ -2254,7 +2537,7 @@ group "Model Root"
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
 			}
-			p_1_Human_in_Loop_real_T_4[25]
+			p_1_Human_in_Loop_real_T_4[26]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "InitialCondition"
@@ -2268,7 +2551,7 @@ group "Model Root"
   
 		group "Mux1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3826]
+			p_0_Human_in_Loop_real_T_0[3828]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "x"
@@ -2283,32 +2566,32 @@ group "Model Root"
   
 		group "State Machine" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3822]
+			p_0_Human_in_Loop_real_T_0[3824]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "mode"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3823]
+			p_0_Human_in_Loop_real_T_0[3825]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "state"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3824]
+			p_0_Human_in_Loop_real_T_0[3826]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3825]
+			p_0_Human_in_Loop_real_T_0[3827]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_timer"
 			 flags:   OUTPUT|READONLY
 			}
 
-			p_1_Human_in_Loop_boolean_T_3[8]
+			p_1_Human_in_Loop_boolean_T_3[9]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_RUN"
@@ -2316,7 +2599,7 @@ group "Model Root"
 			 bitmask: 0x01
 			 flags:   PARAM
 			}
-			p_1_Human_in_Loop_boolean_T_3[9]
+			p_1_Human_in_Loop_boolean_T_3[10]
 			{
 			 type:    uint(8)*
 			 alias:   "BT_SLACK"

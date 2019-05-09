@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Wed May  8 17:05:26 2019
+   Thu May  9 14:07:39 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -31,8 +31,9 @@
 #include <rtkernel.h>
 #include <rti_assert.h>
 #include <rtidefineddatatypes.h>
+#include <dsser.h>
 #ifndef dsRtmGetNumSampleTimes
-# define dsRtmGetNumSampleTimes(rtm)   2
+# define dsRtmGetNumSampleTimes(rtm)   3
 #endif
 
 #ifndef dsRtmSetTaskTime
@@ -252,6 +253,78 @@ static void rti_TIMERB(rtk_p_task_control_block task)
   /* Task exit code END */
 }
 
+/****** Definitions: task functions for HW interrupts *******************/
+
+/* HW Interrupt: <S24>/DS1202SER_INT_C1_I1 */
+static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
+{
+  /* Task entry code BEGIN */
+  /* -- None. -- */
+  /* Task entry code END */
+
+  /* Task code. */
+  {
+    /* RateTransition: '<S20>/RT1' */
+    switch (Human_in_Loop_DW.RT1_write_buf_f) {
+     case 0:
+      Human_in_Loop_DW.RT1_read_buf_p4 = 1;
+      break;
+
+     case 1:
+      Human_in_Loop_DW.RT1_read_buf_p4 = 0;
+      break;
+
+     default:
+      Human_in_Loop_DW.RT1_read_buf_p4 = Human_in_Loop_DW.RT1_last_buf_wr_j;
+      break;
+    }
+
+    if (Human_in_Loop_DW.RT1_read_buf_p4 != 0) {
+      Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer1_f4;
+    } else {
+      Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer0_e;
+    }
+
+    Human_in_Loop_DW.RT1_read_buf_p4 = -1;
+
+    /* End of RateTransition: '<S20>/RT1' */
+
+    /* RateTransition: '<S20>/RT2' */
+    switch (Human_in_Loop_DW.RT2_write_buf_g) {
+     case 0:
+      Human_in_Loop_DW.RT2_read_buf_a = 1;
+      break;
+
+     case 1:
+      Human_in_Loop_DW.RT2_read_buf_a = 0;
+      break;
+
+     default:
+      Human_in_Loop_DW.RT2_read_buf_a = Human_in_Loop_DW.RT2_last_buf_wr_a;
+      break;
+    }
+
+    if (Human_in_Loop_DW.RT2_read_buf_a != 0) {
+      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer1_o;
+    } else {
+      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer0_i;
+    }
+
+    Human_in_Loop_DW.RT2_read_buf_a = -1;
+
+    /* End of RateTransition: '<S20>/RT2' */
+
+    /* S-Function (rti_commonblock): '<S26>/S-Function1' */
+    Human_in_L_SerialDecodingSystem();
+
+    /* End of Outputs for S-Function (rti_commonblock): '<S26>/S-Function1' */
+  }
+
+  /* Task exit code BEGIN */
+  /* -- None. -- */
+  /* Task exit code END */
+}
+
 /* ===== Declarations of RTI blocks ======================================== */
 DacCl1AnalogOutSDrvObject *pRTIDacC1AnalogOut_Ch_16;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_6;
@@ -261,6 +334,9 @@ DioCl1DigInSDrvObject *pRTIDioC1DigIn_Port_1_Ch_2;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_11;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_13;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_1_Ch_1;
+
+/* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
+dsserChannel *rtiDS1202SER_B1_Ser[2];
 
 /* ===== Definition of interface functions for simulation engine =========== */
 #if GRTINTERFACE == 1
@@ -698,8 +774,15 @@ static void rti_mdl_initialize_io_boards(void)
   }
 }
 
-/* Function rti_mdl_slave_load() is empty */
-#define rti_mdl_slave_load()
+static void rti_mdl_slave_load(void)
+{
+  /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
+  rtiDS1202SER_B1_Ser[0] = dsser_init(DSSER_ONBOARD,0,256);
+  dsser_config(rtiDS1202SER_B1_Ser[0],0, 115200, 8, DSSER_1_STOPBIT,
+               DSSER_NO_PARITY, DSSER_14_BYTE_TRIGGER_LEVEL,1, (DSSER_RS232 |
+    DSSER_AUTOFLOW_DISABLE));
+  RTLIB_SLAVE_LOAD_ACKNOWLEDGE();
+}
 
 /* Function rti_mdl_rtk_initialize() is empty */
 #define rti_mdl_rtk_initialize()
@@ -858,6 +941,9 @@ static void rti_mdl_initialize_io_units(void)
       RTLIB_EXIT(1);
     }
   }
+
+  /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
+  dsser_enable(rtiDS1202SER_B1_Ser[0]);
 }
 
 /* Function rti_mdl_acknowledge_interrupts() is empty */
