@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Thu May  9 14:07:39 2019
+   Thu May  9 19:27:10 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -33,11 +33,15 @@
 #include <rtidefineddatatypes.h>
 #include <dsser.h>
 #ifndef dsRtmGetNumSampleTimes
-# define dsRtmGetNumSampleTimes(rtm)   3
+# define dsRtmGetNumSampleTimes(rtm)   5
+#endif
+
+#ifndef dsRtmGetTPtr
+# define dsRtmGetTPtr(rtm)             ((rtm)->Timing.t)
 #endif
 
 #ifndef dsRtmSetTaskTime
-#define dsRtmSetTaskTime(rtm, sti, val) (((rtm)->Timing.taskTime0) = (val))
+# define dsRtmSetTaskTime(rtm, sti, val) (dsRtmGetTPtr((rtm))[sti] = (val))
 #endif
 
 /****** Definitions: task functions for timer tasks *********************/
@@ -70,7 +74,90 @@ static void rti_TIMERB(rtk_p_task_control_block task)
   {
     int32_T i;
 
-    /* RateTransition: '<S4>/RT1' */
+    /* RateTransition: '<Root>/RT4' */
+    switch (Human_in_Loop_DW.RT4_write_buf) {
+     case 0:
+      Human_in_Loop_DW.RT4_read_buf = 1;
+      break;
+
+     case 1:
+      Human_in_Loop_DW.RT4_read_buf = 0;
+      break;
+
+     default:
+      Human_in_Loop_DW.RT4_read_buf = Human_in_Loop_DW.RT4_last_buf_wr;
+      break;
+    }
+
+    if (Human_in_Loop_DW.RT4_read_buf != 0) {
+      Human_in_Loop_B.RT4[0] = Human_in_Loop_DW.RT4_Buffer1[0];
+      Human_in_Loop_B.RT4[1] = Human_in_Loop_DW.RT4_Buffer1[1];
+    } else {
+      Human_in_Loop_B.RT4[0] = Human_in_Loop_DW.RT4_Buffer0[0];
+      Human_in_Loop_B.RT4[1] = Human_in_Loop_DW.RT4_Buffer0[1];
+    }
+
+    Human_in_Loop_DW.RT4_read_buf = -1;
+
+    /* End of RateTransition: '<Root>/RT4' */
+
+    /* RateTransition: '<Root>/RT5' */
+    switch (Human_in_Loop_DW.RT5_write_buf) {
+     case 0:
+      Human_in_Loop_DW.RT5_read_buf = 1;
+      break;
+
+     case 1:
+      Human_in_Loop_DW.RT5_read_buf = 0;
+      break;
+
+     default:
+      Human_in_Loop_DW.RT5_read_buf = Human_in_Loop_DW.RT5_last_buf_wr;
+      break;
+    }
+
+    if (Human_in_Loop_DW.RT5_read_buf != 0) {
+      Human_in_Loop_B.RT5[0] = Human_in_Loop_DW.RT5_Buffer1[0];
+      Human_in_Loop_B.RT5[1] = Human_in_Loop_DW.RT5_Buffer1[1];
+    } else {
+      Human_in_Loop_B.RT5[0] = Human_in_Loop_DW.RT5_Buffer0[0];
+      Human_in_Loop_B.RT5[1] = Human_in_Loop_DW.RT5_Buffer0[1];
+    }
+
+    Human_in_Loop_DW.RT5_read_buf = -1;
+
+    /* End of RateTransition: '<Root>/RT5' */
+
+    /* RateTransition: '<Root>/RT6' */
+    switch (Human_in_Loop_DW.RT6_write_buf) {
+     case 0:
+      Human_in_Loop_DW.RT6_read_buf = 1;
+      break;
+
+     case 1:
+      Human_in_Loop_DW.RT6_read_buf = 0;
+      break;
+
+     default:
+      Human_in_Loop_DW.RT6_read_buf = Human_in_Loop_DW.RT6_last_buf_wr;
+      break;
+    }
+
+    if (Human_in_Loop_DW.RT6_read_buf != 0) {
+      Human_in_Loop_B.RT6[0] = Human_in_Loop_DW.RT6_Buffer1[0];
+      Human_in_Loop_B.RT6[1] = Human_in_Loop_DW.RT6_Buffer1[1];
+      Human_in_Loop_B.RT6[2] = Human_in_Loop_DW.RT6_Buffer1[2];
+    } else {
+      Human_in_Loop_B.RT6[0] = Human_in_Loop_DW.RT6_Buffer0[0];
+      Human_in_Loop_B.RT6[1] = Human_in_Loop_DW.RT6_Buffer0[1];
+      Human_in_Loop_B.RT6[2] = Human_in_Loop_DW.RT6_Buffer0[2];
+    }
+
+    Human_in_Loop_DW.RT6_read_buf = -1;
+
+    /* End of RateTransition: '<Root>/RT6' */
+
+    /* RateTransition: '<Root>/RT1' */
     switch (Human_in_Loop_DW.RT1_write_buf) {
      case 0:
       Human_in_Loop_DW.RT1_read_buf = 1;
@@ -88,16 +175,20 @@ static void rti_TIMERB(rtk_p_task_control_block task)
     if (Human_in_Loop_DW.RT1_read_buf != 0) {
       Human_in_Loop_B.RT1[0] = Human_in_Loop_DW.RT1_Buffer1[0];
       Human_in_Loop_B.RT1[1] = Human_in_Loop_DW.RT1_Buffer1[1];
+      Human_in_Loop_B.RT1[2] = Human_in_Loop_DW.RT1_Buffer1[2];
+      Human_in_Loop_B.RT1[3] = Human_in_Loop_DW.RT1_Buffer1[3];
     } else {
       Human_in_Loop_B.RT1[0] = Human_in_Loop_DW.RT1_Buffer0[0];
       Human_in_Loop_B.RT1[1] = Human_in_Loop_DW.RT1_Buffer0[1];
+      Human_in_Loop_B.RT1[2] = Human_in_Loop_DW.RT1_Buffer0[2];
+      Human_in_Loop_B.RT1[3] = Human_in_Loop_DW.RT1_Buffer0[3];
     }
 
     Human_in_Loop_DW.RT1_read_buf = -1;
 
-    /* End of RateTransition: '<S4>/RT1' */
+    /* End of RateTransition: '<Root>/RT1' */
 
-    /* RateTransition: '<S4>/RT2' */
+    /* RateTransition: '<Root>/RT2' */
     switch (Human_in_Loop_DW.RT2_write_buf) {
      case 0:
       Human_in_Loop_DW.RT2_read_buf = 1;
@@ -112,19 +203,19 @@ static void rti_TIMERB(rtk_p_task_control_block task)
       break;
     }
 
-    if (Human_in_Loop_DW.RT2_read_buf != 0) {
-      Human_in_Loop_B.RT2[0] = Human_in_Loop_DW.RT2_Buffer1[0];
-      Human_in_Loop_B.RT2[1] = Human_in_Loop_DW.RT2_Buffer1[1];
-    } else {
-      Human_in_Loop_B.RT2[0] = Human_in_Loop_DW.RT2_Buffer0[0];
-      Human_in_Loop_B.RT2[1] = Human_in_Loop_DW.RT2_Buffer0[1];
+    for (i = 0; i < 5; i++) {
+      if (Human_in_Loop_DW.RT2_read_buf != 0) {
+        Human_in_Loop_B.RT2[i] = Human_in_Loop_DW.RT2_Buffer1[i];
+      } else {
+        Human_in_Loop_B.RT2[i] = Human_in_Loop_DW.RT2_Buffer0[i];
+      }
     }
 
     Human_in_Loop_DW.RT2_read_buf = -1;
 
-    /* End of RateTransition: '<S4>/RT2' */
+    /* End of RateTransition: '<Root>/RT2' */
 
-    /* RateTransition: '<S4>/RT3' */
+    /* RateTransition: '<Root>/RT3' */
     switch (Human_in_Loop_DW.RT3_write_buf) {
      case 0:
       Human_in_Loop_DW.RT3_read_buf = 1;
@@ -143,109 +234,22 @@ static void rti_TIMERB(rtk_p_task_control_block task)
       Human_in_Loop_B.RT3[0] = Human_in_Loop_DW.RT3_Buffer1[0];
       Human_in_Loop_B.RT3[1] = Human_in_Loop_DW.RT3_Buffer1[1];
       Human_in_Loop_B.RT3[2] = Human_in_Loop_DW.RT3_Buffer1[2];
+      Human_in_Loop_B.RT3[3] = Human_in_Loop_DW.RT3_Buffer1[3];
     } else {
       Human_in_Loop_B.RT3[0] = Human_in_Loop_DW.RT3_Buffer0[0];
       Human_in_Loop_B.RT3[1] = Human_in_Loop_DW.RT3_Buffer0[1];
       Human_in_Loop_B.RT3[2] = Human_in_Loop_DW.RT3_Buffer0[2];
+      Human_in_Loop_B.RT3[3] = Human_in_Loop_DW.RT3_Buffer0[3];
     }
 
     Human_in_Loop_DW.RT3_read_buf = -1;
 
-    /* End of RateTransition: '<S4>/RT3' */
+    /* End of RateTransition: '<Root>/RT3' */
 
-    /* RateTransition: '<S5>/RT1' */
-    switch (Human_in_Loop_DW.RT1_write_buf_n) {
-     case 0:
-      Human_in_Loop_DW.RT1_read_buf_l = 1;
-      break;
-
-     case 1:
-      Human_in_Loop_DW.RT1_read_buf_l = 0;
-      break;
-
-     default:
-      Human_in_Loop_DW.RT1_read_buf_l = Human_in_Loop_DW.RT1_last_buf_wr_m;
-      break;
-    }
-
-    if (Human_in_Loop_DW.RT1_read_buf_l != 0) {
-      Human_in_Loop_B.RT1_n[0] = Human_in_Loop_DW.RT1_Buffer1_f[0];
-      Human_in_Loop_B.RT1_n[1] = Human_in_Loop_DW.RT1_Buffer1_f[1];
-      Human_in_Loop_B.RT1_n[2] = Human_in_Loop_DW.RT1_Buffer1_f[2];
-      Human_in_Loop_B.RT1_n[3] = Human_in_Loop_DW.RT1_Buffer1_f[3];
-    } else {
-      Human_in_Loop_B.RT1_n[0] = Human_in_Loop_DW.RT1_Buffer0_a[0];
-      Human_in_Loop_B.RT1_n[1] = Human_in_Loop_DW.RT1_Buffer0_a[1];
-      Human_in_Loop_B.RT1_n[2] = Human_in_Loop_DW.RT1_Buffer0_a[2];
-      Human_in_Loop_B.RT1_n[3] = Human_in_Loop_DW.RT1_Buffer0_a[3];
-    }
-
-    Human_in_Loop_DW.RT1_read_buf_l = -1;
-
-    /* End of RateTransition: '<S5>/RT1' */
-
-    /* RateTransition: '<S2>/RT1' */
-    switch (Human_in_Loop_DW.RT1_write_buf_e) {
-     case 0:
-      Human_in_Loop_DW.RT1_read_buf_p = 1;
-      break;
-
-     case 1:
-      Human_in_Loop_DW.RT1_read_buf_p = 0;
-      break;
-
-     default:
-      Human_in_Loop_DW.RT1_read_buf_p = Human_in_Loop_DW.RT1_last_buf_wr_a;
-      break;
-    }
-
-    for (i = 0; i < 5; i++) {
-      if (Human_in_Loop_DW.RT1_read_buf_p != 0) {
-        Human_in_Loop_B.RT1_a[i] = Human_in_Loop_DW.RT1_Buffer1_e[i];
-      } else {
-        Human_in_Loop_B.RT1_a[i] = Human_in_Loop_DW.RT1_Buffer0_o[i];
-      }
-    }
-
-    Human_in_Loop_DW.RT1_read_buf_p = -1;
-
-    /* End of RateTransition: '<S2>/RT1' */
-
-    /* RateTransition: '<S2>/RT2' */
-    switch (Human_in_Loop_DW.RT2_write_buf_i) {
-     case 0:
-      Human_in_Loop_DW.RT2_read_buf_k = 1;
-      break;
-
-     case 1:
-      Human_in_Loop_DW.RT2_read_buf_k = 0;
-      break;
-
-     default:
-      Human_in_Loop_DW.RT2_read_buf_k = Human_in_Loop_DW.RT2_last_buf_wr_d;
-      break;
-    }
-
-    if (Human_in_Loop_DW.RT2_read_buf_k != 0) {
-      Human_in_Loop_B.RT2_h[0] = Human_in_Loop_DW.RT2_Buffer1_i[0];
-      Human_in_Loop_B.RT2_h[1] = Human_in_Loop_DW.RT2_Buffer1_i[1];
-      Human_in_Loop_B.RT2_h[2] = Human_in_Loop_DW.RT2_Buffer1_i[2];
-      Human_in_Loop_B.RT2_h[3] = Human_in_Loop_DW.RT2_Buffer1_i[3];
-    } else {
-      Human_in_Loop_B.RT2_h[0] = Human_in_Loop_DW.RT2_Buffer0_k[0];
-      Human_in_Loop_B.RT2_h[1] = Human_in_Loop_DW.RT2_Buffer0_k[1];
-      Human_in_Loop_B.RT2_h[2] = Human_in_Loop_DW.RT2_Buffer0_k[2];
-      Human_in_Loop_B.RT2_h[3] = Human_in_Loop_DW.RT2_Buffer0_k[3];
-    }
-
-    Human_in_Loop_DW.RT2_read_buf_k = -1;
-
-    /* End of RateTransition: '<S2>/RT2' */
-
-    /* S-Function (rti_commonblock): '<S6>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S8>/S-Function1' */
     Human_in_Loop_ControlModule();
 
-    /* End of Outputs for S-Function (rti_commonblock): '<S6>/S-Function1' */
+    /* End of Outputs for S-Function (rti_commonblock): '<S8>/S-Function1' */
   }
 
   /* Task exit code BEGIN */
@@ -255,7 +259,7 @@ static void rti_TIMERB(rtk_p_task_control_block task)
 
 /****** Definitions: task functions for HW interrupts *******************/
 
-/* HW Interrupt: <S24>/DS1202SER_INT_C1_I1 */
+/* HW Interrupt: <S33>/DS1202SER_INT_C1_I1 */
 static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 {
   /* Task entry code BEGIN */
@@ -264,32 +268,32 @@ static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 
   /* Task code. */
   {
-    /* RateTransition: '<S20>/RT1' */
+    /* RateTransition: '<S28>/RT1' */
     switch (Human_in_Loop_DW.RT1_write_buf_f) {
      case 0:
-      Human_in_Loop_DW.RT1_read_buf_p4 = 1;
+      Human_in_Loop_DW.RT1_read_buf_p = 1;
       break;
 
      case 1:
-      Human_in_Loop_DW.RT1_read_buf_p4 = 0;
+      Human_in_Loop_DW.RT1_read_buf_p = 0;
       break;
 
      default:
-      Human_in_Loop_DW.RT1_read_buf_p4 = Human_in_Loop_DW.RT1_last_buf_wr_j;
+      Human_in_Loop_DW.RT1_read_buf_p = Human_in_Loop_DW.RT1_last_buf_wr_j;
       break;
     }
 
-    if (Human_in_Loop_DW.RT1_read_buf_p4 != 0) {
-      Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer1_f4;
+    if (Human_in_Loop_DW.RT1_read_buf_p != 0) {
+      Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer1_f;
     } else {
       Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer0_e;
     }
 
-    Human_in_Loop_DW.RT1_read_buf_p4 = -1;
+    Human_in_Loop_DW.RT1_read_buf_p = -1;
 
-    /* End of RateTransition: '<S20>/RT1' */
+    /* End of RateTransition: '<S28>/RT1' */
 
-    /* RateTransition: '<S20>/RT2' */
+    /* RateTransition: '<S28>/RT2' */
     switch (Human_in_Loop_DW.RT2_write_buf_g) {
      case 0:
       Human_in_Loop_DW.RT2_read_buf_a = 1;
@@ -312,12 +316,12 @@ static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 
     Human_in_Loop_DW.RT2_read_buf_a = -1;
 
-    /* End of RateTransition: '<S20>/RT2' */
+    /* End of RateTransition: '<S28>/RT2' */
 
-    /* S-Function (rti_commonblock): '<S26>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S35>/S-Function1' */
     Human_in_L_SerialDecodingSystem();
 
-    /* End of Outputs for S-Function (rti_commonblock): '<S26>/S-Function1' */
+    /* End of Outputs for S-Function (rti_commonblock): '<S35>/S-Function1' */
   }
 
   /* Task exit code BEGIN */
@@ -334,6 +338,12 @@ DioCl1DigInSDrvObject *pRTIDioC1DigIn_Port_1_Ch_2;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_11;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_13;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_1_Ch_1;
+AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_1;
+AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_2;
+AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_3;
+AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_4;
+AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_9;
+AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_10;
 
 /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
 dsserChannel *rtiDS1202SER_B1_Ser[2];
@@ -343,7 +353,7 @@ dsserChannel *rtiDS1202SER_B1_Ser[2];
 #ifdef MULTITASKING
 # define dsIsSampleHit(RTM,sti)        rtmGetSampleHitPtr(RTM)[sti]
 #else
-# define dsIsSampleHit(RTM,sti)        1
+# define dsIsSampleHit(RTM,sti)        rtmIsSampleHit(RTM,sti,0)
 #endif
 
 #else
@@ -752,6 +762,168 @@ static void rti_mdl_initialize_io_boards(void)
     }
   }
 
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL1 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 1 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_1 */
+    ioErrorCode = AdcCl1AnalogIn_create(&pRTIAdcC1AnalogIn_Ch_1,
+      ADC_CLASS1_CHANNEL_1);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    /* Set parameters for ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_1 */
+    ioErrorCode = AdcCl1AnalogIn_setConversionMode(pRTIAdcC1AnalogIn_Ch_1,
+      ADC_CLASS1_SINGLE_CONV_MODE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_setConversTrigger(pRTIAdcC1AnalogIn_Ch_1,
+      ADC_CLASS1_TRIGGER_SW);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL2 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 2 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_2 */
+    ioErrorCode = AdcCl1AnalogIn_create(&pRTIAdcC1AnalogIn_Ch_2,
+      ADC_CLASS1_CHANNEL_2);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    /* Set parameters for ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_2 */
+    ioErrorCode = AdcCl1AnalogIn_setConversionMode(pRTIAdcC1AnalogIn_Ch_2,
+      ADC_CLASS1_SINGLE_CONV_MODE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_setConversTrigger(pRTIAdcC1AnalogIn_Ch_2,
+      ADC_CLASS1_TRIGGER_SW);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL3 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 3 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_3 */
+    ioErrorCode = AdcCl1AnalogIn_create(&pRTIAdcC1AnalogIn_Ch_3,
+      ADC_CLASS1_CHANNEL_3);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    /* Set parameters for ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_3 */
+    ioErrorCode = AdcCl1AnalogIn_setConversionMode(pRTIAdcC1AnalogIn_Ch_3,
+      ADC_CLASS1_SINGLE_CONV_MODE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_setConversTrigger(pRTIAdcC1AnalogIn_Ch_3,
+      ADC_CLASS1_TRIGGER_SW);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL4 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 4 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_4 */
+    ioErrorCode = AdcCl1AnalogIn_create(&pRTIAdcC1AnalogIn_Ch_4,
+      ADC_CLASS1_CHANNEL_4);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    /* Set parameters for ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_4 */
+    ioErrorCode = AdcCl1AnalogIn_setConversionMode(pRTIAdcC1AnalogIn_Ch_4,
+      ADC_CLASS1_SINGLE_CONV_MODE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_setConversTrigger(pRTIAdcC1AnalogIn_Ch_4,
+      ADC_CLASS1_TRIGGER_SW);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL5 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 9 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_9 */
+    ioErrorCode = AdcCl1AnalogIn_create(&pRTIAdcC1AnalogIn_Ch_9,
+      ADC_CLASS1_CHANNEL_9);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    /* Set parameters for ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_9 */
+    ioErrorCode = AdcCl1AnalogIn_setConversionMode(pRTIAdcC1AnalogIn_Ch_9,
+      ADC_CLASS1_SINGLE_CONV_MODE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_setConversTrigger(pRTIAdcC1AnalogIn_Ch_9,
+      ADC_CLASS1_TRIGGER_SW);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL6 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 10 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_10 */
+    ioErrorCode = AdcCl1AnalogIn_create(&pRTIAdcC1AnalogIn_Ch_10,
+      ADC_CLASS1_CHANNEL_10);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    /* Set parameters for ADC CL1 AnalogIn driver object pRTIAdcC1AnalogIn_Ch_10 */
+    ioErrorCode = AdcCl1AnalogIn_setConversionMode(pRTIAdcC1AnalogIn_Ch_10,
+      ADC_CLASS1_SINGLE_CONV_MODE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_setConversTrigger(pRTIAdcC1AnalogIn_Ch_10,
+      ADC_CLASS1_TRIGGER_SW);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
   /* dSPACE I/O Board DS120XSTDADCC1 #0 Unit:ADCC1 */
 
   /* dSPACE I/O Board DS120XSTDADCC1 #0 Unit:ADCC1 Group:ADC */
@@ -768,6 +940,114 @@ static void rti_mdl_initialize_io_boards(void)
     }
 
     ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_6);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL1 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 1 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Apply- and Start-Fcn for pRTIAdcC1AnalogIn_Ch_1 */
+    ioErrorCode = AdcCl1AnalogIn_apply(pRTIAdcC1AnalogIn_Ch_1);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_1);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL2 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 2 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Apply- and Start-Fcn for pRTIAdcC1AnalogIn_Ch_2 */
+    ioErrorCode = AdcCl1AnalogIn_apply(pRTIAdcC1AnalogIn_Ch_2);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_2);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL3 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 3 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Apply- and Start-Fcn for pRTIAdcC1AnalogIn_Ch_3 */
+    ioErrorCode = AdcCl1AnalogIn_apply(pRTIAdcC1AnalogIn_Ch_3);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_3);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL4 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 4 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Apply- and Start-Fcn for pRTIAdcC1AnalogIn_Ch_4 */
+    ioErrorCode = AdcCl1AnalogIn_apply(pRTIAdcC1AnalogIn_Ch_4);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_4);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL5 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 9 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Apply- and Start-Fcn for pRTIAdcC1AnalogIn_Ch_9 */
+    ioErrorCode = AdcCl1AnalogIn_apply(pRTIAdcC1AnalogIn_Ch_9);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_9);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
+  /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL6 --- */
+  /* --- [RTI120X, ADC C1] - Channel: 10 --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Apply- and Start-Fcn for pRTIAdcC1AnalogIn_Ch_10 */
+    ioErrorCode = AdcCl1AnalogIn_apply(pRTIAdcC1AnalogIn_Ch_10);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = AdcCl1AnalogIn_start(pRTIAdcC1AnalogIn_Ch_10);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -966,13 +1246,37 @@ static void rti_mdl_background(void)
 
 __INLINE void rti_mdl_sample_input(void)
 {
-  /* Calls for base sample time: [0.0002, 0.0] */
+  /* Calls for base sample time: [0.0002, 0] */
   /* dSPACE I/O Board DS120XSTDADCC1 #0 Unit:ADCC1 */
 
   /* dSPACE I/O Board DS120XSTDADCC1 #0 Unit:ADCC1 Group:ADC */
   /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_6 */
   AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_6);
   AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_6);
+
+  /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_1 */
+  AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_1);
+  AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_1);
+
+  /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_2 */
+  AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_2);
+  AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_2);
+
+  /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_3 */
+  AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_3);
+  AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_3);
+
+  /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_4 */
+  AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_4);
+  AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_4);
+
+  /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_9 */
+  AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_9);
+  AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_9);
+
+  /* fire burst- or conversion trigger for analog input channel. Called by ADC C1 block pRTIAdcC1AnalogIn_Ch_10 */
+  AdcCl1AnalogIn_setConversSwTrigger(pRTIAdcC1AnalogIn_Ch_10);
+  AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_10);
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1 --- */
   /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 1 - Port: 1 - Channel: 1 --- */
@@ -1029,13 +1333,8 @@ __INLINE void rti_mdl_sample_input(void)
   }
 }
 
-static void rti_mdl_daq_service()
-{
-  /* dSPACE Host Service */
-  DsDaq_Service(0, 0, 1, (DsDaqSTimestampStruct *)
-                rtk_current_task_absolute_time_ptr_get());
-}
-
+/* Function rti_mdl_daq_service() is empty */
+#define rti_mdl_daq_service()
 #undef __INLINE
 
 /****** [EOF] ****************************************************************/

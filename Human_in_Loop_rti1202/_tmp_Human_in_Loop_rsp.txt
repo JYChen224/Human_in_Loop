@@ -4,6 +4,7 @@ Human_in_Loop_trc_ptr.o07
 rtGetInf.o07
 rtGetNaN.o07
 rt_nonfinite.o07
+rt_zcfcn.o07
 rti_sim_engine.o07
 rti_init_c.o07
 rt_sim.o07

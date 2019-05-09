@@ -5,7 +5,7 @@
    Task Configuration file for model : Human_in_Loop
 
    RTI1202 7.9 (02-Nov-2017)/2.17
-   09-May-2019 14:07:39
+   09-May-2019 19:27:09
 
    MATLAB 9.3.0.713579 (R2017b)
 
@@ -124,7 +124,7 @@ static void rti_th_initialize(void)
   /* --- Initialization code -----------------------------------------------
    * Task  1 : Timer Task 1 (TIMER TIMERA)
    * Priority: 1, Source: 1, Target: 1
-   * Source IntNo: 0, SubIntNo: RTK_NO_SINT, TaskId: 0
+   * Source IntNo: 0, SubIntNo: RTK_NO_SINT, TaskId: 1
    * ----------------------------------------------------------------------- */
   service   = S_PERIODIC_A;                     /*  RTK service.                     */
   subentry = rtk_get_subentry( /* --- Get RTK subentry. ----------- */
@@ -137,7 +137,7 @@ static void rti_th_initialize(void)
       ovc_fcn,                 /*  RTK overrun check type.          */
       rti_default_overrun_fcn,                 /*  Overrun handler function.        */
       1,                 /*  Overrun count limit.             */
-      0);                /*  Simulink TID.                    */
+      1);                /*  Simulink TID.                    */
   rtk_task_name_set( /* --- Set task name. -------------- */
       pTask1,          /*  Task (TCB pointer).              */
       "Timer Task 1");       /*  Task name.                       */

@@ -96,13 +96,13 @@ RELEASE_VERSION                = R2017b
 RELEASE_VERSION               := $(RELEASE_VERSION,S'\.'_',W_,LC,S'^r'')
 COMPUTER                       = PCWIN64
 MODEL                          = Human_in_Loop
-MODULES                        = Human_in_Loop_data.c Human_in_Loop_trc_ptr.c rtGetInf.c rtGetNaN.c rt_nonfinite.c
+MODULES                        = Human_in_Loop_data.c Human_in_Loop_trc_ptr.c rtGetInf.c rtGetNaN.c rt_nonfinite.c rt_zcfcn.c
 S_FUNCTIONS                    = 
 S_FUNCTIONS_LIB                = 
 SOLVER                         = 
-NUMST                          = 1
-TID01EQ                        = 0
-NCSTATES                       = 0
+NUMST                          = 3
+TID01EQ                        = 1
+NCSTATES                       = 48
 EXT_MODE                       = 0
 MULTITASKING                   = 0
 # Support for parallel computing
