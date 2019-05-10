@@ -5,7 +5,7 @@
    Task Configuration file for model : Human_in_Loop
 
    RTI1202 7.9 (02-Nov-2017)/2.17
-   09-May-2019 21:27:38
+   11-May-2019 05:28:39
 
    MATLAB 9.3.0.713579 (R2017b)
 
@@ -18,6 +18,7 @@
    Timer Task 1 [0.0002 0] s      : Timer A interrupt
    DS1202SER_INT_C1_I1            : UART Ch1 RX SW FIFO interrupt
    Timer Interrupt                : Timer B interrupt
+   Software Interrupt             : Software Trigger
 
   * ========================================================================= */
 
@@ -39,11 +40,11 @@
 /* Number of local tasks of the specific type */
 # define  RTITH_TIMER_TASKS_LOCAL_NUM_OF      (1)
 # define  RTITH_HWINT_TASKS_LOCAL_NUM_OF      (1)
-# define  RTITH_SWINT_TASKS_LOCAL_NUM_OF      (0)
+# define  RTITH_SWINT_TASKS_LOCAL_NUM_OF      (1)
 # define  RTITH_TMRINT_TASKS_LOCAL_NUM_OF     (1)
 
-# define  RTITH_INT_TASKS_ALL_LOCAL_NUM_OF    (2)
-# define  RTITH_TASKS_ALL_LOCAL_NUM_OF        (3)
+# define  RTITH_INT_TASKS_ALL_LOCAL_NUM_OF    (3)
+# define  RTITH_TASKS_ALL_LOCAL_NUM_OF        (4)
 
 /* Default scaling factor for timer tasks */
 # ifndef  RTI_TIMER_TASK_TIME_SCALE
@@ -100,6 +101,16 @@ int                  *pRti_TIMERB_OCnt;
 double               *pRti_TIMERB_TCnt;
 int                  *pRti_TIMERB_Prio;
 
+  /* --- Task  4 : Software Interrupt (SWINT SWI1) */
+double               *pRti_SWI1_TTime;
+rtk_task_state_type  *pRti_SWI1_TState;
+rtk_ovc_check_type   *pRti_SWI1_OType;
+int                  *pRti_SWI1_OMax;
+int                  *pRti_SWI1_ORpt;
+int                  *pRti_SWI1_OCnt;
+double               *pRti_SWI1_TCnt;
+int                  *pRti_SWI1_Prio;
+
 /* Pointer to RTK task control block of 'Timer Task 1' */
 static rtk_p_task_control_block    pRtiTimerTask1TCB = NULL;
 
@@ -115,6 +126,7 @@ static void rti_th_initialize(void)
   rtk_p_task_control_block pTask1;  /*  Task (TCB pointer).              */
   rtk_p_task_control_block pTask2;  /*  Task (TCB pointer).              */
   rtk_p_task_control_block pTask3;  /*  Task (TCB pointer).              */
+  rtk_p_task_control_block pTask4;  /*  Task (TCB pointer).              */
 
   int subentry;        /*  RTK subentry.                    */
   int service;         /*  RTK service.                     */
@@ -271,6 +283,51 @@ static void rti_th_initialize(void)
   pRti_TIMERB_OCnt        = &(pTask3->ovc_counter);
   pRti_TIMERB_TCnt        = &(pTask3->tm_task_calls);
   pRti_TIMERB_Prio        = &(pTask3->priority);
+
+  /* --- Initialization code -----------------------------------------------
+   * Task  4 : Software Interrupt (SWINT SWI1)
+   * Priority: 4, Source: 1, Target: 1
+   * Source IntNo: 0, SubIntNo: RTK_NO_SINT, TaskId: -1
+   * ----------------------------------------------------------------------- */
+  service   = S_SOFTTASK;                     /*  RTK service.                     */
+  subentry = rtk_get_subentry( /* --- Get RTK subentry. ----------- */
+      service,                 /*  RTK service.                     */
+      0,                 /*  Board base address.              */
+      0);                /*  Interrupt number.                */
+  pTask4   = rtith_create_task( /* --- Create task. ---------------- */
+      rti_SWI1,                 /*  Task function pointer.           */
+      4,                 /*  Task priority.                   */
+      ovc_fcn,                 /*  RTK overrun check type.          */
+      rti_default_overrun_fcn,                 /*  Overrun handler function.        */
+      1,                 /*  Overrun count limit.             */
+      -1);                /*  Simulink TID.                    */
+  rtk_task_name_set( /* --- Set task name. -------------- */
+      pTask4,          /*  Task (TCB pointer).              */
+      "Software Interrupt");       /*  Task name.                       */
+  rtith_bind_interrupt( /* --- Bind interrupt to task. ----- */
+      service, subentry,         /*  RTK service, RTK subentry.       */
+      pTask4,             /*  Task (TCB pointer).              */
+      0,             /*  Sample time or period.           */
+      C_LOCAL,             /*  RTK channel.                     */
+      -1,             /*  Logical interrupt number.        */
+      NULL);            /*  Hook function.                   */
+  rtith_set_task_type( /* --- Set RTK task type. ---------- */
+      service, subentry,           /*  RTK service, RTK subentry.       */
+      RTK_NO_SINT,               /*  Sub-interrupt number.            */
+      rtk_tt_inherited,               /*  RTK task type.                   */
+      NULL,               /*  Reference task (time stamping).  */
+      0,            /*  Sample time offset.              */
+      1);           /*  Step multiple.                   */
+
+  /* ... Assign task information variables ................................. */
+  pRti_SWI1_TTime         = &(pTask4->turnaround_time);
+  pRti_SWI1_TState        = &(pTask4->state);
+  pRti_SWI1_OType         = &(pTask4->ovc_type);
+  pRti_SWI1_OMax          = &(pTask4->ovc_max);
+  pRti_SWI1_ORpt          = &(pTask4->ovc_repeat);
+  pRti_SWI1_OCnt          = &(pTask4->ovc_counter);
+  pRti_SWI1_TCnt          = &(pTask4->tm_task_calls);
+  pRti_SWI1_Prio          = &(pTask4->priority);
 
 # ifndef FIRST_SIMSTEP_INCREASEMENT
 #   define RTI_SE_TMP_OVC_MAXCNT          (12)

@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Thu May  9 21:27:39 2019
+   Sat May 11 05:28:40 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -33,7 +33,7 @@
 #include <rtidefineddatatypes.h>
 #include <dsser.h>
 #ifndef dsRtmGetNumSampleTimes
-# define dsRtmGetNumSampleTimes(rtm)   5
+# define dsRtmGetNumSampleTimes(rtm)   6
 #endif
 
 #ifndef dsRtmGetTPtr
@@ -246,10 +246,10 @@ static void rti_TIMERB(rtk_p_task_control_block task)
 
     /* End of RateTransition: '<Root>/RT3' */
 
-    /* S-Function (rti_commonblock): '<S8>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S9>/S-Function1' */
     Human_in_Loop_ControlModule();
 
-    /* End of Outputs for S-Function (rti_commonblock): '<S8>/S-Function1' */
+    /* End of Outputs for S-Function (rti_commonblock): '<S9>/S-Function1' */
   }
 
   /* Task exit code BEGIN */
@@ -259,7 +259,7 @@ static void rti_TIMERB(rtk_p_task_control_block task)
 
 /****** Definitions: task functions for HW interrupts *******************/
 
-/* HW Interrupt: <S33>/DS1202SER_INT_C1_I1 */
+/* HW Interrupt: <S41>/DS1202SER_INT_C1_I1 */
 static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 {
   /* Task entry code BEGIN */
@@ -268,7 +268,7 @@ static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 
   /* Task code. */
   {
-    /* RateTransition: '<S28>/RT1' */
+    /* RateTransition: '<S36>/RT1' */
     switch (Human_in_Loop_DW.RT1_write_buf_f) {
      case 0:
       Human_in_Loop_DW.RT1_read_buf_p = 1;
@@ -291,10 +291,57 @@ static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 
     Human_in_Loop_DW.RT1_read_buf_p = -1;
 
-    /* End of RateTransition: '<S28>/RT1' */
+    /* End of RateTransition: '<S36>/RT1' */
 
-    /* RateTransition: '<S28>/RT2' */
+    /* RateTransition: '<S36>/RT2' */
     switch (Human_in_Loop_DW.RT2_write_buf_g) {
+     case 0:
+      Human_in_Loop_DW.RT2_read_buf_aa = 1;
+      break;
+
+     case 1:
+      Human_in_Loop_DW.RT2_read_buf_aa = 0;
+      break;
+
+     default:
+      Human_in_Loop_DW.RT2_read_buf_aa = Human_in_Loop_DW.RT2_last_buf_wr_a;
+      break;
+    }
+
+    if (Human_in_Loop_DW.RT2_read_buf_aa != 0) {
+      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer1_o;
+    } else {
+      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer0_i;
+    }
+
+    Human_in_Loop_DW.RT2_read_buf_aa = -1;
+
+    /* End of RateTransition: '<S36>/RT2' */
+
+    /* S-Function (rti_commonblock): '<S43>/S-Function1' */
+    Human_in_L_SerialDecodingSystem();
+
+    /* End of Outputs for S-Function (rti_commonblock): '<S43>/S-Function1' */
+  }
+
+  /* Task exit code BEGIN */
+  /* -- None. -- */
+  /* Task exit code END */
+}
+
+/****** Definitions: task functions for SW interrupts *******************/
+
+/* SW Interrupt: <S24>/Software Interrupt */
+static void rti_SWI1(rtk_p_task_control_block task)
+{
+  /* Task entry code BEGIN */
+  /* -- None. -- */
+  /* Task entry code END */
+
+  /* Task code. */
+  {
+    /* RateTransition: '<S24>/RT2' */
+    switch (Human_in_Loop_DW.RT2_write_buf_f) {
      case 0:
       Human_in_Loop_DW.RT2_read_buf_a = 1;
       break;
@@ -304,24 +351,30 @@ static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
       break;
 
      default:
-      Human_in_Loop_DW.RT2_read_buf_a = Human_in_Loop_DW.RT2_last_buf_wr_a;
+      Human_in_Loop_DW.RT2_read_buf_a = Human_in_Loop_DW.RT2_last_buf_wr_b;
       break;
     }
 
     if (Human_in_Loop_DW.RT2_read_buf_a != 0) {
-      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer1_o;
+      Human_in_Loop_B.RT2_o = Human_in_Loop_DW.RT2_Buffer1_l;
     } else {
-      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer0_i;
+      Human_in_Loop_B.RT2_o = Human_in_Loop_DW.RT2_Buffer0_b;
     }
 
     Human_in_Loop_DW.RT2_read_buf_a = -1;
 
-    /* End of RateTransition: '<S28>/RT2' */
+    /* End of RateTransition: '<S24>/RT2' */
 
-    /* S-Function (rti_commonblock): '<S35>/S-Function1' */
-    Human_in_L_SerialDecodingSystem();
+    /* Outputs for Triggered SubSystem: '<S24>/Software Interrupt' incorporates:
+     *  TriggerPort: '<S26>/Trigger'
+     */
 
-    /* End of Outputs for S-Function (rti_commonblock): '<S35>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S26>/S-Function1' */
+    Human_in_Loop_BayeisanOpt();
+
+    /* End of Outputs for S-Function (rti_commonblock): '<S26>/S-Function1' */
+
+    /* End of Outputs for SubSystem: '<S24>/Software Interrupt' */
   }
 
   /* Task exit code BEGIN */

@@ -1,0 +1,131 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   16 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "last_trigger"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:232-244"\
+    }\
+    ChartData {\
+      Name         "last_trigger_not_empty"\
+      Description  "EmlPersistentSentinel"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:232-244"\
+    }\
+    ChartData {\
+      Name         "count_val"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:256-265"\
+    }\
+    ChartData {\
+      Name         "cycle_val"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:277-286"\
+    }\
+    ChartData {\
+      Name         "arfiness"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:312-320"\
+    }\
+    ChartData {\
+      Name         "xmean"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:332-337"\
+    }\
+    ChartData {\
+      Name         "arx"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:366-369"\
+    }\
+    ChartData {\
+      Name         "arz"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:381-384"\
+    }\
+    ChartData {\
+      Name         "sigma"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:397-402"\
+    }\
+    ChartData {\
+      Name         "pc"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:433-435"\
+    }\
+    ChartData {\
+      Name         "ps"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:447-449"\
+    }\
+    ChartData {\
+      Name         "B"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:461-462"\
+    }\
+    ChartData {\
+      Name         "D"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:474-475"\
+    }\
+    ChartData {\
+      Name         "C"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:487-488"\
+    }\
+    ChartData {\
+      Name         "Reset"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6319:501-506"\
+    }\
+    ChartData {\
+      Name         "state"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "S:\MATLAB\R2017b\toolbox\eml\lib\matlab\randfun\private\eml_rand_mt19937ar_stateful.m:166-171"\
+      Dimensions   [625]\
+    }\
+  }
+  %return ChartDataElements
+%endfunction
