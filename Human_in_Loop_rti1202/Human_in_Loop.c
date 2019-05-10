@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1152
+ * Model version              : 1.1160
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Thu May  9 19:27:10 2019
+ * C source code generated on : Thu May  9 21:27:39 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -2651,7 +2651,7 @@ void Human_in_Loop_output(void)
     } else {
       /* '<S81>:1:24' */
       Human_in_Loop_DW.filter_time += 0.0002;
-      if (Human_in_Loop_DW.filter_time > 0.1) {
+      if (Human_in_Loop_DW.filter_time > 0.4) {
         /* '<S81>:1:25' */
         /* '<S81>:1:26' */
         Human_in_Loop_DW.filter_time = 0.0;
@@ -2734,7 +2734,7 @@ void Human_in_Loop_output(void)
         /* '<S88>:1:58' */
         Human_in_Loop_DW.reg_stride_time_count = 0.0;
       } else if ((Human_in_Loop_DW.reg_state == 1.0) &&
-                 (Human_in_Loop_DW.reg_stride_time_count > 0.6 *
+                 (Human_in_Loop_DW.reg_stride_time_count > 0.65 *
                   Human_in_Loop_DW.reg_stride_time)) {
         /* '<S88>:1:59' */
         /* '<S88>:1:60' */
