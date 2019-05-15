@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1206
+ * Model version              : 1.1208
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Sat May 11 05:28:40 2019
+ * C source code generated on : Sat May 11 07:01:28 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -3180,35 +3180,35 @@ void Human_in_Loop_ControlModule(void)
     Human_in_Loop_power_a(Human_in_Loop_B.tmp_data_cx, tmp_size_4,
                           Human_in_Loop_B.tmp_data_pb, tmp_size_2);
     for (f = 0; f < b_n; f++) {
-      Human_in_Loop_B.tmp_data_k[f << 2] = 1.0;
+      Human_in_Loop_B.tmp_data_cl[f << 2] = 1.0;
     }
 
     loop_ub = d - br;
     for (f = 0; f <= loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_k[1 + (f << 2)] = (int16_T)((int16_T)((br + f) -
+      Human_in_Loop_B.tmp_data_cl[1 + (f << 2)] = (int16_T)((int16_T)((br + f) -
         1) + 1);
     }
 
     loop_ub = tmp_size_3[1];
     for (f = 0; f < loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_k[2 + (f << 2)] =
+      Human_in_Loop_B.tmp_data_cl[2 + (f << 2)] =
         Human_in_Loop_B.tmp_data_b[tmp_size_3[0] * f];
     }
 
     loop_ub = tmp_size_2[1];
     for (f = 0; f < loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_k[3 + (f << 2)] =
+      Human_in_Loop_B.tmp_data_cl[3 + (f << 2)] =
         Human_in_Loop_B.tmp_data_pb[tmp_size_2[0] * f];
     }
 
     br = b_n;
     for (f = 0; f < b_n; f++) {
-      Human_in_Loop_B.result_data_c[f << 2] = Human_in_Loop_B.tmp_data_k[f << 2];
-      Human_in_Loop_B.result_data_c[1 + (f << 2)] = Human_in_Loop_B.tmp_data_k
+      Human_in_Loop_B.result_data_m[f << 2] = Human_in_Loop_B.tmp_data_cl[f << 2];
+      Human_in_Loop_B.result_data_m[1 + (f << 2)] = Human_in_Loop_B.tmp_data_cl
         [(f << 2) + 1];
-      Human_in_Loop_B.result_data_c[2 + (f << 2)] = Human_in_Loop_B.tmp_data_k
+      Human_in_Loop_B.result_data_m[2 + (f << 2)] = Human_in_Loop_B.tmp_data_cl
         [(f << 2) + 2];
-      Human_in_Loop_B.result_data_c[3 + (f << 2)] = Human_in_Loop_B.tmp_data_k
+      Human_in_Loop_B.result_data_m[3 + (f << 2)] = Human_in_Loop_B.tmp_data_cl
         [(f << 2) + 3];
     }
 
@@ -3230,11 +3230,11 @@ void Human_in_Loop_ControlModule(void)
       for (d = 0; d <= b_n; d++) {
         ar = -1;
         for (f = br; f + 1 <= br + 4; f++) {
-          if (Human_in_Loop_B.result_data_c[f] != 0.0) {
+          if (Human_in_Loop_B.result_data_m[f] != 0.0) {
             ia = ar;
             for (h = d; h + 1 <= d + 1; h++) {
               ia++;
-              Human_in_Loop_B.tmp_data_cx[h] += Human_in_Loop_B.result_data_c[f]
+              Human_in_Loop_B.tmp_data_cx[h] += Human_in_Loop_B.result_data_m[f]
                 * parm1[ia];
             }
           }
@@ -3287,27 +3287,27 @@ void Human_in_Loop_ControlModule(void)
     Human_in_Loop_power(Human_in_Loop_B.tmp_data_cx, tmp_size_1,
                         Human_in_Loop_B.tmp_data_b, tmp_size_2);
     for (f = 0; f < b_n; f++) {
-      Human_in_Loop_B.tmp_data_m[3 * f] = 1.0;
+      Human_in_Loop_B.tmp_data_k[3 * f] = 1.0;
     }
 
     loop_ub = d - br;
     for (f = 0; f <= loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_m[1 + 3 * f] = (real_T)(int16_T)((int16_T)((br +
+      Human_in_Loop_B.tmp_data_k[1 + 3 * f] = (real_T)(int16_T)((int16_T)((br +
         f) - 1) + 1) * 2.0;
     }
 
     loop_ub = tmp_size_2[1];
     for (f = 0; f < loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_m[2 + 3 * f] =
+      Human_in_Loop_B.tmp_data_k[2 + 3 * f] =
         Human_in_Loop_B.tmp_data_b[tmp_size_2[0] * f] * 3.0;
     }
 
     br = b_n;
     for (f = 0; f < b_n; f++) {
-      Human_in_Loop_B.b_result_data[3 * f] = Human_in_Loop_B.tmp_data_m[3 * f];
-      Human_in_Loop_B.b_result_data[1 + 3 * f] = Human_in_Loop_B.tmp_data_m[3 *
+      Human_in_Loop_B.b_result_data[3 * f] = Human_in_Loop_B.tmp_data_k[3 * f];
+      Human_in_Loop_B.b_result_data[1 + 3 * f] = Human_in_Loop_B.tmp_data_k[3 *
         f + 1];
-      Human_in_Loop_B.b_result_data[2 + 3 * f] = Human_in_Loop_B.tmp_data_m[3 *
+      Human_in_Loop_B.b_result_data[2 + 3 * f] = Human_in_Loop_B.tmp_data_k[3 *
         f + 2];
     }
 
@@ -3429,35 +3429,35 @@ void Human_in_Loop_ControlModule(void)
     Human_in_Loop_power_a(Human_in_Loop_B.tmp_data_cx, tmp_size_0,
                           Human_in_Loop_B.tmp_data_pb, tmp_size_3);
     for (f = 0; f < b_n; f++) {
-      Human_in_Loop_B.tmp_data_k[f << 2] = 1.0;
+      Human_in_Loop_B.tmp_data_cl[f << 2] = 1.0;
     }
 
     loop_ub = d - br;
     for (f = 0; f <= loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_k[1 + (f << 2)] = (int16_T)((int16_T)((br + f) -
+      Human_in_Loop_B.tmp_data_cl[1 + (f << 2)] = (int16_T)((int16_T)((br + f) -
         1) + 1);
     }
 
     loop_ub = tmp_size_2[1];
     for (f = 0; f < loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_k[2 + (f << 2)] =
+      Human_in_Loop_B.tmp_data_cl[2 + (f << 2)] =
         Human_in_Loop_B.tmp_data_b[tmp_size_2[0] * f];
     }
 
     loop_ub = tmp_size_3[1];
     for (f = 0; f < loop_ub; f++) {
-      Human_in_Loop_B.tmp_data_k[3 + (f << 2)] =
+      Human_in_Loop_B.tmp_data_cl[3 + (f << 2)] =
         Human_in_Loop_B.tmp_data_pb[tmp_size_3[0] * f];
     }
 
     br = b_n;
     for (f = 0; f < b_n; f++) {
-      Human_in_Loop_B.result_data_c[f << 2] = Human_in_Loop_B.tmp_data_k[f << 2];
-      Human_in_Loop_B.result_data_c[1 + (f << 2)] = Human_in_Loop_B.tmp_data_k
+      Human_in_Loop_B.result_data_m[f << 2] = Human_in_Loop_B.tmp_data_cl[f << 2];
+      Human_in_Loop_B.result_data_m[1 + (f << 2)] = Human_in_Loop_B.tmp_data_cl
         [(f << 2) + 1];
-      Human_in_Loop_B.result_data_c[2 + (f << 2)] = Human_in_Loop_B.tmp_data_k
+      Human_in_Loop_B.result_data_m[2 + (f << 2)] = Human_in_Loop_B.tmp_data_cl
         [(f << 2) + 2];
-      Human_in_Loop_B.result_data_c[3 + (f << 2)] = Human_in_Loop_B.tmp_data_k
+      Human_in_Loop_B.result_data_m[3 + (f << 2)] = Human_in_Loop_B.tmp_data_cl
         [(f << 2) + 3];
     }
 
@@ -3479,11 +3479,11 @@ void Human_in_Loop_ControlModule(void)
       for (d = 0; d <= b_n; d++) {
         ar = -1;
         for (f = br; f + 1 <= br + 4; f++) {
-          if (Human_in_Loop_B.result_data_c[f] != 0.0) {
+          if (Human_in_Loop_B.result_data_m[f] != 0.0) {
             ia = ar;
             for (h = d; h + 1 <= d + 1; h++) {
               ia++;
-              Human_in_Loop_B.tmp_data_cx[h] += Human_in_Loop_B.result_data_c[f]
+              Human_in_Loop_B.tmp_data_cx[h] += Human_in_Loop_B.result_data_m[f]
                 * parm1[ia];
             }
           }
@@ -8119,17 +8119,17 @@ void Human_in_Loop_output(void)
         tmp_size_idx_1 = (d_ia - i) + 1;
         k_ar = d_ia - i;
         for (ixstart = 0; ixstart < k_ar; ixstart++) {
-          memcpy(&Human_in_Loop_B.tmp_data_mb[ixstart * 26],
+          memcpy(&Human_in_Loop_B.tmp_data_m[ixstart * 26],
                  &Human_in_Loop_DW.SingleCycleData[ixstart * 26 + i * 26], 26U *
                  sizeof(real_T));
         }
 
-        memcpy(&Human_in_Loop_B.tmp_data_mb[(d_ia - i) * 26],
+        memcpy(&Human_in_Loop_B.tmp_data_m[(d_ia - i) * 26],
                &Human_in_Loop_B.TmpSignalConversionAtSFunctionI[0], 26U * sizeof
                (real_T));
         for (ixstart = 0; ixstart < tmp_size_idx_1; ixstart++) {
           memcpy(&Human_in_Loop_DW.SingleCycleData[ixstart * 26],
-                 &Human_in_Loop_B.tmp_data_mb[ixstart * 26], 26U * sizeof(real_T));
+                 &Human_in_Loop_B.tmp_data_m[ixstart * 26], 26U * sizeof(real_T));
         }
 
         if (1.0 > Human_in_Loop_P.MultiCycleAnalysis1_N) {
@@ -8142,12 +8142,12 @@ void Human_in_Loop_output(void)
         tmp_size[0] = 26;
         tmp_size[1] = i;
         for (ixstart = 0; ixstart < i; ixstart++) {
-          memcpy(&Human_in_Loop_B.tmp_data_mb[ixstart * 26],
+          memcpy(&Human_in_Loop_B.tmp_data_m[ixstart * 26],
                  &Human_in_Loop_DW.SingleCycleData[ixstart * 26], 26U * sizeof
                  (real_T));
         }
 
-        Human_in_Loop_mean(Human_in_Loop_B.tmp_data_mb, tmp_size,
+        Human_in_Loop_mean(Human_in_Loop_B.tmp_data_m, tmp_size,
                            Human_in_Loop_B.Mean_m);
       }
     }

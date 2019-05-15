@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1206
+ * Model version              : 1.1208
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Sat May 11 05:28:40 2019
+ * C source code generated on : Sat May 11 07:01:28 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -166,11 +166,11 @@ typedef struct {
 
 /* Block signals (auto storage) */
 typedef struct {
-  real_T tmp_data_mb[2600];
+  real_T result_data_m[3000];
+  real_T tmp_data_cl[3000];
+  real_T tmp_data_m[2600];
   real_T b_result_data[2250];
-  real_T tmp_data_m[2250];
-  real_T result_data_c[3000];
-  real_T tmp_data_k[3000];
+  real_T tmp_data_k[2250];
   cell_2_Human_in_Loop_T GP_LCB_environment_f1_environme;
   cell_3_Human_in_Loop_T GP_LCB_environment_f2_environme;
   real_T GP_mu_environment_f2[900];
