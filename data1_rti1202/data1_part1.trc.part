@@ -1,0 +1,217 @@
+-- ******** Model variables ***************************************************
+
+group "Model Root"
+	group "Button" -- block-group
+	{
+	 block: "Constant"
+	}
+		-- Skipping output Out1
+		p_1_data1_real_T_0[1]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Value"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "Button"
+
+	group "current_weight" -- block-group
+	{
+	 block: "Constant"
+	}
+		-- Skipping output Out1
+		p_1_data1_real_T_0[3]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Value"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "current_weight"
+
+	group "freq" -- block-group
+	{
+	 block: "Constant"
+	}
+		p_0_data1_real_T_0[2]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		}
+		p_1_data1_real_T_0[4]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Value"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "freq"
+
+	group "Gain" -- block-group
+	{
+	 block: "Gain"
+	}
+		p_0_data1_real_T_0[1]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 flags:   OUTPUT|READONLY
+		}
+		p_1_data1_real_T_0[2]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "Gain"
+
+  
+  
+	group "ADC_CLASS2_BL2" -- subsystem-group
+
+		p_0_data1_real_T_0[0]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "ADC"
+		 flags:   OUTPUT|READONLY
+		}
+
+	endgroup -- subsystem-group "ADC_CLASS2_BL2"
+  
+  
+	group "RTI Data" -- subsystem-group
+
+
+	endgroup -- subsystem-group "RTI Data"
+  
+  
+	group "Triggered\nSubsystem" -- subsystem-group
+
+		p_0_data1_real_T_0[6]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "voltage"
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		}
+			p_0_data1_real_T_0[6]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+
+
+	endgroup -- subsystem-group "Triggered\nSubsystem"
+  
+  
+	group "Varying Lowpass Filter" -- subsystem-group
+
+		p_0_data1_real_T_0[4]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "y"
+		 flags:   OUTPUT|READONLY
+		}
+
+
+  
+  
+		group "FOS" -- subsystem-group
+
+			p_0_data1_real_T_0[4]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "y"
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "Integrator" -- block-group
+			{
+			 block: "Integrator"
+			}
+				p_0_data1_real_T_0[3]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+				p_1_data1_real_T_0[5]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "InitialCondition"
+				 flags:   PARAM
+				}
+
+
+			endgroup -- block-group "Integrator"
+
+			group "Product4" -- block-group
+			{
+			 block: "Product"
+			}
+				p_0_data1_real_T_0[4]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "Product4"
+
+			group "Sum2" -- block-group
+			{
+			 block: "Sum"
+			}
+				p_0_data1_real_T_0[5]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "Sum2"
+
+
+
+		endgroup -- subsystem-group "FOS"
+
+
+	endgroup -- subsystem-group "Varying Lowpass Filter"
+  
+  
+	group "MATLAB Function" -- subsystem-group
+
+		p_0_data1_real_T_0[7]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "real_weight"
+		 flags:   OUTPUT|READONLY
+		}
+
+
+
+
+	endgroup -- subsystem-group "MATLAB Function"
+
+
+
+endgroup -- "Model Root"
