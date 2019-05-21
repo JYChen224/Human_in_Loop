@@ -61,6 +61,7 @@ rtGetNaN.o07
 "-Id:/Program Files/dSPACE RCPHIL 2017-B/DS1202/Include"
 "-Id:/Program Files/dSPACE RCPHIL 2017-B/MATLAB/RTI/RTI/C"
 "-Id:/Program Files/dSPACE RCPHIL 2017-B/MATLAB/RTI/RTI/SFcn"
+"-Id:/Program Files/dSPACE RCPHIL 2017-B/matlab/rtican/c"
 -IS:/MATLAB/R2017b/simulink/include
 -IS:/MATLAB/R2017b/extern/include
 -IS:/MATLAB/R2017b/rtw/c/src

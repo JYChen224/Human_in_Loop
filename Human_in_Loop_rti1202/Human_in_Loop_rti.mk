@@ -2,7 +2,7 @@
 #  Make include file Human_in_Loop_rti.mk:
 #
 #   RTI1202 7.9 (02-Nov-2017)
-#   Sat May 11 07:01:28 2019
+#   Tue May 21 20:27:12 2019
 #
 #   Copyright 2017, dSPACE GmbH. All rights reserved.
 # =============================================================================
@@ -22,12 +22,13 @@ blockset_after_linkage :
 
 # Includes for additional blocksets -------------------------------------------
 
+%include "$(DSPACE_ROOT)\matlab\rtican\c\rtican.mk"
 
 
 # Model-specific options ------------------------------------------------------
 
 # Additional C source files declared by the model
-MDL_CUSTOM_C_SRCS = rti_assert.c
+MDL_CUSTOM_C_SRCS = rti_assert.c rtican_err1202.c
 
 # Additional assembler source files declared by the model
 MDL_CUSTOM_ASM_SRCS =
@@ -44,6 +45,8 @@ MDL_CUSTOM_SRCS_DIR =
 # Directories where additional header files are stored
 MDL_CUSTOM_INCLUDES_PATH =
 
+# Dependencies declared by the model
+Human_in_Loop.$(OBJ_EXT) :"rtican_include.h" 
 
 # Define build type information
 BUILDTYPE = RTI
