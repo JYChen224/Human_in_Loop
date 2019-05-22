@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1">
-    <ModelRefInfoRepo.ModelRefInfoRoot type="ModelRefInfoRepo.ModelRefInfoRoot" uuid="3cbf57d2-404c-4003-b042-76fc9646199e">
+    <ModelRefInfoRepo.ModelRefInfoRoot type="ModelRefInfoRepo.ModelRefInfoRoot" uuid="736bcbfe-483b-4a98-898b-c7a508bef97f">
         <dataDictionary/>
         <dataTransferInfos>AAFJTQAAAAAOAAAAOAAAAAYAAAAIAAAAAgAAAAAAAAAFAAAACAAAAAAAAAABAAAAAQAAAAAAAAAFAAQAAQAAAAEAAAAAAAAA</dataTransferInfos>
         <hasInlineVariantBlock>false</hasInlineVariantBlock>
@@ -9,14 +9,14 @@
         <needElapsedTime>false</needElapsedTime>
         <userSpecifiedFixedStepSize>0</userSpecifiedFixedStepSize>
         <zeroInternalMemoryAtStartupUnchecked>false</zeroInternalMemoryAtStartupUnchecked>
-        <FMUBlockMap type="ModelRefInfoRepo.FMUBlockInfo" uuid="8d42927b-5326-4010-adec-ebf7a6cafed6"/>
-        <periodicEventPortUnsupportedBlockInfo type="ModelRefInfoRepo.PeriodicEventPortUnsupportedBlockInfo" uuid="0ace067f-f67e-4f22-9b51-2527882c2454">
+        <FMUBlockMap type="ModelRefInfoRepo.FMUBlockInfo" uuid="b4d0e625-0785-4122-902d-497168814e7c"/>
+        <periodicEventPortUnsupportedBlockInfo type="ModelRefInfoRepo.PeriodicEventPortUnsupportedBlockInfo" uuid="fdd03274-3e90-4482-bfd2-cf1a29b05dc6">
             <hasHiddenDeterministicRTB>false</hasHiddenDeterministicRTB>
             <multiRateBlocks>Human_in_Loop/Opt Module/Cosmed/COSMED/DS1202SER_INT_C1_I1/S-Function1</multiRateBlocks>
             <multiRateBlocks>Human_in_Loop/Opt Module/Subsystem/Software Interrupt/S-Function1</multiRateBlocks>
             <multiRateBlocks>Human_in_Loop/Timer Interrupt/S-Function1</multiRateBlocks>
         </periodicEventPortUnsupportedBlockInfo>
-        <simulinkFunctions type="ModelRefInfoRepo.SimulinkFunctions" uuid="47452add-ab03-462e-bb62-205461ced6e6">
+        <simulinkFunctions type="ModelRefInfoRepo.SimulinkFunctions" uuid="7781e08e-a89d-4786-a5a5-c6d6c845e809">
             <compSimulinkFunctionCatalog>AAFJTQAAAAAOAAAAgAAAAAYAAAAIAAAAAgAAAAAAAAAFAAAACAAAAAEAAAABAAAAAQAAAAAAAAAFAAQADgAAAAEAAAAOAAAAQ29tcEZ1bmN0aW9ucwAAAA4AAAAwAAAABgAAAAgAAAAGAAAAAAAAAAUAAAAIAAAAAAAAAAAAAAABAAAAAAAAAAkAAAAAAAAA</compSimulinkFunctionCatalog>
             <postPropHasAnyExportedFunction>false</postPropHasAnyExportedFunction>
             <postPropHasAnyVariantExportedFunction>false</postPropHasAnyVariantExportedFunction>

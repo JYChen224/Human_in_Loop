@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1216
+ * Model version              : 1.1218
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Tue May 21 20:27:12 2019
+ * C source code generated on : Wed May 22 17:03:57 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -170,6 +170,8 @@ typedef struct {
   real_T result_data_m[3000];
   real_T tmp_data_cl[3000];
   real_T tmp_data_m[2600];
+  real_T b_result_data[2250];
+  real_T tmp_data_k[2250];
   cell_2_Human_in_Loop_T GP_LCB_environment_f1_environme;
   cell_3_Human_in_Loop_T GP_LCB_environment_f2_environme;
   real_T GP_mu_environment_f2[900];
@@ -188,13 +190,11 @@ typedef struct {
   real_T K_data_c[841];
   real_T torque_track[750];
   real_T torque_delta_track[750];
-  real_T tmp_data_k[750];
   real_T tmp_data_cx[750];
   real_T tmp_data_b[750];
+  real_T tmp_data_pb[750];
   real_T z1_data[750];
-  real_T z1_data_p[750];
-  real_T b_result_data[2250];
-  real_T tmp_data_cv[2250];
+  real_T z1_data_c[750];
   real_T SFunction1;                   /* '<S103>/S-Function1' */
   real_T Gain;                         /* '<S49>/Gain' */
   real_T u4low2;                       /* '<S49>/0.4low2' */
@@ -359,6 +359,7 @@ typedef struct {
   real_T Count;                        /* '<S23>/Timer' */
   real_T Data1;                        /* '<S30>/MATLAB Function1' */
   real_T Data2;                        /* '<S30>/MATLAB Function1' */
+  real_T Data3;                        /* '<S30>/MATLAB Function1' */
   real_T E;                            /* '<S30>/Estimation' */
   real_T Time_p[12];                   /* '<S30>/Estimation' */
   real_T Y[12];                        /* '<S30>/Estimation' */

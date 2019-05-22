@@ -3,7 +3,7 @@
 --  Trace file: Human_in_Loop.trc
 --
 --  RTI1202 7.9 (02-Nov-2017)
---  Tue May 21 20:27:12 2019
+--  Wed May 22 17:03:57 2019
 --
 --  Copyright 2019, dSPACE GmbH. All rights reserved.
 --
@@ -26,7 +26,7 @@
 
 _genname     "RTI"
 _genversion  "7.9"
-_gendate     "05/21/2019 20:27:19"
+_gendate     "05/22/2019 17:04:03"
 _description ""
 _author      "RTI1202 7.9 (02-Nov-2017)"
 _model       "Human_in_Loop"
@@ -786,19 +786,19 @@ group "Model Root"
   
 	group "ObjectiveCala" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[14156]
+		p_0_Human_in_Loop_real_T_0[14157]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "RMS"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[14162]
+		p_0_Human_in_Loop_real_T_0[14163]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "iEMG"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[14089]
+		p_0_Human_in_Loop_real_T_0[14090]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "loss"
@@ -830,37 +830,37 @@ group "Model Root"
   
 		group "Multi Cycle Analysis1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[14142]
+			p_0_Human_in_Loop_real_T_0[14143]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14143]
+			p_0_Human_in_Loop_real_T_0[14144]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Frequency"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14144]
+			p_0_Human_in_Loop_real_T_0[14145]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Max"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14150]
+			p_0_Human_in_Loop_real_T_0[14151]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Mean"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14156]
+			p_0_Human_in_Loop_real_T_0[14157]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "RMS"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14162]
+			p_0_Human_in_Loop_real_T_0[14163]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "iEMG"
@@ -878,7 +878,7 @@ group "Model Root"
   
 			group "Mean Calculate" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[14142]
+				p_0_Human_in_Loop_real_T_0[14143]
 				{
 				 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 				 alias:   "Mean"
@@ -927,7 +927,7 @@ group "Model Root"
   
 				group "MATLAB Function1" -- subsystem-group
 
-					p_0_Human_in_Loop_real_T_0[14142]
+					p_0_Human_in_Loop_real_T_0[14143]
 					{
 					 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 					 alias:   "Mean"
@@ -948,37 +948,37 @@ group "Model Root"
   
 		group "Single Cycle Analysis1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[14090]
+			p_0_Human_in_Loop_real_T_0[14091]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14091]
+			p_0_Human_in_Loop_real_T_0[14092]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Frequency"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14092]
+			p_0_Human_in_Loop_real_T_0[14093]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Max"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14098]
+			p_0_Human_in_Loop_real_T_0[14099]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Mean"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14104]
+			p_0_Human_in_Loop_real_T_0[14105]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "RMS"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14110]
+			p_0_Human_in_Loop_real_T_0[14111]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6*
 			 alias:   "iEMG"
@@ -1241,37 +1241,37 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[14090]
+				p_0_Human_in_Loop_real_T_0[14091]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Cycle_Time"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[14091]
+				p_0_Human_in_Loop_real_T_0[14092]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Cycle_Frequency"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[14092]
+				p_0_Human_in_Loop_real_T_0[14093]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Max"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[14098]
+				p_0_Human_in_Loop_real_T_0[14099]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Mean"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[14104]
+				p_0_Human_in_Loop_real_T_0[14105]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "RMS"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[14110]
+				p_0_Human_in_Loop_real_T_0[14111]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6*
 				 alias:   "iEMG"
@@ -1289,7 +1289,7 @@ group "Model Root"
   
 		group "get loss" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[14089]
+			p_0_Human_in_Loop_real_T_0[14090]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "loss"
@@ -1307,7 +1307,7 @@ group "Model Root"
   
 	group "Opt Module" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[14022]
+		p_0_Human_in_Loop_real_T_0[14023]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "parm"
@@ -1427,7 +1427,7 @@ group "Model Root"
 			 alias:   "trigger"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[13961]
+			p_0_Human_in_Loop_real_T_0[13962]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "metab"
@@ -1479,7 +1479,7 @@ group "Model Root"
   
 			group "COSMED" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[13961]
+				p_0_Human_in_Loop_real_T_0[13962]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "E"
@@ -1504,7 +1504,7 @@ group "Model Root"
   
 				group "Serial Decoding System" -- subsystem-group
 
-					p_0_Human_in_Loop_real_T_0[13961]
+					p_0_Human_in_Loop_real_T_0[13962]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "E"
@@ -1541,31 +1541,31 @@ group "Model Root"
   
 					group "Estimation" -- subsystem-group
 
-						p_0_Human_in_Loop_real_T_0[13961]
+						p_0_Human_in_Loop_real_T_0[13962]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "E"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[13962]
+						p_0_Human_in_Loop_real_T_0[13963]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Time"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[13974]
+						p_0_Human_in_Loop_real_T_0[13975]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Y"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[13986]
+						p_0_Human_in_Loop_real_T_0[13987]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Y_E"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[13998]
+						p_0_Human_in_Loop_real_T_0[13999]
 						{
 						 type:    Human_in_Loop_ArrayDT0_2_12_Col*
 						 alias:   "est_curve"
@@ -1590,6 +1590,12 @@ group "Model Root"
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "Data2"
+						 flags:   OUTPUT|READONLY
+						}
+						p_0_Human_in_Loop_real_T_0[13961]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Data3"
 						 flags:   OUTPUT|READONLY
 						}
 
@@ -1763,37 +1769,37 @@ group "Model Root"
   
 		group "CMAES" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[14022]
+			p_0_Human_in_Loop_real_T_0[14023]
 			{
 			 type:    Human_in_Loop_ArrayDT0_5_1_Col*
 			 alias:   "x_this_cycle"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14027]
+			p_0_Human_in_Loop_real_T_0[14028]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "gengeration_count"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14028]
+			p_0_Human_in_Loop_real_T_0[14029]
 			{
 			 type:    Human_in_Loop_ArrayDT0_5_10_Col*
 			 alias:   "x_this_gengration"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14078]
+			p_0_Human_in_Loop_real_T_0[14079]
 			{
 			 type:    Human_in_Loop_ArrayDT0_5_1_Col*
 			 alias:   "mean_this_generation"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14083]
+			p_0_Human_in_Loop_real_T_0[14084]
 			{
 			 type:    Human_in_Loop_ArrayDT0_5*
 			 alias:   "variance_this_generation"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[14088]
+			p_0_Human_in_Loop_real_T_0[14089]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "sigma_this_generation"
