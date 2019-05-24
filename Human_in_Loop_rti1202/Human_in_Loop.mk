@@ -897,6 +897,7 @@ TMP_PATH_CC += $(MATLAB_ROOT,>\rtw\c\src)
 %  set TMP_PATH_CC += $(RTIMP_C_DIR)
 %endif
 # RTW Custom Source paths from rtwmakecfg.m.
+TMP_PATH_CC += "D:\Program Files\dSPACE RCPHIL 2017-B\MATLAB\RTICAN\TLC"
 TMP_PATH_CC += "$(MATLAB_ROOT)\rtw\c\src"
 TMP_PATH_CC += "$(MATLAB_ROOT)\simulink\src"
 # End: Custom Source paths.

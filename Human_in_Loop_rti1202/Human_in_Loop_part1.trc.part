@@ -6,7 +6,7 @@ group "Model Root"
 	 block: "DataStoreMemory"
 	}
 
-		p_1_Human_in_Loop_real_T_4[2839]
+		p_1_Human_in_Loop_real_T_4[2849]
 		{
 		 type:    Human_in_Loop_ArrayDT0_4_1100_Col*
 		 alias:   "InitialValue"
@@ -152,7 +152,7 @@ group "Model Root"
 			{
 			 block: "Gain"
 			}
-				p_0_Human_in_Loop_real_T_0[139]
+				p_0_Human_in_Loop_real_T_0[163]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
@@ -172,7 +172,7 @@ group "Model Root"
 			{
 			 block: "Gain"
 			}
-				p_0_Human_in_Loop_real_T_0[138]
+				p_0_Human_in_Loop_real_T_0[162]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
@@ -198,7 +198,7 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3142]
+				p_0_Human_in_Loop_real_T_0[3166]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "vel"
@@ -240,7 +240,7 @@ group "Model Root"
   
 		group "Controller" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3894]
+			p_0_Human_in_Loop_real_T_0[3918]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "motor_vel_cmd"
@@ -291,13 +291,13 @@ group "Model Root"
   
 		group "LRN" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3143]
+			p_0_Human_in_Loop_real_T_0[3167]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "lrn_cmd"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3144]
+			p_0_Human_in_Loop_real_T_0[3168]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_750_Col*
 			 alias:   "lrn_mem"
@@ -346,25 +346,25 @@ group "Model Root"
   
 		group "Torque track" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[140]
+			p_0_Human_in_Loop_real_T_0[164]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_des"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[141]
+			p_0_Human_in_Loop_real_T_0[165]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_delta_des"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[142]
+			p_0_Human_in_Loop_real_T_0[166]
 			{
 			 type:    Human_in_Loop_ArrayDT0_2_750_Col*
 			 alias:   "torque_trace"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[1642]
+			p_0_Human_in_Loop_real_T_0[1666]
 			{
 			 type:    Human_in_Loop_ArrayDT0_2_750_Col*
 			 alias:   "torque_delta_trace"
@@ -388,31 +388,31 @@ group "Model Root"
   
 	group "ObjectiveCala" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[4073]
+		p_0_Human_in_Loop_real_T_0[4098]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "Max"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[4079]
+		p_0_Human_in_Loop_real_T_0[4104]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "Mean"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[4085]
+		p_0_Human_in_Loop_real_T_0[4110]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "RMS"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[4091]
+		p_0_Human_in_Loop_real_T_0[4116]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "iEMG"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[3990]
+		p_0_Human_in_Loop_real_T_0[4015]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "torque_rmse"
@@ -444,43 +444,43 @@ group "Model Root"
   
 		group "Multi Cycle Analysis1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[4070]
+			p_0_Human_in_Loop_real_T_0[4095]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Count"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4071]
+			p_0_Human_in_Loop_real_T_0[4096]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4072]
+			p_0_Human_in_Loop_real_T_0[4097]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Frequency"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4073]
+			p_0_Human_in_Loop_real_T_0[4098]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Max"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4079]
+			p_0_Human_in_Loop_real_T_0[4104]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Mean"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4085]
+			p_0_Human_in_Loop_real_T_0[4110]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "RMS"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4091]
+			p_0_Human_in_Loop_real_T_0[4116]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "iEMG"
@@ -498,13 +498,13 @@ group "Model Root"
   
 			group "Mean Calculate" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[4071]
+				p_0_Human_in_Loop_real_T_0[4096]
 				{
 				 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 				 alias:   "Mean"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[4070]
+				p_0_Human_in_Loop_real_T_0[4095]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Count"
@@ -553,7 +553,7 @@ group "Model Root"
 				{
 				 block: "UnitDelay"
 				}
-					p_0_Human_in_Loop_real_T_0[4017]
+					p_0_Human_in_Loop_real_T_0[4042]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
@@ -573,7 +573,7 @@ group "Model Root"
 				{
 				 block: "UnitDelay"
 				}
-					p_0_Human_in_Loop_real_T_0[4018]
+					p_0_Human_in_Loop_real_T_0[4043]
 					{
 					 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 					 alias:   "Out1"
@@ -593,13 +593,13 @@ group "Model Root"
   
 				group "MATLAB Function1" -- subsystem-group
 
-					p_0_Human_in_Loop_real_T_0[4070]
+					p_0_Human_in_Loop_real_T_0[4095]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "count"
 					 flags:   OUTPUT|READONLY
 					}
-					p_0_Human_in_Loop_real_T_0[4071]
+					p_0_Human_in_Loop_real_T_0[4096]
 					{
 					 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 					 alias:   "Mean"
@@ -620,37 +620,37 @@ group "Model Root"
   
 		group "Single Cycle Analysis1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3991]
+			p_0_Human_in_Loop_real_T_0[4016]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3992]
+			p_0_Human_in_Loop_real_T_0[4017]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Frequency"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3993]
+			p_0_Human_in_Loop_real_T_0[4018]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Max"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3999]
+			p_0_Human_in_Loop_real_T_0[4024]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Mean"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4005]
+			p_0_Human_in_Loop_real_T_0[4030]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "RMS"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[4011]
+			p_0_Human_in_Loop_real_T_0[4036]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6*
 			 alias:   "iEMG"
@@ -913,37 +913,37 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3991]
+				p_0_Human_in_Loop_real_T_0[4016]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Cycle_Time"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[3992]
+				p_0_Human_in_Loop_real_T_0[4017]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Cycle_Frequency"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[3993]
+				p_0_Human_in_Loop_real_T_0[4018]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Max"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[3999]
+				p_0_Human_in_Loop_real_T_0[4024]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Mean"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[4005]
+				p_0_Human_in_Loop_real_T_0[4030]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "RMS"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[4011]
+				p_0_Human_in_Loop_real_T_0[4036]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6*
 				 alias:   "iEMG"
@@ -961,13 +961,13 @@ group "Model Root"
   
 		group "torque_track_loss" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3989]
+			p_0_Human_in_Loop_real_T_0[4014]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_track_rmse"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3990]
+			p_0_Human_in_Loop_real_T_0[4015]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_track_rmse_mean"
@@ -985,13 +985,13 @@ group "Model Root"
   
 	group "Parameter Module" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[3984]
+		p_0_Human_in_Loop_real_T_0[4009]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 		 alias:   "control_parm"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[3980]
+		p_0_Human_in_Loop_real_T_0[4005]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 		 alias:   "torque_parm"
@@ -1003,7 +1003,7 @@ group "Model Root"
   
 		group "Control Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3984]
+			p_0_Human_in_Loop_real_T_0[4009]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 			 alias:   "Control_Parameter"
@@ -1090,7 +1090,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3984]
+				p_0_Human_in_Loop_real_T_0[4009]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 				 alias:   "x"
@@ -1108,7 +1108,7 @@ group "Model Root"
   
 		group "Torque Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3980]
+			p_0_Human_in_Loop_real_T_0[4005]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "Torque_Parameter"
@@ -1180,7 +1180,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3980]
+				p_0_Human_in_Loop_real_T_0[4005]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 				 alias:   "x"
@@ -1219,13 +1219,13 @@ group "Model Root"
 		 alias:   "ankle"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[3909]
+		p_0_Human_in_Loop_real_T_0[3934]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 		 alias:   "motor"
 		 flags:   OUTPUT|READONLY
 		}
-		p_0_Human_in_Loop_real_T_0[3905]
+		p_0_Human_in_Loop_real_T_0[3930]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "footswich"
@@ -1243,13 +1243,13 @@ group "Model Root"
   
 		group "Cosmed" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3914]
+			p_0_Human_in_Loop_real_T_0[3939]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "trigger"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3919]
+			p_0_Human_in_Loop_real_T_0[3944]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "metab"
@@ -1301,7 +1301,7 @@ group "Model Root"
   
 			group "COSMED" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3919]
+				p_0_Human_in_Loop_real_T_0[3944]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "E"
@@ -1326,7 +1326,7 @@ group "Model Root"
   
 				group "Serial Decoding System" -- subsystem-group
 
-					p_0_Human_in_Loop_real_T_0[3919]
+					p_0_Human_in_Loop_real_T_0[3944]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "E"
@@ -1363,31 +1363,31 @@ group "Model Root"
   
 					group "Estimation" -- subsystem-group
 
-						p_0_Human_in_Loop_real_T_0[3919]
+						p_0_Human_in_Loop_real_T_0[3944]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "E"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[3920]
+						p_0_Human_in_Loop_real_T_0[3945]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Time"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[3932]
+						p_0_Human_in_Loop_real_T_0[3957]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Y"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[3944]
+						p_0_Human_in_Loop_real_T_0[3969]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Y_E"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[3956]
+						p_0_Human_in_Loop_real_T_0[3981]
 						{
 						 type:    Human_in_Loop_ArrayDT0_2_12_Col*
 						 alias:   "est_curve"
@@ -1402,13 +1402,13 @@ group "Model Root"
   
 					group "MATLAB Function1" -- subsystem-group
 
-						p_0_Human_in_Loop_real_T_0[3917]
+						p_0_Human_in_Loop_real_T_0[3942]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "Data1"
 						 flags:   OUTPUT|READONLY
 						}
-						p_0_Human_in_Loop_real_T_0[3918]
+						p_0_Human_in_Loop_real_T_0[3943]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "Data2"
@@ -1429,19 +1429,19 @@ group "Model Root"
   
 			group "Timer" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3914]
+				p_0_Human_in_Loop_real_T_0[3939]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Trigger"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[3915]
+				p_0_Human_in_Loop_real_T_0[3940]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Time"
 				 flags:   OUTPUT|READONLY
 				}
-				p_0_Human_in_Loop_real_T_0[3916]
+				p_0_Human_in_Loop_real_T_0[3941]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Count"
@@ -2874,13 +2874,13 @@ group "Model Root"
 			 alias:   "Ankle"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3909]
+			p_0_Human_in_Loop_real_T_0[3934]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Motor"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3906]
+			p_0_Human_in_Loop_real_T_0[3931]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Accel"
@@ -3652,7 +3652,7 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3913]
+				p_0_Human_in_Loop_real_T_0[3938]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
@@ -3675,7 +3675,7 @@ group "Model Root"
   
 			group "Data process1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3912]
+				p_0_Human_in_Loop_real_T_0[3937]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
@@ -3713,7 +3713,7 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3909]
+				p_0_Human_in_Loop_real_T_0[3934]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
@@ -3728,7 +3728,7 @@ group "Model Root"
   
 			group "Mux2" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3906]
+				p_0_Human_in_Loop_real_T_0[3931]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
@@ -3746,7 +3746,7 @@ group "Model Root"
   
 		group "FootSwitch module" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3905]
+			p_0_Human_in_Loop_real_T_0[3930]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "FootSwitch"
@@ -3795,7 +3795,7 @@ group "Model Root"
   
 			group "FootSwitch Filter" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3905]
+				p_0_Human_in_Loop_real_T_0[3930]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "state"
@@ -3809,6 +3809,475 @@ group "Model Root"
 
 
 		endgroup -- subsystem-group "FootSwitch module"
+  
+  
+		group "IMU" -- subsystem-group
+
+			p_0_Human_in_Loop_real_T_0[3929]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Angle"
+			 flags:   OUTPUT|READONLY
+			}
+			p_0_Human_in_Loop_real_T_0[149]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Gyro"
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "Calibration" -- block-group
+			{
+			 block: "Constant"
+			}
+				-- Skipping output Out1
+				p_1_Human_in_Loop_real_T_4[2839]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Value"
+				 flags:   PARAM
+				}
+
+
+			endgroup -- block-group "Calibration"
+
+			group "Gain" -- block-group
+			{
+			 block: "Gain"
+			}
+				p_0_Human_in_Loop_real_T_0[149]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+				p_1_Human_in_Loop_real_T_4[2842]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Gain"
+				 flags:   PARAM
+				}
+
+
+			endgroup -- block-group "Gain"
+
+			group "Sum" -- block-group
+			{
+			 block: "Sum"
+			}
+				p_0_Human_in_Loop_real_T_0[148]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "Sum"
+
+  
+  
+			group "CAN_TYPE1_SETUP_M1_C1" -- subsystem-group
+
+
+			endgroup -- subsystem-group "CAN_TYPE1_SETUP_M1_C1"
+  
+  
+			group "CAN_TYPE1_SETUP_M1_C2" -- subsystem-group
+
+
+			endgroup -- subsystem-group "CAN_TYPE1_SETUP_M1_C2"
+  
+  
+			group "CAN_Test" -- subsystem-group
+
+
+
+				group "Sine Wave" -- block-group
+				{
+				 block: "Sin"
+				}
+					p_0_Human_in_Loop_real_T_0[157]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+					}
+					p_1_Human_in_Loop_real_T_4[2845]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Amplitude"
+					 flags:   PARAM
+					}
+					p_1_Human_in_Loop_real_T_4[2846]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Bias"
+					 flags:   PARAM
+					}
+					p_1_Human_in_Loop_real_T_4[2847]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Frequency"
+					 flags:   PARAM
+					}
+					p_1_Human_in_Loop_real_T_4[2848]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Phase"
+					 flags:   PARAM
+					}
+
+
+				endgroup -- block-group "Sine Wave"
+
+  
+  
+				group "CAN_TYPE1_RX_M1_C1" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[154]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX signal"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[155]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX status"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[156]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX time"
+					 flags:   OUTPUT|READONLY
+					}
+
+				endgroup -- subsystem-group "CAN_TYPE1_RX_M1_C1"
+  
+  
+				group "CAN_TYPE1_TX_M1_C2" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[158]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX status"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[159]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX time"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[160]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX delta time"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[161]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX delay time"
+					 flags:   OUTPUT|READONLY
+					}
+
+				endgroup -- subsystem-group "CAN_TYPE1_TX_M1_C2"
+
+
+			endgroup -- subsystem-group "CAN_Test"
+  
+  
+			group "IMU" -- subsystem-group
+
+				p_0_Human_in_Loop_real_T_0[151]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Angle1"
+				 flags:   OUTPUT|READONLY
+				}
+				p_0_Human_in_Loop_real_T_0[153]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Angle2"
+				 flags:   OUTPUT|READONLY
+				}
+				p_0_Human_in_Loop_real_T_0[145]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Gyro1"
+				 flags:   OUTPUT|READONLY
+				}
+				p_0_Human_in_Loop_real_T_0[147]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Gyro2"
+				 flags:   OUTPUT|READONLY
+				}
+
+
+  
+  
+				group "CAN_RX_Anglex1" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[138]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Angle1"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[139]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Angle2"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[140]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Gyro1"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[141]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Gyro2"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[142]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX status"
+					 flags:   OUTPUT|READONLY
+					}
+					p_0_Human_in_Loop_real_T_0[143]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX time"
+					 flags:   OUTPUT|READONLY
+					}
+
+				endgroup -- subsystem-group "CAN_RX_Anglex1"
+  
+  
+				group "Subsystem" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[151]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+					}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[150]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[151]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+						p_1_Human_in_Loop_real_T_4[2843]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+						}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem"
+  
+  
+				group "Subsystem1" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[153]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+					}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[152]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[153]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+						p_1_Human_in_Loop_real_T_4[2844]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+						}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem1"
+  
+  
+				group "Subsystem3" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[145]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+					}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[144]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[145]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+						p_1_Human_in_Loop_real_T_4[2840]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+						}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem3"
+  
+  
+				group "Subsystem4" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[147]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+					}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[146]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[147]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+						}
+						p_1_Human_in_Loop_real_T_4[2841]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+						}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem4"
+
+
+			endgroup -- subsystem-group "IMU"
+  
+  
+			group "MATLAB Function" -- subsystem-group
+
+				p_0_Human_in_Loop_real_T_0[3929]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Angle_Ankle"
+				 flags:   OUTPUT|READONLY
+				}
+
+
+
+
+			endgroup -- subsystem-group "MATLAB Function"
+
+
+		endgroup -- subsystem-group "IMU"
   
   
 		group "Torque module" -- subsystem-group
@@ -4166,7 +4635,7 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3904]
+				p_0_Human_in_Loop_real_T_0[3928]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque"
@@ -4201,7 +4670,7 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3903]
+				p_0_Human_in_Loop_real_T_0[3927]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque_dot"
@@ -4237,7 +4706,7 @@ group "Model Root"
   
 	group "State Module" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[3899]
+		p_0_Human_in_Loop_real_T_0[3923]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 		 alias:   "state data"
@@ -4249,7 +4718,7 @@ group "Model Root"
   
 		group "Mux1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3899]
+			p_0_Human_in_Loop_real_T_0[3923]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "x"
@@ -4264,25 +4733,25 @@ group "Model Root"
   
 		group "State Machine" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3895]
+			p_0_Human_in_Loop_real_T_0[3919]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "mode"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3896]
+			p_0_Human_in_Loop_real_T_0[3920]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "state"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3897]
+			p_0_Human_in_Loop_real_T_0[3921]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_time"
 			 flags:   OUTPUT|READONLY
 			}
-			p_0_Human_in_Loop_real_T_0[3898]
+			p_0_Human_in_Loop_real_T_0[3922]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_timer"

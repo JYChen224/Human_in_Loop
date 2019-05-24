@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Thu May  9 21:27:39 2019
+   Wed May 22 18:33:58 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -32,6 +32,7 @@
 #include <rti_assert.h>
 #include <rtidefineddatatypes.h>
 #include <dsser.h>
+#include <rtican_ds1202.h>
 #ifndef dsRtmGetNumSampleTimes
 # define dsRtmGetNumSampleTimes(rtm)   5
 #endif
@@ -259,7 +260,7 @@ static void rti_TIMERB(rtk_p_task_control_block task)
 
 /****** Definitions: task functions for HW interrupts *******************/
 
-/* HW Interrupt: <S33>/DS1202SER_INT_C1_I1 */
+/* HW Interrupt: <S34>/DS1202SER_INT_C1_I1 */
 static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 {
   /* Task entry code BEGIN */
@@ -318,10 +319,10 @@ static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
 
     /* End of RateTransition: '<S28>/RT2' */
 
-    /* S-Function (rti_commonblock): '<S35>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S36>/S-Function1' */
     Human_in_L_SerialDecodingSystem();
 
-    /* End of Outputs for S-Function (rti_commonblock): '<S35>/S-Function1' */
+    /* End of Outputs for S-Function (rti_commonblock): '<S36>/S-Function1' */
   }
 
   /* Task exit code BEGIN */
@@ -347,6 +348,39 @@ AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_10;
 
 /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
 dsserChannel *rtiDS1202SER_B1_Ser[2];
+
+/* dSPACE I/O Board DS1_RTICAN #1 */
+
+/* ...  definition of channel struct */
+can_tp1_canChannel* can_type1_channel_M1_C1;
+
+/* ...  definition of channel struct */
+can_tp1_canChannel* can_type1_channel_M1_C2;
+
+/* declare pointers to CAN message structures for support of TX-Custom code */
+can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C1_STD;
+can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C1_XTD;
+
+/* declare pointer to CAN message object for STD-Msg */
+can_tp1_canMsg* CANTP1_RX_SPMSG_M1_C1_STD;
+
+/* declare needed identifiers for mcr-queue */
+can_tp1_canMsg* CANTP1_RX_M1_C1_MCRCLT_STD;
+
+/* declare pointers to CAN message structures for support of TX-Custom code */
+can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C2_STD;
+can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C2_XTD;
+
+/* declare pointer to CAN message object for STD-Msg */
+can_tp1_canMsg* CANTP1_RX_SPMSG_M1_C2_STD;
+
+/* declare needed identifiers for mcr-queue */
+can_tp1_canMsg* CANTP1_RX_M1_C2_MCRCLT_STD;
+
+/* ... definition of message variable for the RTICAN blocks */
+can_tp1_canMsg* can_type1_msg_M1[CANTP1_M1_NUMMSG];
+
+/* dSPACE I/O Board RTICAN_GLOBAL #0 */
 
 /* ===== Definition of interface functions for simulation engine =========== */
 #if GRTINTERFACE == 1
@@ -411,6 +445,10 @@ static void rti_mdl_initialize_io_boards(void)
                           VCM_TXT_STATEFLOW_CODER, 8, 13, 0,
                           VCM_VERSION_RELEASE, 0, 0, 0, VCM_CTRL_NO_ST);
     }
+
+    vcm_module_register(VCM_MID_RTICAN, (void *) 0,
+                        VCM_TXT_RTICAN, 3, 4, 5,
+                        VCM_VERSION_RELEASE, 0, 0, 0, VCM_CTRL_NO_ST);
   }
 
   /* --- Human_in_Loop/Control Module/Motor/DAC_CLASS1_BL1 --- */
@@ -1052,6 +1090,133 @@ static void rti_mdl_initialize_io_boards(void)
       RTLIB_EXIT(1);
     }
   }
+
+  /* dSPACE I/O Board DS1_RTICAN #1 */
+  /* Initialization of DS1501 board */
+  can_tp1_communication_init(can_tp1_address_table[0].module_addr,
+    CAN_TP1_INT_ENABLE);
+
+  /* dSPACE RTICAN MASTER SETUP Block */
+  /* ... Initialize the CAN communication: 500 kbit/s */
+  can_type1_channel_M1_C1 = can_tp1_channel_init(can_tp1_address_table[0].
+    module_addr, 0, (500 * 1000), CAN_TP1_STD, CAN_TP1_NO_SUBINT);
+  can_tp1_channel_termination_set(can_type1_channel_M1_C1,
+    CAN_TP1_TERMINATION_ON);
+
+  /* ... Initialize TX message structs for custom code  */
+  CANTP1_TX_SPMSG_M1_C1_STD = can_tp1_msg_tx_register(can_type1_channel_M1_C1, 3,
+    1050, CAN_TP1_STD, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DELAYCOUNT_INFO |
+    CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG,
+    CAN_TP1_TIMEOUT_NORMAL);
+  CANTP1_TX_SPMSG_M1_C1_XTD = can_tp1_msg_tx_register(can_type1_channel_M1_C1, 3,
+    1100, CAN_TP1_EXT, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DELAYCOUNT_INFO |
+    CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG,
+    CAN_TP1_TIMEOUT_NORMAL);
+
+  /* ... Initialize STD RX message for RX Service support */
+  {
+    UInt32 mask = 0;
+    UInt32 queueSize = 64;
+    UInt32 msgId = 2;
+    CANTP1_RX_SPMSG_M1_C1_STD = can_tp1_msg_rx_register(can_type1_channel_M1_C1,
+      0, 2, CAN_TP1_STD, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DATA_INFO |
+      CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT);
+
+    /* set the queue depth */
+    can_tp1_msg_set(CANTP1_RX_SPMSG_M1_C1_STD,CAN_TP1_MSG_DSMCR_BUFFER,
+                    &queueSize);
+
+    /* set the mask to select which messages are received by service mode */
+    can_tp1_msg_set(CANTP1_RX_SPMSG_M1_C1_STD,CAN_TP1_MSG_MASK, &mask);
+
+    /* create the r-buffer */
+    can_tp1_dsmcr_client_create(CANTP1_RX_SPMSG_M1_C1_STD,
+      CAN_TP1_DSMCR_OVERRUN_OVERWRITE, NULL, &CANTP1_RX_M1_C1_MCRCLT_STD );
+  }
+
+  /* dSPACE RTICAN MASTER SETUP Block */
+  /* ... Initialize the Partial Networking Settings */
+
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:1 */
+  /* ... Register message */
+  can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1] = can_tp1_msg_rx_register
+    (can_type1_channel_M1_C1, 0, 1, CAN_TP1_STD, (CAN_TP1_DATA_INFO|
+      CAN_TP1_DATA_INFO|CAN_TP1_TIMECOUNT_INFO), CAN_TP1_NO_SUBINT);
+
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
+  /* ... Register message */
+  can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64] = can_tp1_msg_rx_register
+    (can_type1_channel_M1_C1, 1, 100, CAN_TP1_STD, (CAN_TP1_DATA_INFO|
+      CAN_TP1_DATA_INFO|CAN_TP1_TIMECOUNT_INFO), CAN_TP1_NO_SUBINT);
+
+  /* dSPACE RTICAN MASTER SETUP Block */
+  /* ... Initialize the CAN communication: 500 kbit/s */
+  can_type1_channel_M1_C2 = can_tp1_channel_init(can_tp1_address_table[0].
+    module_addr, 1, (500 * 1000), CAN_TP1_STD, CAN_TP1_NO_SUBINT);
+  can_tp1_channel_termination_set(can_type1_channel_M1_C2,
+    CAN_TP1_TERMINATION_ON);
+
+  /* ... Initialize TX message structs for custom code  */
+  CANTP1_TX_SPMSG_M1_C2_STD = can_tp1_msg_tx_register(can_type1_channel_M1_C2, 3,
+    1050, CAN_TP1_STD, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DELAYCOUNT_INFO |
+    CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG,
+    CAN_TP1_TIMEOUT_NORMAL);
+  CANTP1_TX_SPMSG_M1_C2_XTD = can_tp1_msg_tx_register(can_type1_channel_M1_C2, 3,
+    1100, CAN_TP1_EXT, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DELAYCOUNT_INFO |
+    CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG,
+    CAN_TP1_TIMEOUT_NORMAL);
+
+  /* ... Initialize STD RX message for RX Service support */
+  {
+    UInt32 mask = 0;
+    UInt32 queueSize = 64;
+    UInt32 msgId = 1;
+    CANTP1_RX_SPMSG_M1_C2_STD = can_tp1_msg_rx_register(can_type1_channel_M1_C2,
+      0, 1, CAN_TP1_STD, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DATA_INFO |
+      CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT);
+
+    /* set the queue depth */
+    can_tp1_msg_set(CANTP1_RX_SPMSG_M1_C2_STD,CAN_TP1_MSG_DSMCR_BUFFER,
+                    &queueSize);
+
+    /* set the mask to select which messages are received by service mode */
+    can_tp1_msg_set(CANTP1_RX_SPMSG_M1_C2_STD,CAN_TP1_MSG_MASK, &mask);
+
+    /* create the r-buffer */
+    can_tp1_dsmcr_client_create(CANTP1_RX_SPMSG_M1_C2_STD,
+      CAN_TP1_DSMCR_OVERRUN_OVERWRITE, NULL, &CANTP1_RX_M1_C2_MCRCLT_STD );
+  }
+
+  /* dSPACE RTICAN MASTER SETUP Block */
+  /* ... Initialize the Partial Networking Settings */
+
+  /* dSPACE RTICAN TX Message Block: "TX Message" Id:100 */
+  /* ... Register message */
+  can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64] = can_tp1_msg_tx_register
+    (can_type1_channel_M1_C2, 1, 100, CAN_TP1_STD, (CAN_TP1_TIMECOUNT_INFO|
+      CAN_TP1_TIMECOUNT_INFO|CAN_TP1_TIMECOUNT_INFO|CAN_TP1_DELAYCOUNT_INFO),
+     CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG, CAN_TP1_TIMEOUT_NORMAL);
+
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:1 */
+  Human_in_Loop_B.SFunction1_o5 = 0;   /* processed - flag */
+  Human_in_Loop_B.SFunction1_o6 = 0;   /* timestamp */
+
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
+  Human_in_Loop_B.SFunction1_o2_e = 0; /* processed - flag */
+  Human_in_Loop_B.SFunction1_o3_j = 0; /* timestamp */
+
+  /* dSPACE RTICAN TX Message Block: "TX Message" Id:100 */
+  /* Messages with timestamp zero have been received in pause/stop state
+     and must not be handled.
+   */
+  if (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->timestamp > 0.0) {
+    Human_in_Loop_B.SFunction1_o1_g = 0;/* processed - flag */
+    Human_in_Loop_B.SFunction1_o2_g = 0;/* timestamp */
+    Human_in_Loop_B.SFunction1_o3_c = 0;/* deltatime */
+    Human_in_Loop_B.SFunction1_o4_h = 0;/* delaytime */
+  }
+
+  /* dSPACE I/O Board RTICAN_GLOBAL #0 */
 }
 
 static void rti_mdl_slave_load(void)
@@ -1224,6 +1389,82 @@ static void rti_mdl_initialize_io_units(void)
 
   /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
   dsser_enable(rtiDS1202SER_B1_Ser[0]);
+
+  /* dSPACE I/O Board DS1_RTICAN #1 */
+  /* Start CAN controller */
+  can_tp1_channel_start(can_type1_channel_M1_C1, CAN_TP1_INT_DISABLE);
+
+  /* Start CAN controller */
+  can_tp1_channel_start(can_type1_channel_M1_C2, CAN_TP1_INT_DISABLE);
+
+  /* Set the type1CAN error level */
+  rtican_type1_error_level = 0;
+
+  /* ... Reset all taskqueue-specific error variables */
+  rtican_type1_tq_err_all_reset(0);
+
+  /* ... Clear all message data buffers */
+  can_tp1_all_data_clear(can_tp1_address_table[0].module_addr);
+
+  /* dSPACE RTICAN STD Srvc-Message Block */
+  {
+    static int numInit = 0;
+    if (numInit != 0) {
+      /* ... Wake message up */
+      while ((rtican_type1_tq_error[0][0] = can_tp1_msg_wakeup
+              (CANTP1_RX_SPMSG_M1_C1_STD))== DSMCOM_BUFFER_OVERFLOW) ;
+    }
+
+    ++numInit;
+  }
+
+  {
+    static UInt32 numInit = 0;
+    if (numInit != 0) {
+      /* ... Wake message up */
+      while ((rtican_type1_tq_error[0][0] = can_tp1_msg_wakeup
+              (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1])) ==
+             DSMCOM_BUFFER_OVERFLOW) ;
+    }
+
+    ++numInit;
+  }
+
+  {
+    static UInt32 numInit = 0;
+    if (numInit != 0) {
+      /* ... Wake message up */
+      while ((rtican_type1_tq_error[0][1] = can_tp1_msg_wakeup
+              (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64])) ==
+             DSMCOM_BUFFER_OVERFLOW) ;
+    }
+
+    ++numInit;
+  }
+
+  /* dSPACE RTICAN STD Srvc-Message Block */
+  {
+    static int numInit = 0;
+    if (numInit != 0) {
+      /* ... Wake message up */
+      while ((rtican_type1_tq_error[0][0] = can_tp1_msg_wakeup
+              (CANTP1_RX_SPMSG_M1_C2_STD))== DSMCOM_BUFFER_OVERFLOW) ;
+    }
+
+    ++numInit;
+  }
+
+  {
+    static UInt32 numInit = 0;
+    if (numInit != 0) {
+      /* ... Wake message up */
+      while ((rtican_type1_tq_error[0][1] = can_tp1_msg_wakeup
+              (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64])) ==
+             DSMCOM_BUFFER_OVERFLOW) ;
+    }
+
+    ++numInit;
+  }
 }
 
 /* Function rti_mdl_acknowledge_interrupts() is empty */
@@ -1242,6 +1483,25 @@ static void rti_mdl_background(void)
 {
   /* DsDaq background call */
   DsDaq_Background(0);
+
+  /* dSPACE I/O Board DS1_RTICAN #1 */
+  {
+    real_T bg_code_exec_time;
+    static real_T bg_code_last_exec_time = 0.0;
+    bg_code_exec_time = RTLIB_TIC_READ();
+    if ((bg_code_exec_time - bg_code_last_exec_time) > 0.25 ||
+        (bg_code_exec_time - bg_code_last_exec_time) < 0) {
+      /* ... Check taskqueue-specific error variables */
+      rtican_type1_tq_err_all_chk(can_tp1_address_table[0].module_addr, 0);
+      bg_code_last_exec_time = bg_code_exec_time;
+    }
+  }
+
+  /* copy DPMEM - buffers in background */
+  {
+    /* call update function for CAN Tp1 CAN interface (module number: 1) */
+    can_tp1_msg_copy_all_to_mem(can_tp1_address_table[0].module_addr);
+  }
 }
 
 __INLINE void rti_mdl_sample_input(void)
@@ -1331,6 +1591,10 @@ __INLINE void rti_mdl_sample_input(void)
     Human_in_Loop_B.SFunction1_a = (boolean_T)((inputDataUInt32 &
       DIO_CLASS1_MASK_CH_2) >> 1);
   }
+
+  /* dSPACE I/O Board DS1_RTICAN #1 Unit:DEFAULT */
+  /* call update function for CAN Tp1 CAN interface (module number: 1) */
+  can_tp1_msg_copy_all_to_mem(can_tp1_address_table[0].module_addr);
 }
 
 /* Function rti_mdl_daq_service() is empty */

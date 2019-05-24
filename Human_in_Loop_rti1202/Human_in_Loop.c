@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1160
+ * Model version              : 1.1163
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Thu May  9 21:27:39 2019
+ * C source code generated on : Wed May 22 18:33:58 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -97,7 +97,7 @@ static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
   rtsiSetSimTimeStep(si,MAJOR_TIME_STEP);
 }
 
-/* Function for MATLAB Function: '<S37>/Estimation' */
+/* Function for MATLAB Function: '<S38>/Estimation' */
 static real_T Human_in_Loop_xnrm2(int32_T n, const real_T x_data[], int32_T ix0)
 {
   real_T y;
@@ -153,7 +153,7 @@ real_T rt_hypotd_snf(real_T u0, real_T u1)
   return y;
 }
 
-/* Function for MATLAB Function: '<S37>/Estimation' */
+/* Function for MATLAB Function: '<S38>/Estimation' */
 static void Human_in_Loop_xgeqp3(real_T A_data[], int32_T A_size[2], real_T
   tau_data[], int32_T *tau_size, int32_T jpvt[2])
 {
@@ -405,7 +405,7 @@ static void Human_in_Loop_xgeqp3(real_T A_data[], int32_T A_size[2], real_T
   A_data[jy] = smax;
 }
 
-/* Function for MATLAB Function: '<S37>/Estimation' */
+/* Function for MATLAB Function: '<S38>/Estimation' */
 static void Human_in_Loop_mldivide(const real_T A_data[], const int32_T A_size[2],
   const real_T B_data[], const int32_T *B_size, real_T Y[2])
 {
@@ -551,12 +551,12 @@ static void Human_in_Loop_mldivide(const real_T A_data[], const int32_T A_size[2
   }
 }
 
-/* System initialize for function-call system: '<S33>/Serial Decoding System' */
+/* System initialize for function-call system: '<S34>/Serial Decoding System' */
 void Human_SerialDecodingSystem_Init(void)
 {
   int32_T i;
 
-  /* SystemInitialize for MATLAB Function: '<S37>/Estimation' */
+  /* SystemInitialize for MATLAB Function: '<S38>/Estimation' */
   Human_in_Loop_DW.last_count = -1.0;
   for (i = 0; i < 20; i++) {
     Human_in_Loop_DW.x[i] = 10.0 * (real_T)i + 10.0;
@@ -567,18 +567,18 @@ void Human_SerialDecodingSystem_Init(void)
   Human_in_Loop_DW.theta[1] = 0.0;
   Human_in_Loop_DW.num = 1.0;
 
-  /* End of SystemInitialize for MATLAB Function: '<S37>/Estimation' */
+  /* End of SystemInitialize for MATLAB Function: '<S38>/Estimation' */
 
-  /* SystemInitialize for Outport: '<S37>/E' */
+  /* SystemInitialize for Outport: '<S38>/E' */
   Human_in_Loop_B.E = Human_in_Loop_P.E_Y0;
 }
 
-/* System reset for function-call system: '<S33>/Serial Decoding System' */
+/* System reset for function-call system: '<S34>/Serial Decoding System' */
 void Huma_SerialDecodingSystem_Reset(void)
 {
   int32_T i;
 
-  /* SystemReset for MATLAB Function: '<S37>/Estimation' */
+  /* SystemReset for MATLAB Function: '<S38>/Estimation' */
   Human_in_Loop_DW.last_count = -1.0;
   for (i = 0; i < 20; i++) {
     Human_in_Loop_DW.x[i] = 10.0 * (real_T)i + 10.0;
@@ -589,10 +589,10 @@ void Huma_SerialDecodingSystem_Reset(void)
   Human_in_Loop_DW.theta[1] = 0.0;
   Human_in_Loop_DW.num = 1.0;
 
-  /* End of SystemReset for MATLAB Function: '<S37>/Estimation' */
+  /* End of SystemReset for MATLAB Function: '<S38>/Estimation' */
 }
 
-/* Output and update for function-call system: '<S33>/Serial Decoding System' */
+/* Output and update for function-call system: '<S34>/Serial Decoding System' */
 void Human_in_L_SerialDecodingSystem(void)
 {
   real_T Data1;
@@ -608,88 +608,88 @@ void Human_in_L_SerialDecodingSystem(void)
   int32_T loop_ub;
   int32_T tmp_size[2];
 
-  /* S-Function (rti_commonblock): '<S38>/S-Function1' */
+  /* S-Function (rti_commonblock): '<S39>/S-Function1' */
   /* This comment workarounds a code generation problem */
 
   /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:RECEIVE */
   {
-    Human_in_Loop_B.SFunction1_o3 = dsser_receive(rtiDS1202SER_B1_Ser[0], 16U,
+    Human_in_Loop_B.SFunction1_o3_l = dsser_receive(rtiDS1202SER_B1_Ser[0], 16U,
       (UInt8 *) &Human_in_Loop_B.SFunction1_o1_l[0], (UInt32 *)
       &Human_in_Loop_B.SFunction1_o2_b);
   }
 
-  /* MATLAB Function: '<S37>/MATLAB Function1' */
-  /* MATLAB Function 'Sensor Data/Cosmed/COSMED/Serial Decoding System/MATLAB Function1': '<S40>:1' */
-  /* '<S40>:1:3' */
+  /* MATLAB Function: '<S38>/MATLAB Function1' */
+  /* MATLAB Function 'Sensor Data/Cosmed/COSMED/Serial Decoding System/MATLAB Function1': '<S41>:1' */
+  /* '<S41>:1:3' */
   Data1 = 0.0;
 
-  /* '<S40>:1:4' */
+  /* '<S41>:1:4' */
   Data2 = 0.0;
 
-  /* '<S40>:1:6' */
+  /* '<S41>:1:6' */
   for (i = 1.0; Human_in_Loop_B.SFunction1_o1_l[(int32_T)i - 1] != 44; i++) {
-    /* '<S40>:1:8' */
-    /* '<S40>:1:9' */
+    /* '<S41>:1:8' */
+    /* '<S41>:1:9' */
     Data1 = ((real_T)Human_in_Loop_B.SFunction1_o1_l[(int32_T)i - 1] - 48.0) +
       Data1 * 10.0;
 
-    /* '<S40>:1:10' */
+    /* '<S41>:1:10' */
   }
 
-  /* '<S40>:1:13' */
+  /* '<S41>:1:13' */
   for (i++; i < Human_in_Loop_B.SFunction1_o2_b; i++) {
-    /* '<S40>:1:15' */
-    /* '<S40>:1:16' */
+    /* '<S41>:1:15' */
+    /* '<S41>:1:16' */
     Data2 = ((real_T)Human_in_Loop_B.SFunction1_o1_l[(int32_T)i - 1] - 48.0) +
       Data2 * 10.0;
 
-    /* '<S40>:1:17' */
+    /* '<S41>:1:17' */
   }
 
   Human_in_Loop_B.Data1 = Data1;
   Human_in_Loop_B.Data2 = Data2;
 
-  /* End of MATLAB Function: '<S37>/MATLAB Function1' */
+  /* End of MATLAB Function: '<S38>/MATLAB Function1' */
 
-  /* MATLAB Function: '<S37>/Estimation' */
-  /* MATLAB Function 'Sensor Data/Cosmed/COSMED/Serial Decoding System/Estimation': '<S39>:1' */
-  /* '<S39>:1:49' */
+  /* MATLAB Function: '<S38>/Estimation' */
+  /* MATLAB Function 'Sensor Data/Cosmed/COSMED/Serial Decoding System/Estimation': '<S40>:1' */
+  /* '<S40>:1:49' */
   if ((Human_in_Loop_DW.last_count != Human_in_Loop_B.RT2_g) ||
       (Human_in_Loop_B.RT2_g == 0.0)) {
-    /* '<S39>:1:21' */
-    /* '<S39>:1:22' */
+    /* '<S40>:1:21' */
+    /* '<S40>:1:22' */
     Human_in_Loop_DW.last_count = Human_in_Loop_B.RT2_g;
 
-    /* '<S39>:1:23' */
-    /* '<S39>:1:24' */
+    /* '<S40>:1:23' */
+    /* '<S40>:1:24' */
     for (i_0 = 0; i_0 < 20; i_0++) {
       Human_in_Loop_DW.x[i_0] = 10.0 * (real_T)i_0 + 10.0;
       Human_in_Loop_DW.y[i_0] = 0.0;
     }
 
-    /* '<S39>:1:25' */
+    /* '<S40>:1:25' */
     Human_in_Loop_DW.theta[0] = 0.0;
     Human_in_Loop_DW.theta[1] = 0.0;
 
-    /* '<S39>:1:26' */
+    /* '<S40>:1:26' */
     Human_in_Loop_DW.num = 1.0;
   } else {
-    /* '<S39>:1:28' */
+    /* '<S40>:1:28' */
     Human_in_Loop_DW.num++;
   }
 
   if (Human_in_Loop_B.RT2_g != 0.0) {
-    /* '<S39>:1:32' */
-    /* '<S39>:1:33' */
+    /* '<S40>:1:32' */
+    /* '<S40>:1:33' */
     Human_in_Loop_DW.x[(int32_T)Human_in_Loop_DW.num - 1] =
       Human_in_Loop_B.RT1_c;
 
-    /* '<S39>:1:34' */
+    /* '<S40>:1:34' */
     Human_in_Loop_DW.y[(int32_T)Human_in_Loop_DW.num - 1] = 0.278 *
       Human_in_Loop_B.Data1 + 0.075 * Human_in_Loop_B.Data2;
     if (Human_in_Loop_DW.num >= 2.0) {
-      /* '<S39>:1:37' */
-      /* '<S39>:1:38' */
+      /* '<S40>:1:37' */
+      /* '<S40>:1:38' */
       i_0 = (int32_T)Human_in_Loop_DW.num;
       loop_ub = (int32_T)Human_in_Loop_DW.num;
       for (i_1 = 0; i_1 < loop_ub; i_1++) {
@@ -704,8 +704,8 @@ void Human_in_L_SerialDecodingSystem(void)
         x_data[loop_ub] = exp(x_data[loop_ub]);
       }
 
-      /* '<S39>:1:39' */
-      /* '<S39>:1:40' */
+      /* '<S40>:1:39' */
+      /* '<S40>:1:40' */
       tmp_size[0] = i_0;
       tmp_size[1] = 2;
       for (i_1 = 0; i_1 < i_0; i_1++) {
@@ -728,14 +728,14 @@ void Human_in_L_SerialDecodingSystem(void)
     }
   }
 
-  /* '<S39>:1:45' */
-  /* '<S39>:1:47' */
+  /* '<S40>:1:45' */
+  /* '<S40>:1:47' */
   memcpy(&Human_in_Loop_B.Time_p[0], &Human_in_Loop_DW.x[0], 12U * sizeof(real_T));
 
-  /* '<S39>:1:48' */
+  /* '<S40>:1:48' */
   memcpy(&Human_in_Loop_B.Y[0], &Human_in_Loop_DW.y[0], 12U * sizeof(real_T));
 
-  /* '<S39>:1:49' */
+  /* '<S40>:1:49' */
   for (i_0 = 0; i_0 < 12; i_0++) {
     b_x[i_0] = -Human_in_Loop_B.Time_p[i_0] / 42.0;
   }
@@ -747,7 +747,7 @@ void Human_in_L_SerialDecodingSystem(void)
     a[loop_ub + 12] = 1.0;
   }
 
-  /* '<S39>:1:50' */
+  /* '<S40>:1:50' */
   Human_in_Loop_B.E = Human_in_Loop_DW.theta[0] + Human_in_Loop_DW.theta[1];
   for (i_1 = 0; i_1 < 12; i_1++) {
     Human_in_Loop_B.Y_E[i_1] = 0.0;
@@ -769,7 +769,7 @@ void Human_in_L_SerialDecodingSystem(void)
     Human_in_Loop_B.est_curve[1 + (i_1 << 1)] = b_x[i_1];
   }
 
-  /* End of MATLAB Function: '<S37>/Estimation' */
+  /* End of MATLAB Function: '<S38>/Estimation' */
 }
 
 /*
@@ -780,8 +780,8 @@ void Human_in_L_SerialDecodingSystem(void)
 void Human_in_Loop_Mux1(real_T rtu_x1, real_T rtu_x2, real_T rtu_x3, real_T
   rtu_x4, real_T rtu_x5, real_T rtu_x6, B_Mux1_Human_in_Loop_T *localB)
 {
-  /* MATLAB Function 'Sensor Data/EMG module/Mux1': '<S47>:1' */
-  /* '<S47>:1:3' */
+  /* MATLAB Function 'Sensor Data/EMG module/Mux1': '<S48>:1' */
+  /* '<S48>:1:3' */
   localB->x[0] = rtu_x1;
   localB->x[1] = rtu_x2;
   localB->x[2] = rtu_x3;
@@ -792,12 +792,12 @@ void Human_in_Loop_Mux1(real_T rtu_x1, real_T rtu_x2, real_T rtu_x3, real_T
 
 /*
  * System initialize for atomic system:
- *    '<S51>/MATLAB Function'
  *    '<S52>/MATLAB Function'
- *    '<S55>/MATLAB Function'
+ *    '<S53>/MATLAB Function'
  *    '<S56>/MATLAB Function'
  *    '<S57>/MATLAB Function'
  *    '<S58>/MATLAB Function'
+ *    '<S59>/MATLAB Function'
  */
 void Human_in_Lo_MATLABFunction_Init(DW_MATLABFunction_Human_in_Lo_T *localDW)
 {
@@ -806,12 +806,12 @@ void Human_in_Lo_MATLABFunction_Init(DW_MATLABFunction_Human_in_Lo_T *localDW)
 
 /*
  * Output and update for atomic system:
- *    '<S51>/MATLAB Function'
  *    '<S52>/MATLAB Function'
- *    '<S55>/MATLAB Function'
+ *    '<S53>/MATLAB Function'
  *    '<S56>/MATLAB Function'
  *    '<S57>/MATLAB Function'
  *    '<S58>/MATLAB Function'
+ *    '<S59>/MATLAB Function'
  */
 void Human_in_Loop_MATLABFunction(real_T rtu_data,
   B_MATLABFunction_Human_in_Loo_T *localB, DW_MATLABFunction_Human_in_Lo_T
@@ -824,12 +824,12 @@ void Human_in_Loop_MATLABFunction(real_T rtu_data,
   real_T tmp[500];
   int32_T k;
 
-  /* MATLAB Function 'Sensor Data/EMG module/Preprocessing10/MATLAB Function': '<S61>:1' */
-  /* '<S61>:1:8' */
+  /* MATLAB Function 'Sensor Data/EMG module/Preprocessing10/MATLAB Function': '<S62>:1' */
+  /* '<S62>:1:8' */
   memcpy(&tmp[0], &localDW->data_mem[1], 499U * sizeof(real_T));
   tmp[499] = rtu_data;
 
-  /* '<S61>:1:10' */
+  /* '<S62>:1:10' */
   y = 0.0;
   scale = 3.3121686421112381E-170;
   for (k = 0; k < 500; k++) {
@@ -853,13 +853,13 @@ void Human_in_Loop_MATLABFunction(real_T rtu_data,
 /*
  * Output and update for atomic system:
  *    '<S30>/Mux'
- *    '<S32>/Mux'
+ *    '<S33>/Mux'
  */
 void Human_in_Loop_Mux(real_T rtu_x1, real_T rtu_x2, B_Mux_Human_in_Loop_T
   *localB)
 {
-  /* MATLAB Function 'Sensor Data/Encoder module/Mux': '<S76>:1' */
-  /* '<S76>:1:3' */
+  /* MATLAB Function 'Sensor Data/Encoder module/Mux': '<S77>:1' */
+  /* '<S77>:1:3' */
   localB->x[0] = rtu_x1;
   localB->x[1] = rtu_x2;
 }
@@ -2013,7 +2013,7 @@ static real_T Human_in_Loop_mean(const real_T x[10])
   return b_y / 10.0;
 }
 
-/* Function for MATLAB Function: '<S32>/MATLAB Function' */
+/* Function for MATLAB Function: '<S33>/MATLAB Function' */
 static real_T Human_in_Loop_xnrm2_o(const real_T x[30], int32_T ix0)
 {
   real_T y;
@@ -2038,7 +2038,7 @@ static real_T Human_in_Loop_xnrm2_o(const real_T x[30], int32_T ix0)
   return scale * sqrt(y);
 }
 
-/* Function for MATLAB Function: '<S32>/MATLAB Function' */
+/* Function for MATLAB Function: '<S33>/MATLAB Function' */
 static real_T Human_in_Loop_xnrm2_ov(int32_T n, const real_T x[30], int32_T ix0)
 {
   real_T y;
@@ -2073,7 +2073,7 @@ static real_T Human_in_Loop_xnrm2_ov(int32_T n, const real_T x[30], int32_T ix0)
   return y;
 }
 
-/* Function for MATLAB Function: '<S32>/MATLAB Function' */
+/* Function for MATLAB Function: '<S33>/MATLAB Function' */
 static void Human_in_Loop_xgeqp3_n(real_T A[30], real_T tau[2], int32_T jpvt[2])
 {
   real_T work[2];
@@ -2344,7 +2344,7 @@ void Human_in_Loop_output(void)
 
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* S-Function (rti_commonblock): '<S83>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S96>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/Torque module/ADC_CLASS1_BL6 --- */
@@ -2368,11 +2368,11 @@ void Human_in_Loop_output(void)
         (real_T*) &Human_in_Loop_B.SFunction1);
     }
 
-    /* Gain: '<S32>/Gain' */
+    /* Gain: '<S33>/Gain' */
     Human_in_Loop_B.Gain = Human_in_Loop_P.Gain_Gain *
       Human_in_Loop_B.SFunction1;
 
-    /* DiscreteFilter: '<S32>/0.4low2' */
+    /* DiscreteFilter: '<S33>/0.4low2' */
     tol = Human_in_Loop_B.Gain;
     tol -= Human_in_Loop_P.u4low2_DenCoef[1] * Human_in_Loop_DW.u4low2_states[0];
     tol -= Human_in_Loop_P.u4low2_DenCoef[2] * Human_in_Loop_DW.u4low2_states[1];
@@ -2385,60 +2385,60 @@ void Human_in_Loop_output(void)
     tol += Human_in_Loop_P.u4low2_NumCoef[3] * Human_in_Loop_DW.u4low2_states[2];
     Human_in_Loop_B.u4low2 = tol;
 
-    /* MATLAB Function: '<S32>/Data process' */
-    /* MATLAB Function 'Sensor Data/Torque module/Data process': '<S84>:1' */
+    /* MATLAB Function: '<S33>/Data process' */
+    /* MATLAB Function 'Sensor Data/Torque module/Data process': '<S97>:1' */
     if (Human_in_Loop_P.Dataprocess_BT_RESET_TORQUE) {
-      /* '<S84>:1:10' */
-      /* '<S84>:1:11' */
+      /* '<S97>:1:10' */
+      /* '<S97>:1:11' */
       Human_in_Loop_DW.torque_zero = Human_in_Loop_B.u4low2 *
         Human_in_Loop_P.Dataprocess_load_vol_gain +
         Human_in_Loop_P.Dataprocess_load_vol_offset;
     }
 
-    /* '<S84>:1:14' */
+    /* '<S97>:1:14' */
     Human_in_Loop_B.torque = (Human_in_Loop_B.u4low2 *
       Human_in_Loop_P.Dataprocess_load_vol_gain +
       Human_in_Loop_P.Dataprocess_load_vol_offset) -
       Human_in_Loop_DW.torque_zero;
 
-    /* End of MATLAB Function: '<S32>/Data process' */
+    /* End of MATLAB Function: '<S33>/Data process' */
 
-    /* UnitDelay: '<S82>/Unit Delay1' */
+    /* UnitDelay: '<S95>/Unit Delay1' */
     Human_in_Loop_B.x2k1 = Human_in_Loop_DW.UnitDelay1_DSTATE;
 
-    /* UnitDelay: '<S82>/Unit Delay' */
+    /* UnitDelay: '<S95>/Unit Delay' */
     Human_in_Loop_B.x1k1 = Human_in_Loop_DW.UnitDelay_DSTATE;
 
-    /* Gain: '<S82>/Gain1' */
+    /* Gain: '<S95>/Gain1' */
     B_0 = Human_in_Loop_P.uOrderTD_T1 * Human_in_Loop_P.uOrderTD_T2;
     tol = 1.0 / B_0;
     Human_in_Loop_B.Gain1 = tol * Human_in_Loop_B.x1k1;
 
-    /* Gain: '<S82>/Gain2' */
+    /* Gain: '<S95>/Gain2' */
     tol = Human_in_Loop_P.uOrderTD_T1 + Human_in_Loop_P.uOrderTD_T2;
     B_0 = Human_in_Loop_P.uOrderTD_T1 * Human_in_Loop_P.uOrderTD_T2;
     tol /= B_0;
     Human_in_Loop_B.Gain2 = tol * Human_in_Loop_B.x2k1;
 
-    /* UnitDelay: '<S82>/Unit Delay2' */
+    /* UnitDelay: '<S95>/Unit Delay2' */
     Human_in_Loop_B.UnitDelay2 = Human_in_Loop_DW.UnitDelay2_DSTATE;
 
-    /* Gain: '<S82>/Gain4' */
+    /* Gain: '<S95>/Gain4' */
     B_0 = Human_in_Loop_P.uOrderTD_T1 * Human_in_Loop_P.uOrderTD_T2;
     tol = 1.0 / B_0;
     Human_in_Loop_B.Gain4 = tol * Human_in_Loop_B.UnitDelay2;
 
-    /* Sum: '<S82>/Add2' */
+    /* Sum: '<S95>/Add2' */
     Human_in_Loop_B.Add2 = (Human_in_Loop_B.Gain1 + Human_in_Loop_B.Gain2) -
       Human_in_Loop_B.Gain4;
 
-    /* Gain: '<S82>/Gain3' */
+    /* Gain: '<S95>/Gain3' */
     Human_in_Loop_B.Gain3 = Human_in_Loop_P.uOrderTD_Ts * Human_in_Loop_B.Add2;
 
-    /* Sum: '<S82>/Add1' */
+    /* Sum: '<S95>/Add1' */
     Human_in_Loop_B.x2k = Human_in_Loop_B.x2k1 - Human_in_Loop_B.Gain3;
 
-    /* MATLAB Function: '<S32>/Mux' */
+    /* MATLAB Function: '<S33>/Mux' */
     Human_in_Loop_Mux(Human_in_Loop_B.torque, Human_in_Loop_B.x2k,
                       &Human_in_Loop_B.sf_Mux);
 
@@ -2471,7 +2471,7 @@ void Human_in_Loop_output(void)
 
     /* End of RateTransition: '<Root>/RT4' */
 
-    /* S-Function (rti_commonblock): '<S72>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S73>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* Gain: '<S30>/Gain' */
@@ -2479,14 +2479,14 @@ void Human_in_Loop_output(void)
       Human_in_Loop_B.SFunction1_o1;
 
     /* MATLAB Function: '<S30>/Data process' */
-    /* MATLAB Function 'Sensor Data/Encoder module/Data process': '<S69>:1' */
+    /* MATLAB Function 'Sensor Data/Encoder module/Data process': '<S70>:1' */
     if (Human_in_Loop_P.Dataprocess_BT_RESET_ANKLE) {
-      /* '<S69>:1:8' */
-      /* '<S69>:1:9' */
+      /* '<S70>:1:8' */
+      /* '<S70>:1:9' */
       Human_in_Loop_DW.angle_zero_f = Human_in_Loop_B.Gain_l;
     }
 
-    /* '<S69>:1:12' */
+    /* '<S70>:1:12' */
     Human_in_Loop_B.angle_m = Human_in_Loop_B.Gain_l -
       Human_in_Loop_DW.angle_zero_f;
 
@@ -2529,7 +2529,7 @@ void Human_in_Loop_output(void)
 
     /* End of RateTransition: '<Root>/RT5' */
 
-    /* S-Function (rti_commonblock): '<S73>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S74>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* Gain: '<S30>/Gain2' */
@@ -2537,14 +2537,14 @@ void Human_in_Loop_output(void)
       Human_in_Loop_B.SFunction1_o1_k;
 
     /* MATLAB Function: '<S30>/Data process1' */
-    /* MATLAB Function 'Sensor Data/Encoder module/Data process1': '<S70>:1' */
+    /* MATLAB Function 'Sensor Data/Encoder module/Data process1': '<S71>:1' */
     if (Human_in_Loop_P.Dataprocess1_BT_RESET_MOTOR) {
-      /* '<S70>:1:8' */
-      /* '<S70>:1:9' */
+      /* '<S71>:1:8' */
+      /* '<S71>:1:9' */
       Human_in_Loop_DW.angle_zero = Human_in_Loop_B.Gain2_h;
     }
 
-    /* '<S70>:1:12' */
+    /* '<S71>:1:12' */
     Human_in_Loop_B.angle = Human_in_Loop_B.Gain2_h -
       Human_in_Loop_DW.angle_zero;
 
@@ -2554,45 +2554,45 @@ void Human_in_Loop_output(void)
     Human_in_Loop_B.Gain3_m = Human_in_Loop_P.Gain3_Gain *
       Human_in_Loop_B.SFunction1_o2_k;
 
-    /* UnitDelay: '<S68>/Unit Delay1' */
+    /* UnitDelay: '<S69>/Unit Delay1' */
     Human_in_Loop_B.x2k1_k = Human_in_Loop_DW.UnitDelay1_DSTATE_h;
 
-    /* UnitDelay: '<S68>/Unit Delay' */
+    /* UnitDelay: '<S69>/Unit Delay' */
     Human_in_Loop_B.x1k1_m = Human_in_Loop_DW.UnitDelay_DSTATE_e;
 
-    /* Gain: '<S68>/Gain1' */
+    /* Gain: '<S69>/Gain1' */
     B_0 = Human_in_Loop_P.uOrderTD_T1_l * Human_in_Loop_P.uOrderTD_T2_h;
     tol = 1.0 / B_0;
     Human_in_Loop_B.Gain1_m = tol * Human_in_Loop_B.x1k1_m;
 
-    /* Gain: '<S68>/Gain2' */
+    /* Gain: '<S69>/Gain2' */
     tol = Human_in_Loop_P.uOrderTD_T1_l + Human_in_Loop_P.uOrderTD_T2_h;
     B_0 = Human_in_Loop_P.uOrderTD_T1_l * Human_in_Loop_P.uOrderTD_T2_h;
     tol /= B_0;
     Human_in_Loop_B.Gain2_c = tol * Human_in_Loop_B.x2k1_k;
 
-    /* UnitDelay: '<S68>/Unit Delay2' */
+    /* UnitDelay: '<S69>/Unit Delay2' */
     Human_in_Loop_B.UnitDelay2_b = Human_in_Loop_DW.UnitDelay2_DSTATE_a;
 
-    /* Gain: '<S68>/Gain4' */
+    /* Gain: '<S69>/Gain4' */
     B_0 = Human_in_Loop_P.uOrderTD_T1_l * Human_in_Loop_P.uOrderTD_T2_h;
     tol = 1.0 / B_0;
     Human_in_Loop_B.Gain4_g = tol * Human_in_Loop_B.UnitDelay2_b;
 
-    /* Sum: '<S68>/Add2' */
+    /* Sum: '<S69>/Add2' */
     Human_in_Loop_B.Add2_m = (Human_in_Loop_B.Gain1_m + Human_in_Loop_B.Gain2_c)
       - Human_in_Loop_B.Gain4_g;
 
-    /* Gain: '<S68>/Gain3' */
+    /* Gain: '<S69>/Gain3' */
     Human_in_Loop_B.Gain3_k = Human_in_Loop_P.uOrderTD_Ts_n *
       Human_in_Loop_B.Add2_m;
 
-    /* Sum: '<S68>/Add1' */
+    /* Sum: '<S69>/Add1' */
     Human_in_Loop_B.x2k_i = Human_in_Loop_B.x2k1_k - Human_in_Loop_B.Gain3_k;
 
     /* MATLAB Function: '<S30>/Mux1' */
-    /* MATLAB Function 'Sensor Data/Encoder module/Mux1': '<S77>:1' */
-    /* '<S77>:1:3' */
+    /* MATLAB Function 'Sensor Data/Encoder module/Mux1': '<S78>:1' */
+    /* '<S78>:1:3' */
     Human_in_Loop_B.x_i[0] = Human_in_Loop_B.angle;
     Human_in_Loop_B.x_i[1] = Human_in_Loop_B.Gain3_m;
     Human_in_Loop_B.x_i[2] = Human_in_Loop_B.x2k_i;
@@ -2628,157 +2628,157 @@ void Human_in_Loop_output(void)
 
     /* End of RateTransition: '<Root>/RT6' */
 
-    /* S-Function (rti_commonblock): '<S79>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S80>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* MATLAB Function: '<S31>/FootSwitch Filter' */
-    /* MATLAB Function 'Sensor Data/FootSwitch module/FootSwitch Filter': '<S81>:1' */
-    /* '<S81>:1:6' */
+    /* MATLAB Function 'Sensor Data/FootSwitch module/FootSwitch Filter': '<S82>:1' */
+    /* '<S82>:1:6' */
     if (Human_in_Loop_DW.foot_state == 0.0) {
-      /* '<S81>:1:14' */
+      /* '<S82>:1:14' */
       if (Human_in_Loop_B.SFunction1_a) {
-        /* '<S81>:1:15' */
-        /* '<S81>:1:16' */
+        /* '<S82>:1:15' */
+        /* '<S82>:1:16' */
         Human_in_Loop_DW.foot_state = 1.0;
       } else {
-        /* '<S81>:1:18' */
+        /* '<S82>:1:18' */
         Human_in_Loop_DW.foot_state = 0.0;
       }
     } else if (Human_in_Loop_B.SFunction1_a) {
-      /* '<S81>:1:21' */
-      /* '<S81>:1:22' */
+      /* '<S82>:1:21' */
+      /* '<S82>:1:22' */
       Human_in_Loop_DW.foot_state = 1.0;
     } else {
-      /* '<S81>:1:24' */
+      /* '<S82>:1:24' */
       Human_in_Loop_DW.filter_time += 0.0002;
       if (Human_in_Loop_DW.filter_time > 0.4) {
-        /* '<S81>:1:25' */
-        /* '<S81>:1:26' */
+        /* '<S82>:1:25' */
+        /* '<S82>:1:26' */
         Human_in_Loop_DW.filter_time = 0.0;
 
-        /* '<S81>:1:27' */
+        /* '<S82>:1:27' */
         Human_in_Loop_DW.foot_state = 0.0;
       }
     }
 
-    /* '<S81>:1:32' */
+    /* '<S82>:1:32' */
     Human_in_Loop_B.state_c = Human_in_Loop_DW.foot_state;
 
     /* End of MATLAB Function: '<S31>/FootSwitch Filter' */
 
     /* MATLAB Function: '<S7>/State Machine' */
-    /* MATLAB Function 'State Module/State Machine': '<S88>:1' */
-    /* '<S88>:1:20' */
-    /* '<S88>:1:21' */
-    /* '<S88>:1:22' */
-    /* '<S88>:1:23' */
-    /* '<S88>:1:26' */
-    /* '<S88>:1:27' */
-    /* '<S88>:1:28' */
-    /* '<S88>:1:29' */
-    /* '<S88>:1:30' */
+    /* MATLAB Function 'State Module/State Machine': '<S101>:1' */
+    /* '<S101>:1:20' */
+    /* '<S101>:1:21' */
+    /* '<S101>:1:22' */
+    /* '<S101>:1:23' */
+    /* '<S101>:1:26' */
+    /* '<S101>:1:27' */
+    /* '<S101>:1:28' */
+    /* '<S101>:1:29' */
+    /* '<S101>:1:30' */
     if (Human_in_Loop_P.StateMachine_BT_RUN) {
-      /* '<S88>:1:33' */
-      /* '<S88>:1:34' */
+      /* '<S101>:1:33' */
+      /* '<S101>:1:34' */
       Human_in_Loop_DW.bt_run = 1.0;
     }
 
     if (Human_in_Loop_P.StateMachine_BT_CALIB) {
-      /* '<S88>:1:36' */
-      /* '<S88>:1:37' */
+      /* '<S101>:1:36' */
+      /* '<S101>:1:37' */
       Human_in_Loop_DW.reg_mode = 4.0;
     }
 
     if (Human_in_Loop_P.StateMachine_BT_SLACK) {
-      /* '<S88>:1:39' */
-      /* '<S88>:1:40' */
+      /* '<S101>:1:39' */
+      /* '<S101>:1:40' */
       Human_in_Loop_DW.reg_mode = 3.0;
     }
 
     if (Human_in_Loop_P.StateMachine_BT_IDLE) {
-      /* '<S88>:1:42' */
-      /* '<S88>:1:43' */
+      /* '<S101>:1:42' */
+      /* '<S101>:1:43' */
       Human_in_Loop_DW.reg_mode = 1.0;
     }
 
     if (Human_in_Loop_P.StateMachine_BT_ERROR) {
-      /* '<S88>:1:45' */
-      /* '<S88>:1:46' */
+      /* '<S101>:1:45' */
+      /* '<S101>:1:46' */
       Human_in_Loop_DW.reg_mode = 0.0;
     }
 
     if ((Human_in_Loop_DW.bt_run == 1.0) && (Human_in_Loop_DW.reg_last_switch ==
          0.0) && (Human_in_Loop_B.state_c == 1.0)) {
-      /* '<S88>:1:49' */
-      /* '<S88>:1:50' */
+      /* '<S101>:1:49' */
+      /* '<S101>:1:50' */
       Human_in_Loop_DW.reg_mode = 2.0;
 
-      /* '<S88>:1:51' */
+      /* '<S101>:1:51' */
       Human_in_Loop_DW.bt_run = 0.0;
     }
 
     if ((Human_in_Loop_DW.reg_mode == 2.0) || (Human_in_Loop_DW.reg_mode == 1.0))
     {
-      /* '<S88>:1:54' */
+      /* '<S101>:1:54' */
       if ((Human_in_Loop_DW.reg_last_switch == 0.0) && (Human_in_Loop_B.state_c ==
            1.0)) {
-        /* '<S88>:1:55' */
-        /* '<S88>:1:56' */
+        /* '<S101>:1:55' */
+        /* '<S101>:1:56' */
         Human_in_Loop_DW.reg_state = 1.0;
 
-        /* '<S88>:1:57' */
+        /* '<S101>:1:57' */
         Human_in_Loop_DW.reg_stride_time = 0.618 *
           Human_in_Loop_DW.reg_stride_time + 0.382 *
           Human_in_Loop_DW.reg_stride_time_count;
 
-        /* '<S88>:1:58' */
+        /* '<S101>:1:58' */
         Human_in_Loop_DW.reg_stride_time_count = 0.0;
       } else if ((Human_in_Loop_DW.reg_state == 1.0) &&
                  (Human_in_Loop_DW.reg_stride_time_count > 0.65 *
                   Human_in_Loop_DW.reg_stride_time)) {
-        /* '<S88>:1:59' */
-        /* '<S88>:1:60' */
+        /* '<S101>:1:59' */
+        /* '<S101>:1:60' */
         Human_in_Loop_DW.reg_state = 0.0;
 
-        /* '<S88>:1:61' */
+        /* '<S101>:1:61' */
         Human_in_Loop_DW.reg_stride_time_count += 0.0002;
       } else {
-        /* '<S88>:1:63' */
+        /* '<S101>:1:63' */
         Human_in_Loop_DW.reg_stride_time_count += 0.0002;
       }
     }
 
-    /* '<S88>:1:67' */
+    /* '<S101>:1:67' */
     Human_in_Loop_DW.reg_last_switch = Human_in_Loop_B.state_c;
     if (Human_in_Loop_DW.reg_stride_time > 1.5) {
-      /* '<S88>:1:68' */
-      /* '<S88>:1:69' */
+      /* '<S101>:1:68' */
+      /* '<S101>:1:69' */
       Human_in_Loop_DW.reg_stride_time = 1.5;
     } else {
       if (Human_in_Loop_DW.reg_stride_time < 0.5) {
-        /* '<S88>:1:70' */
-        /* '<S88>:1:71' */
+        /* '<S101>:1:70' */
+        /* '<S101>:1:71' */
         Human_in_Loop_DW.reg_stride_time = 0.5;
       }
     }
 
-    /* '<S88>:1:74' */
+    /* '<S101>:1:74' */
     Human_in_Loop_B.mode = Human_in_Loop_DW.reg_mode;
 
-    /* '<S88>:1:75' */
+    /* '<S101>:1:75' */
     Human_in_Loop_B.state = Human_in_Loop_DW.reg_state;
 
-    /* '<S88>:1:76' */
+    /* '<S101>:1:76' */
     Human_in_Loop_B.stride_time = Human_in_Loop_DW.reg_stride_time;
 
-    /* '<S88>:1:77' */
+    /* '<S101>:1:77' */
     Human_in_Loop_B.stride_timer = Human_in_Loop_DW.reg_stride_time_count;
 
     /* End of MATLAB Function: '<S7>/State Machine' */
 
     /* MATLAB Function: '<S7>/Mux1' */
-    /* MATLAB Function 'State Module/Mux1': '<S87>:1' */
-    /* '<S87>:1:3' */
+    /* MATLAB Function 'State Module/Mux1': '<S100>:1' */
+    /* '<S100>:1:3' */
     Human_in_Loop_B.x[0] = Human_in_Loop_B.mode;
     Human_in_Loop_B.x[1] = Human_in_Loop_B.state;
     Human_in_Loop_B.x[2] = Human_in_Loop_B.stride_time;
@@ -2931,32 +2931,32 @@ void Human_in_Loop_output(void)
     Human_in_Loop_B.Delay6 = Human_in_Loop_DW.Delay6_DSTATE;
   }
 
-  /* StateSpace: '<S49>/low_pass' */
+  /* StateSpace: '<S50>/low_pass' */
   Human_in_Loop_B.low_pass = 0.0;
   Human_in_Loop_B.low_pass += Human_in_Loop_P.low_pass_C *
     Human_in_Loop_X.low_pass_CSTATE[1];
 
-  /* StateSpace: '<S50>/low_pass' */
+  /* StateSpace: '<S51>/low_pass' */
   Human_in_Loop_B.low_pass_f = 0.0;
   Human_in_Loop_B.low_pass_f += Human_in_Loop_P.low_pass_C_g *
     Human_in_Loop_X.low_pass_CSTATE_o[1];
 
-  /* StateSpace: '<S53>/low_pass' */
+  /* StateSpace: '<S54>/low_pass' */
   Human_in_Loop_B.low_pass_l = 0.0;
   Human_in_Loop_B.low_pass_l += Human_in_Loop_P.low_pass_C_d *
     Human_in_Loop_X.low_pass_CSTATE_n[1];
 
-  /* StateSpace: '<S54>/low_pass' */
+  /* StateSpace: '<S55>/low_pass' */
   Human_in_Loop_B.low_pass_d = 0.0;
   Human_in_Loop_B.low_pass_d += Human_in_Loop_P.low_pass_C_i *
     Human_in_Loop_X.low_pass_CSTATE_p[1];
 
-  /* StateSpace: '<S60>/low_pass' */
+  /* StateSpace: '<S61>/low_pass' */
   Human_in_Loop_B.low_pass_k = 0.0;
   Human_in_Loop_B.low_pass_k += Human_in_Loop_P.low_pass_C_a *
     Human_in_Loop_X.low_pass_CSTATE_on[1];
 
-  /* StateSpace: '<S59>/low_pass' */
+  /* StateSpace: '<S60>/low_pass' */
   Human_in_Loop_B.low_pass_fc = 0.0;
   Human_in_Loop_B.low_pass_fc += Human_in_Loop_P.low_pass_C_c *
     Human_in_Loop_X.low_pass_CSTATE_f[1];
@@ -3256,21 +3256,21 @@ void Human_in_Loop_output(void)
 
     /* End of MATLAB Function: '<S3>/torque_track_loss' */
 
-    /* Gain: '<S82>/Gain' */
+    /* Gain: '<S95>/Gain' */
     Human_in_Loop_B.Gain_g = Human_in_Loop_P.uOrderTD_Ts * Human_in_Loop_B.x2k1;
 
-    /* Sum: '<S82>/Add' */
+    /* Sum: '<S95>/Add' */
     Human_in_Loop_B.x1k = Human_in_Loop_B.Gain_g + Human_in_Loop_B.x1k1;
 
-    /* MATLAB Function: '<S32>/MATLAB Function' */
-    /* MATLAB Function 'Sensor Data/Torque module/MATLAB Function': '<S85>:1' */
-    /* '<S85>:1:13' */
-    /* '<S85>:1:8' */
+    /* MATLAB Function: '<S33>/MATLAB Function' */
+    /* MATLAB Function 'Sensor Data/Torque module/MATLAB Function': '<S98>:1' */
+    /* '<S98>:1:13' */
+    /* '<S98>:1:8' */
     memcpy(&B[0], &Human_in_Loop_DW.data[1], 14U * sizeof(real_T));
     B[14] = Human_in_Loop_B.torque;
     memcpy(&Human_in_Loop_DW.data[0], &B[0], 15U * sizeof(real_T));
 
-    /* '<S85>:1:13' */
+    /* '<S98>:1:13' */
     for (ixstart = 0; ixstart < 30; ixstart++) {
       A[ixstart] = b_A[ixstart];
     }
@@ -3328,22 +3328,22 @@ void Human_in_Loop_output(void)
       }
     }
 
-    /* '<S85>:1:15' */
+    /* '<S98>:1:15' */
     Human_in_Loop_B.torque_dot = x_0[1] * 5000.0;
 
-    /* End of MATLAB Function: '<S32>/MATLAB Function' */
+    /* End of MATLAB Function: '<S33>/MATLAB Function' */
 
-    /* SampleTimeMath: '<S71>/TSamp'
+    /* SampleTimeMath: '<S72>/TSamp'
      *
-     * About '<S71>/TSamp':
+     * About '<S72>/TSamp':
      *  y = u * K where K = 1 / ( w * Ts )
      */
     Human_in_Loop_B.TSamp = Human_in_Loop_B.Gain3_m * Human_in_Loop_P.TSamp_WtEt;
 
-    /* UnitDelay: '<S71>/UD' */
+    /* UnitDelay: '<S72>/UD' */
     Human_in_Loop_B.Uk1 = Human_in_Loop_DW.UD_DSTATE;
 
-    /* Sum: '<S71>/Diff' */
+    /* Sum: '<S72>/Diff' */
     Human_in_Loop_B.Diff = Human_in_Loop_B.TSamp - Human_in_Loop_B.Uk1;
 
     /* DiscreteFilter: '<S30>/0.4low1' */
@@ -3359,52 +3359,52 @@ void Human_in_Loop_output(void)
     tol += Human_in_Loop_P.u4low1_NumCoef[3] * Human_in_Loop_DW.u4low1_states[2];
     Human_in_Loop_B.u4low1 = tol;
 
-    /* UnitDelay: '<S67>/Unit Delay' */
+    /* UnitDelay: '<S68>/Unit Delay' */
     Human_in_Loop_B.UnitDelay = Human_in_Loop_DW.UnitDelay_DSTATE_j;
 
-    /* UnitDelay: '<S67>/Unit Delay1' */
+    /* UnitDelay: '<S68>/Unit Delay1' */
     Human_in_Loop_B.UnitDelay1 = Human_in_Loop_DW.UnitDelay1_DSTATE_a;
 
-    /* Sum: '<S67>/Add1' */
+    /* Sum: '<S68>/Add1' */
     Human_in_Loop_B.Add1 = Human_in_Loop_B.UnitDelay -
       Human_in_Loop_B.UnitDelay1;
 
-    /* Gain: '<S67>/Gain' */
+    /* Gain: '<S68>/Gain' */
     Human_in_Loop_B.Gain_p = Human_in_Loop_P.uOrderTD_Ts_g *
       Human_in_Loop_B.Add1;
 
-    /* Gain: '<S67>/Gain1' */
+    /* Gain: '<S68>/Gain1' */
     B_0 = Human_in_Loop_P.uOrderTD_T;
     tol = 1.0 / B_0;
     Human_in_Loop_B.Gain1_d = tol * Human_in_Loop_B.Gain_p;
 
-    /* Sum: '<S67>/Add2' */
+    /* Sum: '<S68>/Add2' */
     Human_in_Loop_B.Add2_i = Human_in_Loop_B.UnitDelay1 +
       Human_in_Loop_B.Gain1_d;
 
-    /* Sum: '<S67>/Add3' */
+    /* Sum: '<S68>/Add3' */
     Human_in_Loop_B.Add3 = Human_in_Loop_B.Gain3_m - Human_in_Loop_B.Add2_i;
 
-    /* Gain: '<S67>/Gain2' */
+    /* Gain: '<S68>/Gain2' */
     B_0 = Human_in_Loop_P.uOrderTD_T;
     tol = 1.0 / B_0;
     Human_in_Loop_B.Gain2_i = tol * Human_in_Loop_B.Add3;
 
-    /* Gain: '<S68>/Gain' */
+    /* Gain: '<S69>/Gain' */
     Human_in_Loop_B.Gain_io = Human_in_Loop_P.uOrderTD_Ts_n *
       Human_in_Loop_B.x2k1_k;
 
-    /* Sum: '<S68>/Add' */
+    /* Sum: '<S69>/Add' */
     Human_in_Loop_B.x1k_i = Human_in_Loop_B.Gain_io + Human_in_Loop_B.x1k1_m;
 
     /* MATLAB Function: '<S30>/Mux2' */
-    /* MATLAB Function 'Sensor Data/Encoder module/Mux2': '<S78>:1' */
-    /* '<S78>:1:3' */
+    /* MATLAB Function 'Sensor Data/Encoder module/Mux2': '<S79>:1' */
+    /* '<S79>:1:3' */
     Human_in_Loop_B.x_d[0] = Human_in_Loop_B.u4low1;
     Human_in_Loop_B.x_d[1] = Human_in_Loop_B.Gain2_i;
     Human_in_Loop_B.x_d[2] = Human_in_Loop_B.x2k_i;
 
-    /* S-Function (rti_commonblock): '<S74>/S-Function1' incorporates:
+    /* S-Function (rti_commonblock): '<S75>/S-Function1' incorporates:
      *  Constant: '<S30>/VCC1'
      */
     /* This comment workarounds a code generation problem */
@@ -3422,7 +3422,7 @@ void Human_in_Loop_output(void)
       DioCl1DigOut_write(pRTIDioC1DigOut_Port_3_Ch_11);
     }
 
-    /* S-Function (rti_commonblock): '<S75>/S-Function1' incorporates:
+    /* S-Function (rti_commonblock): '<S76>/S-Function1' incorporates:
      *  Constant: '<S30>/VCC3'
      */
     /* This comment workarounds a code generation problem */
@@ -3440,7 +3440,7 @@ void Human_in_Loop_output(void)
       DioCl1DigOut_write(pRTIDioC1DigOut_Port_3_Ch_13);
     }
 
-    /* S-Function (rti_commonblock): '<S80>/S-Function1' incorporates:
+    /* S-Function (rti_commonblock): '<S81>/S-Function1' incorporates:
      *  Constant: '<S31>/Constant'
      */
     /* This comment workarounds a code generation problem */
@@ -3458,7 +3458,7 @@ void Human_in_Loop_output(void)
       DioCl1DigOut_write(pRTIDioC1DigOut_Port_1_Ch_1);
     }
 
-    /* S-Function (rti_commonblock): '<S41>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S42>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL1 --- */
@@ -3482,7 +3482,7 @@ void Human_in_Loop_output(void)
         (real_T*) &Human_in_Loop_B.SFunction1_o);
     }
 
-    /* S-Function (rti_commonblock): '<S42>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S43>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL2 --- */
@@ -3506,7 +3506,7 @@ void Human_in_Loop_output(void)
         (real_T*) &Human_in_Loop_B.SFunction1_k);
     }
 
-    /* S-Function (rti_commonblock): '<S43>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S44>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL3 --- */
@@ -3530,7 +3530,7 @@ void Human_in_Loop_output(void)
         (real_T*) &Human_in_Loop_B.SFunction1_j);
     }
 
-    /* S-Function (rti_commonblock): '<S44>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S45>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL4 --- */
@@ -3554,7 +3554,7 @@ void Human_in_Loop_output(void)
         (real_T*) &Human_in_Loop_B.SFunction1_d);
     }
 
-    /* S-Function (rti_commonblock): '<S45>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S46>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL5 --- */
@@ -3578,7 +3578,7 @@ void Human_in_Loop_output(void)
         (real_T*) &Human_in_Loop_B.SFunction1_l);
     }
 
-    /* S-Function (rti_commonblock): '<S46>/S-Function1' */
+    /* S-Function (rti_commonblock): '<S47>/S-Function1' */
     /* This comment workarounds a code generation problem */
 
     /* --- Human_in_Loop/Sensor Data/EMG module/ADC_CLASS1_BL6 --- */
@@ -3627,91 +3627,91 @@ void Human_in_Loop_output(void)
       Human_in_Loop_B.SFunction1_i;
   }
 
-  /* StateSpace: '<S55>/high_pass' */
+  /* StateSpace: '<S56>/high_pass' */
   Human_in_Loop_B.high_pass = 0.0;
   Human_in_Loop_B.high_pass += Human_in_Loop_P.high_pass_C *
     Human_in_Loop_X.high_pass_CSTATE[1];
 
-  /* Abs: '<S55>/Abs' */
+  /* Abs: '<S56>/Abs' */
   Human_in_Loop_B.Abs = fabs(Human_in_Loop_B.high_pass);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* MATLAB Function: '<S55>/MATLAB Function' */
+    /* MATLAB Function: '<S56>/MATLAB Function' */
     Human_in_Loop_MATLABFunction(Human_in_Loop_B.Abs,
       &Human_in_Loop_B.sf_MATLABFunction_g,
       &Human_in_Loop_DW.sf_MATLABFunction_g);
   }
 
-  /* StateSpace: '<S56>/high_pass' */
+  /* StateSpace: '<S57>/high_pass' */
   Human_in_Loop_B.high_pass_b = 0.0;
   Human_in_Loop_B.high_pass_b += Human_in_Loop_P.high_pass_C_i *
     Human_in_Loop_X.high_pass_CSTATE_b[1];
 
-  /* Abs: '<S56>/Abs' */
+  /* Abs: '<S57>/Abs' */
   Human_in_Loop_B.Abs_k = fabs(Human_in_Loop_B.high_pass_b);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* MATLAB Function: '<S56>/MATLAB Function' */
+    /* MATLAB Function: '<S57>/MATLAB Function' */
     Human_in_Loop_MATLABFunction(Human_in_Loop_B.Abs_k,
       &Human_in_Loop_B.sf_MATLABFunction_m,
       &Human_in_Loop_DW.sf_MATLABFunction_m);
   }
 
-  /* StateSpace: '<S57>/high_pass' */
+  /* StateSpace: '<S58>/high_pass' */
   Human_in_Loop_B.high_pass_d = 0.0;
   Human_in_Loop_B.high_pass_d += Human_in_Loop_P.high_pass_C_m *
     Human_in_Loop_X.high_pass_CSTATE_c[1];
 
-  /* Abs: '<S57>/Abs' */
+  /* Abs: '<S58>/Abs' */
   Human_in_Loop_B.Abs_b = fabs(Human_in_Loop_B.high_pass_d);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* MATLAB Function: '<S57>/MATLAB Function' */
+    /* MATLAB Function: '<S58>/MATLAB Function' */
     Human_in_Loop_MATLABFunction(Human_in_Loop_B.Abs_b,
       &Human_in_Loop_B.sf_MATLABFunction_n,
       &Human_in_Loop_DW.sf_MATLABFunction_n);
   }
 
-  /* StateSpace: '<S58>/high_pass' */
+  /* StateSpace: '<S59>/high_pass' */
   Human_in_Loop_B.high_pass_o = 0.0;
   Human_in_Loop_B.high_pass_o += Human_in_Loop_P.high_pass_C_j *
     Human_in_Loop_X.high_pass_CSTATE_m[1];
 
-  /* Abs: '<S58>/Abs' */
+  /* Abs: '<S59>/Abs' */
   Human_in_Loop_B.Abs_n = fabs(Human_in_Loop_B.high_pass_o);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* MATLAB Function: '<S58>/MATLAB Function' */
+    /* MATLAB Function: '<S59>/MATLAB Function' */
     Human_in_Loop_MATLABFunction(Human_in_Loop_B.Abs_n,
       &Human_in_Loop_B.sf_MATLABFunction_l,
       &Human_in_Loop_DW.sf_MATLABFunction_l);
   }
 
-  /* StateSpace: '<S51>/high_pass' */
+  /* StateSpace: '<S52>/high_pass' */
   Human_in_Loop_B.high_pass_l = 0.0;
   Human_in_Loop_B.high_pass_l += Human_in_Loop_P.high_pass_C_mg *
     Human_in_Loop_X.high_pass_CSTATE_a[1];
 
-  /* Abs: '<S51>/Abs' */
+  /* Abs: '<S52>/Abs' */
   Human_in_Loop_B.Abs_m = fabs(Human_in_Loop_B.high_pass_l);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* MATLAB Function: '<S51>/MATLAB Function' */
+    /* MATLAB Function: '<S52>/MATLAB Function' */
     Human_in_Loop_MATLABFunction(Human_in_Loop_B.Abs_m,
       &Human_in_Loop_B.sf_MATLABFunction_g5,
       &Human_in_Loop_DW.sf_MATLABFunction_g5);
   }
 
-  /* StateSpace: '<S52>/high_pass' */
+  /* StateSpace: '<S53>/high_pass' */
   Human_in_Loop_B.high_pass_g = 0.0;
   Human_in_Loop_B.high_pass_g += Human_in_Loop_P.high_pass_C_a *
     Human_in_Loop_X.high_pass_CSTATE_my[1];
 
-  /* Abs: '<S52>/Abs' */
+  /* Abs: '<S53>/Abs' */
   Human_in_Loop_B.Abs_f = fabs(Human_in_Loop_B.high_pass_g);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* MATLAB Function: '<S52>/MATLAB Function' */
+    /* MATLAB Function: '<S53>/MATLAB Function' */
     Human_in_Loop_MATLABFunction(Human_in_Loop_B.Abs_f,
       &Human_in_Loop_B.sf_MATLABFunction_p,
       &Human_in_Loop_DW.sf_MATLABFunction_p);
@@ -3726,7 +3726,7 @@ void Human_in_Loop_output(void)
                        &Human_in_Loop_B.sf_Mux3);
   }
 
-  /* StateSpace: '<S49>/high_pass' */
+  /* StateSpace: '<S50>/high_pass' */
   Human_in_Loop_B.high_pass_h = 0.0;
   Human_in_Loop_B.high_pass_h += Human_in_Loop_P.high_pass_C_ja[0] *
     Human_in_Loop_X.high_pass_CSTATE_p[0];
@@ -3735,10 +3735,10 @@ void Human_in_Loop_output(void)
   Human_in_Loop_B.high_pass_h += Human_in_Loop_P.high_pass_D *
     Human_in_Loop_B.Gain_k;
 
-  /* Abs: '<S49>/Abs' */
+  /* Abs: '<S50>/Abs' */
   Human_in_Loop_B.Abs_h = fabs(Human_in_Loop_B.high_pass_h);
 
-  /* StateSpace: '<S50>/high_pass' */
+  /* StateSpace: '<S51>/high_pass' */
   Human_in_Loop_B.high_pass_oe = 0.0;
   Human_in_Loop_B.high_pass_oe += Human_in_Loop_P.high_pass_C_d[0] *
     Human_in_Loop_X.high_pass_CSTATE_n[0];
@@ -3747,10 +3747,10 @@ void Human_in_Loop_output(void)
   Human_in_Loop_B.high_pass_oe += Human_in_Loop_P.high_pass_D_m *
     Human_in_Loop_B.Gain1_p;
 
-  /* Abs: '<S50>/Abs' */
+  /* Abs: '<S51>/Abs' */
   Human_in_Loop_B.Abs_d = fabs(Human_in_Loop_B.high_pass_oe);
 
-  /* StateSpace: '<S53>/high_pass' */
+  /* StateSpace: '<S54>/high_pass' */
   Human_in_Loop_B.high_pass_ba = 0.0;
   Human_in_Loop_B.high_pass_ba += Human_in_Loop_P.high_pass_C_g[0] *
     Human_in_Loop_X.high_pass_CSTATE_pw[0];
@@ -3759,10 +3759,10 @@ void Human_in_Loop_output(void)
   Human_in_Loop_B.high_pass_ba += Human_in_Loop_P.high_pass_D_j *
     Human_in_Loop_B.Gain2_cz;
 
-  /* Abs: '<S53>/Abs' */
+  /* Abs: '<S54>/Abs' */
   Human_in_Loop_B.Abs_j = fabs(Human_in_Loop_B.high_pass_ba);
 
-  /* StateSpace: '<S54>/high_pass' */
+  /* StateSpace: '<S55>/high_pass' */
   Human_in_Loop_B.high_pass_hl = 0.0;
   Human_in_Loop_B.high_pass_hl += Human_in_Loop_P.high_pass_C_h[0] *
     Human_in_Loop_X.high_pass_CSTATE_k[0];
@@ -3771,10 +3771,10 @@ void Human_in_Loop_output(void)
   Human_in_Loop_B.high_pass_hl += Human_in_Loop_P.high_pass_D_a *
     Human_in_Loop_B.Gain3_f;
 
-  /* Abs: '<S54>/Abs' */
+  /* Abs: '<S55>/Abs' */
   Human_in_Loop_B.Abs_a = fabs(Human_in_Loop_B.high_pass_hl);
 
-  /* StateSpace: '<S59>/high_pass' */
+  /* StateSpace: '<S60>/high_pass' */
   Human_in_Loop_B.high_pass_a = 0.0;
   Human_in_Loop_B.high_pass_a += Human_in_Loop_P.high_pass_C_dd[0] *
     Human_in_Loop_X.high_pass_CSTATE_l[0];
@@ -3783,10 +3783,10 @@ void Human_in_Loop_output(void)
   Human_in_Loop_B.high_pass_a += Human_in_Loop_P.high_pass_D_n *
     Human_in_Loop_B.Gain5;
 
-  /* Abs: '<S59>/Abs' */
+  /* Abs: '<S60>/Abs' */
   Human_in_Loop_B.Abs_dj = fabs(Human_in_Loop_B.high_pass_a);
 
-  /* StateSpace: '<S60>/high_pass' */
+  /* StateSpace: '<S61>/high_pass' */
   Human_in_Loop_B.high_pass_e = 0.0;
   Human_in_Loop_B.high_pass_e += Human_in_Loop_P.high_pass_C_dc[0] *
     Human_in_Loop_X.high_pass_CSTATE_h[0];
@@ -3795,51 +3795,51 @@ void Human_in_Loop_output(void)
   Human_in_Loop_B.high_pass_e += Human_in_Loop_P.high_pass_D_mh *
     Human_in_Loop_B.Gain4_h;
 
-  /* Abs: '<S60>/Abs' */
+  /* Abs: '<S61>/Abs' */
   Human_in_Loop_B.Abs_fy = fabs(Human_in_Loop_B.high_pass_e);
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
     /* MATLAB Function: '<S28>/Timer' */
-    /* MATLAB Function 'Sensor Data/Cosmed/Timer': '<S34>:1' */
-    /* '<S34>:1:7' */
-    /* '<S34>:1:8' */
+    /* MATLAB Function 'Sensor Data/Cosmed/Timer': '<S35>:1' */
+    /* '<S35>:1:7' */
+    /* '<S35>:1:8' */
     if (Human_in_Loop_P.Timer_BT_METAB_EST) {
-      /* '<S34>:1:16' */
+      /* '<S35>:1:16' */
       if (Human_in_Loop_DW.time > 120.0) {
-        /* '<S34>:1:17' */
-        /* '<S34>:1:18' */
+        /* '<S35>:1:17' */
+        /* '<S35>:1:18' */
         Human_in_Loop_DW.time = 0.0;
 
-        /* '<S34>:1:19' */
+        /* '<S35>:1:19' */
         Human_in_Loop_DW.count++;
 
-        /* '<S34>:1:20' */
+        /* '<S35>:1:20' */
         i = 1;
       } else {
-        /* '<S34>:1:22' */
+        /* '<S35>:1:22' */
         Human_in_Loop_DW.time += 0.0002;
 
-        /* '<S34>:1:23' */
+        /* '<S35>:1:23' */
         i = 0;
       }
     } else {
-      /* '<S34>:1:26' */
+      /* '<S35>:1:26' */
       i = 0;
 
-      /* '<S34>:1:27' */
+      /* '<S35>:1:27' */
       Human_in_Loop_DW.count = 0.0;
 
-      /* '<S34>:1:28' */
+      /* '<S35>:1:28' */
       Human_in_Loop_DW.time += 0.0002;
     }
 
-    /* '<S34>:1:31' */
+    /* '<S35>:1:31' */
     Human_in_Loop_B.Trigger = i;
 
-    /* '<S34>:1:32' */
+    /* '<S35>:1:32' */
     Human_in_Loop_B.Time = Human_in_Loop_DW.time;
 
-    /* '<S34>:1:33' */
+    /* '<S35>:1:33' */
     Human_in_Loop_B.Count = Human_in_Loop_DW.count;
 
     /* End of MATLAB Function: '<S28>/Timer' */
@@ -3898,14 +3898,265 @@ void Human_in_Loop_output(void)
 
     /* End of RateTransition: '<S28>/RT2' */
 
-    /* S-Function (rti_commonblock): '<S35>/S-Function1' */
-
-    /* This comment workarounds a code generation problem */
-
-    /* End of Outputs for S-Function (rti_commonblock): '<S35>/S-Function1' */
-
     /* S-Function (rti_commonblock): '<S36>/S-Function1' */
+
     /* This comment workarounds a code generation problem */
+
+    /* End of Outputs for S-Function (rti_commonblock): '<S36>/S-Function1' */
+
+    /* S-Function (rti_commonblock): '<S37>/S-Function1' */
+    /* This comment workarounds a code generation problem */
+
+    /* S-Function (rti_commonblock): '<S90>/S-Function1' */
+    /* This comment workarounds a code generation problem */
+
+    /* dSPACE RTICAN RX Message Block: "RX Message" Id:1 */
+    {
+      UInt32 *CAN_Msg;
+
+      /* ... Read status and timestamp info (previous message) */
+      can_tp1_msg_read_from_mem(can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]);
+
+      /* Convert timestamp */
+      if (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->processed) {
+        can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->timestamp =
+          rtk_dsts_time_to_simtime_convert
+          (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->timestamp);
+      }
+
+      /* Messages with timestamp zero have been received in pause/stop state
+         and must not be handled.
+       */
+      if (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->timestamp > 0.0) {
+        if (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->processed) {
+          Human_in_Loop_B.SFunction1_o5 = (real_T)
+            can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->processed;
+          Human_in_Loop_B.SFunction1_o6 = (real_T)
+            can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->timestamp;
+          CAN_Msg = can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->data;
+
+          /* ... Decode CAN Message */
+          {
+            rtican_Signal_t CAN_Sgn;
+
+            /* ...... "Angle1" (0|16, standard signal, signed int, little endian) */
+            CAN_Sgn.SgnBytes.Byte0 = CAN_Msg[0];
+            CAN_Sgn.SgnBytes.Byte1 = CAN_Msg[1];
+            CAN_Sgn.SignedSgn &= 0x0000FFFF;
+            if (CAN_Sgn.SignedSgn >> 15) {
+              CAN_Sgn.SignedSgn |= 0xFFFF0000;
+            }
+
+            Human_in_Loop_B.SFunction1_o1_d = ((real_T) CAN_Sgn.SignedSgn);
+
+            /* ...... "Angle2" (16|16, standard signal, signed int, little endian) */
+            CAN_Sgn.SgnBytes.Byte0 = CAN_Msg[2];
+            CAN_Sgn.SgnBytes.Byte1 = CAN_Msg[3];
+            CAN_Sgn.SignedSgn &= 0x0000FFFF;
+            if (CAN_Sgn.SignedSgn >> 15) {
+              CAN_Sgn.SignedSgn |= 0xFFFF0000;
+            }
+
+            Human_in_Loop_B.SFunction1_o2_d = ((real_T) CAN_Sgn.SignedSgn);
+
+            /* ...... "Gyro1" (32|16, standard signal, signed int, little endian) */
+            CAN_Sgn.SgnBytes.Byte0 = CAN_Msg[4];
+            CAN_Sgn.SgnBytes.Byte1 = CAN_Msg[5];
+            CAN_Sgn.SignedSgn &= 0x0000FFFF;
+            if (CAN_Sgn.SignedSgn >> 15) {
+              CAN_Sgn.SignedSgn |= 0xFFFF0000;
+            }
+
+            Human_in_Loop_B.SFunction1_o3 = ((real_T) CAN_Sgn.SignedSgn);
+
+            /* ...... "Gyro2" (48|16, standard signal, signed int, little endian) */
+            CAN_Sgn.SgnBytes.Byte0 = CAN_Msg[6];
+            CAN_Sgn.SgnBytes.Byte1 = CAN_Msg[7];
+            CAN_Sgn.SignedSgn &= 0x0000FFFF;
+            if (CAN_Sgn.SignedSgn >> 15) {
+              CAN_Sgn.SignedSgn |= 0xFFFF0000;
+            }
+
+            Human_in_Loop_B.SFunction1_o4 = ((real_T) CAN_Sgn.SignedSgn);
+          }
+        }
+      }
+
+      if (!can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1]->processed) {
+        /* ... set RX status to 0 because no new message has arrived */
+        Human_in_Loop_B.SFunction1_o5 = 0.0;
+      }
+    }
+
+    /* DataTypeConversion: '<S93>/Data Type Conversion' */
+    Human_in_Loop_B.DataTypeConversion = Human_in_Loop_B.SFunction1_o3;
+
+    /* Gain: '<S93>/Gain' */
+    Human_in_Loop_B.Gain_h = Human_in_Loop_P.Gain_Gain_cd *
+      Human_in_Loop_B.DataTypeConversion;
+
+    /* DataTypeConversion: '<S94>/Data Type Conversion' */
+    Human_in_Loop_B.DataTypeConversion_f = Human_in_Loop_B.SFunction1_o4;
+
+    /* Gain: '<S94>/Gain' */
+    Human_in_Loop_B.Gain_m = Human_in_Loop_P.Gain_Gain_n *
+      Human_in_Loop_B.DataTypeConversion_f;
+
+    /* Sum: '<S32>/Sum' */
+    Human_in_Loop_B.Sum = Human_in_Loop_B.Gain_h - Human_in_Loop_B.Gain_m;
+
+    /* Gain: '<S32>/Gain' */
+    Human_in_Loop_B.Gain_e = Human_in_Loop_P.Gain_Gain_m * Human_in_Loop_B.Sum;
+
+    /* DataTypeConversion: '<S91>/Data Type Conversion' */
+    Human_in_Loop_B.DataTypeConversion_fh = Human_in_Loop_B.SFunction1_o1_d;
+
+    /* Gain: '<S91>/Gain' */
+    Human_in_Loop_B.Gain_kx = Human_in_Loop_P.Gain_Gain_e *
+      Human_in_Loop_B.DataTypeConversion_fh;
+
+    /* DataTypeConversion: '<S92>/Data Type Conversion' */
+    Human_in_Loop_B.DataTypeConversion_a = Human_in_Loop_B.SFunction1_o2_d;
+
+    /* Gain: '<S92>/Gain' */
+    Human_in_Loop_B.Gain_gm = Human_in_Loop_P.Gain_Gain_a *
+      Human_in_Loop_B.DataTypeConversion_a;
+
+    /* MATLAB Function: '<S32>/MATLAB Function' incorporates:
+     *  Constant: '<S32>/Calibration'
+     */
+    /* MATLAB Function 'Sensor Data/IMU/MATLAB Function': '<S87>:1' */
+    if (Human_in_Loop_P.Calibration_Value == 1.0) {
+      /* '<S87>:1:11' */
+      /* '<S87>:1:12' */
+      Human_in_Loop_DW.angle1_zero = 0.9 * Human_in_Loop_DW.angle1_zero + 0.1 *
+        Human_in_Loop_B.Gain_kx;
+
+      /* '<S87>:1:13' */
+      Human_in_Loop_DW.angle2_zero = 0.9 * Human_in_Loop_DW.angle2_zero + 0.1 *
+        Human_in_Loop_B.Gain_gm;
+    }
+
+    /* '<S87>:1:16' */
+    Human_in_Loop_B.Angle_Ankle = (Human_in_Loop_B.Gain_kx -
+      Human_in_Loop_DW.angle1_zero) - (Human_in_Loop_B.Gain_gm -
+      Human_in_Loop_DW.angle2_zero);
+
+    /* '<S87>:1:18' */
+    Human_in_Loop_B.Angle_Ankle = -Human_in_Loop_B.Angle_Ankle;
+
+    /* End of MATLAB Function: '<S32>/MATLAB Function' */
+    /* S-Function (rti_commonblock): '<S83>/S-Function1' */
+    /* This comment workarounds a code generation problem */
+
+    /* S-Function (rti_commonblock): '<S84>/S-Function1' */
+    /* This comment workarounds a code generation problem */
+
+    /* S-Function (rti_commonblock): '<S88>/S-Function1' */
+    /* This comment workarounds a code generation problem */
+
+    /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
+    {
+      UInt32 *CAN_Msg;
+
+      /* ... Read status and timestamp info (previous message) */
+      can_tp1_msg_read_from_mem(can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]);
+
+      /* Convert timestamp */
+      if (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->processed) {
+        can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->timestamp =
+          rtk_dsts_time_to_simtime_convert
+          (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->timestamp);
+      }
+
+      /* Messages with timestamp zero have been received in pause/stop state
+         and must not be handled.
+       */
+      if (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->timestamp > 0.0) {
+        if (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->processed) {
+          Human_in_Loop_B.SFunction1_o2_e = (real_T)
+            can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->processed;
+          Human_in_Loop_B.SFunction1_o3_j = (real_T)
+            can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->timestamp;
+          CAN_Msg = can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->data;
+
+          /* ... Decode CAN Message */
+          {
+            rtican_Signal_t CAN_Sgn;
+
+            /* ...... "RX signal" (0|32, standard signal, IEEE 32, little endian) */
+            CAN_Sgn.SgnBytes.Byte0 = CAN_Msg[0];
+            CAN_Sgn.SgnBytes.Byte1 = CAN_Msg[1];
+            CAN_Sgn.SgnBytes.Byte2 = CAN_Msg[2];
+            CAN_Sgn.SgnBytes.Byte3 = CAN_Msg[3];
+            Human_in_Loop_B.SFunction1_o1_i = ((real_T) CAN_Sgn.IeeeVal32);
+          }
+        }
+      }
+
+      if (!can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64]->processed) {
+        /* ... set RX status to 0 because no new message has arrived */
+        Human_in_Loop_B.SFunction1_o2_e = 0.0;
+      }
+    }
+  }
+
+  /* Sin: '<S85>/Sine Wave' */
+  Human_in_Loop_B.SineWave = sin(Human_in_Loop_P.SineWave_Freq *
+    Human_in_Loop_M->Timing.t[0] + Human_in_Loop_P.SineWave_Phase) *
+    Human_in_Loop_P.SineWave_Amp + Human_in_Loop_P.SineWave_Bias;
+  if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
+      Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
+    /* S-Function (rti_commonblock): '<S89>/S-Function1' */
+    /* This comment workarounds a code generation problem */
+
+    /* dSPACE RTICAN TX Message Block: "TX Message" Id:100 */
+    {
+      UInt32 CAN_Msg[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+      Float32 delayTime = 0.0;
+
+      /* ... Read status and timestamp info (previous message) */
+      can_tp1_msg_read(can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]);
+
+      /* Convert timestamp */
+      if (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->processed) {
+        can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->timestamp =
+          rtk_dsts_time_to_simtime_convert
+          (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->timestamp);
+      }
+
+      /* Messages with timestamp zero have been received in pause/stop state
+         and must not be handled.
+       */
+      if (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->timestamp > 0.0) {
+        Human_in_Loop_B.SFunction1_o1_g = (real_T)
+          can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->processed;
+        Human_in_Loop_B.SFunction1_o2_g = (real_T)
+          can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->timestamp;
+        Human_in_Loop_B.SFunction1_o3_c = (real_T)
+          can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->deltatime;
+        Human_in_Loop_B.SFunction1_o4_h = (real_T)
+          can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->delaytime;
+      }
+
+      /* ... Encode Simulink signals of TX and RM blocks*/
+      {
+        rtican_Signal_t CAN_Sgn;
+
+        /* ...... "TX signal" (0|32, standard signal, IEEE 32, little endian) */
+        /* Add or substract 0.5 in order to round to nearest integer */
+        CAN_Sgn.IeeeVal32 = (Float32) (( Human_in_Loop_B.SineWave ));
+        CAN_Msg[0] |= CAN_Sgn.SgnBytes.Byte0;
+        CAN_Msg[1] |= CAN_Sgn.SgnBytes.Byte1;
+        CAN_Msg[2] |= CAN_Sgn.SgnBytes.Byte2;
+        CAN_Msg[3] |= CAN_Sgn.SgnBytes.Byte3;
+      }
+
+      /* ... Write the data to the CAN microcontroller and trigger the sending of the message */
+      can_tp1_msg_send(can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64], 8, &(CAN_Msg
+        [0]), delayTime);
+    }
   }
 
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
@@ -3932,27 +4183,27 @@ void Human_in_Loop_update(void)
   int32_T i;
   if (rtmIsMajorTimeStep(Human_in_Loop_M) &&
       Human_in_Loop_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Update for DiscreteFilter: '<S32>/0.4low2' */
+    /* Update for DiscreteFilter: '<S33>/0.4low2' */
     Human_in_Loop_DW.u4low2_states[2] = Human_in_Loop_DW.u4low2_states[1];
     Human_in_Loop_DW.u4low2_states[1] = Human_in_Loop_DW.u4low2_states[0];
     Human_in_Loop_DW.u4low2_states[0] = Human_in_Loop_DW.u4low2_tmp;
 
-    /* Update for UnitDelay: '<S82>/Unit Delay1' */
+    /* Update for UnitDelay: '<S95>/Unit Delay1' */
     Human_in_Loop_DW.UnitDelay1_DSTATE = Human_in_Loop_B.x2k;
 
-    /* Update for UnitDelay: '<S82>/Unit Delay' */
+    /* Update for UnitDelay: '<S95>/Unit Delay' */
     Human_in_Loop_DW.UnitDelay_DSTATE = Human_in_Loop_B.x1k;
 
-    /* Update for UnitDelay: '<S82>/Unit Delay2' */
+    /* Update for UnitDelay: '<S95>/Unit Delay2' */
     Human_in_Loop_DW.UnitDelay2_DSTATE = Human_in_Loop_B.torque;
 
-    /* Update for UnitDelay: '<S68>/Unit Delay1' */
+    /* Update for UnitDelay: '<S69>/Unit Delay1' */
     Human_in_Loop_DW.UnitDelay1_DSTATE_h = Human_in_Loop_B.x2k_i;
 
-    /* Update for UnitDelay: '<S68>/Unit Delay' */
+    /* Update for UnitDelay: '<S69>/Unit Delay' */
     Human_in_Loop_DW.UnitDelay_DSTATE_e = Human_in_Loop_B.x1k_i;
 
-    /* Update for UnitDelay: '<S68>/Unit Delay2' */
+    /* Update for UnitDelay: '<S69>/Unit Delay2' */
     Human_in_Loop_DW.UnitDelay2_DSTATE_a = Human_in_Loop_B.Gain3_m;
 
     /* Update for Delay: '<S16>/Delay3' */
@@ -3995,7 +4246,7 @@ void Human_in_Loop_update(void)
 
     /* End of Update for Delay: '<S16>/Delay8' */
 
-    /* Update for UnitDelay: '<S71>/UD' */
+    /* Update for UnitDelay: '<S72>/UD' */
     Human_in_Loop_DW.UD_DSTATE = Human_in_Loop_B.TSamp;
 
     /* Update for DiscreteFilter: '<S30>/0.4low1' */
@@ -4003,10 +4254,10 @@ void Human_in_Loop_update(void)
     Human_in_Loop_DW.u4low1_states[1] = Human_in_Loop_DW.u4low1_states[0];
     Human_in_Loop_DW.u4low1_states[0] = Human_in_Loop_DW.u4low1_tmp;
 
-    /* Update for UnitDelay: '<S67>/Unit Delay' */
+    /* Update for UnitDelay: '<S68>/Unit Delay' */
     Human_in_Loop_DW.UnitDelay_DSTATE_j = Human_in_Loop_B.Gain3_m;
 
-    /* Update for UnitDelay: '<S67>/Unit Delay1' */
+    /* Update for UnitDelay: '<S68>/Unit Delay1' */
     Human_in_Loop_DW.UnitDelay1_DSTATE_a = Human_in_Loop_B.Add2_i;
   }
 
@@ -4055,7 +4306,7 @@ void Human_in_Loop_derivatives(void)
   XDot_Human_in_Loop_T *_rtXdot;
   _rtXdot = ((XDot_Human_in_Loop_T *) Human_in_Loop_M->derivs);
 
-  /* Derivatives for StateSpace: '<S49>/low_pass' */
+  /* Derivatives for StateSpace: '<S50>/low_pass' */
   _rtXdot->low_pass_CSTATE[0] = 0.0;
   _rtXdot->low_pass_CSTATE[1] = 0.0;
   _rtXdot->low_pass_CSTATE[0] += Human_in_Loop_P.low_pass_A[0] *
@@ -4067,7 +4318,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->low_pass_CSTATE[0] += Human_in_Loop_P.low_pass_B *
     Human_in_Loop_B.Abs_h;
 
-  /* Derivatives for StateSpace: '<S50>/low_pass' */
+  /* Derivatives for StateSpace: '<S51>/low_pass' */
   _rtXdot->low_pass_CSTATE_o[0] = 0.0;
   _rtXdot->low_pass_CSTATE_o[1] = 0.0;
   _rtXdot->low_pass_CSTATE_o[0] += Human_in_Loop_P.low_pass_A_k[0] *
@@ -4079,7 +4330,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->low_pass_CSTATE_o[0] += Human_in_Loop_P.low_pass_B_o *
     Human_in_Loop_B.Abs_d;
 
-  /* Derivatives for StateSpace: '<S53>/low_pass' */
+  /* Derivatives for StateSpace: '<S54>/low_pass' */
   _rtXdot->low_pass_CSTATE_n[0] = 0.0;
   _rtXdot->low_pass_CSTATE_n[1] = 0.0;
   _rtXdot->low_pass_CSTATE_n[0] += Human_in_Loop_P.low_pass_A_f[0] *
@@ -4091,7 +4342,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->low_pass_CSTATE_n[0] += Human_in_Loop_P.low_pass_B_j *
     Human_in_Loop_B.Abs_j;
 
-  /* Derivatives for StateSpace: '<S54>/low_pass' */
+  /* Derivatives for StateSpace: '<S55>/low_pass' */
   _rtXdot->low_pass_CSTATE_p[0] = 0.0;
   _rtXdot->low_pass_CSTATE_p[1] = 0.0;
   _rtXdot->low_pass_CSTATE_p[0] += Human_in_Loop_P.low_pass_A_a[0] *
@@ -4103,7 +4354,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->low_pass_CSTATE_p[0] += Human_in_Loop_P.low_pass_B_m *
     Human_in_Loop_B.Abs_a;
 
-  /* Derivatives for StateSpace: '<S60>/low_pass' */
+  /* Derivatives for StateSpace: '<S61>/low_pass' */
   _rtXdot->low_pass_CSTATE_on[0] = 0.0;
   _rtXdot->low_pass_CSTATE_on[1] = 0.0;
   _rtXdot->low_pass_CSTATE_on[0] += Human_in_Loop_P.low_pass_A_b[0] *
@@ -4115,7 +4366,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->low_pass_CSTATE_on[0] += Human_in_Loop_P.low_pass_B_g *
     Human_in_Loop_B.Abs_fy;
 
-  /* Derivatives for StateSpace: '<S59>/low_pass' */
+  /* Derivatives for StateSpace: '<S60>/low_pass' */
   _rtXdot->low_pass_CSTATE_f[0] = 0.0;
   _rtXdot->low_pass_CSTATE_f[1] = 0.0;
   _rtXdot->low_pass_CSTATE_f[0] += Human_in_Loop_P.low_pass_A_i[0] *
@@ -4127,7 +4378,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->low_pass_CSTATE_f[0] += Human_in_Loop_P.low_pass_B_os *
     Human_in_Loop_B.Abs_dj;
 
-  /* Derivatives for StateSpace: '<S55>/high_pass' */
+  /* Derivatives for StateSpace: '<S56>/high_pass' */
   _rtXdot->high_pass_CSTATE[0] = 0.0;
   _rtXdot->high_pass_CSTATE[1] = 0.0;
   _rtXdot->high_pass_CSTATE[2] = 0.0;
@@ -4149,7 +4400,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE[0] += Human_in_Loop_P.high_pass_B *
     Human_in_Loop_B.Gain_k;
 
-  /* Derivatives for StateSpace: '<S56>/high_pass' */
+  /* Derivatives for StateSpace: '<S57>/high_pass' */
   _rtXdot->high_pass_CSTATE_b[0] = 0.0;
   _rtXdot->high_pass_CSTATE_b[1] = 0.0;
   _rtXdot->high_pass_CSTATE_b[2] = 0.0;
@@ -4171,7 +4422,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_b[0] += Human_in_Loop_P.high_pass_B_g *
     Human_in_Loop_B.Gain1_p;
 
-  /* Derivatives for StateSpace: '<S57>/high_pass' */
+  /* Derivatives for StateSpace: '<S58>/high_pass' */
   _rtXdot->high_pass_CSTATE_c[0] = 0.0;
   _rtXdot->high_pass_CSTATE_c[1] = 0.0;
   _rtXdot->high_pass_CSTATE_c[2] = 0.0;
@@ -4193,7 +4444,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_c[0] += Human_in_Loop_P.high_pass_B_i *
     Human_in_Loop_B.Gain2_cz;
 
-  /* Derivatives for StateSpace: '<S58>/high_pass' */
+  /* Derivatives for StateSpace: '<S59>/high_pass' */
   _rtXdot->high_pass_CSTATE_m[0] = 0.0;
   _rtXdot->high_pass_CSTATE_m[1] = 0.0;
   _rtXdot->high_pass_CSTATE_m[2] = 0.0;
@@ -4215,7 +4466,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_m[0] += Human_in_Loop_P.high_pass_B_c *
     Human_in_Loop_B.Gain3_f;
 
-  /* Derivatives for StateSpace: '<S51>/high_pass' */
+  /* Derivatives for StateSpace: '<S52>/high_pass' */
   _rtXdot->high_pass_CSTATE_a[0] = 0.0;
   _rtXdot->high_pass_CSTATE_a[1] = 0.0;
   _rtXdot->high_pass_CSTATE_a[2] = 0.0;
@@ -4237,7 +4488,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_a[0] += Human_in_Loop_P.high_pass_B_d *
     Human_in_Loop_B.Gain4_h;
 
-  /* Derivatives for StateSpace: '<S52>/high_pass' */
+  /* Derivatives for StateSpace: '<S53>/high_pass' */
   _rtXdot->high_pass_CSTATE_my[0] = 0.0;
   _rtXdot->high_pass_CSTATE_my[1] = 0.0;
   _rtXdot->high_pass_CSTATE_my[2] = 0.0;
@@ -4259,7 +4510,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_my[0] += Human_in_Loop_P.high_pass_B_h *
     Human_in_Loop_B.Gain5;
 
-  /* Derivatives for StateSpace: '<S49>/high_pass' */
+  /* Derivatives for StateSpace: '<S50>/high_pass' */
   _rtXdot->high_pass_CSTATE_p[0] = 0.0;
   _rtXdot->high_pass_CSTATE_p[1] = 0.0;
   _rtXdot->high_pass_CSTATE_p[0] += Human_in_Loop_P.high_pass_A_d[0] *
@@ -4271,7 +4522,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_p[1] += Human_in_Loop_P.high_pass_B_b *
     Human_in_Loop_B.Gain_k;
 
-  /* Derivatives for StateSpace: '<S50>/high_pass' */
+  /* Derivatives for StateSpace: '<S51>/high_pass' */
   _rtXdot->high_pass_CSTATE_n[0] = 0.0;
   _rtXdot->high_pass_CSTATE_n[1] = 0.0;
   _rtXdot->high_pass_CSTATE_n[0] += Human_in_Loop_P.high_pass_A_b[0] *
@@ -4283,7 +4534,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_n[1] += Human_in_Loop_P.high_pass_B_j *
     Human_in_Loop_B.Gain1_p;
 
-  /* Derivatives for StateSpace: '<S53>/high_pass' */
+  /* Derivatives for StateSpace: '<S54>/high_pass' */
   _rtXdot->high_pass_CSTATE_pw[0] = 0.0;
   _rtXdot->high_pass_CSTATE_pw[1] = 0.0;
   _rtXdot->high_pass_CSTATE_pw[0] += Human_in_Loop_P.high_pass_A_j[0] *
@@ -4295,7 +4546,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_pw[1] += Human_in_Loop_P.high_pass_B_e *
     Human_in_Loop_B.Gain2_cz;
 
-  /* Derivatives for StateSpace: '<S54>/high_pass' */
+  /* Derivatives for StateSpace: '<S55>/high_pass' */
   _rtXdot->high_pass_CSTATE_k[0] = 0.0;
   _rtXdot->high_pass_CSTATE_k[1] = 0.0;
   _rtXdot->high_pass_CSTATE_k[0] += Human_in_Loop_P.high_pass_A_l[0] *
@@ -4307,7 +4558,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_k[1] += Human_in_Loop_P.high_pass_B_o *
     Human_in_Loop_B.Gain3_f;
 
-  /* Derivatives for StateSpace: '<S59>/high_pass' */
+  /* Derivatives for StateSpace: '<S60>/high_pass' */
   _rtXdot->high_pass_CSTATE_l[0] = 0.0;
   _rtXdot->high_pass_CSTATE_l[1] = 0.0;
   _rtXdot->high_pass_CSTATE_l[0] += Human_in_Loop_P.high_pass_A_m[0] *
@@ -4319,7 +4570,7 @@ void Human_in_Loop_derivatives(void)
   _rtXdot->high_pass_CSTATE_l[1] += Human_in_Loop_P.high_pass_B_hu *
     Human_in_Loop_B.Gain5;
 
-  /* Derivatives for StateSpace: '<S60>/high_pass' */
+  /* Derivatives for StateSpace: '<S61>/high_pass' */
   _rtXdot->high_pass_CSTATE_h[0] = 0.0;
   _rtXdot->high_pass_CSTATE_h[1] = 0.0;
   _rtXdot->high_pass_CSTATE_h[0] += Human_in_Loop_P.high_pass_A_f[0] *
@@ -4461,20 +4712,20 @@ void Human_in_Loop_initialize(void)
   {
     int32_T i;
 
-    /* InitializeConditions for DiscreteFilter: '<S32>/0.4low2' */
+    /* InitializeConditions for DiscreteFilter: '<S33>/0.4low2' */
     Human_in_Loop_DW.u4low2_states[0] = Human_in_Loop_P.u4low2_InitialStates;
     Human_in_Loop_DW.u4low2_states[1] = Human_in_Loop_P.u4low2_InitialStates;
     Human_in_Loop_DW.u4low2_states[2] = Human_in_Loop_P.u4low2_InitialStates;
 
-    /* InitializeConditions for UnitDelay: '<S82>/Unit Delay1' */
+    /* InitializeConditions for UnitDelay: '<S95>/Unit Delay1' */
     Human_in_Loop_DW.UnitDelay1_DSTATE =
       Human_in_Loop_P.UnitDelay1_InitialCondition_i;
 
-    /* InitializeConditions for UnitDelay: '<S82>/Unit Delay' */
+    /* InitializeConditions for UnitDelay: '<S95>/Unit Delay' */
     Human_in_Loop_DW.UnitDelay_DSTATE =
       Human_in_Loop_P.UnitDelay_InitialCondition_d;
 
-    /* InitializeConditions for UnitDelay: '<S82>/Unit Delay2' */
+    /* InitializeConditions for UnitDelay: '<S95>/Unit Delay2' */
     Human_in_Loop_DW.UnitDelay2_DSTATE =
       Human_in_Loop_P.UnitDelay2_InitialCondition;
 
@@ -4490,15 +4741,15 @@ void Human_in_Loop_initialize(void)
     Human_in_Loop_DW.RT5_write_buf = -1;
     Human_in_Loop_DW.RT5_read_buf = -1;
 
-    /* InitializeConditions for UnitDelay: '<S68>/Unit Delay1' */
+    /* InitializeConditions for UnitDelay: '<S69>/Unit Delay1' */
     Human_in_Loop_DW.UnitDelay1_DSTATE_h =
       Human_in_Loop_P.UnitDelay1_InitialCondition_j;
 
-    /* InitializeConditions for UnitDelay: '<S68>/Unit Delay' */
+    /* InitializeConditions for UnitDelay: '<S69>/Unit Delay' */
     Human_in_Loop_DW.UnitDelay_DSTATE_e =
       Human_in_Loop_P.UnitDelay_InitialCondition_j;
 
-    /* InitializeConditions for UnitDelay: '<S68>/Unit Delay2' */
+    /* InitializeConditions for UnitDelay: '<S69>/Unit Delay2' */
     Human_in_Loop_DW.UnitDelay2_DSTATE_a =
       Human_in_Loop_P.UnitDelay2_InitialCondition_h;
 
@@ -4547,51 +4798,51 @@ void Human_in_Loop_initialize(void)
     /* InitializeConditions for Delay: '<S16>/Delay6' */
     Human_in_Loop_DW.Delay6_DSTATE = Human_in_Loop_P.Delay6_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S49>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S50>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE[0] =
       Human_in_Loop_P.low_pass_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S50>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S51>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_o[0] =
       Human_in_Loop_P.low_pass_InitialCondition_e;
 
-    /* InitializeConditions for StateSpace: '<S53>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S54>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_n[0] =
       Human_in_Loop_P.low_pass_InitialCondition_ew;
 
-    /* InitializeConditions for StateSpace: '<S54>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S55>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_p[0] =
       Human_in_Loop_P.low_pass_InitialCondition_c;
 
-    /* InitializeConditions for StateSpace: '<S60>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S61>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_on[0] =
       Human_in_Loop_P.low_pass_InitialCondition_l;
 
-    /* InitializeConditions for StateSpace: '<S59>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S60>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_f[0] =
       Human_in_Loop_P.low_pass_InitialCondition_i;
 
-    /* InitializeConditions for StateSpace: '<S49>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S50>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE[1] =
       Human_in_Loop_P.low_pass_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S50>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S51>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_o[1] =
       Human_in_Loop_P.low_pass_InitialCondition_e;
 
-    /* InitializeConditions for StateSpace: '<S53>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S54>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_n[1] =
       Human_in_Loop_P.low_pass_InitialCondition_ew;
 
-    /* InitializeConditions for StateSpace: '<S54>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S55>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_p[1] =
       Human_in_Loop_P.low_pass_InitialCondition_c;
 
-    /* InitializeConditions for StateSpace: '<S60>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S61>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_on[1] =
       Human_in_Loop_P.low_pass_InitialCondition_l;
 
-    /* InitializeConditions for StateSpace: '<S59>/low_pass' */
+    /* InitializeConditions for StateSpace: '<S60>/low_pass' */
     Human_in_Loop_X.low_pass_CSTATE_f[1] =
       Human_in_Loop_P.low_pass_InitialCondition_i;
     for (i = 0; i < 6; i++) {
@@ -4612,7 +4863,7 @@ void Human_in_Loop_initialize(void)
         Human_in_Loop_P.Delay8_InitialCondition;
     }
 
-    /* InitializeConditions for UnitDelay: '<S71>/UD' */
+    /* InitializeConditions for UnitDelay: '<S72>/UD' */
     Human_in_Loop_DW.UD_DSTATE = Human_in_Loop_P.DiscreteDerivative_ICPrevScaled;
 
     /* InitializeConditions for DiscreteFilter: '<S30>/0.4low1' */
@@ -4620,155 +4871,155 @@ void Human_in_Loop_initialize(void)
     Human_in_Loop_DW.u4low1_states[1] = Human_in_Loop_P.u4low1_InitialStates;
     Human_in_Loop_DW.u4low1_states[2] = Human_in_Loop_P.u4low1_InitialStates;
 
-    /* InitializeConditions for UnitDelay: '<S67>/Unit Delay' */
+    /* InitializeConditions for UnitDelay: '<S68>/Unit Delay' */
     Human_in_Loop_DW.UnitDelay_DSTATE_j =
       Human_in_Loop_P.UnitDelay_InitialCondition_g;
 
-    /* InitializeConditions for UnitDelay: '<S67>/Unit Delay1' */
+    /* InitializeConditions for UnitDelay: '<S68>/Unit Delay1' */
     Human_in_Loop_DW.UnitDelay1_DSTATE_a =
       Human_in_Loop_P.UnitDelay1_InitialCondition_i0;
 
-    /* InitializeConditions for StateSpace: '<S55>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE[0] =
       Human_in_Loop_P.high_pass_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_b[0] =
       Human_in_Loop_P.high_pass_InitialCondition_g;
 
-    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_c[0] =
       Human_in_Loop_P.high_pass_InitialCondition_n;
 
-    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S59>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_m[0] =
       Human_in_Loop_P.high_pass_InitialCondition_b;
 
-    /* InitializeConditions for StateSpace: '<S51>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_a[0] =
       Human_in_Loop_P.high_pass_InitialCondition_bd;
 
-    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S53>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_my[0] =
       Human_in_Loop_P.high_pass_InitialCondition_m;
 
-    /* InitializeConditions for StateSpace: '<S55>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE[1] =
       Human_in_Loop_P.high_pass_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_b[1] =
       Human_in_Loop_P.high_pass_InitialCondition_g;
 
-    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_c[1] =
       Human_in_Loop_P.high_pass_InitialCondition_n;
 
-    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S59>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_m[1] =
       Human_in_Loop_P.high_pass_InitialCondition_b;
 
-    /* InitializeConditions for StateSpace: '<S51>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_a[1] =
       Human_in_Loop_P.high_pass_InitialCondition_bd;
 
-    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S53>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_my[1] =
       Human_in_Loop_P.high_pass_InitialCondition_m;
 
-    /* InitializeConditions for StateSpace: '<S55>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE[2] =
       Human_in_Loop_P.high_pass_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_b[2] =
       Human_in_Loop_P.high_pass_InitialCondition_g;
 
-    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_c[2] =
       Human_in_Loop_P.high_pass_InitialCondition_n;
 
-    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S59>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_m[2] =
       Human_in_Loop_P.high_pass_InitialCondition_b;
 
-    /* InitializeConditions for StateSpace: '<S51>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_a[2] =
       Human_in_Loop_P.high_pass_InitialCondition_bd;
 
-    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S53>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_my[2] =
       Human_in_Loop_P.high_pass_InitialCondition_m;
 
-    /* InitializeConditions for StateSpace: '<S55>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE[3] =
       Human_in_Loop_P.high_pass_InitialCondition;
 
-    /* InitializeConditions for StateSpace: '<S56>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_b[3] =
       Human_in_Loop_P.high_pass_InitialCondition_g;
 
-    /* InitializeConditions for StateSpace: '<S57>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_c[3] =
       Human_in_Loop_P.high_pass_InitialCondition_n;
 
-    /* InitializeConditions for StateSpace: '<S58>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S59>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_m[3] =
       Human_in_Loop_P.high_pass_InitialCondition_b;
 
-    /* InitializeConditions for StateSpace: '<S51>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_a[3] =
       Human_in_Loop_P.high_pass_InitialCondition_bd;
 
-    /* InitializeConditions for StateSpace: '<S52>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S53>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_my[3] =
       Human_in_Loop_P.high_pass_InitialCondition_m;
 
-    /* InitializeConditions for StateSpace: '<S49>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S50>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_p[0] =
       Human_in_Loop_P.high_pass_InitialCondition_p;
 
-    /* InitializeConditions for StateSpace: '<S50>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S51>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_n[0] =
       Human_in_Loop_P.high_pass_InitialCondition_n4;
 
-    /* InitializeConditions for StateSpace: '<S53>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S54>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_pw[0] =
       Human_in_Loop_P.high_pass_InitialCondition_m4;
 
-    /* InitializeConditions for StateSpace: '<S54>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S55>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_k[0] =
       Human_in_Loop_P.high_pass_InitialCondition_gb;
 
-    /* InitializeConditions for StateSpace: '<S59>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S60>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_l[0] =
       Human_in_Loop_P.high_pass_InitialCondition_c;
 
-    /* InitializeConditions for StateSpace: '<S60>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S61>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_h[0] =
       Human_in_Loop_P.high_pass_InitialCondition_gw;
 
-    /* InitializeConditions for StateSpace: '<S49>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S50>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_p[1] =
       Human_in_Loop_P.high_pass_InitialCondition_p;
 
-    /* InitializeConditions for StateSpace: '<S50>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S51>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_n[1] =
       Human_in_Loop_P.high_pass_InitialCondition_n4;
 
-    /* InitializeConditions for StateSpace: '<S53>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S54>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_pw[1] =
       Human_in_Loop_P.high_pass_InitialCondition_m4;
 
-    /* InitializeConditions for StateSpace: '<S54>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S55>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_k[1] =
       Human_in_Loop_P.high_pass_InitialCondition_gb;
 
-    /* InitializeConditions for StateSpace: '<S59>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S60>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_l[1] =
       Human_in_Loop_P.high_pass_InitialCondition_c;
 
-    /* InitializeConditions for StateSpace: '<S60>/high_pass' */
+    /* InitializeConditions for StateSpace: '<S61>/high_pass' */
     Human_in_Loop_X.high_pass_CSTATE_h[1] =
       Human_in_Loop_P.high_pass_InitialCondition_gw;
 
@@ -4782,7 +5033,7 @@ void Human_in_Loop_initialize(void)
     Human_in_Loop_DW.RT2_write_buf_g = -1;
     Human_in_Loop_DW.RT2_read_buf_a = -1;
 
-    /* SystemInitialize for MATLAB Function: '<S32>/Data process' */
+    /* SystemInitialize for MATLAB Function: '<S33>/Data process' */
     Human_in_Loop_DW.torque_zero = 0.0;
 
     /* SystemInitialize for MATLAB Function: '<S30>/Data process' */
@@ -4833,48 +5084,52 @@ void Human_in_Loop_initialize(void)
     Human_in_Loop_DW.loss_reg = 0.0;
     memset(&Human_in_Loop_DW.loss_mem[0], 0, 10U * sizeof(real_T));
 
-    /* SystemInitialize for MATLAB Function: '<S32>/MATLAB Function' */
+    /* SystemInitialize for MATLAB Function: '<S33>/MATLAB Function' */
     for (i = 0; i < 15; i++) {
       Human_in_Loop_DW.data[i] = 1.0;
     }
 
-    /* End of SystemInitialize for MATLAB Function: '<S32>/MATLAB Function' */
-
-    /* SystemInitialize for MATLAB Function: '<S55>/MATLAB Function' */
-    Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_g);
+    /* End of SystemInitialize for MATLAB Function: '<S33>/MATLAB Function' */
 
     /* SystemInitialize for MATLAB Function: '<S56>/MATLAB Function' */
-    Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_m);
+    Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_g);
 
     /* SystemInitialize for MATLAB Function: '<S57>/MATLAB Function' */
-    Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_n);
+    Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_m);
 
     /* SystemInitialize for MATLAB Function: '<S58>/MATLAB Function' */
+    Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_n);
+
+    /* SystemInitialize for MATLAB Function: '<S59>/MATLAB Function' */
     Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_l);
 
-    /* SystemInitialize for MATLAB Function: '<S51>/MATLAB Function' */
+    /* SystemInitialize for MATLAB Function: '<S52>/MATLAB Function' */
     Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_g5);
 
-    /* SystemInitialize for MATLAB Function: '<S52>/MATLAB Function' */
+    /* SystemInitialize for MATLAB Function: '<S53>/MATLAB Function' */
     Human_in_Lo_MATLABFunction_Init(&Human_in_Loop_DW.sf_MATLABFunction_p);
 
     /* SystemInitialize for MATLAB Function: '<S28>/Timer' */
     Human_in_Loop_DW.count = 0.0;
     Human_in_Loop_DW.time = 0.0;
 
-    /* SystemInitialize for S-Function (rti_commonblock): '<S35>/S-Function1' incorporates:
-     *  SubSystem: '<S33>/Serial Decoding System'
+    /* SystemInitialize for S-Function (rti_commonblock): '<S36>/S-Function1' incorporates:
+     *  SubSystem: '<S34>/Serial Decoding System'
      */
     Human_SerialDecodingSystem_Init();
 
-    /* End of SystemInitialize for S-Function (rti_commonblock): '<S35>/S-Function1' */
+    /* End of SystemInitialize for S-Function (rti_commonblock): '<S36>/S-Function1' */
+
+    /* SystemInitialize for MATLAB Function: '<S32>/MATLAB Function' */
+    Human_in_Loop_DW.angle1_zero = 0.0;
+    Human_in_Loop_DW.angle2_zero = 0.0;
   }
 }
 
 /* Model terminate function */
 void Human_in_Loop_terminate(void)
 {
-  /* Terminate for S-Function (rti_commonblock): '<S72>/S-Function1' */
+  /* Terminate for S-Function (rti_commonblock): '<S73>/S-Function1' */
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1 --- */
   /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 1 - Port: 1 - Channel: 1 --- */
@@ -4883,7 +5138,7 @@ void Human_in_Loop_terminate(void)
     DioCl2EncoderIn_stop(pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1);
   }
 
-  /* Terminate for S-Function (rti_commonblock): '<S73>/S-Function1' */
+  /* Terminate for S-Function (rti_commonblock): '<S74>/S-Function1' */
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL3 --- */
   /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 3 - Port: 1 - Channel: 5 --- */
@@ -4899,7 +5154,7 @@ void Human_in_Loop_terminate(void)
 
   /* End of Terminate for S-Function (rti_commonblock): '<S8>/S-Function1' */
 
-  /* Terminate for S-Function (rti_commonblock): '<S74>/S-Function1' incorporates:
+  /* Terminate for S-Function (rti_commonblock): '<S75>/S-Function1' incorporates:
    *  Constant: '<S30>/VCC1'
    */
 
@@ -4912,7 +5167,7 @@ void Human_in_Loop_terminate(void)
     DIO_CLASS1_HIGH_Z_ON);
   DioCl1DigOut_write(pRTIDioC1DigOut_Port_3_Ch_11);
 
-  /* Terminate for S-Function (rti_commonblock): '<S75>/S-Function1' incorporates:
+  /* Terminate for S-Function (rti_commonblock): '<S76>/S-Function1' incorporates:
    *  Constant: '<S30>/VCC3'
    */
 
@@ -4925,7 +5180,7 @@ void Human_in_Loop_terminate(void)
     DIO_CLASS1_HIGH_Z_ON);
   DioCl1DigOut_write(pRTIDioC1DigOut_Port_3_Ch_13);
 
-  /* Terminate for S-Function (rti_commonblock): '<S80>/S-Function1' incorporates:
+  /* Terminate for S-Function (rti_commonblock): '<S81>/S-Function1' incorporates:
    *  Constant: '<S31>/Constant'
    */
 
@@ -4938,9 +5193,57 @@ void Human_in_Loop_terminate(void)
     DIO_CLASS1_HIGH_Z_ON);
   DioCl1DigOut_write(pRTIDioC1DigOut_Port_1_Ch_1);
 
-  /* Terminate for S-Function (rti_commonblock): '<S36>/S-Function1' */
+  /* Terminate for S-Function (rti_commonblock): '<S37>/S-Function1' */
 
   /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
   dsser_disable(rtiDS1202SER_B1_Ser[0]);
   dsser_fifo_reset(rtiDS1202SER_B1_Ser[0]);
+
+  /* Terminate for S-Function (rti_commonblock): '<S90>/S-Function1' */
+
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:1 */
+  {
+    /* ... Set the message into sleep mode */
+    while ((rtican_type1_tq_error[0][0] = can_tp1_msg_sleep
+            (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1])) ==
+           DSMCOM_BUFFER_OVERFLOW) ;
+  }
+
+  /* Terminate for S-Function (rti_commonblock): '<S83>/S-Function1' */
+
+  /* dSPACE RTICAN STD Srvc-Message Block */
+  {
+    /* ... Set the message into sleep mode */
+    while ((rtican_type1_tq_error[0][0] = can_tp1_msg_sleep
+            (CANTP1_RX_SPMSG_M1_C1_STD)) == DSMCOM_BUFFER_OVERFLOW) ;
+  }
+
+  /* Terminate for S-Function (rti_commonblock): '<S84>/S-Function1' */
+
+  /* dSPACE RTICAN STD Srvc-Message Block */
+  {
+    /* ... Set the message into sleep mode */
+    while ((rtican_type1_tq_error[0][0] = can_tp1_msg_sleep
+            (CANTP1_RX_SPMSG_M1_C2_STD)) == DSMCOM_BUFFER_OVERFLOW) ;
+  }
+
+  /* Terminate for S-Function (rti_commonblock): '<S88>/S-Function1' */
+
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
+  {
+    /* ... Set the message into sleep mode */
+    while ((rtican_type1_tq_error[0][1] = can_tp1_msg_sleep
+            (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X64])) ==
+           DSMCOM_BUFFER_OVERFLOW) ;
+  }
+
+  /* Terminate for S-Function (rti_commonblock): '<S89>/S-Function1' */
+
+  /* dSPACE RTICAN TX Message Block: "TX Message" Id:100 */
+  {
+    /* ... Set the message into sleep mode */
+    while ((rtican_type1_tq_error[0][1] = can_tp1_msg_sleep
+            (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64])) ==
+           DSMCOM_BUFFER_OVERFLOW) ;
+  }
 }

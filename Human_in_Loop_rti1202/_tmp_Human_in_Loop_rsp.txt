@@ -9,6 +9,7 @@ rti_sim_engine.o07
 rti_init_c.o07
 rt_sim.o07
 rti_assert.o07
+rtican_err1202.o07
 -l:librtcan.so
 -l:librtj1939.so
 -l:librtser.so

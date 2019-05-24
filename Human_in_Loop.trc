@@ -3,7 +3,7 @@
 --  Trace file: Human_in_Loop.trc
 --
 --  RTI1202 7.9 (02-Nov-2017)
---  Thu May  9 21:27:39 2019
+--  Wed May 22 18:33:58 2019
 --
 --  Copyright 2019, dSPACE GmbH. All rights reserved.
 --
@@ -26,7 +26,7 @@
 
 _genname     "RTI"
 _genversion  "7.9"
-_gendate     "05/09/2019 21:27:45"
+_gendate     "05/22/2019 18:34:04"
 _description ""
 _author      "RTI1202 7.9 (02-Nov-2017)"
 _model       "Human_in_Loop"
@@ -76,6 +76,7 @@ typedef Human_in_Loop_ArrayDT0_15 flt(64,IEEE)[15]
 typedef Human_in_Loop_ArrayDT0_1_20_Col col flt(64,IEEE)[1][20]
 typedef Human_in_Loop_ArrayDT0_1_10_Col col flt(64,IEEE)[1][10]
 typedef Human_in_Loop_ArrayDT0_2600 flt(64,IEEE)[2600]
+typedef Human_in_Loop_ArrayDT10_2 int(32)[2]
 typedef Human_in_Loop_ArrayDT0_1_500_Col col flt(64,IEEE)[1][500]
 
 
@@ -88,7 +89,7 @@ finalTime
  desc:  "Simulation stop time. When reached, simState switches to STOP."
  flags:  READONLY
  unit:  "s"
- addr:    0x4809cd6c
+ addr:    0x4809e904
 }
 
 currentTime
@@ -98,7 +99,7 @@ currentTime
  desc:  "Current simulation time. Increments with execution of Timer Task 1."
  flags: READONLY
  unit:  "s"
- addr:    0x4809cd68
+ addr:    0x4809e900
 }
 
 modelStepSize
@@ -108,7 +109,7 @@ modelStepSize
  desc:  "Fixed step size of the model, sample time of Timer Task 1."
  flags: READONLY
  unit:  "s"
- addr:    0x4809cd70
+ addr:    0x4809e908
 }
 
 simState
@@ -117,7 +118,7 @@ simState
  alias: "simState"
  desc:  "Simulation state: STOP=0 RUN=2"
  unit:  "-"
- addr:    0x4805b450
+ addr:    0x4805cdf8
 }
 
 p_msg_last_error_no
@@ -127,7 +128,7 @@ p_msg_last_error_no
  desc:  "Error number of last error message (zero if no error)."
  unit:  "-"
  flags: READONLY
- addr:    0x4804c2c8
+ addr:    0x4804d370
 }
 
 p_dsts_sum_of_reset_time
@@ -137,7 +138,7 @@ p_dsts_sum_of_reset_time
  desc:  "Internal variable for summing up reset time."
  unit:  "s"
  flags: READONLY|HIDDEN
- addr:    0x4804c2c4
+ addr:    0x4804d36c
 }
 
 
@@ -156,64 +157,64 @@ group "Task Info"
    type:  flt(64,IEEE)*
    alias: "sampleTime"
    flags: READONLY
- addr:    0x4809cdbc
+ addr:    0x4809e99c
 }
   pRti_TIMERA_TTime
   {
    type:  flt(64,IEEE)*
    alias: "turnaroundTime"
    flags: READONLY
-		 addr:    0x4809cdc0
-		}
+ addr:    0x4809e9a0
+}
   pRti_TIMERA_TState
   {
    type:  int(32)*
    alias: "state"
    flags: READONLY
- addr:    0x4809cdc4
+ addr:    0x4809e9a4
 }
   pRti_TIMERA_OType
   {
    type:  int(32)*
    alias: "overrunCheckType"
    flags: READONLY
- addr:    0x4809cdc8
-}
+		 addr:    0x4809e9a8
+		}
   pRti_TIMERA_OMax
   {
    type:  int(32)*
    alias: "overrunQueueMax"
    flags: READONLY
- addr:    0x4809cdcc
+ addr:    0x4809e9ac
 }
   pRti_TIMERA_ORpt
   {
    type:  int(32)*
    alias: "overrunQueueCount"
    flags: READONLY
- addr:    0x4809cdd0
-}
+		 addr:    0x4809e9b0
+		}
   pRti_TIMERA_OCnt
   {
    type:  int(32)*
    alias: "overrunCount"
    flags: READONLY
- addr:    0x4809cdd4
+ addr:    0x4809e9b4
 }
   pRti_TIMERA_TCnt
   {
    type:  flt(64,IEEE)*
    alias: "taskCallCount"
    flags: READONLY
-		 addr:    0x4809cdd8
-		}
+ addr:    0x4809e9b8
+}
   pRti_TIMERA_Prio
   {
    type:  int(32)*
    alias: "priority"
    flags: READONLY
-		 addr:    0x4809cddc
-		}
+ addr:    0x4809e9bc
+}
   endgroup
 
   group "Timer Interrupt"
@@ -226,64 +227,64 @@ group "Task Info"
    type:  flt(64,IEEE)*
    alias: "sampleTime"
    flags: READONLY
-		 addr:    0x4809ce04
-		}
+ addr:    0x4809e9e4
+}
   pRti_TIMERB_TTime
   {
    type:  flt(64,IEEE)*
    alias: "turnaroundTime"
    flags: READONLY
- addr:    0x4809ce08
+ addr:    0x4809e9e8
 }
   pRti_TIMERB_TState
   {
    type:  int(32)*
    alias: "state"
    flags: READONLY
- addr:    0x4809ce0c
-}
+		 addr:    0x4809e9ec
+		}
   pRti_TIMERB_OType
   {
    type:  int(32)*
    alias: "overrunCheckType"
    flags: READONLY
- addr:    0x4809ce10
+ addr:    0x4809e9f0
 }
   pRti_TIMERB_OMax
   {
    type:  int(32)*
    alias: "overrunQueueMax"
    flags: READONLY
- addr:    0x4809ce14
+ addr:    0x4809e9f4
 }
   pRti_TIMERB_ORpt
   {
    type:  int(32)*
    alias: "overrunQueueCount"
    flags: READONLY
- addr:    0x4809ce18
+ addr:    0x4809e9f8
 }
   pRti_TIMERB_OCnt
   {
    type:  int(32)*
    alias: "overrunCount"
    flags: READONLY
- addr:    0x4809ce1c
+ addr:    0x4809e9fc
 }
   pRti_TIMERB_TCnt
   {
    type:  flt(64,IEEE)*
    alias: "taskCallCount"
    flags: READONLY
- addr:    0x4809ce20
+ addr:    0x4809ea00
 }
   pRti_TIMERB_Prio
   {
    type:  int(32)*
    alias: "priority"
    flags: READONLY
-		 addr:    0x4809ce24
-		}
+ addr:    0x4809ea04
+}
   endgroup
 
   group "DS1202SER_INT_C1_I1"
@@ -296,56 +297,56 @@ group "Task Info"
    type:  flt(64,IEEE)*
    alias: "turnaroundTime"
    flags: READONLY
- addr:    0x4809cde4
+ addr:    0x4809e9c4
 }
   pRti_UART_EVENTS_CH1_INT0_TState
   {
    type:  int(32)*
    alias: "state"
    flags: READONLY
-		 addr:    0x4809cde8
+		 addr:    0x4809e9c8
 		}
   pRti_UART_EVENTS_CH1_INT0_OType
   {
    type:  int(32)*
    alias: "overrunCheckType"
    flags: READONLY
-		 addr:    0x4809cdec
-		}
+ addr:    0x4809e9cc
+}
   pRti_UART_EVENTS_CH1_INT0_OMax
   {
    type:  int(32)*
    alias: "overrunQueueMax"
    flags: READONLY
- addr:    0x4809cdf0
+ addr:    0x4809e9d0
 }
   pRti_UART_EVENTS_CH1_INT0_ORpt
   {
    type:  int(32)*
    alias: "overrunQueueCount"
    flags: READONLY
- addr:    0x4809cdf4
+ addr:    0x4809e9d4
 }
   pRti_UART_EVENTS_CH1_INT0_OCnt
   {
    type:  int(32)*
    alias: "overrunCount"
    flags: READONLY
- addr:    0x4809cdf8
+ addr:    0x4809e9d8
 }
   pRti_UART_EVENTS_CH1_INT0_TCnt
   {
    type:  flt(64,IEEE)*
    alias: "taskCallCount"
    flags: READONLY
- addr:    0x4809cdfc
+ addr:    0x4809e9dc
 }
   pRti_UART_EVENTS_CH1_INT0_Prio
   {
    type:  int(32)*
    alias: "priority"
    flags: READONLY
- addr:    0x4809ce00
+ addr:    0x4809e9e0
 }
   endgroup
 
@@ -361,12 +362,12 @@ group "Model Root"
 	 block: "DataStoreMemory"
 	}
 
-		p_1_Human_in_Loop_real_T_4[2839]
+		p_1_Human_in_Loop_real_T_4[2849]
 		{
 		 type:    Human_in_Loop_ArrayDT0_4_1100_Col*
 		 alias:   "InitialValue"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -381,14 +382,14 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 		 alias:   "Out1"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 		p_1_Human_in_Loop_real_T_4[2630]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "InitialCondition"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -403,14 +404,14 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 		 alias:   "Out1"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 		p_1_Human_in_Loop_real_T_4[2636]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "InitialCondition"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -425,14 +426,14 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 		 alias:   "Out1"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 		p_1_Human_in_Loop_real_T_4[2641]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "InitialCondition"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -447,14 +448,14 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 		 alias:   "Out1"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 		p_1_Human_in_Loop_real_T_4[2620]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "InitialCondition"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -469,14 +470,14 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 		 alias:   "Out1"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 		p_1_Human_in_Loop_real_T_4[2623]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "InitialCondition"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -491,14 +492,14 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 		 alias:   "Out1"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 		p_1_Human_in_Loop_real_T_4[2629]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "InitialCondition"
 		 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -520,20 +521,20 @@ group "Model Root"
 			{
 			 block: "Gain"
 			}
-				p_0_Human_in_Loop_real_T_0[139]
+				p_0_Human_in_Loop_real_T_0[163]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2606]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Gain1"
@@ -542,20 +543,20 @@ group "Model Root"
 			{
 			 block: "Gain"
 			}
-				p_0_Human_in_Loop_real_T_0[138]
+				p_0_Human_in_Loop_real_T_0[162]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2605]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
-				 addr:    0x4809cd08
-				}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Gain2"
@@ -570,12 +571,12 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3142]
+				p_0_Human_in_Loop_real_T_0[3166]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "vel"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 				p_1_Human_in_Loop_real_T_0[6]
@@ -583,29 +584,29 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "MAX_TORQUE"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[4]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "MAX_MOTOR_ANGLE"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[7]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "MIN_MOTOR_ANGLE"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[5]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "MAX_SPEED"
 				 flags:   PARAM
-		 addr:    0x4809ccf8
-		}
+ addr:    0x4809e888
+}
 
 
 
@@ -617,12 +618,12 @@ group "Model Root"
   
 		group "Controller" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3894]
+			p_0_Human_in_Loop_real_T_0[3918]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "motor_vel_cmd"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			p_1_Human_in_Loop_int8_T_2[0]
@@ -630,42 +631,42 @@ group "Model Root"
 			 type:    int(8)*
 			 alias:   "run_mode"
 			 flags:   PARAM
-			 addr:    0x4809cd00
-			}
+ addr:    0x4809e890
+}
 			p_1_Human_in_Loop_real_T_0[1]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "CALIB_TORQUE"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 			p_1_Human_in_Loop_real_T_0[0]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "CALIB_SPEED"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 			p_1_Human_in_Loop_real_T_0[9]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "SLACK_SPEED"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 			p_1_Human_in_Loop_real_T_0[2]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "FOLLOW_SLACK_ANGLE"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 			p_1_Human_in_Loop_real_T_0[10]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "SWING_MAX_ANGLE"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 
 
@@ -675,19 +676,19 @@ group "Model Root"
   
 		group "LRN" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3143]
+			p_0_Human_in_Loop_real_T_0[3167]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "lrn_cmd"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3144]
+			p_0_Human_in_Loop_real_T_0[3168]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_750_Col*
 			 alias:   "lrn_mem"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			p_1_Human_in_Loop_boolean_T_3[3]
@@ -697,7 +698,7 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 			p_1_Human_in_Loop_boolean_T_3[4]
 			{
@@ -706,28 +707,28 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 			p_1_Human_in_Loop_real_T_0[20]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "error_filter_k"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 			p_1_Human_in_Loop_int32_T_1[0]
 			{
 			 type:    int(32)*
 			 alias:   "time_delay"
 			 flags:   PARAM
- addr:    0x4809ccfc
+ addr:    0x4809e88c
 }
 			p_1_Human_in_Loop_real_T_0[23]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "lrn_shrink"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 
 
@@ -737,33 +738,33 @@ group "Model Root"
   
 		group "Torque track" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[140]
+			p_0_Human_in_Loop_real_T_0[164]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_des"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[141]
+			p_0_Human_in_Loop_real_T_0[165]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_delta_des"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[142]
+			p_0_Human_in_Loop_real_T_0[166]
 			{
 			 type:    Human_in_Loop_ArrayDT0_2_750_Col*
 			 alias:   "torque_trace"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[1642]
+			p_0_Human_in_Loop_real_T_0[1666]
 			{
 			 type:    Human_in_Loop_ArrayDT0_2_750_Col*
 			 alias:   "torque_delta_trace"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -783,41 +784,41 @@ group "Model Root"
   
 	group "ObjectiveCala" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[4073]
+		p_0_Human_in_Loop_real_T_0[4098]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "Max"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-		p_0_Human_in_Loop_real_T_0[4079]
+		p_0_Human_in_Loop_real_T_0[4104]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "Mean"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-		p_0_Human_in_Loop_real_T_0[4085]
+		p_0_Human_in_Loop_real_T_0[4110]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "RMS"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-		p_0_Human_in_Loop_real_T_0[4091]
+		p_0_Human_in_Loop_real_T_0[4116]
 		{
 		 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 		 alias:   "iEMG"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-		p_0_Human_in_Loop_real_T_0[3990]
+ addr:    0x4809e84c
+}
+		p_0_Human_in_Loop_real_T_0[4015]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "torque_rmse"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 		group "Gain" -- block-group
@@ -829,15 +830,15 @@ group "Model Root"
 			 type:    flt(64,IEEE)*
 			 alias:   "Out1"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 			p_1_Human_in_Loop_real_T_4[2642]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Gain"
 			 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 		endgroup -- block-group "Gain"
@@ -846,81 +847,81 @@ group "Model Root"
   
 		group "Multi Cycle Analysis1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[4070]
+			p_0_Human_in_Loop_real_T_0[4095]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Count"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[4071]
+			p_0_Human_in_Loop_real_T_0[4096]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Time"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[4072]
+			p_0_Human_in_Loop_real_T_0[4097]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Frequency"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-			p_0_Human_in_Loop_real_T_0[4073]
+ addr:    0x4809e84c
+}
+			p_0_Human_in_Loop_real_T_0[4098]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Max"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-			p_0_Human_in_Loop_real_T_0[4079]
+ addr:    0x4809e84c
+}
+			p_0_Human_in_Loop_real_T_0[4104]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Mean"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[4085]
+			p_0_Human_in_Loop_real_T_0[4110]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "RMS"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[4091]
+			p_0_Human_in_Loop_real_T_0[4116]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "iEMG"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 			p_1_Human_in_Loop_real_T_0[8]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "N"
 			 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 
   
   
 			group "Mean Calculate" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[4071]
+				p_0_Human_in_Loop_real_T_0[4096]
 				{
 				 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 				 alias:   "Mean"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-				p_0_Human_in_Loop_real_T_0[4070]
+				p_0_Human_in_Loop_real_T_0[4095]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Count"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -934,8 +935,8 @@ group "Model Root"
 					 type:    Human_in_Loop_ArrayDT0_26_100_Col*
 					 alias:   "InitialValue"
 					 flags:   PARAM
-					 addr:    0x4809cd08
-					}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "Data Store\nMemory"
@@ -966,19 +967,19 @@ group "Model Root"
 				{
 				 block: "UnitDelay"
 				}
-					p_0_Human_in_Loop_real_T_0[4017]
+					p_0_Human_in_Loop_real_T_0[4042]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -988,19 +989,19 @@ group "Model Root"
 				{
 				 block: "UnitDelay"
 				}
-					p_0_Human_in_Loop_real_T_0[4018]
+					p_0_Human_in_Loop_real_T_0[4043]
 					{
 					 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[3]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1010,19 +1011,19 @@ group "Model Root"
   
 				group "MATLAB Function1" -- subsystem-group
 
-					p_0_Human_in_Loop_real_T_0[4070]
+					p_0_Human_in_Loop_real_T_0[4095]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "count"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-					p_0_Human_in_Loop_real_T_0[4071]
+					p_0_Human_in_Loop_real_T_0[4096]
 					{
 					 type:    Human_in_Loop_ArrayDT0_26_1_Col*
 					 alias:   "Mean"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1039,47 +1040,47 @@ group "Model Root"
   
 		group "Single Cycle Analysis1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3991]
+			p_0_Human_in_Loop_real_T_0[4016]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Time"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3992]
+			p_0_Human_in_Loop_real_T_0[4017]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "Frequency"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3993]
+			p_0_Human_in_Loop_real_T_0[4018]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Max"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-			p_0_Human_in_Loop_real_T_0[3999]
+ addr:    0x4809e84c
+}
+			p_0_Human_in_Loop_real_T_0[4024]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "Mean"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[4005]
+			p_0_Human_in_Loop_real_T_0[4030]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 			 alias:   "RMS"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[4011]
+			p_0_Human_in_Loop_real_T_0[4036]
 			{
 			 type:    Human_in_Loop_ArrayDT0_6*
 			 alias:   "iEMG"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			p_1_Human_in_Loop_real_T_0[18]
@@ -1087,8 +1088,8 @@ group "Model Root"
 			 type:    flt(64,IEEE)*
 			 alias:   "Ts"
 			 flags:   PARAM
-			 addr:    0x4809ccf8
-			}
+ addr:    0x4809e888
+}
 
 			group "Data Store\nMemory" -- block-group
 			{
@@ -1100,7 +1101,7 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_6_4_Col*
 				 alias:   "InitialValue"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1116,7 +1117,7 @@ group "Model Root"
 				 refgroup: ".."
 				 refvar:   "Ts"
 				 alias:    "Ts"
-		}
+}
 				trcref0_Value
 				{
 				 refgroup: ".."
@@ -1137,21 +1138,21 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 				p_1_Human_in_Loop_uint32_T_5[4]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
- addr:    0x4809cd0c
+ addr:    0x4809e89c
 }
 				p_1_Human_in_Loop_real_T_4[2683]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1166,21 +1167,21 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_uint32_T_5[1]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
- addr:    0x4809cd0c
+ addr:    0x4809e89c
 }
 				p_1_Human_in_Loop_real_T_4[2644]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1195,21 +1196,21 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_uint32_T_5[0]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
-		 addr:    0x4809cd0c
-		}
+ addr:    0x4809e89c
+}
 				p_1_Human_in_Loop_real_T_4[2643]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1224,21 +1225,21 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_uint32_T_5[6]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
- addr:    0x4809cd0c
+ addr:    0x4809e89c
 }
 				p_1_Human_in_Loop_real_T_4[2685]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1253,22 +1254,22 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_uint32_T_5[5]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
-		 addr:    0x4809cd0c
-		}
+ addr:    0x4809e89c
+}
 				p_1_Human_in_Loop_real_T_4[2684]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Delay5"
@@ -1282,21 +1283,21 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 				p_1_Human_in_Loop_uint32_T_5[3]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
-		 addr:    0x4809cd0c
-		}
+ addr:    0x4809e89c
+}
 				p_1_Human_in_Loop_real_T_4[2646]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1311,22 +1312,22 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_uint32_T_5[2]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
-		 addr:    0x4809cd0c
+		 addr:    0x4809e89c
 		}
 				p_1_Human_in_Loop_real_T_4[2645]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Delay7"
@@ -1340,21 +1341,21 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_6*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_uint32_T_5[7]
 				{
 				 type:    uint(32)*
 				 alias:   "DelayLength"
 				 flags:   PARAM
-		 addr:    0x4809cd0c
-		}
+ addr:    0x4809e89c
+}
 				p_1_Human_in_Loop_real_T_4[2686]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1364,47 +1365,47 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3991]
+				p_0_Human_in_Loop_real_T_0[4016]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Cycle_Time"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-				p_0_Human_in_Loop_real_T_0[3992]
+				p_0_Human_in_Loop_real_T_0[4017]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Cycle_Frequency"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-				p_0_Human_in_Loop_real_T_0[3993]
+ addr:    0x4809e84c
+}
+				p_0_Human_in_Loop_real_T_0[4018]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Max"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-				p_0_Human_in_Loop_real_T_0[3999]
+				p_0_Human_in_Loop_real_T_0[4024]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "Mean"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-				p_0_Human_in_Loop_real_T_0[4005]
+				p_0_Human_in_Loop_real_T_0[4030]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6_1_Col*
 				 alias:   "RMS"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-				p_0_Human_in_Loop_real_T_0[4011]
+				p_0_Human_in_Loop_real_T_0[4036]
 				{
 				 type:    Human_in_Loop_ArrayDT0_6*
 				 alias:   "iEMG"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1418,20 +1419,20 @@ group "Model Root"
   
 		group "torque_track_loss" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3989]
+			p_0_Human_in_Loop_real_T_0[4014]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_track_rmse"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3990]
+			p_0_Human_in_Loop_real_T_0[4015]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "torque_track_rmse_mean"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 
@@ -1444,33 +1445,33 @@ group "Model Root"
   
 	group "Parameter Module" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[3984]
+		p_0_Human_in_Loop_real_T_0[4009]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 		 alias:   "control_parm"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-		p_0_Human_in_Loop_real_T_0[3980]
+ addr:    0x4809e84c
+}
+		p_0_Human_in_Loop_real_T_0[4005]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 		 alias:   "torque_parm"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
   
   
 		group "Control Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3984]
+			p_0_Human_in_Loop_real_T_0[4009]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 			 alias:   "Control_Parameter"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 
 
 			group "Kd" -- block-group
@@ -1483,8 +1484,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Kd"
@@ -1499,8 +1500,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Kl"
@@ -1515,7 +1516,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1531,7 +1532,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1547,8 +1548,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
- addr:    0x4809cd08
-}
+		 addr:    0x4809e898
+		}
 
 
 			endgroup -- block-group "Ks"
@@ -1557,13 +1558,13 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3984]
+				p_0_Human_in_Loop_real_T_0[4009]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_5_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 
@@ -1576,12 +1577,12 @@ group "Model Root"
   
 		group "Torque Parameter" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3980]
+			p_0_Human_in_Loop_real_T_0[4005]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "Torque_Parameter"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1595,8 +1596,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "fall_time"
@@ -1611,8 +1612,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "peak_time"
@@ -1627,7 +1628,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1643,7 +1644,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Value"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1653,12 +1654,12 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3980]
+				p_0_Human_in_Loop_real_T_0[4005]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1686,35 +1687,35 @@ group "Model Root"
 		 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 		 alias:   "torque"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccd0
+ addr:    0x4809e860
 }
 		p_0_Human_in_Loop_real_T_6[0]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 		 alias:   "ankle"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccd4
+ addr:    0x4809e864
 }
-		p_0_Human_in_Loop_real_T_0[3909]
+		p_0_Human_in_Loop_real_T_0[3934]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 		 alias:   "motor"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-		p_0_Human_in_Loop_real_T_0[3905]
+		p_0_Human_in_Loop_real_T_0[3930]
 		{
 		 type:    flt(64,IEEE)*
 		 alias:   "footswich"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 		p_0_Human_in_Loop_real_T_14[0]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_6_Col*
 		 alias:   "EMG"
 		 flags:   OUTPUT|READONLY
- addr:    0x4809ccf4
+ addr:    0x4809e884
 }
 
 
@@ -1722,20 +1723,20 @@ group "Model Root"
   
 		group "Cosmed" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3914]
+			p_0_Human_in_Loop_real_T_0[3939]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "trigger"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3919]
+			p_0_Human_in_Loop_real_T_0[3944]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "metab"
 			 flags:   OUTPUT|READONLY
-			 addr:    0x4809ccbc
-			}
+ addr:    0x4809e84c
+}
 
 
 			group "RT1" -- block-group
@@ -1747,14 +1748,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2837]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1769,14 +1770,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2838]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialCondition"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -1786,12 +1787,12 @@ group "Model Root"
   
 			group "COSMED" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3919]
+				p_0_Human_in_Loop_real_T_0[3944]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "E"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1812,12 +1813,12 @@ group "Model Root"
   
 				group "Serial Decoding System" -- subsystem-group
 
-					p_0_Human_in_Loop_real_T_0[3919]
+					p_0_Human_in_Loop_real_T_0[3944]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "E"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1830,14 +1831,14 @@ group "Model Root"
 						 type:    Human_in_Loop_ArrayDT3_16*
 						 alias:   "RXBytes"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccc8
+ addr:    0x4809e858
 }
 						p_0_Human_in_Loop_uint32_T_2[0]
 						{
 						 type:    uint(32)*
 						 alias:   "NumRXBytes"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccc4
+ addr:    0x4809e854
 }
 						p_0_Human_in_Loop_int32_T_1[0]
 						{
@@ -1845,7 +1846,7 @@ group "Model Root"
 						 alias:   "Status"
 						 desc:    "No data (unused channel) "
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccc0
+ addr:    0x4809e850
 }
 
 					endgroup -- subsystem-group "DS1202SER_RX_C1"
@@ -1853,40 +1854,40 @@ group "Model Root"
   
 					group "Estimation" -- subsystem-group
 
-						p_0_Human_in_Loop_real_T_0[3919]
+						p_0_Human_in_Loop_real_T_0[3944]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "E"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-						p_0_Human_in_Loop_real_T_0[3920]
+						p_0_Human_in_Loop_real_T_0[3945]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Time"
 						 flags:   OUTPUT|READONLY
-					 addr:    0x4809ccbc
-					}
-						p_0_Human_in_Loop_real_T_0[3932]
+ addr:    0x4809e84c
+}
+						p_0_Human_in_Loop_real_T_0[3957]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Y"
 						 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-						p_0_Human_in_Loop_real_T_0[3944]
+ addr:    0x4809e84c
+}
+						p_0_Human_in_Loop_real_T_0[3969]
 						{
 						 type:    Human_in_Loop_ArrayDT0_1_12_Col*
 						 alias:   "Y_E"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-						p_0_Human_in_Loop_real_T_0[3956]
+						p_0_Human_in_Loop_real_T_0[3981]
 						{
 						 type:    Human_in_Loop_ArrayDT0_2_12_Col*
 						 alias:   "est_curve"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1897,19 +1898,19 @@ group "Model Root"
   
 					group "MATLAB Function1" -- subsystem-group
 
-						p_0_Human_in_Loop_real_T_0[3917]
+						p_0_Human_in_Loop_real_T_0[3942]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "Data1"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-						p_0_Human_in_Loop_real_T_0[3918]
+						p_0_Human_in_Loop_real_T_0[3943]
 						{
 						 type:    flt(64,IEEE)*
 						 alias:   "Data2"
 						 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -1926,27 +1927,27 @@ group "Model Root"
   
 			group "Timer" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3914]
+				p_0_Human_in_Loop_real_T_0[3939]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Trigger"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-				p_0_Human_in_Loop_real_T_0[3915]
+				p_0_Human_in_Loop_real_T_0[3940]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Time"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
-				p_0_Human_in_Loop_real_T_0[3916]
+ addr:    0x4809e84c
+}
+				p_0_Human_in_Loop_real_T_0[3941]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Count"
 				 flags:   OUTPUT|READONLY
-				 addr:    0x4809ccbc
-				}
+ addr:    0x4809e84c
+}
 
 				p_1_Human_in_Loop_boolean_T_3[5]
 				{
@@ -1955,7 +1956,7 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 
 
@@ -1973,15 +1974,15 @@ group "Model Root"
 			 type:    Human_in_Loop_ArrayDT0_1_6_Col*
 			 alias:   "EMG"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccf4
+ addr:    0x4809e884
 }
 			p_0_Human_in_Loop_real_T_13[0]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_6_Col*
 			 alias:   "EMG_compare"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccf0
-		}
+ addr:    0x4809e880
+}
 
 
 			group "Gain" -- block-group
@@ -1993,14 +1994,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2723]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2015,14 +2016,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2724]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2037,14 +2038,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2725]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2059,15 +2060,15 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2726]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Gain3"
@@ -2081,15 +2082,15 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 				p_1_Human_in_Loop_real_T_4[2727]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Gain4"
@@ -2103,14 +2104,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 				p_1_Human_in_Loop_real_T_4[2728]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2125,7 +2126,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL1"
@@ -2138,8 +2139,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
-				 addr:    0x4809ccbc
-				}
+ addr:    0x4809e84c
+}
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL2"
   
@@ -2151,8 +2152,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL3"
   
@@ -2164,7 +2165,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL4"
@@ -2177,7 +2178,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL5"
@@ -2190,7 +2191,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL6"
@@ -2203,7 +2204,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2216,7 +2217,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2231,42 +2232,42 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2789]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2792]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2793]
 					{
 					 type:    Human_in_Loop_ArrayDT0_2*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2795]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "D"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2796]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2281,36 +2282,36 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 					p_1_Human_in_Loop_real_T_4[2647]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2650]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2651]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2652]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "low_pass"
@@ -2327,7 +2328,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
+		 addr:    0x4809e84c
 		}
 
 
@@ -2340,7 +2341,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2355,42 +2356,42 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 					p_1_Human_in_Loop_real_T_4[2797]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2800]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2801]
 					{
 					 type:    Human_in_Loop_ArrayDT0_2*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
-}
+		 addr:    0x4809e898
+		}
 					p_1_Human_in_Loop_real_T_4[2803]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "D"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2804]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2405,35 +2406,35 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2653]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2656]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2657]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2658]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2451,7 +2452,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccec
+ addr:    0x4809e87c
 }
 
 
@@ -2464,7 +2465,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2479,36 +2480,36 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2769]
 					{
 					 type:    Human_in_Loop_ArrayDT0_7*
 					 alias:   "A"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2776]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2777]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2778]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "high_pass"
@@ -2522,8 +2523,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "y"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccec
-		}
+ addr:    0x4809e87c
+}
 
 
 
@@ -2541,7 +2542,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809cce8
+ addr:    0x4809e878
 }
 
 
@@ -2554,7 +2555,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2569,36 +2570,36 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2779]
 					{
 					 type:    Human_in_Loop_ArrayDT0_7*
 					 alias:   "A"
 					 flags:   PARAM
-		 addr:    0x4809cd08
+		 addr:    0x4809e898
 		}
 					p_1_Human_in_Loop_real_T_4[2786]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2787]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2788]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "high_pass"
@@ -2612,7 +2613,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "y"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809cce8
+ addr:    0x4809e878
 }
 
 
@@ -2631,7 +2632,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2644,7 +2645,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2659,42 +2660,42 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2805]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2808]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2809]
 					{
 					 type:    Human_in_Loop_ArrayDT0_2*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2811]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "D"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2812]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2709,35 +2710,35 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-			 addr:    0x4809ccbc
-			}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2659]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2662]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
-}
+		 addr:    0x4809e898
+		}
 					p_1_Human_in_Loop_real_T_4[2663]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2664]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2755,7 +2756,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2768,7 +2769,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -2783,42 +2784,42 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 					p_1_Human_in_Loop_real_T_4[2813]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2816]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2817]
 					{
 					 type:    Human_in_Loop_ArrayDT0_2*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2819]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "D"
 					 flags:   PARAM
-				 addr:    0x4809cd08
-				}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2820]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
+		 addr:    0x4809e898
 		}
 
 
@@ -2833,35 +2834,35 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2665]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2668]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2669]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2670]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -2879,8 +2880,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809cce4
-		}
+ addr:    0x4809e874
+}
 
 
 				group "Abs" -- block-group
@@ -2892,8 +2893,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-				 addr:    0x4809ccbc
-				}
+ addr:    0x4809e84c
+}
 
 
 				endgroup -- block-group "Abs"
@@ -2907,36 +2908,36 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2729]
 					{
 					 type:    Human_in_Loop_ArrayDT0_7*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2736]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2737]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2738]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "high_pass"
@@ -2950,7 +2951,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "y"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809cce4
+ addr:    0x4809e874
 }
 
 
@@ -2969,8 +2970,8 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809cce0
-		}
+ addr:    0x4809e870
+}
 
 
 				group "Abs" -- block-group
@@ -2982,7 +2983,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
+		 addr:    0x4809e84c
 		}
 
 
@@ -2997,36 +2998,36 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2739]
 					{
 					 type:    Human_in_Loop_ArrayDT0_7*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2746]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2747]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2748]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
-}
+		 addr:    0x4809e898
+		}
 
 
 				endgroup -- block-group "high_pass"
@@ -3040,7 +3041,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "y"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809cce0
+ addr:    0x4809e870
 }
 
 
@@ -3059,7 +3060,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccdc
+ addr:    0x4809e86c
 }
 
 
@@ -3072,7 +3073,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3087,35 +3088,35 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2749]
 					{
 					 type:    Human_in_Loop_ArrayDT0_7*
 					 alias:   "A"
 					 flags:   PARAM
-			 addr:    0x4809cd08
-			}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2756]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2757]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2758]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3130,7 +3131,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "y"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccdc
+ addr:    0x4809e86c
 }
 
 
@@ -3149,7 +3150,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccd8
+ addr:    0x4809e868
 }
 
 
@@ -3162,7 +3163,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3177,36 +3178,36 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2759]
 					{
 					 type:    Human_in_Loop_ArrayDT0_7*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2766]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2767]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2768]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-				 addr:    0x4809cd08
-				}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "high_pass"
@@ -3220,8 +3221,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "y"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccd8
-		}
+ addr:    0x4809e868
+}
 
 
 
@@ -3239,7 +3240,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3252,7 +3253,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3267,42 +3268,42 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2821]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2824]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2825]
 					{
 					 type:    Human_in_Loop_ArrayDT0_2*
 					 alias:   "C"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2827]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "D"
 					 flags:   PARAM
-				 addr:    0x4809cd08
-				}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2828]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3317,35 +3318,35 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2677]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2680]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2681]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2682]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3363,7 +3364,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "e(t)"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3376,7 +3377,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3391,43 +3392,43 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2829]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2832]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 					p_1_Human_in_Loop_real_T_4[2833]
 					{
 					 type:    Human_in_Loop_ArrayDT0_2*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2835]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "D"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2836]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-				 addr:    0x4809cd08
-				}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "high_pass"
@@ -3441,35 +3442,35 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2671]
 					{
 					 type:    Human_in_Loop_ArrayDT0_3*
 					 alias:   "A"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2674]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "B"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2675]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "C"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 					p_1_Human_in_Loop_real_T_4[2676]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3487,8 +3488,8 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_1_6_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccf4
-		}
+ addr:    0x4809e884
+}
 
 
 
@@ -3503,7 +3504,7 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_1_6_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccf0
+ addr:    0x4809e880
 }
 
 
@@ -3522,21 +3523,21 @@ group "Model Root"
 			 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 			 alias:   "Ankle"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccd4
+ addr:    0x4809e864
 }
-			p_0_Human_in_Loop_real_T_0[3909]
+			p_0_Human_in_Loop_real_T_0[3934]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Motor"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
-			p_0_Human_in_Loop_real_T_0[3906]
+		 addr:    0x4809e84c
+		}
+			p_0_Human_in_Loop_real_T_0[3931]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 			 alias:   "Accel"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3552,8 +3553,8 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
- addr:    0x4809cd10
-}
+		 addr:    0x4809e8a0
+		}
 
 
 			endgroup -- block-group "VCC1"
@@ -3570,7 +3571,7 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
- addr:    0x4809cd10
+ addr:    0x4809e8a0
 }
 
 
@@ -3585,14 +3586,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2621]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3607,15 +3608,15 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2622]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Gain1"
@@ -3629,15 +3630,15 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 				p_1_Human_in_Loop_real_T_4[2624]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 			endgroup -- block-group "Gain2"
@@ -3651,14 +3652,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 				p_1_Human_in_Loop_real_T_4[2625]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3673,28 +3674,28 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2712]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Numerator"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 				p_1_Human_in_Loop_real_T_4[2716]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Denominator"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 				p_1_Human_in_Loop_real_T_4[2720]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialStates"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3709,7 +3710,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "D"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 				p_1_Human_in_Loop_real_T_0[19]
@@ -3717,14 +3718,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Ts"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[11]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "T"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 
 				group "Gain" -- block-group
@@ -3736,8 +3737,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					trcref0_Ts
 					{
 					 refgroup: ".."
@@ -3764,7 +3765,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_T
 					{
@@ -3786,7 +3787,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_T
 					{
@@ -3808,8 +3809,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 				endgroup -- block-group "Add1"
@@ -3823,7 +3824,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -3838,8 +3839,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 				endgroup -- block-group "Add3"
@@ -3853,14 +3854,14 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2721]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -3875,15 +3876,15 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2722]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "Unit Delay1"
@@ -3900,29 +3901,29 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "D"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 				p_1_Human_in_Loop_real_T_0[17]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Ts"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[13]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "T1"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[15]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "T2"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 
 				group "Gain" -- block-group
@@ -3934,8 +3935,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					trcref0_Ts
 					{
 					 refgroup: ".."
@@ -3962,8 +3963,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-				 addr:    0x4809ccbc
-				}
+ addr:    0x4809e84c
+}
 					trcref0_T1
 					{
 					 refgroup: ".."
@@ -3975,7 +3976,7 @@ group "Model Root"
 					 refgroup: ".."
 					 refvar:   "T2"
 					 alias:    "T2"
-		}
+}
 					-- Skipping parameter "Gain"
 					-- Skipping parameter "Gain"
 
@@ -3991,7 +3992,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_T1
 					{
@@ -4024,7 +4025,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_Ts
 					{
@@ -4052,8 +4053,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					trcref0_T1
 					{
 					 refgroup: ".."
@@ -4081,7 +4082,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4096,7 +4097,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4111,8 +4112,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 				endgroup -- block-group "Add2"
@@ -4126,15 +4127,15 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2627]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "Unit Delay"
@@ -4148,14 +4149,14 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2626]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -4170,15 +4171,15 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2628]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "Unit Delay2"
@@ -4195,7 +4196,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Y"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 				p_1_Human_in_Loop_real_T_0[3]
@@ -4203,7 +4204,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ICPrevScaledInput"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 
 				group "Diff" -- block-group
@@ -4216,8 +4217,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 				endgroup -- block-group "Diff"
@@ -4231,22 +4232,22 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "In1"
 					 flags:   READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_0_Human_in_Loop_real_T_0[86]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "In2"
 					 flags:   READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_0_Human_in_Loop_real_T_0[87]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "In3"
 					 flags:   READONLY
-				 addr:    0x4809ccbc
-				}
+ addr:    0x4809e84c
+}
 
 
 
@@ -4261,15 +4262,15 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2711]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "WtEt"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "TSamp"
@@ -4284,7 +4285,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_ICPrevScaledInput
 					{
@@ -4315,14 +4316,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Position"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_0_Human_in_Loop_real_T_0[15]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Speed"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			endgroup -- subsystem-group "EMC_ENCODER_BL1"
@@ -4335,14 +4336,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Position"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_0_Human_in_Loop_real_T_0[21]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Speed"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			endgroup -- subsystem-group "EMC_ENCODER_BL3"
@@ -4362,13 +4363,13 @@ group "Model Root"
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3913]
+				p_0_Human_in_Loop_real_T_0[3938]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 				p_1_Human_in_Loop_boolean_T_3[6]
 				{
@@ -4377,8 +4378,8 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
-				 addr:    0x4809cd04
-				}
+ addr:    0x4809e894
+}
 
 
 
@@ -4387,13 +4388,13 @@ group "Model Root"
   
 			group "Data process1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3912]
+				p_0_Human_in_Loop_real_T_0[3937]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "angle"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 
 				p_1_Human_in_Loop_boolean_T_3[7]
 				{
@@ -4402,7 +4403,7 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 
 
@@ -4417,8 +4418,8 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccd4
-		}
+ addr:    0x4809e864
+}
 
 
 
@@ -4428,12 +4429,12 @@ group "Model Root"
   
 			group "Mux1" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3909]
+				p_0_Human_in_Loop_real_T_0[3934]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4444,12 +4445,12 @@ group "Model Root"
   
 			group "Mux2" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3906]
+				p_0_Human_in_Loop_real_T_0[3931]
 				{
 				 type:    Human_in_Loop_ArrayDT0_1_3_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4463,13 +4464,13 @@ group "Model Root"
   
 		group "FootSwitch module" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3905]
+			p_0_Human_in_Loop_real_T_0[3930]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "FootSwitch"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 
 
 			group "Constant" -- block-group
@@ -4484,7 +4485,7 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
- addr:    0x4809cd10
+ addr:    0x4809e8a0
 }
 
 
@@ -4501,8 +4502,8 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   OUTPUT|READONLY
- addr:    0x4809cccc
-}
+		 addr:    0x4809e85c
+		}
 
 			endgroup -- subsystem-group "DIO_CLASS1_BIT_IN_BL1"
   
@@ -4515,12 +4516,12 @@ group "Model Root"
   
 			group "FootSwitch Filter" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3905]
+				p_0_Human_in_Loop_real_T_0[3930]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "state"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4532,6 +4533,520 @@ group "Model Root"
 		endgroup -- subsystem-group "FootSwitch module"
   
   
+		group "IMU" -- subsystem-group
+
+			p_0_Human_in_Loop_real_T_0[3929]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Angle"
+			 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+			p_0_Human_in_Loop_real_T_0[149]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Gyro"
+			 flags:   OUTPUT|READONLY
+		 addr:    0x4809e84c
+		}
+
+
+			group "Calibration" -- block-group
+			{
+			 block: "Constant"
+			}
+				-- Skipping output Out1
+				p_1_Human_in_Loop_real_T_4[2839]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Value"
+				 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+			endgroup -- block-group "Calibration"
+
+			group "Gain" -- block-group
+			{
+			 block: "Gain"
+			}
+				p_0_Human_in_Loop_real_T_0[149]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+				p_1_Human_in_Loop_real_T_4[2842]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Gain"
+				 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+			endgroup -- block-group "Gain"
+
+			group "Sum" -- block-group
+			{
+			 block: "Sum"
+			}
+				p_0_Human_in_Loop_real_T_0[148]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+			endgroup -- block-group "Sum"
+
+  
+  
+			group "CAN_TYPE1_SETUP_M1_C1" -- subsystem-group
+
+
+			endgroup -- subsystem-group "CAN_TYPE1_SETUP_M1_C1"
+  
+  
+			group "CAN_TYPE1_SETUP_M1_C2" -- subsystem-group
+
+
+			endgroup -- subsystem-group "CAN_TYPE1_SETUP_M1_C2"
+  
+  
+			group "CAN_Test" -- subsystem-group
+
+
+
+				group "Sine Wave" -- block-group
+				{
+				 block: "Sin"
+				}
+					p_0_Human_in_Loop_real_T_0[157]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_1_Human_in_Loop_real_T_4[2845]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Amplitude"
+					 flags:   PARAM
+ addr:    0x4809e898
+}
+					p_1_Human_in_Loop_real_T_4[2846]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Bias"
+					 flags:   PARAM
+ addr:    0x4809e898
+}
+					p_1_Human_in_Loop_real_T_4[2847]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Frequency"
+					 flags:   PARAM
+ addr:    0x4809e898
+}
+					p_1_Human_in_Loop_real_T_4[2848]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Phase"
+					 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+				endgroup -- block-group "Sine Wave"
+
+  
+  
+				group "CAN_TYPE1_RX_M1_C1" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[154]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX signal"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[155]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX status"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[156]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX time"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+				endgroup -- subsystem-group "CAN_TYPE1_RX_M1_C1"
+  
+  
+				group "CAN_TYPE1_TX_M1_C2" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[158]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX status"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[159]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX time"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[160]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX delta time"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[161]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "TX delay time"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+				endgroup -- subsystem-group "CAN_TYPE1_TX_M1_C2"
+
+
+			endgroup -- subsystem-group "CAN_Test"
+  
+  
+			group "IMU" -- subsystem-group
+
+				p_0_Human_in_Loop_real_T_0[151]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Angle1"
+				 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+				p_0_Human_in_Loop_real_T_0[153]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Angle2"
+				 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+				p_0_Human_in_Loop_real_T_0[145]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Gyro1"
+				 flags:   OUTPUT|READONLY
+		 addr:    0x4809e84c
+		}
+				p_0_Human_in_Loop_real_T_0[147]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Gyro2"
+				 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+  
+  
+				group "CAN_RX_Anglex1" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[138]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Angle1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[139]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Angle2"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[140]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Gyro1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[141]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Gyro2"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[142]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX status"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+					p_0_Human_in_Loop_real_T_0[143]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "RX time"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+				endgroup -- subsystem-group "CAN_RX_Anglex1"
+  
+  
+				group "Subsystem" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[151]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[150]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[151]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+						p_1_Human_in_Loop_real_T_4[2843]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem"
+  
+  
+				group "Subsystem1" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[153]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[152]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[153]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+						p_1_Human_in_Loop_real_T_4[2844]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem1"
+  
+  
+				group "Subsystem3" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[145]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[144]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[145]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+						p_1_Human_in_Loop_real_T_4[2840]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem3"
+  
+  
+				group "Subsystem4" -- subsystem-group
+
+					p_0_Human_in_Loop_real_T_0[147]
+					{
+					 type:    flt(64,IEEE)*
+					 alias:   "Out1"
+					 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					group "Data Type Conversion" -- block-group
+					{
+					 block: "DataTypeConversion"
+					}
+						p_0_Human_in_Loop_real_T_0[146]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+					endgroup -- block-group "Data Type Conversion"
+
+					group "Gain" -- block-group
+					{
+					 block: "Gain"
+					}
+						p_0_Human_in_Loop_real_T_0[147]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Out1"
+						 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+						p_1_Human_in_Loop_real_T_4[2841]
+						{
+						 type:    flt(64,IEEE)*
+						 alias:   "Gain"
+						 flags:   PARAM
+ addr:    0x4809e898
+}
+
+
+					endgroup -- block-group "Gain"
+
+
+
+				endgroup -- subsystem-group "Subsystem4"
+
+
+			endgroup -- subsystem-group "IMU"
+  
+  
+			group "MATLAB Function" -- subsystem-group
+
+				p_0_Human_in_Loop_real_T_0[3929]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Angle_Ankle"
+				 flags:   OUTPUT|READONLY
+ addr:    0x4809e84c
+}
+
+
+
+
+			endgroup -- subsystem-group "MATLAB Function"
+
+
+		endgroup -- subsystem-group "IMU"
+  
+  
 		group "Torque module" -- subsystem-group
 
 			p_0_Human_in_Loop_real_T_5[0]
@@ -4539,7 +5054,7 @@ group "Model Root"
 			 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 			 alias:   "Torque"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccd0
+ addr:    0x4809e860
 }
 
 
@@ -4552,14 +5067,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 				p_1_Human_in_Loop_real_T_4[2607]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "Gain"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -4574,28 +5089,28 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Out1"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 				p_1_Human_in_Loop_real_T_4[2608]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Numerator"
 				 flags:   PARAM
-				 addr:    0x4809cd08
-				}
+ addr:    0x4809e898
+}
 				p_1_Human_in_Loop_real_T_4[2612]
 				{
 				 type:    Human_in_Loop_ArrayDT0_4*
 				 alias:   "Denominator"
 				 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 				p_1_Human_in_Loop_real_T_4[2616]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "InitialStates"
 				 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -4610,7 +5125,7 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "D"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 				p_1_Human_in_Loop_real_T_0[16]
@@ -4618,22 +5133,22 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "Ts"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[12]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "T1"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[14]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "T2"
 				 flags:   PARAM
-		 addr:    0x4809ccf8
-		}
+ addr:    0x4809e888
+}
 
 				group "Gain" -- block-group
 				{
@@ -4644,7 +5159,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_Ts
 					{
@@ -4672,8 +5187,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 					trcref0_T1
 					{
 					 refgroup: ".."
@@ -4701,7 +5216,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_T1
 					{
@@ -4734,7 +5249,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					trcref0_Ts
 					{
@@ -4748,7 +5263,7 @@ group "Model Root"
 					 refvar:   "Ts"
 					 alias:    "Gain"
 					 flags:    DEPRECATED|HIDDEN
-		}
+}
 
 
 				endgroup -- block-group "Gain3"
@@ -4762,8 +5277,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 					trcref0_T1
 					{
 					 refgroup: ".."
@@ -4791,8 +5306,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 				endgroup -- block-group "Add"
@@ -4806,8 +5321,8 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 
 
 				endgroup -- block-group "Add1"
@@ -4821,7 +5336,7 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4836,15 +5351,15 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 					p_1_Human_in_Loop_real_T_4[2618]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "Unit Delay"
@@ -4858,15 +5373,15 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 					p_1_Human_in_Loop_real_T_4[2617]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
-		 addr:    0x4809cd08
-		}
+ addr:    0x4809e898
+}
 
 
 				endgroup -- block-group "Unit Delay1"
@@ -4880,14 +5395,14 @@ group "Model Root"
 					 type:    flt(64,IEEE)*
 					 alias:   "Out1"
 					 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
-}
+		 addr:    0x4809e84c
+		}
 					p_1_Human_in_Loop_real_T_4[2619]
 					{
 					 type:    flt(64,IEEE)*
 					 alias:   "InitialCondition"
 					 flags:   PARAM
- addr:    0x4809cd08
+ addr:    0x4809e898
 }
 
 
@@ -4905,20 +5420,20 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "ADC"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 			endgroup -- subsystem-group "ADC_CLASS1_BL6"
   
   
 			group "Data process" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3904]
+				p_0_Human_in_Loop_real_T_0[3928]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 				p_1_Human_in_Loop_real_T_0[21]
@@ -4926,14 +5441,14 @@ group "Model Root"
 				 type:    flt(64,IEEE)*
 				 alias:   "load_vol_gain"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_real_T_0[22]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "load_vol_offset"
 				 flags:   PARAM
- addr:    0x4809ccf8
+ addr:    0x4809e888
 }
 				p_1_Human_in_Loop_boolean_T_3[8]
 				{
@@ -4942,7 +5457,7 @@ group "Model Root"
 				 range:   < 0 ; 1 >
 				 bitmask: 0x01
 				 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 
 
@@ -4952,12 +5467,12 @@ group "Model Root"
   
 			group "MATLAB Function" -- subsystem-group
 
-				p_0_Human_in_Loop_real_T_0[3903]
+				p_0_Human_in_Loop_real_T_0[3927]
 				{
 				 type:    flt(64,IEEE)*
 				 alias:   "torque_dot"
 				 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 
@@ -4973,7 +5488,7 @@ group "Model Root"
 				 type:    Human_in_Loop_ArrayDT0_1_2_Col*
 				 alias:   "x"
 				 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccd0
+		 addr:    0x4809e860
 		}
 
 
@@ -4990,26 +5505,26 @@ group "Model Root"
   
 	group "State Module" -- subsystem-group
 
-		p_0_Human_in_Loop_real_T_0[3899]
+		p_0_Human_in_Loop_real_T_0[3923]
 		{
 		 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 		 alias:   "state data"
 		 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
   
   
 		group "Mux1" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3899]
+			p_0_Human_in_Loop_real_T_0[3923]
 			{
 			 type:    Human_in_Loop_ArrayDT0_1_4_Col*
 			 alias:   "x"
 			 flags:   OUTPUT|READONLY
-		 addr:    0x4809ccbc
-		}
+ addr:    0x4809e84c
+}
 
 
 
@@ -5019,33 +5534,33 @@ group "Model Root"
   
 		group "State Machine" -- subsystem-group
 
-			p_0_Human_in_Loop_real_T_0[3895]
+			p_0_Human_in_Loop_real_T_0[3919]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "mode"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3896]
+			p_0_Human_in_Loop_real_T_0[3920]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "state"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3897]
+			p_0_Human_in_Loop_real_T_0[3921]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_time"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
-			p_0_Human_in_Loop_real_T_0[3898]
+			p_0_Human_in_Loop_real_T_0[3922]
 			{
 			 type:    flt(64,IEEE)*
 			 alias:   "stride_timer"
 			 flags:   OUTPUT|READONLY
- addr:    0x4809ccbc
+ addr:    0x4809e84c
 }
 
 			p_1_Human_in_Loop_boolean_T_3[9]
@@ -5055,7 +5570,7 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 			p_1_Human_in_Loop_boolean_T_3[10]
 			{
@@ -5064,7 +5579,7 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 			p_1_Human_in_Loop_boolean_T_3[2]
 			{
@@ -5073,7 +5588,7 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
- addr:    0x4809cd04
+ addr:    0x4809e894
 }
 			p_1_Human_in_Loop_boolean_T_3[1]
 			{
@@ -5082,8 +5597,8 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
-			 addr:    0x4809cd04
-			}
+ addr:    0x4809e894
+}
 			p_1_Human_in_Loop_boolean_T_3[0]
 			{
 			 type:    uint(8)*
@@ -5091,8 +5606,8 @@ group "Model Root"
 			 range:   < 0 ; 1 >
 			 bitmask: 0x01
 			 flags:   PARAM
-		 addr:    0x4809cd04
-		}
+ addr:    0x4809e894
+}
 
 
 
@@ -5162,7 +5677,7 @@ group "XIL API"
       desc:    "Index of active ErrorSet or 0 if no ErrorSet is active."
       flags:   OUTPUT|READONLY
       range:   < 0 ; 4294967295 >
- addr:    0x4805b46c
+ addr:    0x4805ce18
 }
 
     p_xilapi_eesport_erroractivated_uint32_T
@@ -5172,7 +5687,7 @@ group "XIL API"
       desc:    "0 - no error is activated on hardware, 1 - at least one error is activated on hardware."  
       flags:   OUTPUT|READONLY
       range:   < 0 ; 1 >
- addr:    0x4805b468
+ addr:    0x4805ce14
 }
 
     p_xilapi_eesport_errorswitching_uint32_T
@@ -5182,7 +5697,7 @@ group "XIL API"
       desc:    "0 - no switching operation running on hardware, 1 -  switching operation running on hardware."
       flags:   OUTPUT|READONLY
       range:   < 0 ; 1 >
- addr:    0x4805b464
+ addr:    0x4805ce10
 }
 
     xilapi_eesport_flags_uint32_T
@@ -5191,7 +5706,7 @@ group "XIL API"
       alias:   "Flags"
       flags:   OUTPUT|READONLY
       range:   < 0 ; 4294967295 >
- addr:    0x4809ce34
+ addr:    0x4809ebe0
 }
 
     xilapi_eesport_trigger_uint32_T
@@ -5200,7 +5715,7 @@ group "XIL API"
       alias:   "Trigger"
       flags:   OUTPUT|READONLY
       range:   < 0 ; 4294967295 >
- addr:    0x4809ce30
+ addr:    0x4809ebdc
 }
 
     endgroup -- "EESPort"

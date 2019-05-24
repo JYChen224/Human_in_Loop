@@ -31,6 +31,7 @@ typedef Human_in_Loop_ArrayDT0_15 flt(64,IEEE)[15]
 typedef Human_in_Loop_ArrayDT0_1_20_Col col flt(64,IEEE)[1][20]
 typedef Human_in_Loop_ArrayDT0_1_10_Col col flt(64,IEEE)[1][10]
 typedef Human_in_Loop_ArrayDT0_2600 flt(64,IEEE)[2600]
+typedef Human_in_Loop_ArrayDT10_2 int(32)[2]
 typedef Human_in_Loop_ArrayDT0_1_500_Col col flt(64,IEEE)[1][500]
 
 

@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1160
+ * Model version              : 1.1163
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Thu May  9 21:27:39 2019
+ * C source code generated on : Wed May 22 18:33:58 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -37,6 +37,51 @@
 # define rtmSetTPtr(rtm, val)          ((rtm)->Timing.t = (val))
 #endif
 
+/* ...  variable for information on a CAN channel */
+extern can_tp1_canChannel* can_type1_channel_M1_C1;
+
+/* ...  variable for information on a CAN channel */
+extern can_tp1_canChannel* can_type1_channel_M1_C2;
+
+/* ... definition of message variable for the RTICAN blocks */
+#define CANTP1_M1_NUMMSG               3
+
+extern can_tp1_canMsg* can_type1_msg_M1[CANTP1_M1_NUMMSG];
+
+/* ... variable for taskqueue error checking                  */
+extern Int32 rtican_type1_tq_error[CAN_TYPE1_NUM_MODULES]
+  [CAN_TYPE1_NUM_TASKQUEUES];
+
+/* Declaration of user indices (CAN_Type1_M1) */
+#define CANTP1_M1_C1_RX_STD_0X1        0
+#define RX_C1_STD_0X1                  0
+#undef RX_C1_STD_0X1
+#define CANTP1_M1_C1_RX_STD_0X64       1
+#define RX_C1_STD_0X64                 1
+#undef RX_C1_STD_0X64
+#define CANTP1_M1_C2_TX_STD_0X64       2
+#define TX_C2_STD_0X64                 2
+#undef TX_C2_STD_0X64
+
+/* predefine needed TX-definition code to support TX-Custom code */
+extern can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C1_STD;
+extern can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C1_XTD;
+
+/* predefine pointer to CAN message object for STD-Msg */
+extern can_tp1_canMsg* CANTP1_RX_SPMSG_M1_C1_STD;
+
+/* predefine needed identifiers for mcr-queue */
+extern can_tp1_canMsg* CANTP1_RX_M1_C1_MCRCLT_STD;
+
+/* predefine needed TX-definition code to support TX-Custom code */
+extern can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C2_STD;
+extern can_tp1_canMsg* CANTP1_TX_SPMSG_M1_C2_XTD;
+
+/* predefine pointer to CAN message object for STD-Msg */
+extern can_tp1_canMsg* CANTP1_RX_SPMSG_M1_C2_STD;
+
+/* predefine needed identifiers for mcr-queue */
+extern can_tp1_canMsg* CANTP1_RX_M1_C2_MCRCLT_STD;
 extern DacCl1AnalogOutSDrvObject *pRTIDacC1AnalogOut_Ch_16;
 extern AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_6;
 extern DioCl2EncoderInSDrvObject *pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1;
