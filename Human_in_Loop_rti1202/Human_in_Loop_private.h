@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1163
+ * Model version              : 1.1181
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Wed May 22 18:33:58 2019
+ * C source code generated on : Fri Jun 28 16:43:27 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -53,9 +53,9 @@ extern Int32 rtican_type1_tq_error[CAN_TYPE1_NUM_MODULES]
   [CAN_TYPE1_NUM_TASKQUEUES];
 
 /* Declaration of user indices (CAN_Type1_M1) */
-#define CANTP1_M1_C1_RX_STD_0X1        0
-#define RX_C1_STD_0X1                  0
-#undef RX_C1_STD_0X1
+#define CANTP1_M1_C1_RX_STD_0XA        0
+#define RX_C1_STD_0XA                  0
+#undef RX_C1_STD_0XA
 #define CANTP1_M1_C1_RX_STD_0X64       1
 #define RX_C1_STD_0X64                 1
 #undef RX_C1_STD_0X64
@@ -99,6 +99,7 @@ extern AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_10;
 
 /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
 extern dsserChannel *rtiDS1202SER_B1_Ser[2];
+extern SensorSupplySDrvObject *pRTI_Sensor_Supply;
 extern real_T rt_hypotd_snf(real_T u0, real_T u1);
 extern real_T rt_powd_snf(real_T u0, real_T u1);
 extern real_T rt_roundd_snf(real_T u);
@@ -109,8 +110,6 @@ extern void Human_in_Lo_MATLABFunction_Init(DW_MATLABFunction_Human_in_Lo_T
 extern void Human_in_Loop_MATLABFunction(real_T rtu_data,
   B_MATLABFunction_Human_in_Loo_T *localB, DW_MATLABFunction_Human_in_Lo_T
   *localDW);
-extern void Human_in_Loop_Mux(real_T rtu_x1, real_T rtu_x2,
-  B_Mux_Human_in_Loop_T *localB);
 extern void Human_SerialDecodingSystem_Init(void);
 extern void Huma_SerialDecodingSystem_Reset(void);
 extern void Human_in_L_SerialDecodingSystem(void);

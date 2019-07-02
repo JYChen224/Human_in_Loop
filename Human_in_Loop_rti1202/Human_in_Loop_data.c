@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1163
+ * Model version              : 1.1181
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Wed May 22 18:33:58 2019
+ * C source code generated on : Fri Jun 28 16:43:27 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -236,6 +236,7 @@ P_Human_in_Loop_T Human_in_Loop_P = {
     0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, 0.0 },
   0.0,
+  2.0,
   0.0027777777777777779,
   0.05,
   10.0,
@@ -251,6 +252,11 @@ P_Human_in_Loop_T Human_in_Loop_P = {
   0.0,
   0.288,
   0.288,
+
+  { 0.001567010350588, 0.004701031051765, 0.004701031051765, 0.001567010350588 },
+
+  { 1.0, -2.4986083446911782, 2.1152541270031588, -0.604109699507275 },
+  0.0,
   0.0,
   -0.288,
   -0.288,
@@ -262,7 +268,8 @@ P_Human_in_Loop_T Human_in_Loop_P = {
   0.0,
   0.0,
   0.0,
-  2.0,
+  1.0,
+  0.1,
   0.0,
   0.0,
   30.0,
@@ -413,11 +420,12 @@ P_Human_in_Loop_T Human_in_Loop_P = {
   0.0,
   0.0,
   0.0,
-  0.030518509475997192,
-  0.030518509475997192,
-  -1.0,
+  0.061037018951994385,
+  0.061037018951994385,
+  1.0,
   0.0054933317056794946,
   0.0054933317056794946,
+  1.0,
   100.0,
   0.0,
   1.0,

@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Wed May 22 18:33:58 2019
+   Fri Jun 28 16:43:27 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -204,7 +204,7 @@ static void rti_TIMERB(rtk_p_task_control_block task)
       break;
     }
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
       if (Human_in_Loop_DW.RT2_read_buf != 0) {
         Human_in_Loop_B.RT2[i] = Human_in_Loop_DW.RT2_Buffer1[i];
       } else {
@@ -345,6 +345,7 @@ AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_3;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_4;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_9;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_10;
+SensorSupplySDrvObject *pRTI_Sensor_Supply;
 
 /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
 dsserChannel *rtiDS1202SER_B1_Ser[2];
@@ -772,6 +773,40 @@ static void rti_mdl_initialize_io_boards(void)
     }
   }
 
+  /* --- Human_in_Loop/Sensor Data/IMU/DS1202_SENSOR_SUPPLY --- */
+  /* --- [RTI120X, Sensor Supply] --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init Sensor Supply driver object pRTI_Sensor_Supply */
+    ioErrorCode = SensorSupply_create(&pRTI_Sensor_Supply, SENSOR_SUPPLY_NO_2);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_setVoltage(pRTI_Sensor_Supply, 8);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_setSensorState(pRTI_Sensor_Supply,
+      SENSOR_STATE_ENABLE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_apply(pRTI_Sensor_Supply);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_start(pRTI_Sensor_Supply);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
   /* dSPACE I/O Board DS120XSTDADCC1 #0 */
   /* --- Human_in_Loop/Sensor Data/Torque module/ADC_CLASS1_BL6 --- */
   /* --- [RTI120X, ADC C1] - Channel: 6 --- */
@@ -1117,9 +1152,9 @@ static void rti_mdl_initialize_io_boards(void)
   {
     UInt32 mask = 0;
     UInt32 queueSize = 64;
-    UInt32 msgId = 2;
+    UInt32 msgId = 1;
     CANTP1_RX_SPMSG_M1_C1_STD = can_tp1_msg_rx_register(can_type1_channel_M1_C1,
-      0, 2, CAN_TP1_STD, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DATA_INFO |
+      0, 1, CAN_TP1_STD, CAN_TP1_TIMECOUNT_INFO | CAN_TP1_DATA_INFO |
       CAN_TP1_MSG_INFO, CAN_TP1_NO_SUBINT);
 
     /* set the queue depth */
@@ -1137,10 +1172,10 @@ static void rti_mdl_initialize_io_boards(void)
   /* dSPACE RTICAN MASTER SETUP Block */
   /* ... Initialize the Partial Networking Settings */
 
-  /* dSPACE RTICAN RX Message Block: "RX Message" Id:1 */
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:10 */
   /* ... Register message */
-  can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1] = can_tp1_msg_rx_register
-    (can_type1_channel_M1_C1, 0, 1, CAN_TP1_STD, (CAN_TP1_DATA_INFO|
+  can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0XA] = can_tp1_msg_rx_register
+    (can_type1_channel_M1_C1, 0, 10, CAN_TP1_STD, (CAN_TP1_DATA_INFO|
       CAN_TP1_DATA_INFO|CAN_TP1_TIMECOUNT_INFO), CAN_TP1_NO_SUBINT);
 
   /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
@@ -1197,7 +1232,7 @@ static void rti_mdl_initialize_io_boards(void)
       CAN_TP1_TIMECOUNT_INFO|CAN_TP1_TIMECOUNT_INFO|CAN_TP1_DELAYCOUNT_INFO),
      CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG, CAN_TP1_TIMEOUT_NORMAL);
 
-  /* dSPACE RTICAN RX Message Block: "RX Message" Id:1 */
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:10 */
   Human_in_Loop_B.SFunction1_o5 = 0;   /* processed - flag */
   Human_in_Loop_B.SFunction1_o6 = 0;   /* timestamp */
 
@@ -1423,7 +1458,7 @@ static void rti_mdl_initialize_io_units(void)
     if (numInit != 0) {
       /* ... Wake message up */
       while ((rtican_type1_tq_error[0][0] = can_tp1_msg_wakeup
-              (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X1])) ==
+              (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0XA])) ==
              DSMCOM_BUFFER_OVERFLOW) ;
     }
 
