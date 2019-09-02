@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Fri Jun 28 16:43:27 2019
+   Wed Jul 10 21:07:07 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -481,7 +481,7 @@ static void rti_mdl_initialize_io_boards(void)
     /* Create EMC Encoder driver object pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1 */
     ioErrorRetValue = DioCl2EncoderIn_create
       (&pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, DIO_CLASS2_CHANNEL_1,
-       DIO_ENC_INSTANCE_1,DIO_ENC_IUSAGE_DISABLED);
+       DIO_ENC_INSTANCE_1,DIO_ENC_IUSAGE_ENABLED);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -512,17 +512,19 @@ static void rti_mdl_initialize_io_boards(void)
     /* Sets index signal usage mode for the selected incremental Encoder */
     ioErrorRetValue = DioCl2EncoderIn_setIndexMode
       (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64)
-       DIO_ENC_IMODE_DISABLED);
+       DIO_ENC_IMODE_EVERY_INDEX);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    /* specify the minimum encoder velocity (in lines per second) */
-    ioErrorRetValue = DioCl2EncoderIn_setMinEncVelocity
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64) 1);
+    /* Sets index position for the selected incremental Encoder on index signal detection (in lines) */
+    ioErrorRetValue = DioCl2EncoderIn_setIndexPosition
+      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64) 0);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
+
+    /* no user specific minimum encoder velocity used */
 
     /* Sets gated mode for the selected incremental Encoder */
     ioErrorRetValue = DioCl2EncoderIn_setGatedMode
@@ -1592,6 +1594,12 @@ __INLINE void rti_mdl_sample_input(void)
       &speedOrAngVelocity);
     Human_in_Loop_B.SFunction1_o1 = (real_T) positionOrAngle;
     Human_in_Loop_B.SFunction1_o2 = (real_T) speedOrAngVelocity;
+
+    /* Once the index signal is detected, this outport is raised high.   *
+     * This value is retained until the end of the real-time application */
+    DioCl2EncoderIn_getIsIndexRaised (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1,
+      &isIndexRaised);
+    Human_in_Loop_B.SFunction1_o3_n = (boolean_T) isIndexRaised ;
   }
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL3 --- */

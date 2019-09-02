@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1181
+ * Model version              : 1.1183
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Fri Jun 28 16:43:27 2019
+ * C source code generated on : Wed Jul 10 21:07:07 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -356,6 +356,7 @@ typedef struct {
   int32_T SFunction1_o3_l;             /* '<S39>/S-Function1' */
   uint32_T SFunction1_o2_b;            /* '<S39>/S-Function1' */
   uint8_T SFunction1_o1_l[16];         /* '<S39>/S-Function1' */
+  boolean_T SFunction1_o3_n;           /* '<S73>/S-Function1' */
   boolean_T SFunction1_a;              /* '<S80>/S-Function1' */
   B_MATLABFunction_Human_in_Loo_T sf_MATLABFunction_l;/* '<S59>/MATLAB Function' */
   B_MATLABFunction_Human_in_Loo_T sf_MATLABFunction_n;/* '<S58>/MATLAB Function' */
@@ -586,6 +587,9 @@ struct P_Human_in_Loop_T_ {
   real_T MultiCycleAnalysis1_N;        /* Mask Parameter: MultiCycleAnalysis1_N
                                         * Referenced by: '<S18>/Constant'
                                         */
+  real_T Controller_R_ANKLE;           /* Mask Parameter: Controller_R_ANKLE
+                                        * Referenced by: '<S1>/Controller'
+                                        */
   real_T Controller_SLACK_SPEED;       /* Mask Parameter: Controller_SLACK_SPEED
                                         * Referenced by: '<S1>/Controller'
                                         */
@@ -705,9 +709,6 @@ struct P_Human_in_Loop_T_ {
                                              */
   real_T E_Y0;                         /* Computed Parameter: E_Y0
                                         * Referenced by: '<S38>/E'
-                                        */
-  real_T Constant_Value;               /* Expression: 2
-                                        * Referenced by: '<S1>/Constant'
                                         */
   real_T Gain2_Gain;                   /* Expression: 1/360
                                         * Referenced by: '<S11>/Gain2'
@@ -1190,7 +1191,7 @@ struct P_Human_in_Loop_T_ {
   boolean_T VCC3_Value;                /* Computed Parameter: VCC3_Value
                                         * Referenced by: '<S30>/VCC3'
                                         */
-  boolean_T Constant_Value_f;          /* Computed Parameter: Constant_Value_f
+  boolean_T Constant_Value;            /* Computed Parameter: Constant_Value
                                         * Referenced by: '<S31>/Constant'
                                         */
 };

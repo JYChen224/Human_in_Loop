@@ -3,9 +3,9 @@
  *
  * Code generation for model "Human_in_Loop".
  *
- * Model version              : 1.1181
+ * Model version              : 1.1183
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Fri Jun 28 16:43:27 2019
+ * C source code generated on : Wed Jul 10 21:07:07 2019
  *
  * Target selection: rti1202.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -36,17 +36,16 @@ RT_MODEL_Human_in_Loop_T *const Human_in_Loop_M = &Human_in_Loop_M_;
 
 /* Forward declaration for local functions */
 static real_T Human_in_Loop_xnrm2(int32_T n, const real_T x_data[], int32_T ix0);
-static void Human_in_Loop_LSQFromQR(const real_T A_data[], const int32_T A_size
-  [2], const real_T tau_data[], const int32_T jpvt[2], real_T B_data[], int32_T
-  rankA, real_T Y[2]);
-static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2],
+static void Human_in_Loop_xgeqp3(real_T A_data[], int32_T A_size[2], real_T
+  tau_data[], int32_T *tau_size, int32_T jpvt[2]);
+static void Human_in_Loop_mldivide(const real_T A_data[], const int32_T A_size[2],
   const real_T B_data[], const int32_T *B_size, real_T Y[2]);
 
 /* Forward declaration for local functions */
-static void Human_in_Loop_mldivide(const real_T A[16], real_T B[4]);
+static void Human_in_Loop_mldivide_g(const real_T A[16], real_T B[4]);
 static void Human_in_Loop_power(const real_T a_data[], const int32_T a_size[2],
   real_T y_data[], int32_T y_size[2]);
-static void Human_in_Loop_power_g(const real_T a_data[], const int32_T a_size[2],
+static void Human_in_Loop_power_a(const real_T a_data[], const int32_T a_size[2],
   real_T y_data[], int32_T y_size[2]);
 
 /* Forward declaration for local functions */
@@ -54,7 +53,7 @@ static real_T Human_in_Loop_norm(const real_T x_data[], const int32_T x_size[2])
 static real_T Human_in_Loop_mean(const real_T x[10]);
 static real_T Human_in_Loop_xnrm2_o(const real_T x[30], int32_T ix0);
 static real_T Human_in_Loop_xnrm2_ov(int32_T n, const real_T x[30], int32_T ix0);
-static void Human_in_Loop_xgeqp3(real_T A[30], real_T tau[2], int32_T jpvt[2]);
+static void Human_in_Loop_xgeqp3_n(real_T A[30], real_T tau[2], int32_T jpvt[2]);
 static void rate_scheduler(void);
 
 /*
@@ -155,67 +154,9 @@ real_T rt_hypotd_snf(real_T u0, real_T u1)
 }
 
 /* Function for MATLAB Function: '<S38>/Estimation' */
-static void Human_in_Loop_LSQFromQR(const real_T A_data[], const int32_T A_size
-  [2], const real_T tau_data[], const int32_T jpvt[2], real_T B_data[], int32_T
-  rankA, real_T Y[2])
+static void Human_in_Loop_xgeqp3(real_T A_data[], int32_T A_size[2], real_T
+  tau_data[], int32_T *tau_size, int32_T jpvt[2])
 {
-  int32_T m;
-  real_T wj;
-  int32_T c_i;
-  m = A_size[0];
-  Y[0] = 0.0;
-  if (tau_data[0] != 0.0) {
-    wj = B_data[0];
-    for (c_i = 1; c_i + 1 <= m; c_i++) {
-      wj += A_data[c_i] * B_data[c_i];
-    }
-
-    wj *= tau_data[0];
-    if (wj != 0.0) {
-      B_data[0] -= wj;
-      for (c_i = 1; c_i + 1 <= m; c_i++) {
-        B_data[c_i] -= A_data[c_i] * wj;
-      }
-    }
-  }
-
-  Y[1] = 0.0;
-  if (tau_data[1] != 0.0) {
-    wj = B_data[1];
-    for (c_i = 2; c_i + 1 <= m; c_i++) {
-      wj += A_data[c_i + A_size[0]] * B_data[c_i];
-    }
-
-    wj *= tau_data[1];
-    if (wj != 0.0) {
-      B_data[1] -= wj;
-      for (c_i = 2; c_i + 1 <= m; c_i++) {
-        B_data[c_i] -= A_data[c_i + A_size[0]] * wj;
-      }
-    }
-  }
-
-  for (m = 0; m + 1 <= rankA; m++) {
-    Y[jpvt[m] - 1] = B_data[m];
-  }
-
-  for (m = rankA - 1; m + 1 > 0; m--) {
-    Y[jpvt[m] - 1] /= A_data[A_size[0] * m + m];
-    c_i = 1;
-    while (c_i <= m) {
-      Y[jpvt[0] - 1] -= Y[jpvt[m] - 1] * A_data[A_size[0] * m];
-      c_i = 2;
-    }
-  }
-}
-
-/* Function for MATLAB Function: '<S38>/Estimation' */
-static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2],
-  const real_T B_data[], const int32_T *B_size, real_T Y[2])
-{
-  real_T b_A_data[40];
-  real_T tau_data[2];
-  int32_T jpvt[2];
   int32_T m;
   real_T work[2];
   real_T vn1[2];
@@ -229,18 +170,10 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
   int32_T f;
   int32_T b_ia;
   int32_T jy;
-  real_T B_data_0[20];
-  int32_T b_A_size[2];
   int32_T exitg1;
   boolean_T exitg2;
-  b_A_size[0] = A_size[0];
-  b_A_size[1] = 2;
-  k = A_size[0] * A_size[1];
-  if (0 <= k - 1) {
-    memcpy(&b_A_data[0], &A_data[0], k * sizeof(real_T));
-  }
-
   m = A_size[0];
+  *tau_size = 2;
   jpvt[0] = 1;
   work[0] = 0.0;
   smax = Human_in_Loop_xnrm2(m, A_data, 1);
@@ -269,9 +202,9 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
     ix = m * k;
     iy = 0;
     for (jy = 1; jy <= m; jy++) {
-      smax = b_A_data[ix];
-      b_A_data[ix] = b_A_data[iy];
-      b_A_data[iy] = smax;
+      smax = A_data[ix];
+      A_data[ix] = A_data[iy];
+      A_data[iy] = smax;
       ix++;
       iy++;
     }
@@ -281,13 +214,13 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
     jpvt[0] = ix;
   }
 
-  smax = b_A_data[0];
+  smax = A_data[0];
   b_c = 0.0;
   if (!(m <= 0)) {
-    xnorm = Human_in_Loop_xnrm2(m - 1, b_A_data, 2);
+    xnorm = Human_in_Loop_xnrm2(m - 1, A_data, 2);
     if (xnorm != 0.0) {
-      xnorm = rt_hypotd_snf(b_A_data[0], xnorm);
-      if (b_A_data[0] >= 0.0) {
+      xnorm = rt_hypotd_snf(A_data[0], xnorm);
+      if (A_data[0] >= 0.0) {
         xnorm = -xnorm;
       }
 
@@ -297,14 +230,14 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
         do {
           k++;
           for (iy = 1; iy + 1 <= ix; iy++) {
-            b_A_data[iy] *= 9.9792015476736E+291;
+            A_data[iy] *= 9.9792015476736E+291;
           }
 
           xnorm *= 9.9792015476736E+291;
           smax *= 9.9792015476736E+291;
         } while (!(fabs(xnorm) >= 1.0020841800044864E-292));
 
-        xnorm = rt_hypotd_snf(smax, Human_in_Loop_xnrm2(m - 1, b_A_data, 2));
+        xnorm = rt_hypotd_snf(smax, Human_in_Loop_xnrm2(m - 1, A_data, 2));
         if (smax >= 0.0) {
           xnorm = -xnorm;
         }
@@ -312,7 +245,7 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
         b_c = (xnorm - smax) / xnorm;
         smax = 1.0 / (smax - xnorm);
         for (iy = 1; iy + 1 <= ix; iy++) {
-          b_A_data[iy] *= smax;
+          A_data[iy] *= smax;
         }
 
         for (ix = 1; ix <= k; ix++) {
@@ -321,11 +254,11 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
 
         smax = xnorm;
       } else {
-        b_c = (xnorm - b_A_data[0]) / xnorm;
-        smax = 1.0 / (b_A_data[0] - xnorm);
+        b_c = (xnorm - A_data[0]) / xnorm;
+        smax = 1.0 / (A_data[0] - xnorm);
         k = m;
         for (ix = 1; ix + 1 <= k; ix++) {
-          b_A_data[ix] *= smax;
+          A_data[ix] *= smax;
         }
 
         smax = xnorm;
@@ -334,13 +267,13 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
   }
 
   tau_data[0] = b_c;
-  b_A_data[0] = smax;
-  smax = b_A_data[0];
-  b_A_data[0] = 1.0;
+  A_data[0] = smax;
+  smax = A_data[0];
+  A_data[0] = 1.0;
   if (tau_data[0] != 0.0) {
     k = m;
     ix = m - 1;
-    while ((k > 0) && (b_A_data[ix] == 0.0)) {
+    while ((k > 0) && (A_data[ix] == 0.0)) {
       k--;
       ix--;
     }
@@ -352,7 +285,7 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
       do {
         exitg1 = 0;
         if (iy + 1 <= m + k) {
-          if (b_A_data[iy] != 0.0) {
+          if (A_data[iy] != 0.0) {
             exitg1 = 1;
           } else {
             iy++;
@@ -381,7 +314,7 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
         b_c = 0.0;
         f = (jy + k) - 1;
         for (b_ia = jy; b_ia <= f; b_ia++) {
-          b_c += b_A_data[b_ia - 1] * b_A_data[c_ix];
+          b_c += A_data[b_ia - 1] * A_data[c_ix];
           c_ix++;
         }
 
@@ -400,7 +333,7 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
           c_ix = 0;
           f = k + iy;
           for (b_ia = iy; b_ia + 1 <= f; b_ia++) {
-            b_A_data[b_ia] += b_A_data[c_ix] * b_c;
+            A_data[b_ia] += A_data[c_ix] * b_c;
             c_ix++;
           }
         }
@@ -412,16 +345,16 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
     }
   }
 
-  b_A_data[0] = smax;
+  A_data[0] = smax;
   jy = 1 + m;
   m--;
-  smax = b_A_data[jy];
+  smax = A_data[jy];
   b_c = 0.0;
   if (!(m <= 0)) {
-    xnorm = Human_in_Loop_xnrm2(m - 1, b_A_data, jy + 2);
+    xnorm = Human_in_Loop_xnrm2(m - 1, A_data, jy + 2);
     if (xnorm != 0.0) {
-      xnorm = rt_hypotd_snf(b_A_data[jy], xnorm);
-      if (b_A_data[jy] >= 0.0) {
+      xnorm = rt_hypotd_snf(A_data[jy], xnorm);
+      if (A_data[jy] >= 0.0) {
         xnorm = -xnorm;
       }
 
@@ -431,14 +364,14 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
         do {
           k++;
           for (iy = jy + 1; iy + 1 <= ix; iy++) {
-            b_A_data[iy] *= 9.9792015476736E+291;
+            A_data[iy] *= 9.9792015476736E+291;
           }
 
           xnorm *= 9.9792015476736E+291;
           smax *= 9.9792015476736E+291;
         } while (!(fabs(xnorm) >= 1.0020841800044864E-292));
 
-        xnorm = rt_hypotd_snf(smax, Human_in_Loop_xnrm2(m - 1, b_A_data, jy + 2));
+        xnorm = rt_hypotd_snf(smax, Human_in_Loop_xnrm2(m - 1, A_data, jy + 2));
         if (smax >= 0.0) {
           xnorm = -xnorm;
         }
@@ -447,7 +380,7 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
         smax = 1.0 / (smax - xnorm);
         ix = jy + m;
         for (iy = jy + 1; iy + 1 <= ix; iy++) {
-          b_A_data[iy] *= smax;
+          A_data[iy] *= smax;
         }
 
         for (ix = 1; ix <= k; ix++) {
@@ -456,11 +389,11 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
 
         smax = xnorm;
       } else {
-        b_c = (xnorm - b_A_data[jy]) / xnorm;
-        smax = 1.0 / (b_A_data[jy] - xnorm);
+        b_c = (xnorm - A_data[jy]) / xnorm;
+        smax = 1.0 / (A_data[jy] - xnorm);
         k = jy + m;
         for (ix = jy + 1; ix + 1 <= k; ix++) {
-          b_A_data[ix] *= smax;
+          A_data[ix] *= smax;
         }
 
         smax = xnorm;
@@ -469,19 +402,153 @@ static void Human_in_Loop_qrsolve(const real_T A_data[], const int32_T A_size[2]
   }
 
   tau_data[1] = b_c;
-  b_A_data[jy] = smax;
-  m = 0;
-  smax = (real_T)b_A_size[0] * fabs(b_A_data[0]) * 2.2204460492503131E-16;
-  while ((m < 2) && (!(fabs(b_A_data[b_A_size[0] * m + m]) <= smax))) {
-    m++;
-  }
+  A_data[jy] = smax;
+}
 
-  k = *B_size;
-  if (0 <= k - 1) {
-    memcpy(&B_data_0[0], &B_data[0], k * sizeof(real_T));
-  }
+/* Function for MATLAB Function: '<S38>/Estimation' */
+static void Human_in_Loop_mldivide(const real_T A_data[], const int32_T A_size[2],
+  const real_T B_data[], const int32_T *B_size, real_T Y[2])
+{
+  real_T b_A_data[40];
+  real_T tau_data[2];
+  int32_T jpvt[2];
+  int32_T rankR;
+  real_T tol;
+  real_T b_B_data[20];
+  int32_T m;
+  int32_T c_i;
+  int32_T b_A_size[2];
+  real_T x_data_idx_1;
+  real_T x_data_idx_0;
+  real_T x_data_idx_2;
+  real_T x_data_idx_3;
+  if (A_size[0] == 2) {
+    x_data_idx_0 = A_data[0];
+    x_data_idx_1 = A_data[1];
+    x_data_idx_2 = A_data[2];
+    x_data_idx_3 = A_data[3];
+    jpvt[0] = 1;
+    rankR = 0;
+    if (fabs(A_data[1]) > fabs(A_data[0])) {
+      rankR = 1;
+    }
 
-  Human_in_Loop_LSQFromQR(b_A_data, b_A_size, tau_data, jpvt, B_data_0, m, Y);
+    if (A_data[rankR] != 0.0) {
+      if (rankR != 0) {
+        jpvt[0] = 2;
+        x_data_idx_0 = A_data[0];
+        x_data_idx_1 = A_data[1];
+        x_data_idx_2 = A_data[2];
+        x_data_idx_3 = A_data[3];
+        tol = x_data_idx_0;
+        x_data_idx_0 = x_data_idx_1;
+        x_data_idx_1 = tol;
+        tol = x_data_idx_2;
+        x_data_idx_2 = x_data_idx_3;
+        x_data_idx_3 = tol;
+      }
+
+      x_data_idx_1 /= x_data_idx_0;
+    }
+
+    if (x_data_idx_2 != 0.0) {
+      x_data_idx_3 += x_data_idx_1 * -x_data_idx_2;
+    }
+
+    Y[0] = B_data[0];
+    Y[1] = B_data[1];
+    if (jpvt[0] != 1) {
+      Y[0] = B_data[1];
+      Y[1] = B_data[0];
+    }
+
+    if (Y[0] != 0.0) {
+      rankR = 2;
+      while (rankR < 3) {
+        Y[1] -= Y[0] * x_data_idx_1;
+        rankR = 3;
+      }
+    }
+
+    if (Y[1] != 0.0) {
+      Y[1] /= x_data_idx_3;
+      rankR = 1;
+      while (rankR <= 1) {
+        Y[0] -= Y[1] * x_data_idx_2;
+        rankR = 2;
+      }
+    }
+
+    if (Y[0] != 0.0) {
+      Y[0] /= x_data_idx_0;
+    }
+  } else {
+    b_A_size[0] = A_size[0];
+    b_A_size[1] = 2;
+    m = A_size[0] * A_size[1];
+    if (0 <= m - 1) {
+      memcpy(&b_A_data[0], &A_data[0], m * sizeof(real_T));
+    }
+
+    Human_in_Loop_xgeqp3(b_A_data, b_A_size, tau_data, &m, jpvt);
+    rankR = 0;
+    tol = (real_T)b_A_size[0] * fabs(b_A_data[0]) * 2.2204460492503131E-16;
+    while ((rankR < 2) && (!(fabs(b_A_data[b_A_size[0] * rankR + rankR]) <= tol)))
+    {
+      rankR++;
+    }
+
+    Y[0] = 0.0;
+    Y[1] = 0.0;
+    m = *B_size;
+    if (0 <= m - 1) {
+      memcpy(&b_B_data[0], &B_data[0], m * sizeof(real_T));
+    }
+
+    m = b_A_size[0];
+    if (tau_data[0] != 0.0) {
+      tol = b_B_data[0];
+      for (c_i = 1; c_i + 1 <= m; c_i++) {
+        tol += b_A_data[c_i] * b_B_data[c_i];
+      }
+
+      tol *= tau_data[0];
+      if (tol != 0.0) {
+        b_B_data[0] -= tol;
+        for (c_i = 1; c_i + 1 <= m; c_i++) {
+          b_B_data[c_i] -= b_A_data[c_i] * tol;
+        }
+      }
+    }
+
+    if (tau_data[1] != 0.0) {
+      tol = b_B_data[1];
+      for (c_i = 2; c_i + 1 <= m; c_i++) {
+        tol += b_A_data[c_i + b_A_size[0]] * b_B_data[c_i];
+      }
+
+      tol *= tau_data[1];
+      if (tol != 0.0) {
+        b_B_data[1] -= tol;
+        for (c_i = 2; c_i + 1 <= m; c_i++) {
+          b_B_data[c_i] -= b_A_data[c_i + b_A_size[0]] * tol;
+        }
+      }
+    }
+
+    for (m = 0; m + 1 <= rankR; m++) {
+      Y[jpvt[m] - 1] = b_B_data[m];
+    }
+
+    for (rankR--; rankR + 1 > 0; rankR--) {
+      Y[jpvt[rankR] - 1] /= b_A_data[b_A_size[0] * rankR + rankR];
+      m = 1;
+      while (m <= rankR) {
+        Y[jpvt[0] - 1] -= Y[jpvt[rankR] - 1] * b_A_data[b_A_size[0] * rankR];
+        m = 2;
+      }
+    }
+  }
 }
 
 /* System initialize for function-call system: '<S34>/Serial Decoding System' */
@@ -528,21 +595,18 @@ void Huma_SerialDecodingSystem_Reset(void)
 /* Output and update for function-call system: '<S34>/Serial Decoding System' */
 void Human_in_L_SerialDecodingSystem(void)
 {
+  real_T Data1;
   real_T Data2;
   real_T i;
-  real_T A_data[40];
-  real_T b_data[20];
+  real_T y_data[20];
   real_T x_data[20];
-  int32_T ix;
-  real_T temp;
-  real_T c_x[12];
+  real_T b_x[12];
   real_T a[24];
+  real_T tmp_data[40];
   int32_T i_0;
-  int32_T A_size[2];
-  int32_T b_size;
-  int8_T ipiv_idx_0;
-  real_T b_x_data_idx_2;
-  real_T b_x_data_idx_3;
+  int32_T i_1;
+  int32_T loop_ub;
+  int32_T tmp_size[2];
 
   /* S-Function (rti_commonblock): '<S39>/S-Function1' */
   /* This comment workarounds a code generation problem */
@@ -557,7 +621,7 @@ void Human_in_L_SerialDecodingSystem(void)
   /* MATLAB Function: '<S38>/MATLAB Function1' */
   /* MATLAB Function 'Sensor Data/Cosmed/COSMED/Serial Decoding System/MATLAB Function1': '<S41>:1' */
   /* '<S41>:1:3' */
-  temp = 0.0;
+  Data1 = 0.0;
 
   /* '<S41>:1:4' */
   Data2 = 0.0;
@@ -566,8 +630,8 @@ void Human_in_L_SerialDecodingSystem(void)
   for (i = 1.0; Human_in_Loop_B.SFunction1_o1_l[(int32_T)i - 1] != 44; i++) {
     /* '<S41>:1:8' */
     /* '<S41>:1:9' */
-    temp = ((real_T)Human_in_Loop_B.SFunction1_o1_l[(int32_T)i - 1] - 48.0) +
-      temp * 10.0;
+    Data1 = ((real_T)Human_in_Loop_B.SFunction1_o1_l[(int32_T)i - 1] - 48.0) +
+      Data1 * 10.0;
 
     /* '<S41>:1:10' */
   }
@@ -582,7 +646,7 @@ void Human_in_L_SerialDecodingSystem(void)
     /* '<S41>:1:17' */
   }
 
-  Human_in_Loop_B.Data1 = temp;
+  Human_in_Loop_B.Data1 = Data1;
   Human_in_Loop_B.Data2 = Data2;
 
   /* End of MATLAB Function: '<S38>/MATLAB Function1' */
@@ -598,9 +662,9 @@ void Human_in_L_SerialDecodingSystem(void)
 
     /* '<S40>:1:23' */
     /* '<S40>:1:24' */
-    for (b_size = 0; b_size < 20; b_size++) {
-      Human_in_Loop_DW.x[b_size] = 10.0 * (real_T)b_size + 10.0;
-      Human_in_Loop_DW.y[b_size] = 0.0;
+    for (i_0 = 0; i_0 < 20; i_0++) {
+      Human_in_Loop_DW.x[i_0] = 10.0 * (real_T)i_0 + 10.0;
+      Human_in_Loop_DW.y[i_0] = 0.0;
     }
 
     /* '<S40>:1:25' */
@@ -626,105 +690,41 @@ void Human_in_L_SerialDecodingSystem(void)
     if (Human_in_Loop_DW.num >= 2.0) {
       /* '<S40>:1:37' */
       /* '<S40>:1:38' */
-      b_size = (int32_T)Human_in_Loop_DW.num;
-      ix = (int32_T)Human_in_Loop_DW.num;
-      for (i_0 = 0; i_0 < ix; i_0++) {
-        b_data[i_0] = -Human_in_Loop_DW.x[i_0] / 42.0;
+      i_0 = (int32_T)Human_in_Loop_DW.num;
+      loop_ub = (int32_T)Human_in_Loop_DW.num;
+      for (i_1 = 0; i_1 < loop_ub; i_1++) {
+        y_data[i_1] = -Human_in_Loop_DW.x[i_1] / 42.0;
       }
 
-      ix = b_size;
-      if (0 <= ix - 1) {
-        memcpy(&x_data[0], &b_data[0], ix * sizeof(real_T));
+      if (0 <= i_0 - 1) {
+        memcpy(&x_data[0], &y_data[0], i_0 * sizeof(real_T));
       }
 
-      for (ix = 0; ix + 1 <= b_size; ix++) {
-        x_data[ix] = exp(x_data[ix]);
-      }
-
-      A_size[0] = b_size;
-      A_size[1] = 2;
-      for (i_0 = 0; i_0 < b_size; i_0++) {
-        A_data[i_0] = 1.0 - x_data[i_0];
-      }
-
-      ix = (int32_T)Human_in_Loop_DW.num;
-      for (i_0 = 0; i_0 < ix; i_0++) {
-        A_data[i_0 + b_size] = 1.0;
+      for (loop_ub = 0; loop_ub + 1 <= i_0; loop_ub++) {
+        x_data[loop_ub] = exp(x_data[loop_ub]);
       }
 
       /* '<S40>:1:39' */
-      b_size = (int32_T)Human_in_Loop_DW.num;
-      ix = (int32_T)Human_in_Loop_DW.num;
-      if (0 <= ix - 1) {
-        memcpy(&b_data[0], &Human_in_Loop_DW.y[0], ix * sizeof(real_T));
-      }
-
       /* '<S40>:1:40' */
-      if (A_size[0] == 2) {
-        Data2 = A_data[0];
-        i = A_data[1];
-        b_x_data_idx_2 = A_data[2];
-        b_x_data_idx_3 = A_data[3];
-        ipiv_idx_0 = 1;
-        ix = 0;
-        if (fabs(A_data[1]) > fabs(A_data[0])) {
-          ix = 1;
-        }
-
-        if (A_data[ix] != 0.0) {
-          if (ix != 0) {
-            ipiv_idx_0 = 2;
-            Data2 = A_data[0];
-            i = A_data[1];
-            b_x_data_idx_2 = A_data[2];
-            b_x_data_idx_3 = A_data[3];
-            temp = Data2;
-            Data2 = i;
-            i = temp;
-            temp = b_x_data_idx_2;
-            b_x_data_idx_2 = b_x_data_idx_3;
-            b_x_data_idx_3 = temp;
-          }
-
-          i /= Data2;
-        }
-
-        if (b_x_data_idx_2 != 0.0) {
-          b_x_data_idx_3 += i * -b_x_data_idx_2;
-        }
-
-        Human_in_Loop_DW.theta[0] = b_data[0];
-        Human_in_Loop_DW.theta[1] = b_data[1];
-        if (ipiv_idx_0 != 1) {
-          Human_in_Loop_DW.theta[0] = b_data[1];
-          Human_in_Loop_DW.theta[1] = b_data[0];
-        }
-
-        if (Human_in_Loop_DW.theta[0] != 0.0) {
-          b_size = 2;
-          while (b_size < 3) {
-            Human_in_Loop_DW.theta[1] -= Human_in_Loop_DW.theta[0] * i;
-            b_size = 3;
-          }
-        }
-
-        if (Human_in_Loop_DW.theta[1] != 0.0) {
-          Human_in_Loop_DW.theta[1] /= b_x_data_idx_3;
-          b_size = 1;
-          while (b_size <= 1) {
-            Human_in_Loop_DW.theta[0] -= Human_in_Loop_DW.theta[1] *
-              b_x_data_idx_2;
-            b_size = 2;
-          }
-        }
-
-        if (Human_in_Loop_DW.theta[0] != 0.0) {
-          Human_in_Loop_DW.theta[0] /= Data2;
-        }
-      } else {
-        Human_in_Loop_qrsolve(A_data, A_size, b_data, &b_size,
-                              Human_in_Loop_DW.theta);
+      tmp_size[0] = i_0;
+      tmp_size[1] = 2;
+      for (i_1 = 0; i_1 < i_0; i_1++) {
+        tmp_data[i_1] = 1.0 - x_data[i_1];
       }
+
+      loop_ub = (int32_T)Human_in_Loop_DW.num;
+      for (i_1 = 0; i_1 < loop_ub; i_1++) {
+        tmp_data[i_1 + i_0] = 1.0;
+      }
+
+      i_0 = (int32_T)Human_in_Loop_DW.num;
+      loop_ub = (int32_T)Human_in_Loop_DW.num;
+      if (0 <= loop_ub - 1) {
+        memcpy(&y_data[0], &Human_in_Loop_DW.y[0], loop_ub * sizeof(real_T));
+      }
+
+      Human_in_Loop_mldivide(tmp_data, tmp_size, y_data, &i_0,
+        Human_in_Loop_DW.theta);
     }
   }
 
@@ -736,37 +736,37 @@ void Human_in_L_SerialDecodingSystem(void)
   memcpy(&Human_in_Loop_B.Y[0], &Human_in_Loop_DW.y[0], 12U * sizeof(real_T));
 
   /* '<S40>:1:49' */
-  for (b_size = 0; b_size < 12; b_size++) {
-    c_x[b_size] = -Human_in_Loop_B.Time_p[b_size] / 42.0;
+  for (i_0 = 0; i_0 < 12; i_0++) {
+    b_x[i_0] = -Human_in_Loop_B.Time_p[i_0] / 42.0;
   }
 
-  for (ix = 0; ix < 12; ix++) {
-    temp = c_x[ix];
-    temp = exp(temp);
-    a[ix] = 1.0 - temp;
-    a[ix + 12] = 1.0;
+  for (loop_ub = 0; loop_ub < 12; loop_ub++) {
+    Data1 = b_x[loop_ub];
+    Data1 = exp(Data1);
+    a[loop_ub] = 1.0 - Data1;
+    a[loop_ub + 12] = 1.0;
   }
 
   /* '<S40>:1:50' */
   Human_in_Loop_B.E = Human_in_Loop_DW.theta[0] + Human_in_Loop_DW.theta[1];
-  for (i_0 = 0; i_0 < 12; i_0++) {
-    Human_in_Loop_B.Y_E[i_0] = 0.0;
-    Human_in_Loop_B.Y_E[i_0] += a[i_0] * Human_in_Loop_DW.theta[0];
-    Human_in_Loop_B.Y_E[i_0] += a[i_0 + 12] * Human_in_Loop_DW.theta[1];
+  for (i_1 = 0; i_1 < 12; i_1++) {
+    Human_in_Loop_B.Y_E[i_1] = 0.0;
+    Human_in_Loop_B.Y_E[i_1] += a[i_1] * Human_in_Loop_DW.theta[0];
+    Human_in_Loop_B.Y_E[i_1] += a[i_1 + 12] * Human_in_Loop_DW.theta[1];
   }
 
-  for (i_0 = 0; i_0 < 12; i_0++) {
-    temp = a[i_0] * Human_in_Loop_DW.theta[0];
-    temp += a[i_0 + 12] * Human_in_Loop_DW.theta[1];
-    c_x[i_0] = temp;
+  for (i_1 = 0; i_1 < 12; i_1++) {
+    Data1 = a[i_1] * Human_in_Loop_DW.theta[0];
+    Data1 += a[i_1 + 12] * Human_in_Loop_DW.theta[1];
+    b_x[i_1] = Data1;
   }
 
-  for (i_0 = 0; i_0 < 12; i_0++) {
-    Human_in_Loop_B.est_curve[i_0 << 1] = Human_in_Loop_B.Y[i_0];
+  for (i_1 = 0; i_1 < 12; i_1++) {
+    Human_in_Loop_B.est_curve[i_1 << 1] = Human_in_Loop_B.Y[i_1];
   }
 
-  for (i_0 = 0; i_0 < 12; i_0++) {
-    Human_in_Loop_B.est_curve[1 + (i_0 << 1)] = c_x[i_0];
+  for (i_1 = 0; i_1 < 12; i_1++) {
+    Human_in_Loop_B.est_curve[1 + (i_1 << 1)] = b_x[i_1];
   }
 
   /* End of MATLAB Function: '<S38>/Estimation' */
@@ -897,7 +897,7 @@ real_T rt_powd_snf(real_T u0, real_T u1)
 }
 
 /* Function for MATLAB Function: '<S1>/Torque track' */
-static void Human_in_Loop_mldivide(const real_T A[16], real_T B[4])
+static void Human_in_Loop_mldivide_g(const real_T A[16], real_T B[4])
 {
   real_T b_A[16];
   int8_T ipiv[4];
@@ -1066,7 +1066,7 @@ static void Human_in_Loop_power(const real_T a_data[], const int32_T a_size[2],
 }
 
 /* Function for MATLAB Function: '<S1>/Torque track' */
-static void Human_in_Loop_power_g(const real_T a_data[], const int32_T a_size[2],
+static void Human_in_Loop_power_a(const real_T a_data[], const int32_T a_size[2],
   real_T y_data[], int32_T y_size[2])
 {
   int32_T loop_ub;
@@ -1141,7 +1141,6 @@ void Human_in_Lo_ControlModule_Reset(void)
 /* Output and update for function-call system: '<Root>/Control Module' */
 void Human_in_Loop_ControlModule(void)
 {
-  real_T torque_offset;
   real_T mode;
   real_T footstate;
   real_T peak_torque;
@@ -1173,13 +1172,9 @@ void Human_in_Loop_ControlModule(void)
   int32_T tmp_size_idx_1;
   int16_T tmp_0;
 
-  /* MATLAB Function: '<S1>/Torque track' incorporates:
-   *  Constant: '<S1>/Constant'
-   */
-  torque_offset = Human_in_Loop_P.Constant_Value;
-
+  /* MATLAB Function: '<S1>/Torque track' */
   /* MATLAB Function 'Control Module/Torque track': '<S12>:1' */
-  /* '<S12>:1:43' */
+  /* '<S12>:1:42' */
   /* '<S12>:1:19' */
   mode = Human_in_Loop_B.RT1[0];
 
@@ -1212,27 +1207,27 @@ void Human_in_Loop_ControlModule(void)
       && ((Human_in_Loop_B.RT1[0] == 2.0) || (Human_in_Loop_B.RT1[0] == 1.0))) {
     /* '<S12>:1:37' */
     /* '<S12>:1:39' */
-    /* '<S12>:1:41' */
+    /* '<S12>:1:40' */
     memset(&Human_in_Loop_B.torque_track[0], 0, 750U * sizeof(real_T));
     memset(&Human_in_Loop_B.torque_delta_track[0], 0, 750U * sizeof(real_T));
 
+    /* '<S12>:1:41' */
     /* '<S12>:1:42' */
     /* '<S12>:1:43' */
-    /* '<S12>:1:44' */
     index_peak = floor(Human_in_Loop_B.RT3[2] / 100.0 * Human_in_Loop_B.RT1[2] *
                        500.0);
 
-    /* '<S12>:1:45' */
+    /* '<S12>:1:44' */
     index_rise = index_peak - floor(Human_in_Loop_B.RT3[1] / 100.0 *
       Human_in_Loop_B.RT1[2] * 500.0);
 
-    /* '<S12>:1:46' */
+    /* '<S12>:1:45' */
     index_fall = floor(Human_in_Loop_B.RT3[3] / 100.0 * Human_in_Loop_B.RT1[2] *
                        500.0) + index_peak;
 
-    /* '<S12>:1:49' */
+    /* '<S12>:1:48' */
+    /* '<S12>:1:52' */
     /* '<S12>:1:53' */
-    /* '<S12>:1:54' */
     parm1[0] = 0.0;
     parm1[1] = Human_in_Loop_B.RT3[0];
     parm1[2] = 0.0;
@@ -1253,7 +1248,7 @@ void Human_in_Loop_ControlModule(void)
     tmp[7] = 1.0;
     tmp[11] = 2.0 * index_peak;
     tmp[15] = index_peak * index_peak * 3.0;
-    Human_in_Loop_mldivide(tmp, parm1);
+    Human_in_Loop_mldivide_g(tmp, parm1);
     b = index_peak - index_rise;
     if (1.0 > b) {
       b_n = 0;
@@ -1305,7 +1300,7 @@ void Human_in_Loop_ControlModule(void)
       Human_in_Loop_B.tmp_data_c[f] = tmp_data[f];
     }
 
-    Human_in_Loop_power_g(Human_in_Loop_B.tmp_data_c, tmp_size_4,
+    Human_in_Loop_power_a(Human_in_Loop_B.tmp_data_c, tmp_size_4,
                           Human_in_Loop_B.tmp_data_cx, tmp_size_2);
     for (f = 0; f < b_n; f++) {
       Human_in_Loop_B.tmp_data[f << 2] = 1.0;
@@ -1374,10 +1369,9 @@ void Human_in_Loop_ControlModule(void)
       }
     }
 
-    /* '<S12>:1:55' */
+    /* '<S12>:1:54' */
     for (f = 0; f < tmp_size_idx_1; f++) {
-      Human_in_Loop_B.torque_track[ab + f] = Human_in_Loop_B.tmp_data_c[f] +
-        torque_offset;
+      Human_in_Loop_B.torque_track[ab + f] = Human_in_Loop_B.tmp_data_c[f];
     }
 
     b = index_peak - index_rise;
@@ -1474,15 +1468,15 @@ void Human_in_Loop_ControlModule(void)
       }
     }
 
-    /* '<S12>:1:56' */
+    /* '<S12>:1:55' */
     for (f = 0; f < tmp_size_idx_1; f++) {
       Human_in_Loop_B.torque_delta_track[ab + f] = Human_in_Loop_B.tmp_data_c[f]
         * 500.0;
     }
 
-    /* '<S12>:1:58' */
+    /* '<S12>:1:57' */
+    /* '<S12>:1:61' */
     /* '<S12>:1:62' */
-    /* '<S12>:1:63' */
     parm1[0] = peak_torque;
     parm1[1] = 0.0;
     parm1[2] = 0.0;
@@ -1503,7 +1497,7 @@ void Human_in_Loop_ControlModule(void)
     tmp[7] = 1.0;
     tmp[11] = 2.0 * index_fall;
     tmp[15] = index_fall * index_fall * 3.0;
-    Human_in_Loop_mldivide(tmp, parm1);
+    Human_in_Loop_mldivide_g(tmp, parm1);
     peak_torque = (index_fall + 1.0) - index_peak;
     if (1.0 > peak_torque) {
       b_n = 0;
@@ -1555,7 +1549,7 @@ void Human_in_Loop_ControlModule(void)
       Human_in_Loop_B.tmp_data_c[f] = tmp_data[f];
     }
 
-    Human_in_Loop_power_g(Human_in_Loop_B.tmp_data_c, tmp_size_0,
+    Human_in_Loop_power_a(Human_in_Loop_B.tmp_data_c, tmp_size_0,
                           Human_in_Loop_B.tmp_data_cx, tmp_size_3);
     for (f = 0; f < b_n; f++) {
       Human_in_Loop_B.tmp_data[f << 2] = 1.0;
@@ -1624,32 +1618,30 @@ void Human_in_Loop_ControlModule(void)
       }
     }
 
-    /* '<S12>:1:64' */
+    /* '<S12>:1:63' */
     for (f = 0; f < tmp_size_idx_1; f++) {
-      Human_in_Loop_B.torque_track[ab + f] = Human_in_Loop_B.tmp_data_c[f] +
-        torque_offset;
+      Human_in_Loop_B.torque_track[ab + f] = Human_in_Loop_B.tmp_data_c[f];
     }
 
-    /* '<S12>:1:69' */
+    /* '<S12>:1:68' */
     for (ab = 0; ab < (int32_T)(index_rise - 1.0); ab++) {
+      /* '<S12>:1:68' */
       /* '<S12>:1:69' */
-      /* '<S12>:1:70' */
-      Human_in_Loop_B.torque_track[ab] = (1.0 + (real_T)ab) / index_rise *
-        torque_offset;
+      Human_in_Loop_B.torque_track[ab] = (1.0 + (real_T)ab) / index_rise * 2.0;
     }
 
-    /* '<S12>:1:73' */
+    /* '<S12>:1:72' */
     for (ab = 0; ab < (int32_T)((1.0 - index_fall) + 750.0); ab++) {
-      /* '<S12>:1:73' */
+      /* '<S12>:1:72' */
       index_peak = index_fall + (real_T)ab;
 
-      /* '<S12>:1:74' */
+      /* '<S12>:1:73' */
       Human_in_Loop_B.torque_track[(int32_T)index_peak - 1] = (750.0 -
-        index_peak) / (750.0 - index_fall) * torque_offset;
+        index_peak) / (750.0 - index_fall) * 2.0;
     }
 
-    /* '<S12>:1:77' */
-    /* '<S12>:1:79' */
+    /* '<S12>:1:76' */
+    /* '<S12>:1:78' */
     for (f = 0; f < 750; f++) {
       Human_in_Loop_DW.TorqueMem[f << 2] = Human_in_Loop_B.torque_track[f];
       Human_in_Loop_DW.TorqueMem[2 + (f << 2)] =
@@ -1657,35 +1649,35 @@ void Human_in_Loop_ControlModule(void)
     }
   }
 
-  /* '<S12>:1:83' */
+  /* '<S12>:1:82' */
   Human_in_Loop_DW.last_footstate = footstate;
 
-  /* '<S12>:1:84' */
+  /* '<S12>:1:83' */
   Human_in_Loop_DW.TorqueMem[1 + (((int32_T)stride_index - 1) << 2)] =
     torque_measure;
 
-  /* '<S12>:1:85' */
+  /* '<S12>:1:84' */
   Human_in_Loop_DW.TorqueMem[3 + (((int32_T)stride_index - 1) << 2)] =
     troque_delta;
   if (mode == 2.0) {
+    /* '<S12>:1:86' */
     /* '<S12>:1:87' */
-    /* '<S12>:1:88' */
-    torque_offset = Human_in_Loop_DW.TorqueMem[((int32_T)stride_index - 1) << 2];
+    mode = Human_in_Loop_DW.TorqueMem[((int32_T)stride_index - 1) << 2];
 
-    /* '<S12>:1:89' */
+    /* '<S12>:1:88' */
     stride_index = Human_in_Loop_DW.TorqueMem[(((int32_T)stride_index - 1) << 2)
       + 2];
   } else {
-    /* '<S12>:1:91' */
-    torque_offset = 0.0;
+    /* '<S12>:1:90' */
+    mode = 0.0;
 
-    /* '<S12>:1:92' */
+    /* '<S12>:1:91' */
     stride_index = 0.0;
   }
 
+  /* '<S12>:1:94' */
   /* '<S12>:1:95' */
-  /* '<S12>:1:96' */
-  Human_in_Loop_B.torque_des = torque_offset;
+  Human_in_Loop_B.torque_des = mode;
   Human_in_Loop_B.torque_delta_des = stride_index;
   for (f = 0; f < 750; f++) {
     Human_in_Loop_B.torque_trace[f << 1] = Human_in_Loop_DW.TorqueMem[f << 2];
@@ -1724,18 +1716,18 @@ void Human_in_Loop_ControlModule(void)
     /* '<S10>:1:34' */
     /* '<S10>:1:35' */
     /* '<S10>:1:36' */
-    torque_offset = 1.0 - Human_in_Loop_P.LRN_error_filter_k;
+    mode = 1.0 - Human_in_Loop_P.LRN_error_filter_k;
 
     /* '<S10>:1:37' */
-    mode = Human_in_Loop_B.RT2[2];
+    footstate = Human_in_Loop_B.RT2[2];
     for (f = 0; f < 750; f++) {
-      footstate = (Human_in_Loop_DW.TorqueMem[f << 2] -
-                   Human_in_Loop_DW.TorqueMem[(f << 2) + 1]) *
-        Human_in_Loop_P.LRN_error_filter_k + torque_offset *
+      peak_torque = (Human_in_Loop_DW.TorqueMem[f << 2] -
+                     Human_in_Loop_DW.TorqueMem[(f << 2) + 1]) *
+        Human_in_Loop_P.LRN_error_filter_k + mode *
         Human_in_Loop_DW.torque_error_memory[f];
-      Human_in_Loop_DW.torque_error_memory[f] = footstate;
+      Human_in_Loop_DW.torque_error_memory[f] = peak_torque;
       Human_in_Loop_DW.lrn_cmd_memory[f] = Human_in_Loop_P.LRN_lrn_shrink *
-        Human_in_Loop_DW.lrn_cmd_memory[f] + mode *
+        Human_in_Loop_DW.lrn_cmd_memory[f] + footstate *
         Human_in_Loop_DW.torque_error_memory[f];
     }
   }
@@ -1763,11 +1755,10 @@ void Human_in_Loop_ControlModule(void)
       Human_in_Loop_B.lrn_cmd = 0.0;
     } else {
       /* '<S10>:1:49' */
-      torque_offset = rt_roundd_snf(stride_index + (real_T)
-        Human_in_Loop_P.LRN_time_delay);
-      if (torque_offset < 2.147483648E+9) {
-        if (torque_offset >= -2.147483648E+9) {
-          f = (int32_T)torque_offset;
+      mode = rt_roundd_snf(stride_index + (real_T)Human_in_Loop_P.LRN_time_delay);
+      if (mode < 2.147483648E+9) {
+        if (mode >= -2.147483648E+9) {
+          f = (int32_T)mode;
         } else {
           f = MIN_int32_T;
         }
@@ -1795,6 +1786,8 @@ void Human_in_Loop_ControlModule(void)
   /* MATLAB Function 'Control Module/Controller': '<S9>:1' */
   /* '<S9>:1:21' */
   /* '<S9>:1:22' */
+  stride_index = 40.0 / Human_in_Loop_P.Controller_R_ANKLE;
+
   /* '<S9>:1:26' */
   /* '<S9>:1:27' */
   /* '<S9>:1:31' */
@@ -1851,9 +1844,9 @@ void Human_in_Loop_ControlModule(void)
       /* '<S9>:1:70' */
       /* '<S9>:1:71' */
       Human_in_Loop_B.motor_vel_cmd = ((Human_in_Loop_B.RT5[0] -
-        Human_in_Loop_B.RT6[0] * 0.33333333333333331) * Human_in_Loop_B.RT2[3] +
-        Human_in_Loop_B.RT5[1] * 0.33333333333333331 * Human_in_Loop_B.RT2[4]) *
-        5.0 / 0.05;
+        Human_in_Loop_B.RT6[0] * stride_index) * Human_in_Loop_B.RT2[3] +
+        Human_in_Loop_B.RT5[1] * stride_index * Human_in_Loop_B.RT2[4]) * 5.0 /
+        0.05;
       break;
 
      case 2:
@@ -1874,9 +1867,9 @@ void Human_in_Loop_ControlModule(void)
         /* '<S9>:1:81' */
         /* '<S9>:1:82' */
         Human_in_Loop_B.motor_vel_cmd = ((Human_in_Loop_B.RT5[0] -
-          Human_in_Loop_B.RT6[0] * 0.33333333333333331) * Human_in_Loop_B.RT2[3]
-          + Human_in_Loop_B.RT5[1] * 0.33333333333333331 * Human_in_Loop_B.RT2[4])
-          * 5.0 / 0.05;
+          Human_in_Loop_B.RT6[0] * stride_index) * Human_in_Loop_B.RT2[3] +
+          Human_in_Loop_B.RT5[1] * stride_index * Human_in_Loop_B.RT2[4]) * 5.0 /
+          0.05;
       }
       break;
 
@@ -2083,7 +2076,7 @@ static real_T Human_in_Loop_xnrm2_ov(int32_T n, const real_T x[30], int32_T ix0)
 }
 
 /* Function for MATLAB Function: '<S33>/MATLAB Function' */
-static void Human_in_Loop_xgeqp3(real_T A[30], real_T tau[2], int32_T jpvt[2])
+static void Human_in_Loop_xgeqp3_n(real_T A[30], real_T tau[2], int32_T jpvt[2])
 {
   real_T work[2];
   real_T vn1[2];
@@ -3309,7 +3302,7 @@ void Human_in_Loop_output(void)
       A[ixstart] = b_A[ixstart];
     }
 
-    Human_in_Loop_xgeqp3(A, varargin_1, tmp_size);
+    Human_in_Loop_xgeqp3_n(A, varargin_1, tmp_size);
     rankR = 0;
     tol = 15.0 * fabs(A[0]) * 2.2204460492503131E-16;
     while ((rankR < 2) && (!(fabs(A[15 * rankR + rankR]) <= tol))) {
@@ -3486,7 +3479,7 @@ void Human_in_Loop_output(void)
       UInt32 outputData = 0;
 
       /* write output state value to digital output channel 1-1 on port 1 */
-      outputData = ( ( ( (UInt32)Human_in_Loop_P.Constant_Value_f) << (1 - 1)) |
+      outputData = ( ( ( (UInt32)Human_in_Loop_P.Constant_Value) << (1 - 1)) |
                     outputData);
       DioCl1DigOut_setChMaskOutData(pRTIDioC1DigOut_Port_1_Ch_1, outputData);
       DioCl1DigOut_write(pRTIDioC1DigOut_Port_1_Ch_1);

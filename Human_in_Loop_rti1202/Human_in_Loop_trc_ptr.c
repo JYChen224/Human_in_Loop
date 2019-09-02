@@ -5,7 +5,7 @@
    Definition of function that initializes the global TRC pointers
 
    RTI1202 7.9 (02-Nov-2017)
-   Fri Jun 28 16:43:27 2019
+   Wed Jul 10 21:07:07 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -81,7 +81,7 @@ static void rti_init_trc_pointers_0(void)
   p_0_Human_in_Loop_int32_T_1 = &Human_in_Loop_B.SFunction1_o3_l;
   p_0_Human_in_Loop_uint32_T_2 = &Human_in_Loop_B.SFunction1_o2_b;
   p_0_Human_in_Loop_uint8_T_3 = &Human_in_Loop_B.SFunction1_o1_l[0];
-  p_0_Human_in_Loop_boolean_T_4 = &Human_in_Loop_B.SFunction1_a;
+  p_0_Human_in_Loop_boolean_T_4 = &Human_in_Loop_B.SFunction1_o3_n;
   p_0_Human_in_Loop_real_T_5 = &Human_in_Loop_B.sf_MATLABFunction_l.y;
   p_0_Human_in_Loop_real_T_6 = &Human_in_Loop_B.sf_MATLABFunction_n.y;
   p_0_Human_in_Loop_real_T_7 = &Human_in_Loop_B.sf_MATLABFunction_m.y;
