@@ -181,61 +181,6 @@ group "Task Info"
   }
   endgroup
 
-  group "DS1202SER_INT_C1_I1"
-  {
-   flags: COLLAPSED
-  }
-
-  pRti_UART_EVENTS_CH1_INT0_TTime
-  {
-   type:  flt(64,IEEE)*
-   alias: "turnaroundTime"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_TState
-  {
-   type:  int(32)*
-   alias: "state"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_OType
-  {
-   type:  int(32)*
-   alias: "overrunCheckType"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_OMax
-  {
-   type:  int(32)*
-   alias: "overrunQueueMax"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_ORpt
-  {
-   type:  int(32)*
-   alias: "overrunQueueCount"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_OCnt
-  {
-   type:  int(32)*
-   alias: "overrunCount"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_TCnt
-  {
-   type:  flt(64,IEEE)*
-   alias: "taskCallCount"
-   flags: READONLY
-  }
-  pRti_UART_EVENTS_CH1_INT0_Prio
-  {
-   type:  int(32)*
-   alias: "priority"
-   flags: READONLY
-  }
-  endgroup
-
 
 endgroup
 

@@ -6,7 +6,7 @@
    the hardware and software interrupts used.
 
    RTI1202 7.9 (02-Nov-2017)
-   Wed Jul 10 21:07:07 2019
+   Sat Sep 21 19:43:10 2019
 
    Copyright 2019, dSPACE GmbH. All rights reserved.
 
@@ -31,10 +31,9 @@
 #include <rtkernel.h>
 #include <rti_assert.h>
 #include <rtidefineddatatypes.h>
-#include <dsser.h>
 #include <rtican_ds1202.h>
 #ifndef dsRtmGetNumSampleTimes
-# define dsRtmGetNumSampleTimes(rtm)   5
+# define dsRtmGetNumSampleTimes(rtm)   4
 #endif
 
 #ifndef dsRtmGetTPtr
@@ -258,85 +257,14 @@ static void rti_TIMERB(rtk_p_task_control_block task)
   /* Task exit code END */
 }
 
-/****** Definitions: task functions for HW interrupts *******************/
-
-/* HW Interrupt: <S34>/DS1202SER_INT_C1_I1 */
-static void rti_UART_EVENTS_CH1_INT0(rtk_p_task_control_block task)
-{
-  /* Task entry code BEGIN */
-  /* -- None. -- */
-  /* Task entry code END */
-
-  /* Task code. */
-  {
-    /* RateTransition: '<S28>/RT1' */
-    switch (Human_in_Loop_DW.RT1_write_buf_f) {
-     case 0:
-      Human_in_Loop_DW.RT1_read_buf_p = 1;
-      break;
-
-     case 1:
-      Human_in_Loop_DW.RT1_read_buf_p = 0;
-      break;
-
-     default:
-      Human_in_Loop_DW.RT1_read_buf_p = Human_in_Loop_DW.RT1_last_buf_wr_j;
-      break;
-    }
-
-    if (Human_in_Loop_DW.RT1_read_buf_p != 0) {
-      Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer1_f;
-    } else {
-      Human_in_Loop_B.RT1_c = Human_in_Loop_DW.RT1_Buffer0_e;
-    }
-
-    Human_in_Loop_DW.RT1_read_buf_p = -1;
-
-    /* End of RateTransition: '<S28>/RT1' */
-
-    /* RateTransition: '<S28>/RT2' */
-    switch (Human_in_Loop_DW.RT2_write_buf_g) {
-     case 0:
-      Human_in_Loop_DW.RT2_read_buf_a = 1;
-      break;
-
-     case 1:
-      Human_in_Loop_DW.RT2_read_buf_a = 0;
-      break;
-
-     default:
-      Human_in_Loop_DW.RT2_read_buf_a = Human_in_Loop_DW.RT2_last_buf_wr_a;
-      break;
-    }
-
-    if (Human_in_Loop_DW.RT2_read_buf_a != 0) {
-      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer1_o;
-    } else {
-      Human_in_Loop_B.RT2_g = Human_in_Loop_DW.RT2_Buffer0_i;
-    }
-
-    Human_in_Loop_DW.RT2_read_buf_a = -1;
-
-    /* End of RateTransition: '<S28>/RT2' */
-
-    /* S-Function (rti_commonblock): '<S36>/S-Function1' */
-    Human_in_L_SerialDecodingSystem();
-
-    /* End of Outputs for S-Function (rti_commonblock): '<S36>/S-Function1' */
-  }
-
-  /* Task exit code BEGIN */
-  /* -- None. -- */
-  /* Task exit code END */
-}
-
 /* ===== Declarations of RTI blocks ======================================== */
 DacCl1AnalogOutSDrvObject *pRTIDacC1AnalogOut_Ch_16;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_6;
-DioCl2EncoderInSDrvObject *pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1;
+DioCl2EncoderInSDrvObject *pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10;
 DioCl2EncoderInSDrvObject *pRTIEmcEncoder_Unit_3_DioCl_2_Port_1_Ch5;
 DioCl1DigInSDrvObject *pRTIDioC1DigIn_Port_1_Ch_2;
-DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_11;
+SensorSupplySDrvObject *pRTI_Sensor_Supply;
+DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_15;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_3_Ch_13;
 DioCl1DigOutSDrvObject *pRTIDioC1DigOut_Port_1_Ch_1;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_1;
@@ -345,10 +273,6 @@ AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_3;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_4;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_9;
 AdcCl1AnalogInSDrvObject *pRTIAdcC1AnalogIn_Ch_10;
-SensorSupplySDrvObject *pRTI_Sensor_Supply;
-
-/* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
-dsserChannel *rtiDS1202SER_B1_Ser[2];
 
 /* dSPACE I/O Board DS1_RTICAN #1 */
 
@@ -473,15 +397,15 @@ static void rti_mdl_initialize_io_boards(void)
   }
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1 --- */
-  /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 1 - Port: 1 - Channel: 1 --- */
+  /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 5 - Port: 1 - Channel: 10 --- */
   {
     /* define a variable for IO error handling */
     UInt32 ioErrorRetValue = IOLIB_NO_ERROR;
 
-    /* Create EMC Encoder driver object pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1 */
+    /* Create EMC Encoder driver object pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10 */
     ioErrorRetValue = DioCl2EncoderIn_create
-      (&pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, DIO_CLASS2_CHANNEL_1,
-       DIO_ENC_INSTANCE_1,DIO_ENC_IUSAGE_ENABLED);
+      (&pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, DIO_CLASS2_CHANNEL_10,
+       DIO_ENC_INSTANCE_5,DIO_ENC_IUSAGE_ENABLED);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -490,28 +414,28 @@ static void rti_mdl_initialize_io_boards(void)
 
     /* Sets number of encoder lines for the selected incremental Encoder */
     ioErrorRetValue = DioCl2EncoderIn_setEncoderLines
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (UInt32) 250000.0);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (UInt32) 250000.0);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
     /* Sets minimum position for the selected incremental Encoder (in lines) */
     ioErrorRetValue = DioCl2EncoderIn_setMinPosition
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64) -125000);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (Float64) -125000);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
     /* Sets maximum position for the selected incremental Encoder (in lines) */
     ioErrorRetValue = DioCl2EncoderIn_setMaxPosition
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64) 125000);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (Float64) 125000);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
     /* Sets index signal usage mode for the selected incremental Encoder */
     ioErrorRetValue = DioCl2EncoderIn_setIndexMode
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64)
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (Float64)
        DIO_ENC_IMODE_EVERY_INDEX);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
@@ -519,29 +443,34 @@ static void rti_mdl_initialize_io_boards(void)
 
     /* Sets index position for the selected incremental Encoder on index signal detection (in lines) */
     ioErrorRetValue = DioCl2EncoderIn_setIndexPosition
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64) 0);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (Float64) 0);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    /* no user specific minimum encoder velocity used */
+    /* specify the minimum encoder velocity (in lines per second) */
+    ioErrorRetValue = DioCl2EncoderIn_setMinEncVelocity
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (Float64) 1);
+    if (ioErrorRetValue > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
 
     /* Sets gated mode for the selected incremental Encoder */
     ioErrorRetValue = DioCl2EncoderIn_setGatedMode
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, DIO_ENC_IUSAGE_ENABLED);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, DIO_ENC_IUSAGE_ENABLED);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
     ioErrorRetValue = DioCl2EncoderIn_setMeasurementInterval
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, 1);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, 1);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
     /* Apply all parameter settings. Finalize the construction of the Encoder Obj driver object */
     ioErrorRetValue = DioCl2EncoderIn_apply
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -649,8 +578,42 @@ static void rti_mdl_initialize_io_boards(void)
     }
   }
 
+  /* --- Human_in_Loop/Sensor Data/Torque module/DS1202_SENSOR_SUPPLY --- */
+  /* --- [RTI120X, Sensor Supply] --- */
+  {
+    /* define a variable for IO error handling */
+    UInt32 ioErrorCode = IOLIB_NO_ERROR;
+
+    /* Init Sensor Supply driver object pRTI_Sensor_Supply */
+    ioErrorCode = SensorSupply_create(&pRTI_Sensor_Supply, SENSOR_SUPPLY_NO_2);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_setVoltage(pRTI_Sensor_Supply, 20);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_setSensorState(pRTI_Sensor_Supply,
+      SENSOR_STATE_ENABLE);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_apply(pRTI_Sensor_Supply);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+
+    ioErrorCode = SensorSupply_start(pRTI_Sensor_Supply);
+    if (ioErrorCode > IOLIB_NO_ERROR) {
+      RTLIB_EXIT(1);
+    }
+  }
+
   /* --- Human_in_Loop/Sensor Data/Encoder module/Encoder Power Setup1 --- */
-  /* --- [RTI120X, BITOUT] - Port: 3 - Channel: 11 --- */
+  /* --- [RTI120X, BITOUT] - Port: 3 - Channel: 15 --- */
   {
     /* define a variable for IO error handling */
     UInt32 ioErrorCode = IOLIB_NO_ERROR;
@@ -658,34 +621,34 @@ static void rti_mdl_initialize_io_boards(void)
     /* define variables required for BitOut initial functions */
     UInt32 outputDataInit = 0;
 
-    /* Init DIO CL1 DigOut driver object pRTIDioC1DigOut_Port_3_Ch_11 */
-    ioErrorCode = DioCl1DigOut_create(&pRTIDioC1DigOut_Port_3_Ch_11,
-      DIO_CLASS1_PORT_3, DIO_CLASS1_MASK_CH_11);
+    /* Init DIO CL1 DigOut driver object pRTIDioC1DigOut_Port_3_Ch_15 */
+    ioErrorCode = DioCl1DigOut_create(&pRTIDioC1DigOut_Port_3_Ch_15,
+      DIO_CLASS1_PORT_3, DIO_CLASS1_MASK_CH_15);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    ioErrorCode = DioCl1DigOut_setSignalVoltage(pRTIDioC1DigOut_Port_3_Ch_11,
+    ioErrorCode = DioCl1DigOut_setSignalVoltage(pRTIDioC1DigOut_Port_3_Ch_15,
       DIO_CLASS1_SIGNAL_5_0_V);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    outputDataInit = ( ( ( (UInt32)0) << (11 - 1)) | outputDataInit);
+    outputDataInit = ( ( ( (UInt32)0) << (15 - 1)) | outputDataInit);
 
-    /* write initialization value to digital output channel 11-11 on port 3 */
-    ioErrorCode = DioCl1DigOut_setChMaskOutData(pRTIDioC1DigOut_Port_3_Ch_11,
+    /* write initialization value to digital output channel 15-15 on port 3 */
+    ioErrorCode = DioCl1DigOut_setChMaskOutData(pRTIDioC1DigOut_Port_3_Ch_15,
       outputDataInit);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    ioErrorCode = DioCl1DigOut_apply(pRTIDioC1DigOut_Port_3_Ch_11);
+    ioErrorCode = DioCl1DigOut_apply(pRTIDioC1DigOut_Port_3_Ch_15);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    ioErrorCode = DioCl1DigOut_start(pRTIDioC1DigOut_Port_3_Ch_11);
+    ioErrorCode = DioCl1DigOut_start(pRTIDioC1DigOut_Port_3_Ch_15);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -770,40 +733,6 @@ static void rti_mdl_initialize_io_boards(void)
     }
 
     ioErrorCode = DioCl1DigOut_start(pRTIDioC1DigOut_Port_1_Ch_1);
-    if (ioErrorCode > IOLIB_NO_ERROR) {
-      RTLIB_EXIT(1);
-    }
-  }
-
-  /* --- Human_in_Loop/Sensor Data/IMU/DS1202_SENSOR_SUPPLY --- */
-  /* --- [RTI120X, Sensor Supply] --- */
-  {
-    /* define a variable for IO error handling */
-    UInt32 ioErrorCode = IOLIB_NO_ERROR;
-
-    /* Init Sensor Supply driver object pRTI_Sensor_Supply */
-    ioErrorCode = SensorSupply_create(&pRTI_Sensor_Supply, SENSOR_SUPPLY_NO_2);
-    if (ioErrorCode > IOLIB_NO_ERROR) {
-      RTLIB_EXIT(1);
-    }
-
-    ioErrorCode = SensorSupply_setVoltage(pRTI_Sensor_Supply, 8);
-    if (ioErrorCode > IOLIB_NO_ERROR) {
-      RTLIB_EXIT(1);
-    }
-
-    ioErrorCode = SensorSupply_setSensorState(pRTI_Sensor_Supply,
-      SENSOR_STATE_ENABLE);
-    if (ioErrorCode > IOLIB_NO_ERROR) {
-      RTLIB_EXIT(1);
-    }
-
-    ioErrorCode = SensorSupply_apply(pRTI_Sensor_Supply);
-    if (ioErrorCode > IOLIB_NO_ERROR) {
-      RTLIB_EXIT(1);
-    }
-
-    ioErrorCode = SensorSupply_start(pRTI_Sensor_Supply);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -1174,10 +1103,10 @@ static void rti_mdl_initialize_io_boards(void)
   /* dSPACE RTICAN MASTER SETUP Block */
   /* ... Initialize the Partial Networking Settings */
 
-  /* dSPACE RTICAN RX Message Block: "RX Message" Id:10 */
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:3 */
   /* ... Register message */
-  can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0XA] = can_tp1_msg_rx_register
-    (can_type1_channel_M1_C1, 0, 10, CAN_TP1_STD, (CAN_TP1_DATA_INFO|
+  can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X3] = can_tp1_msg_rx_register
+    (can_type1_channel_M1_C1, 0, 3, CAN_TP1_STD, (CAN_TP1_DATA_INFO|
       CAN_TP1_DATA_INFO|CAN_TP1_TIMECOUNT_INFO), CAN_TP1_NO_SUBINT);
 
   /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
@@ -1234,37 +1163,30 @@ static void rti_mdl_initialize_io_boards(void)
       CAN_TP1_TIMECOUNT_INFO|CAN_TP1_TIMECOUNT_INFO|CAN_TP1_DELAYCOUNT_INFO),
      CAN_TP1_NO_SUBINT, 0, CAN_TP1_TRIGGER_MSG, CAN_TP1_TIMEOUT_NORMAL);
 
-  /* dSPACE RTICAN RX Message Block: "RX Message" Id:10 */
-  Human_in_Loop_B.SFunction1_o5 = 0;   /* processed - flag */
-  Human_in_Loop_B.SFunction1_o6 = 0;   /* timestamp */
+  /* dSPACE RTICAN RX Message Block: "RX Message" Id:3 */
+  Human_in_Loop_B.SFunction1_o4 = 0;   /* processed - flag */
+  Human_in_Loop_B.SFunction1_o5 = 0;   /* timestamp */
 
   /* dSPACE RTICAN RX Message Block: "RX Message" Id:100 */
-  Human_in_Loop_B.SFunction1_o2_e = 0; /* processed - flag */
-  Human_in_Loop_B.SFunction1_o3_j = 0; /* timestamp */
+  Human_in_Loop_B.SFunction1_o2_f = 0; /* processed - flag */
+  Human_in_Loop_B.SFunction1_o3_g = 0; /* timestamp */
 
   /* dSPACE RTICAN TX Message Block: "TX Message" Id:100 */
   /* Messages with timestamp zero have been received in pause/stop state
      and must not be handled.
    */
   if (can_type1_msg_M1[CANTP1_M1_C2_TX_STD_0X64]->timestamp > 0.0) {
-    Human_in_Loop_B.SFunction1_o1_g = 0;/* processed - flag */
-    Human_in_Loop_B.SFunction1_o2_g = 0;/* timestamp */
-    Human_in_Loop_B.SFunction1_o3_c = 0;/* deltatime */
-    Human_in_Loop_B.SFunction1_o4_h = 0;/* delaytime */
+    Human_in_Loop_B.SFunction1_o1_l = 0;/* processed - flag */
+    Human_in_Loop_B.SFunction1_o2_jb = 0;/* timestamp */
+    Human_in_Loop_B.SFunction1_o3_p = 0;/* deltatime */
+    Human_in_Loop_B.SFunction1_o4_k = 0;/* delaytime */
   }
 
   /* dSPACE I/O Board RTICAN_GLOBAL #0 */
 }
 
-static void rti_mdl_slave_load(void)
-{
-  /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
-  rtiDS1202SER_B1_Ser[0] = dsser_init(DSSER_ONBOARD,0,256);
-  dsser_config(rtiDS1202SER_B1_Ser[0],0, 115200, 8, DSSER_1_STOPBIT,
-               DSSER_NO_PARITY, DSSER_14_BYTE_TRIGGER_LEVEL,1, (DSSER_RS232 |
-    DSSER_AUTOFLOW_DISABLE));
-  RTLIB_SLAVE_LOAD_ACKNOWLEDGE();
-}
+/* Function rti_mdl_slave_load() is empty */
+#define rti_mdl_slave_load()
 
 /* Function rti_mdl_rtk_initialize() is empty */
 #define rti_mdl_rtk_initialize()
@@ -1296,21 +1218,21 @@ static void rti_mdl_initialize_io_units(void)
   }
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1 --- */
-  /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 1 - Port: 1 - Channel: 1 --- */
+  /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 5 - Port: 1 - Channel: 10 --- */
   {
     /* define a variable for IO error handling */
     UInt32 ioErrorRetValue = IOLIB_NO_ERROR;
 
     /* Resets start (initial) position for the selected incremental Encoder (in lines) */
     ioErrorRetValue = DioCl2EncoderIn_setEncPosition
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1, (Float64) 0);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10, (Float64) 0);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
     /* Activate Encoder signals read */
     ioErrorRetValue = DioCl2EncoderIn_start
-      (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1);
+      (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10);
     if (ioErrorRetValue > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -1338,29 +1260,29 @@ static void rti_mdl_initialize_io_units(void)
   }
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/Encoder Power Setup1 --- */
-  /* --- [RTI120X, BITOUT] - Port: 3 - Channel: 11 --- */
+  /* --- [RTI120X, BITOUT] - Port: 3 - Channel: 15 --- */
   {
     /* define a variable for IO error handling */
     UInt32 ioErrorCode = IOLIB_NO_ERROR;
 
     /* define variables required for BitOut initial functions */
     UInt32 outputDataInit = 0;
-    ioErrorCode = DioCl1DigOut_setChMaskOutHighZ(pRTIDioC1DigOut_Port_3_Ch_11,
+    ioErrorCode = DioCl1DigOut_setChMaskOutHighZ(pRTIDioC1DigOut_Port_3_Ch_15,
       DIO_CLASS1_HIGH_Z_OFF);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    outputDataInit = ( ( ( (UInt32)0) << (11 - 1)) | outputDataInit);
+    outputDataInit = ( ( ( (UInt32)0) << (15 - 1)) | outputDataInit);
 
-    /* write initialization value to digital output channel 11-11 on port 3 */
-    ioErrorCode = DioCl1DigOut_setChMaskOutData(pRTIDioC1DigOut_Port_3_Ch_11,
+    /* write initialization value to digital output channel 15-15 on port 3 */
+    ioErrorCode = DioCl1DigOut_setChMaskOutData(pRTIDioC1DigOut_Port_3_Ch_15,
       outputDataInit);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
 
-    ioErrorCode = DioCl1DigOut_write(pRTIDioC1DigOut_Port_3_Ch_11);
+    ioErrorCode = DioCl1DigOut_write(pRTIDioC1DigOut_Port_3_Ch_15);
     if (ioErrorCode > IOLIB_NO_ERROR) {
       RTLIB_EXIT(1);
     }
@@ -1424,9 +1346,6 @@ static void rti_mdl_initialize_io_units(void)
     }
   }
 
-  /* dSPACE I/O Board DS1202SER #1 Unit:GENSER Group:SETUP */
-  dsser_enable(rtiDS1202SER_B1_Ser[0]);
-
   /* dSPACE I/O Board DS1_RTICAN #1 */
   /* Start CAN controller */
   can_tp1_channel_start(can_type1_channel_M1_C1, CAN_TP1_INT_DISABLE);
@@ -1460,7 +1379,7 @@ static void rti_mdl_initialize_io_units(void)
     if (numInit != 0) {
       /* ... Wake message up */
       while ((rtican_type1_tq_error[0][0] = can_tp1_msg_wakeup
-              (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0XA])) ==
+              (can_type1_msg_M1[CANTP1_M1_C1_RX_STD_0X3])) ==
              DSMCOM_BUFFER_OVERFLOW) ;
     }
 
@@ -1576,30 +1495,30 @@ __INLINE void rti_mdl_sample_input(void)
   AdcCl1AnalogIn_write(pRTIAdcC1AnalogIn_Ch_10);
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL1 --- */
-  /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 1 - Port: 1 - Channel: 1 --- */
+  /* --- [RTIEMC, Encoder] - DIO class: 2 - Unit: 5 - Port: 1 - Channel: 10 --- */
   {
     /* define variables required for encoder sensor realtime functions */
     Float64 positionOrAngle= 0.0, speedOrAngVelocity= 0.0;
     UInt32 isIndexRaised= 0;
 
     /* Reads complete input data from selected encoder input channels (update data from hardware) */
-    DioCl2EncoderIn_read(pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1);
+    DioCl2EncoderIn_read(pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10);
 
     /* Gets encoder position (line) */
-    DioCl2EncoderIn_getEncPosition(pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1,
+    DioCl2EncoderIn_getEncPosition(pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10,
       &positionOrAngle);
 
     /* Gets encoder speed (lines/second) */
-    DioCl2EncoderIn_getEncVelocity(pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1,
+    DioCl2EncoderIn_getEncVelocity(pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10,
       &speedOrAngVelocity);
     Human_in_Loop_B.SFunction1_o1 = (real_T) positionOrAngle;
     Human_in_Loop_B.SFunction1_o2 = (real_T) speedOrAngVelocity;
 
     /* Once the index signal is detected, this outport is raised high.   *
      * This value is retained until the end of the real-time application */
-    DioCl2EncoderIn_getIsIndexRaised (pRTIEmcEncoder_Unit_1_DioCl_2_Port_1_Ch1,
+    DioCl2EncoderIn_getIsIndexRaised (pRTIEmcEncoder_Unit_5_DioCl_2_Port_1_Ch10,
       &isIndexRaised);
-    Human_in_Loop_B.SFunction1_o3_n = (boolean_T) isIndexRaised ;
+    Human_in_Loop_B.SFunction1_o3_b = (boolean_T) isIndexRaised ;
   }
 
   /* --- Human_in_Loop/Sensor Data/Encoder module/EMC_ENCODER_BL3 --- */
@@ -1619,8 +1538,8 @@ __INLINE void rti_mdl_sample_input(void)
     /* Gets encoder speed (lines/second) */
     DioCl2EncoderIn_getEncVelocity(pRTIEmcEncoder_Unit_3_DioCl_2_Port_1_Ch5,
       &speedOrAngVelocity);
-    Human_in_Loop_B.SFunction1_o1_k = (real_T) positionOrAngle;
-    Human_in_Loop_B.SFunction1_o2_k = (real_T) speedOrAngVelocity;
+    Human_in_Loop_B.SFunction1_o1_j = (real_T) positionOrAngle;
+    Human_in_Loop_B.SFunction1_o2_j = (real_T) speedOrAngVelocity;
   }
 
   /* --- Human_in_Loop/Sensor Data/FootSwitch module/DIO_CLASS1_BIT_IN_BL1 --- */
@@ -1631,7 +1550,7 @@ __INLINE void rti_mdl_sample_input(void)
     /* get digital signal state on channel 2-2 on port 1 */
     DioCl1DigIn_read(pRTIDioC1DigIn_Port_1_Ch_2);
     DioCl1DigIn_getChMaskInData(pRTIDioC1DigIn_Port_1_Ch_2, &inputDataUInt32);
-    Human_in_Loop_B.SFunction1_a = (boolean_T)((inputDataUInt32 &
+    Human_in_Loop_B.SFunction1_it = (boolean_T)((inputDataUInt32 &
       DIO_CLASS1_MASK_CH_2) >> 1);
   }
 

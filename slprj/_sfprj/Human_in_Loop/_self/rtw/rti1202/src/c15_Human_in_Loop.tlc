@@ -7,7 +7,7 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   3 \
+    NumChartData   5 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
@@ -18,14 +18,21 @@
       Description  "EmlPersistent"\
       SFName       ""\
       Path         ""\
-      SrcLocation  "Human_in_Loop:5011:161-175"\
+      SrcLocation  "Human_in_Loop:6337:173-187"\
+    }\
+    ChartData {\
+      Name         "last_footstate_not_empty"\
+      Description  "EmlPersistentSentinel"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6337:173-187"\
     }\
     ChartData {\
       Name         "torque_error_memory"\
       Description  "EmlPersistent"\
       SFName       ""\
       Path         ""\
-      SrcLocation  "Human_in_Loop:5011:188-207"\
+      SrcLocation  "Human_in_Loop:6337:200-219"\
       Dimensions   [1,1000]\
     }\
     ChartData {\
@@ -33,8 +40,16 @@
       Description  "EmlPersistent"\
       SFName       ""\
       Path         ""\
-      SrcLocation  "Human_in_Loop:5011:220-234"\
+      SrcLocation  "Human_in_Loop:6337:232-246"\
       Dimensions   [1,1000]\
+    }\
+    ChartData {\
+      Name         "last_torque_parm"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Human_in_Loop:6337:259-275"\
+      Dimensions   [1,2]\
     }\
   }
   %return ChartDataElements

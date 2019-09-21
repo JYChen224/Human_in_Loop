@@ -5,7 +5,7 @@
    Task Configuration file for model : Human_in_Loop
 
    RTI1202 7.9 (02-Nov-2017)/2.17
-   10-Jul-2019 21:07:06
+   21-Sep-2019 19:43:09
 
    MATLAB 9.3.0.713579 (R2017b)
 
@@ -16,7 +16,6 @@
 /* ===== List of model tasks and assigned interrupt sources ================
 
    Timer Task 1 [0.0002 0] s      : Timer A interrupt
-   DS1202SER_INT_C1_I1            : UART Ch1 RX SW FIFO interrupt
    Timer Interrupt                : Timer B interrupt
 
   * ========================================================================= */
@@ -28,8 +27,8 @@
 
 /* Auxiliary functions of TaskHandling*/
 
-/* Indicate usage of sub-interrupt functions of RTKernel: */
-# define RTITH_USES_SUBINT /* Controls rti_th_aux.c */
+/* No sub-interrupts used by application: */
+/* RTITH_USES_SUBINT not defined for rti_th_aux.c */
 # include <rti_th_aux.c>
 
 /* rtkernel.h already included in RTI Simulation Engine. */
@@ -38,12 +37,12 @@
 
 /* Number of local tasks of the specific type */
 # define  RTITH_TIMER_TASKS_LOCAL_NUM_OF      (1)
-# define  RTITH_HWINT_TASKS_LOCAL_NUM_OF      (1)
+# define  RTITH_HWINT_TASKS_LOCAL_NUM_OF      (0)
 # define  RTITH_SWINT_TASKS_LOCAL_NUM_OF      (0)
 # define  RTITH_TMRINT_TASKS_LOCAL_NUM_OF     (1)
 
-# define  RTITH_INT_TASKS_ALL_LOCAL_NUM_OF    (2)
-# define  RTITH_TASKS_ALL_LOCAL_NUM_OF        (3)
+# define  RTITH_INT_TASKS_ALL_LOCAL_NUM_OF    (1)
+# define  RTITH_TASKS_ALL_LOCAL_NUM_OF        (2)
 
 /* Default scaling factor for timer tasks */
 # ifndef  RTI_TIMER_TASK_TIME_SCALE
@@ -79,17 +78,7 @@ int                  *pRti_TIMERA_OCnt;
 double               *pRti_TIMERA_TCnt;
 int                  *pRti_TIMERA_Prio;
 
-  /* --- Task  2 : DS1202SER_INT_C1_I1 (HWINT UART_EVENTS_CH1_INT0) */
-double               *pRti_UART_EVENTS_CH1_INT0_TTime;
-rtk_task_state_type  *pRti_UART_EVENTS_CH1_INT0_TState;
-rtk_ovc_check_type   *pRti_UART_EVENTS_CH1_INT0_OType;
-int                  *pRti_UART_EVENTS_CH1_INT0_OMax;
-int                  *pRti_UART_EVENTS_CH1_INT0_ORpt;
-int                  *pRti_UART_EVENTS_CH1_INT0_OCnt;
-double               *pRti_UART_EVENTS_CH1_INT0_TCnt;
-int                  *pRti_UART_EVENTS_CH1_INT0_Prio;
-
-  /* --- Task  3 : Timer Interrupt (TMRINT TIMERB) */
+  /* --- Task  2 : Timer Interrupt (TMRINT TIMERB) */
 double               *pRti_TIMERB_STime;
 double               *pRti_TIMERB_TTime;
 rtk_task_state_type  *pRti_TIMERB_TState;
@@ -114,7 +103,6 @@ static void rti_th_initialize(void)
   /* Pointers to task control blocks */
   rtk_p_task_control_block pTask1;  /*  Task (TCB pointer).              */
   rtk_p_task_control_block pTask2;  /*  Task (TCB pointer).              */
-  rtk_p_task_control_block pTask3;  /*  Task (TCB pointer).              */
 
   int subentry;        /*  RTK subentry.                    */
   int service;         /*  RTK service.                     */
@@ -181,53 +169,7 @@ static void rti_th_initialize(void)
 # endif
 
   /* --- Initialization code -----------------------------------------------
-   * Task  2 : DS1202SER_INT_C1_I1 (HWINT UART_EVENTS_CH1_INT0)
-   * Priority: 3, Source: 1, Target: 1
-   * Source IntNo: UART_EVENTS, SubIntNo: 0, TaskId: -1
-   * ----------------------------------------------------------------------- */
-  service   = S_RTLIB_FPGA_IO;                     /*  RTK service.                     */
-  subentry = rtk_get_subentry( /* --- Get RTK subentry. ----------- */
-      service,                 /*  RTK service.                     */
-      IOLIB_SPEC_INT_UART(1),                 /*  Board base address.              */
-      UART_EVENTS);                /*  Interrupt number.                */
-  pTask2   = rtith_create_task( /* --- Create task. ---------------- */
-      rti_UART_EVENTS_CH1_INT0,                 /*  Task function pointer.           */
-      3,                 /*  Task priority.                   */
-      ovc_fcn,                 /*  RTK overrun check type.          */
-      rti_default_overrun_fcn,                 /*  Overrun handler function.        */
-      1,                 /*  Overrun count limit.             */
-      -1);                /*  Simulink TID.                    */
-  rtk_task_name_set( /* --- Set task name. -------------- */
-      pTask2,          /*  Task (TCB pointer).              */
-      "DS1202SER_INT_C1_I1");       /*  Task name.                       */
-  rtith_bind_subinterrupt( /* --- Bind sub-interrupt to task. - */
-      service, subentry,            /*  RTK service, RTK subentry.       */
-      0,                /*  Sub-interrupt number.            */
-      pTask2,                /*  Task (TCB pointer).              */
-      0,                /*  Sample time or period.           */
-      C_LOCAL,                /*  RTK channel.                     */
-      -1,                /*  Logical interrupt number.        */
-      NULL);               /*  Hook function.                   */
-  rtith_set_task_type( /* --- Set RTK task type. ---------- */
-      service, subentry,           /*  RTK service, RTK subentry.       */
-      0,               /*  Sub-interrupt number.            */
-      rtk_tt_aperiodic,               /*  RTK task type.                   */
-      pTask1,               /*  Reference task (time stamping).  */
-      0,            /*  Sample time offset.              */
-      1);           /*  Step multiple.                   */
-
-  /* ... Assign task information variables ................................. */
-  pRti_UART_EVENTS_CH1_INT0_TTime = &(pTask2->turnaround_time);
-  pRti_UART_EVENTS_CH1_INT0_TState = &(pTask2->state);
-  pRti_UART_EVENTS_CH1_INT0_OType = &(pTask2->ovc_type);
-  pRti_UART_EVENTS_CH1_INT0_OMax = &(pTask2->ovc_max);
-  pRti_UART_EVENTS_CH1_INT0_ORpt = &(pTask2->ovc_repeat);
-  pRti_UART_EVENTS_CH1_INT0_OCnt = &(pTask2->ovc_counter);
-  pRti_UART_EVENTS_CH1_INT0_TCnt = &(pTask2->tm_task_calls);
-  pRti_UART_EVENTS_CH1_INT0_Prio = &(pTask2->priority);
-
-  /* --- Initialization code -----------------------------------------------
-   * Task  3 : Timer Interrupt (TMRINT TIMERB)
+   * Task  2 : Timer Interrupt (TMRINT TIMERB)
    * Priority: 2, Source: 1, Target: 1
    * Source IntNo: 0, SubIntNo: RTK_NO_SINT, TaskId: -1
    * ----------------------------------------------------------------------- */
@@ -236,7 +178,7 @@ static void rti_th_initialize(void)
       service,                 /*  RTK service.                     */
       0,                 /*  Board base address.              */
       0);                /*  Interrupt number.                */
-  pTask3   = rtith_create_task( /* --- Create task. ---------------- */
+  pTask2   = rtith_create_task( /* --- Create task. ---------------- */
       rti_TIMERB,                 /*  Task function pointer.           */
       2,                 /*  Task priority.                   */
       ovc_fcn,                 /*  RTK overrun check type.          */
@@ -244,11 +186,11 @@ static void rti_th_initialize(void)
       1,                 /*  Overrun count limit.             */
       -1);                /*  Simulink TID.                    */
   rtk_task_name_set( /* --- Set task name. -------------- */
-      pTask3,          /*  Task (TCB pointer).              */
+      pTask2,          /*  Task (TCB pointer).              */
       "Timer Interrupt");       /*  Task name.                       */
   rtith_bind_interrupt( /* --- Bind interrupt to task. ----- */
       service, subentry,         /*  RTK service, RTK subentry.       */
-      pTask3,             /*  Task (TCB pointer).              */
+      pTask2,             /*  Task (TCB pointer).              */
       0.002,             /*  Sample time or period.           */
       C_LOCAL,             /*  RTK channel.                     */
       -1,             /*  Logical interrupt number.        */
@@ -262,15 +204,15 @@ static void rti_th_initialize(void)
       1);           /*  Step multiple.                   */
 
   /* ... Assign task information variables ................................. */
-  pRti_TIMERB_STime       = &(pTask3->sample_time);
-  pRti_TIMERB_TTime       = &(pTask3->turnaround_time);
-  pRti_TIMERB_TState      = &(pTask3->state);
-  pRti_TIMERB_OType       = &(pTask3->ovc_type);
-  pRti_TIMERB_OMax        = &(pTask3->ovc_max);
-  pRti_TIMERB_ORpt        = &(pTask3->ovc_repeat);
-  pRti_TIMERB_OCnt        = &(pTask3->ovc_counter);
-  pRti_TIMERB_TCnt        = &(pTask3->tm_task_calls);
-  pRti_TIMERB_Prio        = &(pTask3->priority);
+  pRti_TIMERB_STime       = &(pTask2->sample_time);
+  pRti_TIMERB_TTime       = &(pTask2->turnaround_time);
+  pRti_TIMERB_TState      = &(pTask2->state);
+  pRti_TIMERB_OType       = &(pTask2->ovc_type);
+  pRti_TIMERB_OMax        = &(pTask2->ovc_max);
+  pRti_TIMERB_ORpt        = &(pTask2->ovc_repeat);
+  pRti_TIMERB_OCnt        = &(pTask2->ovc_counter);
+  pRti_TIMERB_TCnt        = &(pTask2->tm_task_calls);
+  pRti_TIMERB_Prio        = &(pTask2->priority);
 
 # ifndef FIRST_SIMSTEP_INCREASEMENT
 #   define RTI_SE_TMP_OVC_MAXCNT          (12)
@@ -291,13 +233,6 @@ static void rti_th_initialize(void)
 #   if (RTI_SE_INITIAL_OVCREPEAT_ASYNCHRONOUS_TASK == 1)
       rtk_setup_temp_overrun_handling(
         pTask2,
-        ovc_queue,
-        NULL,
-        RTI_SE_TMP_OVC_MAXCNT,
-        RTI_SE_TMP_OVC_NUM_CALLS
-      );
-      rtk_setup_temp_overrun_handling(
-        pTask3,
         ovc_queue,
         NULL,
         RTI_SE_TMP_OVC_MAXCNT,
